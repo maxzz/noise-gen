@@ -12,8 +12,9 @@ function Canvas() {
             
             return;
         }
-        console.log('use on', canvas.current, canvas.current instanceof OffscreenCanvas);
+        console.log('use on', canvas.current, 'tm', canvas.current.dataset.tm);
         
+        canvas.current.dataset.tm = '444';
 
         // const offscreen = canvas.current.transferControlToOffscreen();
 
