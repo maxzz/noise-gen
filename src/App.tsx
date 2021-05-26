@@ -1,7 +1,7 @@
-import { useAtom } from 'jotai';
 import React, { useEffect } from 'react';
+import { useAtom } from 'jotai';
 import './App.css';
-import webWorker from './utils/web-worker?url';
+import webWorker from './utils/web-worker?worker';
 import { offscreenCanvasAtom } from './atoms';
 
 function Canvas() {
@@ -18,13 +18,15 @@ function Canvas() {
         
         canvas.current.dataset.tm = '444';
 
+        //const hasOffscreen = "OffscreenCanvas" in window;
+
         const offscreen = offscreenCanvasCashed || canvas.current.transferControlToOffscreen();
 
         if (!offscreenCanvasCashed) {
             offscreenCanvasCashedSet(offscreen);
         }
 
-        const newWorker = new Worker(webWorker);
+        const newWorker = new webWorker();
 
         newWorker.onmessage = (event: any) => {
             console.log(event);
