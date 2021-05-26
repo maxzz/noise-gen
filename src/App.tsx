@@ -7,14 +7,25 @@ function Canvas() {
     const worker = React.useRef<Worker>();
 
     useEffect(() => {
+        if (!canvas.current) {
+            return;
+        }
+
+        const canvasOffscreen = (canvas.current! as any).transferControlToOffscreen();
+
         const newWorker = new Worker(webWorker);
+
         newWorker.onmessage = (event: any) => {
             console.log(event);
         };
         newWorker.onerror = (event: any) => {
             console.log('error', event);
         };
-        newWorker.postMessage({init: 'init'});
+        newWorker.postMessage({
+            init: 'init',
+            canvas: canvasOffscreen,
+        }, [canvasOffscreen]);
+
         worker.current = newWorker;
         return () => {
             worker.current?.terminate();
