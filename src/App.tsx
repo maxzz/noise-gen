@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import './App.css';
 import webWorker from './utils/web-worker?url';
 
 function Canvas() {
-    const canvas = React.useRef(null);
+    const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = React.useRef<Worker>();
 
     useEffect(() => {
         if (!canvas.current) {
             return;
         }
+        console.log('use on', canvas.current, canvas.current instanceof OffscreenCanvas);
+        
 
-        const canvasOffscreen = (canvas.current! as any).transferControlToOffscreen();
+        const offscreen = canvas.current.transferControlToOffscreen();
+
+        console.log('use on', canvas.current, canvas.current instanceof OffscreenCanvas);
 
         const newWorker = new Worker(webWorker);
 
@@ -23,14 +27,17 @@ function Canvas() {
         };
         newWorker.postMessage({
             init: 'init',
-            canvas: canvasOffscreen,
-        }, [canvasOffscreen]);
+            canvas: offscreen,
+        }, [offscreen]);
 
         worker.current = newWorker;
         return () => {
+            console.log('use off', canvas.current);
+
             worker.current?.terminate();
+            worker.current = undefined;
         }
-    }, []);
+    }, [canvas]);
 
     return (
         <canvas ref={canvas}></canvas>
