@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { useAtom } from 'jotai';
 import './App.css';
 import webWorker from './utils/web-worker?worker';
@@ -24,6 +24,7 @@ function Canvas() {
 
         if (!offscreenCanvasCashed) {
             offscreenCanvasCashedSet(offscreen);
+            console.log('set offset');
         }
 
         const newWorker = new webWorker();
@@ -35,21 +36,34 @@ function Canvas() {
             console.log('error', event);
         };
         newWorker.postMessage({
-            init: 'init',
+            type: 'init',
             canvas: offscreen,
         }, [offscreen]);
 
         worker.current = newWorker;
         return () => {
-            console.log('use off', canvas.current);
+            console.log('use off', canvas.current, offscreenCanvasCashed);
 
             worker.current?.terminate();
             worker.current = undefined;
+
+            offscreenCanvasCashedSet(null);
         }
     }, [canvas]);
 
+    useLayoutEffect(() => {
+        console.log('use layout on', offscreenCanvasCashed);
+        
+        return () => {
+            console.log('use layout off', offscreenCanvasCashed);
+            offscreenCanvasCashedSet(null);
+        };
+    }, [canvas]);
+
     return (
-        <canvas ref={canvas}></canvas>
+        <canvas ref={canvas} className="w-96 h-96 bg-purple-400">
+
+        </canvas>
     )
 }
 

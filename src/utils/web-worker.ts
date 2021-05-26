@@ -1,14 +1,25 @@
 import { renderBody } from './render-body';
 
-const ctx: Worker = self as any;
+const runtime: Worker = self as any;
 
 function RunStuff() {
     console.log('running');
-    ctx.onmessage = (event: MessageEvent) => {
+
+    let ctx: CanvasRenderingContext2D | null;
+
+    runtime.onmessage = (event: MessageEvent) => {
         console.log('got', event);
-        renderBody();
+
+        if (event.data.type === 'init') {
+            let offscreen = (event.data.canvas as HTMLCanvasElement)
+            ctx = offscreen.getContext('2d');
+        }
+        if (ctx) {
+            renderBody(ctx);
+        }
     };
-    ctx.postMessage('result')
+
+    runtime.postMessage('result')
 }
 
 RunStuff();

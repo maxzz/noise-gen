@@ -1,5 +1,5 @@
-//import noise from 'simplex-noise';
+import noise from 'simplex-noise';
 
-export function renderBody() {
-    console.log('rendered');
+export function renderBody(ctx: CanvasRenderingContext2D) {
+    console.log('rendered', ctx);
 }
