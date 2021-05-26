@@ -1,41 +1,43 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useAtom } from 'jotai';
+import React, { useEffect } from 'react';
 import './App.css';
 import webWorker from './utils/web-worker?url';
+import { offscreenCanvasAtom } from './atoms';
 
 function Canvas() {
     const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = React.useRef<Worker>();
 
+    const [offscreenCanvasCashed, offscreenCanvasCashedSet] = useAtom(offscreenCanvasAtom);
+
     useEffect(() => {
         if (!canvas.current) {
-            console.log('canvas null');
-            
             return;
         }
-        console.log('use on', canvas.current, 'offscreen', canvas.current.dataset.offscreen);
+        console.log('use on', canvas.current, 'offscreen', offscreenCanvasCashed);
         
         canvas.current.dataset.tm = '444';
 
-        const offscreen = canvas.current.dataset.offscreen || canvas.current.transferControlToOffscreen();
+        const offscreen = offscreenCanvasCashed || canvas.current.transferControlToOffscreen();
 
-        (canvas.current.dataset as any).offscreen = offscreen;
+        if (!offscreenCanvasCashed) {
+            offscreenCanvasCashedSet(offscreen);
+        }
 
-        // console.log('use on', canvas.current, canvas.current instanceof OffscreenCanvas);
+        const newWorker = new Worker(webWorker);
 
-        // const newWorker = new Worker(webWorker);
+        newWorker.onmessage = (event: any) => {
+            console.log(event);
+        };
+        newWorker.onerror = (event: any) => {
+            console.log('error', event);
+        };
+        newWorker.postMessage({
+            init: 'init',
+            canvas: offscreen,
+        }, [offscreen]);
 
-        // newWorker.onmessage = (event: any) => {
-        //     console.log(event);
-        // };
-        // newWorker.onerror = (event: any) => {
-        //     console.log('error', event);
-        // };
-        // newWorker.postMessage({
-        //     init: 'init',
-        //     canvas: offscreen,
-        // }, [offscreen]);
-
-        // worker.current = newWorker;
+        worker.current = newWorker;
         return () => {
             console.log('use off', canvas.current);
 
