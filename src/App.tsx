@@ -69,9 +69,17 @@ function Canvas() {
 
 function App() {
     return (
-        <div className="App h-screen flex flex-col items-center justify-center space-y-4">
-            <button className="px-2 py-1 border rounded text-red-600">AAA</button>
-            <Canvas />
+        <div className="App h-screen flex flex-col items-center space-y-4 max-w-lg m-auto">
+            <div className="w-100 flex justify-between">
+                <div className="py-2 px-4 bg-purple-200">logo</div>
+                <div className="py-2 px-4 bg-purple-200">menu</div>
+            </div>
+            <button className="px-2 py-1 border rounded text-red-600 uppercase">
+                Run
+            </button>
+            <div className="flex-1 flex items-center">
+                <Canvas />
+            </div>
         </div>
     );
 }
