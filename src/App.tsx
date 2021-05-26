@@ -69,8 +69,8 @@ function Canvas() {
 
 function App() {
     return (
-        <div className="App">
-            <button className="text-red-600">AAA</button>
+        <div className="App h-screen flex flex-col items-center justify-center space-y-4">
+            <button className="px-2 py-1 border rounded text-red-600">AAA</button>
             <Canvas />
         </div>
     );
