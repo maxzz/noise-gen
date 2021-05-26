@@ -8,29 +8,31 @@ function Canvas() {
 
     useEffect(() => {
         if (!canvas.current) {
+            console.log('canvas null');
+            
             return;
         }
         console.log('use on', canvas.current, canvas.current instanceof OffscreenCanvas);
         
 
-        const offscreen = canvas.current.transferControlToOffscreen();
+        // const offscreen = canvas.current.transferControlToOffscreen();
 
-        console.log('use on', canvas.current, canvas.current instanceof OffscreenCanvas);
+        // console.log('use on', canvas.current, canvas.current instanceof OffscreenCanvas);
 
-        const newWorker = new Worker(webWorker);
+        // const newWorker = new Worker(webWorker);
 
-        newWorker.onmessage = (event: any) => {
-            console.log(event);
-        };
-        newWorker.onerror = (event: any) => {
-            console.log('error', event);
-        };
-        newWorker.postMessage({
-            init: 'init',
-            canvas: offscreen,
-        }, [offscreen]);
+        // newWorker.onmessage = (event: any) => {
+        //     console.log(event);
+        // };
+        // newWorker.onerror = (event: any) => {
+        //     console.log('error', event);
+        // };
+        // newWorker.postMessage({
+        //     init: 'init',
+        //     canvas: offscreen,
+        // }, [offscreen]);
 
-        worker.current = newWorker;
+        // worker.current = newWorker;
         return () => {
             console.log('use off', canvas.current);
 
