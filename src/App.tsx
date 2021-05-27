@@ -4,7 +4,7 @@ import './App.css';
 import webWorker from './utils/web-worker?worker';
 import { offscreenCanvasAtom } from './atoms';
 
-function Canvas() {
+function Canvas({seed}: {seed: string}) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = React.useRef<Worker>();
 
@@ -51,6 +51,13 @@ function Canvas() {
         }
     }, [canvas]);
 
+    useEffect(() => {
+        if (!worker.current) {
+            return;
+        }
+        worker.current.postMessage({type: 're-run', seed});
+    }, [seed]);
+
     // useLayoutEffect(() => {
     //     console.log('use layout on', offscreenCanvasCashed);
         
@@ -68,17 +75,24 @@ function Canvas() {
 }
 
 function App() {
+    
+    function doRun() {
+        
+    }
     return (
         <div className="App h-screen flex flex-col items-center space-y-4 max-w-lg m-auto">
             <div className="w-full flex justify-between">
                 <div className="py-2 px-4 bg-purple-200">logo</div>
                 <div className="py-2 px-4 bg-purple-200">menu</div>
             </div>
-            <button className="px-2 py-1 border rounded text-red-600 uppercase">
+            <button
+                className="px-2 py-1 border rounded text-red-600 uppercase"
+                onClick={() => doRun()}
+            >
                 Run
             </button>
             <div className="flex-1 flex items-center">
-                <Canvas />
+                <Canvas seed={'seed'} />
             </div>
         </div>
     );
