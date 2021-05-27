@@ -11,12 +11,17 @@ function RunStuff() {
     runtime.onmessage = (event: MessageEvent) => {
         console.log('got', event);
 
+        let seed: string;
+
         if (event.data.type === 'init') {
             canvasElm = (event.data.canvas as HTMLCanvasElement)
             ctx = canvasElm.getContext('2d');
         }
+
+        seed = event.data.seed || undefined;
+
         if (ctx) {
-            renderBody(ctx);
+            renderBody(ctx, seed);
         }
     };
 

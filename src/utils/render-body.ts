@@ -55,9 +55,9 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
     // });
 }
 
-export function renderBody(ctx: CanvasRenderingContext2D) {
+export function renderBody(ctx: CanvasRenderingContext2D, seed: string) {
 
-    const simplex = new SimplexNoise('seed');
+    const simplex = new SimplexNoise(seed);
 
     function fn(x: number, y: number) {
         //return simplex.noise2D(x / 16, y / 356);

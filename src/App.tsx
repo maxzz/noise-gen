@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect } from 'react';
 import { useAtom } from 'jotai';
 import './App.css';
 import webWorker from './utils/web-worker?worker';
-import { offscreenCanvasAtom } from './atoms';
+import { offscreenCanvasAtom, seedAtom } from './atoms';
 
 function Canvas({seed}: {seed: string}) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
@@ -75,7 +75,8 @@ function Canvas({seed}: {seed: string}) {
 }
 
 function App() {
-    
+    const [seed, seedSet] = useAtom(seedAtom);
+
     function doRun() {
         
     }
@@ -91,8 +92,11 @@ function App() {
             >
                 Run
             </button>
+            <div className="c">
+                <input className="p-2 text-red-900 bg-purple-200" value={seed} onChange={(event) => seedSet(event.target.value)} />
+            </div>
             <div className="flex-1 flex items-center">
-                <Canvas seed={'seed'} />
+                <Canvas seed={seed} />
             </div>
         </div>
     );
