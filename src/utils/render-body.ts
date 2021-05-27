@@ -1,6 +1,80 @@
 import SimplexNoise from 'simplex-noise';
 
+type RenderContext = {
+    ctx: CanvasRenderingContext2D;
+    n1: number;
+    n2: number;
+    distortion: number;
+    color: string;
+}
+
+function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => number) {
+    const {
+        ctx
+    } = renderContext;
+
+    let w = ctx.canvas.width;
+    let h = ctx.canvas.height;
+
+    var dotMargin = 0;
+    let dotDiameter = 1;
+    let dotRadius = dotDiameter / 2;
+    let xMargin = 1;
+    let distortion = renderContext.distortion;
+    var numRows = 300;
+    var numCols = 300;
+    let outsideMargin = 20;
+  
+    ctx.clearRect(0, 0, w, h);
+  
+    let p = new Path2D();
+  
+    for (let i = outsideMargin; i < numRows - outsideMargin; i++) {
+      for (let j = outsideMargin; j < numCols - outsideMargin; j++) {
+        let x = j * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
+        let y = i * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
+  
+        let c = renderContext.color; //"#fff"; //`hsl(${hue},${sat}%,50%)`;
+        ctx.fillStyle = c;
+  
+        let noisex = fn(x / renderContext.n1, y / renderContext.n2);
+        let noisey = fn(x / renderContext.n2, y / renderContext.n1);
+  
+        let x2 = x + distortion * noisex;
+        let y2 = y + distortion * noisey;
+  
+        p.rect(x2, y2, 1, 1);
+      }
+    }
+  
+    ctx.fill(p);
+  
+    // mainCanvas.convertToBlob({ quality: 1 }).then(function (blob) {
+    //   downloadData = blob;
+    // });
+  }
+
 export function renderBody(ctx: CanvasRenderingContext2D) {
+
+    const simplex = new SimplexNoise();
+
+    function fn(x: number, y: number) {
+        //return simplex.noise2D(x / 16, y / 356);
+        //return simplex.noise3D(x / 10, y / 10, 0);
+        return simplex.noise4D(x / 20, y / 20, 1, 1);
+    }
+
+    let renderContext: RenderContext = {
+        ctx,
+        n1: 10,
+        n2: 10,
+        distortion: 1,
+        color: 'red'
+    }
+    gridNoise(renderContext, fn);
+}
+
+export function renderBody3(ctx: CanvasRenderingContext2D) {
 
     let w = ctx.canvas.width;
     let h = ctx.canvas.height;
