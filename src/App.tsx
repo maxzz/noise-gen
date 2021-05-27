@@ -30,10 +30,10 @@ function Canvas() {
         const newWorker = new webWorker();
 
         newWorker.onmessage = (event: any) => {
-            console.log(event);
+            console.log('from worker:', event.data);
         };
         newWorker.onerror = (event: any) => {
-            console.log('error', event);
+            console.log('from worker: error', event.data);
         };
         newWorker.postMessage({
             type: 'init',
