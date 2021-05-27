@@ -8,7 +8,9 @@ export function renderBody(ctx: CanvasRenderingContext2D) {
     const simplex = new SimplexNoise();
 
     function fn(x: number, y: number) {
-        return simplex.noise2D(x / 20, y / 20);
+        //return simplex.noise2D(x / 16, y / 356);
+        //return simplex.noise3D(x / 10, y / 10, 0);
+        return simplex.noise4D(x / 20, y / 20, 1, 1);
     }
 
     var imageData = ctx.getImageData(0, 0, w, h);
