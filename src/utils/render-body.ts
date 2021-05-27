@@ -11,6 +11,6 @@ export function renderBody(ctx: CanvasRenderingContext2D) {
     for (let i = 0; i < h; i+=10) {
         ctx.fillStyle = 'tomato';
         ctx.fillRect(0, i, w, 5);
-        console.log([0, i, w, 5]);
+        //console.log([0, i, w, 5]);
     }
 }

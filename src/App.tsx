@@ -51,14 +51,14 @@ function Canvas() {
         }
     }, [canvas]);
 
-    useLayoutEffect(() => {
-        console.log('use layout on', offscreenCanvasCashed);
+    // useLayoutEffect(() => {
+    //     console.log('use layout on', offscreenCanvasCashed);
         
-        return () => {
-            console.log('use layout off', offscreenCanvasCashed);
-            offscreenCanvasCashedSet(null);
-        };
-    }, [canvas]);
+    //     return () => {
+    //         console.log('use layout off', offscreenCanvasCashed);
+    //         offscreenCanvasCashedSet(null);
+    //     };
+    // }, [canvas]);
 
     return (
         <canvas ref={canvas} className="w-96 h-96 bg-purple-400">
@@ -70,7 +70,7 @@ function Canvas() {
 function App() {
     return (
         <div className="App h-screen flex flex-col items-center space-y-4 max-w-lg m-auto">
-            <div className="w-100 flex justify-between">
+            <div className="w-full flex justify-between">
                 <div className="py-2 px-4 bg-purple-200">logo</div>
                 <div className="py-2 px-4 bg-purple-200">menu</div>
             </div>
