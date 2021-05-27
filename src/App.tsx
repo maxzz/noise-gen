@@ -61,7 +61,7 @@ function Canvas() {
     // }, [canvas]);
 
     return (
-        <canvas ref={canvas} className="w-96 h-96 bg-purple-400">
+        <canvas ref={canvas} className="w-96 h-96 bg-purple-200">
 
         </canvas>
     )

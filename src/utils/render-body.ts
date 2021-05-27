@@ -6,7 +6,7 @@ type RenderContext = {
     n2: number;
     distortion: number;
     color: string;
-}
+};
 
 function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => number) {
     const {
@@ -21,38 +21,38 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
     let dotRadius = dotDiameter / 2;
     let xMargin = 1;
     let distortion = renderContext.distortion;
-    var numRows = 300;
-    var numCols = 300;
-    let outsideMargin = 20;
-  
+    var numRows = h;
+    var numCols = w;
+    let outsideMargin = 0;
+
     ctx.clearRect(0, 0, w, h);
-  
+
     let p = new Path2D();
-  
+
     for (let i = outsideMargin; i < numRows - outsideMargin; i++) {
-      for (let j = outsideMargin; j < numCols - outsideMargin; j++) {
-        let x = j * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
-        let y = i * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
-  
-        let c = renderContext.color; //"#fff"; //`hsl(${hue},${sat}%,50%)`;
-        ctx.fillStyle = c;
-  
-        let noisex = fn(x / renderContext.n1, y / renderContext.n2);
-        let noisey = fn(x / renderContext.n2, y / renderContext.n1);
-  
-        let x2 = x + distortion * noisex;
-        let y2 = y + distortion * noisey;
-  
-        p.rect(x2, y2, 1, 1);
-      }
+        for (let j = outsideMargin; j < numCols - outsideMargin; j++) {
+            let x = j * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
+            let y = i * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
+
+            let c = renderContext.color;
+            ctx.fillStyle = c;
+
+            let noisex = fn(x / renderContext.n1, y / renderContext.n2);
+            let noisey = fn(x / renderContext.n2, y / renderContext.n1);
+
+            let x2 = x + distortion * noisex;
+            let y2 = y + distortion * noisey;
+
+            p.rect(x2, y2, 1, 1);
+        }
     }
-  
+
     ctx.fill(p);
-  
+
     // mainCanvas.convertToBlob({ quality: 1 }).then(function (blob) {
     //   downloadData = blob;
     // });
-  }
+}
 
 export function renderBody(ctx: CanvasRenderingContext2D) {
 
@@ -68,9 +68,9 @@ export function renderBody(ctx: CanvasRenderingContext2D) {
         ctx,
         n1: 10,
         n2: 10,
-        distortion: 1,
+        distortion: 2,
         color: 'red'
-    }
+    };
     gridNoise(renderContext, fn);
 }
 
@@ -89,11 +89,11 @@ export function renderBody3(ctx: CanvasRenderingContext2D) {
 
     var imageData = ctx.getImageData(0, 0, w, h);
     for (var i = 0; i < imageData.data.length; i++) {
-      var x = (fn(i % 512, ~~(i / 512)) + 1) * 128;
-      imageData.data[i * 4] = x;
-      imageData.data[i * 4 + 1] = x;
-      imageData.data[i * 4 + 2] = x;
-      imageData.data[i * 4 + 3] = 255;
+        var x = (fn(i % 512, ~~(i / 512)) + 1) * 128;
+        imageData.data[i * 4] = x;
+        imageData.data[i * 4 + 1] = x;
+        imageData.data[i * 4 + 2] = x;
+        imageData.data[i * 4 + 3] = 255;
     }
     ctx.putImageData(imageData, 0, 0);
 }
@@ -106,7 +106,7 @@ export function renderBody2(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = 'red';
     ctx.fillRect(0, 0, w, h);
 
-    for (let i = 0; i < h; i+=10) {
+    for (let i = 0; i < h; i += 10) {
         ctx.fillStyle = 'tomato';
         ctx.fillRect(0, i, w, 5);
         //console.log([0, i, w, 5]);
