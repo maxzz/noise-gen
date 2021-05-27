@@ -23,16 +23,17 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
     let distortion = renderContext.distortion;
     var numRows = h;
     var numCols = w;
-    let outsideMargin = 0;
+    let outsideMargin = -20;
 
     ctx.clearRect(0, 0, w, h);
 
     let p = new Path2D();
 
-    for (let i = outsideMargin; i < numRows - outsideMargin; i++) {
-        for (let j = outsideMargin; j < numCols - outsideMargin; j++) {
-            let x = j * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
-            let y = i * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
+    for (let loopY = outsideMargin; loopY < numRows - outsideMargin; loopY++) {
+        for (let loopX = outsideMargin; loopX < numCols - outsideMargin; loopX++) {
+
+            let x = loopX * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
+            let y = loopY * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
 
             let c = renderContext.color;
             ctx.fillStyle = c;
@@ -56,7 +57,7 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
 
 export function renderBody(ctx: CanvasRenderingContext2D) {
 
-    const simplex = new SimplexNoise();
+    const simplex = new SimplexNoise('seed');
 
     function fn(x: number, y: number) {
         //return simplex.noise2D(x / 16, y / 356);
