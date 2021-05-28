@@ -73,17 +73,18 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
     );
 }
 
-function ColorPicker(props: {className: string, style: React.CSSProperties}) {
-    const {className, style} = props;
+function ColorPicker(props: {className: string, style?: React.CSSProperties}) {
+    const {className, style = {}} = props;
     const [color, colorSet] = useAtom(colorAtom);
     const [isDown, isDownSet] = useState<boolean>(false);
     return (
-        <div className={`${className} relative`} style={{...style, backgroundColor: color}}
+        <div className={`${className} relative p-4 border border-gray-400`} style={{...style}}
             onClick={() => {
                 console.log('down', isDown);
                 isDownSet(v => !v);
             }}
         >
+            <div className="" style={{backgroundColor: 'green'}}></div>
             <div className={`absolute right-0 top-full z-10 shadow border rounded-[0.6rem] border-gray-700 ${isDown ? 'hidden' : ''}`}>
                 <HexColorPicker color={color} onChange={colorSet} />
             </div>
@@ -114,7 +115,7 @@ function App() {
                             placeholder="Type anything as a seed"
                             value={seed} onChange={(event) => seedSet(event.target.value)}
                         />
-                        <ColorPicker className="w-12 h-10" style={{backgroundColor: 'red'}} />
+                        <ColorPicker className="w-12 h-10"/>
                     </div>
                     <button
                         className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
