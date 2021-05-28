@@ -1,4 +1,5 @@
 import SimplexNoise from 'simplex-noise';
+import { hex2rgb } from '@swiftcarrot/color-fns';
 
 type RenderContext = {
     ctx: CanvasRenderingContext2D;
@@ -60,9 +61,9 @@ export function renderBody(ctx: CanvasRenderingContext2D, seed: string, color: s
     const simplex = new SimplexNoise(seed);
 
     function fn(x: number, y: number) {
-        //return simplex.noise2D(x / 16, y / 356);
+        return simplex.noise2D(x / 36, y / 10);
         //return simplex.noise3D(x / 10, y / 10, 0);
-        return simplex.noise4D(x / 20, y / 20, 1, 1);
+        //return simplex.noise4D(x / 20, y / 20, 1, 1);
     }
 
     let renderContext: RenderContext = {

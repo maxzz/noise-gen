@@ -85,7 +85,7 @@ function ColorPicker(props: {className: string, style?: React.CSSProperties}) {
             }}
         >
             <div className="w-full h-full rounded" style={{backgroundColor: color}}></div>
-            <div className={`absolute right-0 top-full z-10 shadow border rounded-[0.6rem] border-gray-700 ${isDown ? 'hidden' : ''}`}>
+            <div className={`absolute right-0 top-full z-10 shadow border rounded-[0.6rem] border-gray-700 ${isDown ? '' : 'hidden'}`}>
                 <HexColorPicker color={color} onChange={colorSet} />
             </div>
         </div>

@@ -11,6 +11,7 @@
         "deploy": "gh-pages -d dist"
     },
     "dependencies": {
+        "@swiftcarrot/color-fns": "^3.2.0",
         "jotai": "^0.16.7",
         "react": "^17.0.0",
         "react-colorful": "^5.2.0",
