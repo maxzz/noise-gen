@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import './App.css';
 import webWorker from './utils/web-worker?worker';
@@ -73,9 +73,20 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
     );
 }
 
+function ColorPicker(props: React.CSSProperties | {className: string}) {
+    const [color, colorSet] = useAtom(colorAtom);
+    const [isDown, isDownSet] = useState<boolean>(false);
+    return (
+        <div>
+            <HexColorPicker color={color} onChange={colorSet} />
+        </div>
+    )
+}
+
+
 function App() {
     const [seed, seedSet] = useAtom(seedAtom);
-    const [color, colorSet] = useAtom(colorAtom);
+    const [color] = useAtom(colorAtom);
 
     function doRandom() {
         seedSet(`${Math.random()}`.replace(/^0\./, ''));
@@ -95,7 +106,7 @@ function App() {
                             placeholder="Type anything as a seed"
                             value={seed} onChange={(event) => seedSet(event.target.value)}
                         />
-                        <HexColorPicker color={color} onChange={colorSet} />
+                        <ColorPicker className="w-64 h-64"/>
                     </div>
                     <button
                         className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
