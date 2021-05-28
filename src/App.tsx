@@ -79,7 +79,7 @@ function App() {
     const [seed, seedSet] = useAtom(seedAtom);
 
     function doRandom() {
-
+        seedSet(`${Math.random()}`);
     }
     return (
         <div className="App h-screen flex flex-col items-center space-y-4 max-w-lg m-auto bg-gray-100">
@@ -88,14 +88,14 @@ function App() {
                 <div className="px-4 py-2 text-xl uppercase">Noise generator</div>
             </div>
 
-            <div className="w-full flex flex-col space-x-2">
+            <div className="w-full flex flex-col space-y-1">
                 <input
-                    className="flex-1 w-full px-2 py-2 text-sm text-red-900 bg-purple-100 border rounded"
+                    className="flex-1 w-full px-2 py-2 text-sm text-gray-900 bg-purple-100 border rounded"
                     placeholder="Type anything as a seed"
                     value={seed} onChange={(event) => seedSet(event.target.value)}
                 />
                 <button
-                    className="px-2 py-1 border rounded text-red-600 uppercase"
+                    className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
                     onClick={() => doRandom()}
                 >
                     Random
