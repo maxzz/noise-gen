@@ -82,29 +82,30 @@ function App() {
         seedSet(`${Math.random()}`.replace(/^0\./, ''));
     }
     return (
-        <div className="App h-screen flex flex-col items-center space-y-4 max-w-lg m-auto bg-gray-100">
+        <div className="App h-screen flex flex-col items-center space-y-4 bg-gray-100">
             <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300">
                 <div className="mx-4 flex-none w-10 h-10"><Logo /></div>
                 <div className="px-4 py-2 text-xl uppercase">Noise generator</div>
             </div>
 
-            <div className="w-full flex flex-col space-y-1">
-                <input
-                    className="flex-1 w-full px-2 py-2 text-sm text-gray-900 bg-purple-100 border rounded"
-                    placeholder="Type anything as a seed"
-                    value={seed} onChange={(event) => seedSet(event.target.value)}
-                />
-                <button
-                    className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
-                    onClick={() => doRandom()}
-                >
-                    Random
-                </button>
-            </div>
-
-            <div className="flex-1 flex items-center">
-                <div className="w-96 h-96">
-                    <Canvas seed={seed} />
+            <div className="max-w-lg m-auto space-y-4">
+                <div className="w-full flex flex-col space-y-1">
+                    <input
+                        className="flex-1 w-full px-2 py-2 text-sm text-gray-900 bg-purple-100 border rounded"
+                        placeholder="Type anything as a seed"
+                        value={seed} onChange={(event) => seedSet(event.target.value)}
+                    />
+                    <button
+                        className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
+                        onClick={() => doRandom()}
+                    >
+                        Random
+                    </button>
+                </div>
+                <div className="flex-1 flex items-center">
+                    <div className="w-96 h-96">
+                        <Canvas seed={seed} />
+                    </div>
                 </div>
             </div>
         </div>
