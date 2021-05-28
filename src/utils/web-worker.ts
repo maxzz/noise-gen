@@ -12,6 +12,7 @@ function RunStuff() {
         console.log('got', event);
 
         let seed: string;
+        let color: string;
 
         if (event.data.type === 'init') {
             canvasElm = (event.data.canvas as HTMLCanvasElement)
@@ -19,9 +20,10 @@ function RunStuff() {
         }
 
         seed = event.data.seed || undefined;
+        color = event.data.seed || 'red';
 
         if (ctx) {
-            renderBody(ctx, seed);
+            renderBody(ctx, seed, color);
         }
     };
 

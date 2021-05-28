@@ -55,7 +55,7 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
     // });
 }
 
-export function renderBody(ctx: CanvasRenderingContext2D, seed: string) {
+export function renderBody(ctx: CanvasRenderingContext2D, seed: string, color: string) {
 
     const simplex = new SimplexNoise(seed);
 
@@ -70,7 +70,7 @@ export function renderBody(ctx: CanvasRenderingContext2D, seed: string) {
         n1: 10,
         n2: 10,
         distortion: 2,
-        color: 'red'
+        color: color
     };
     gridNoise(renderContext, fn);
 }

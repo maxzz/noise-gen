@@ -2,10 +2,10 @@ import React, { useEffect, useLayoutEffect } from 'react';
 import { useAtom } from 'jotai';
 import './App.css';
 import webWorker from './utils/web-worker?worker';
-import { offscreenCanvasAtom, seedAtom } from './atoms';
+import { colorAtom, offscreenCanvasAtom, seedAtom } from './atoms';
 import Logo from './components/Logo';
 
-function Canvas({ seed }: { seed: string; }) {
+function Canvas({ seed, color }: { seed: string, color: string }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = React.useRef<Worker>();
 
@@ -56,7 +56,7 @@ function Canvas({ seed }: { seed: string; }) {
         if (!worker.current) {
             return;
         }
-        worker.current.postMessage({ type: 're-run', seed });
+        worker.current.postMessage({ type: 're-run', seed, color });
     }, [seed]);
 
     // useLayoutEffect(() => {
@@ -77,6 +77,7 @@ function Canvas({ seed }: { seed: string; }) {
 
 function App() {
     const [seed, seedSet] = useAtom(seedAtom);
+    const [color, colorSet] = useAtom(colorAtom);
 
     function doRandom() {
         seedSet(`${Math.random()}`.replace(/^0\./, ''));
@@ -104,7 +105,7 @@ function App() {
                 </div>
                 <div className="flex-1 flex items-center">
                     <div className="w-96 h-96">
-                        <Canvas seed={seed} />
+                        <Canvas seed={seed} color={color} />
                     </div>
                 </div>
             </div>
