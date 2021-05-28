@@ -3,6 +3,7 @@ import { useAtom } from 'jotai';
 import './App.css';
 import webWorker from './utils/web-worker?worker';
 import { offscreenCanvasAtom, seedAtom } from './atoms';
+import Logo from './components/Logo';
 
 function Canvas({ seed }: { seed: string; }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
@@ -81,15 +82,16 @@ function App() {
 
     }
     return (
-        <div className="App h-screen flex flex-col items-center space-y-4 max-w-lg m-auto">
-            <div className="w-full flex justify-between bg-purple-300">
-                <div className="py-2 px-4 bg-purple-200">logo</div>
-                <div className="py-2 px-4 bg-purple-200">menu</div>
+        <div className="App h-screen flex flex-col items-center space-y-4 max-w-lg m-auto bg-gray-100">
+            <div className="w-full py-4 flex items-center justify-between bg-purple-300">
+                <div className="mx-4 flex-none w-6 h-6 text-red-900"><Logo /></div>
+                <div className="px-4 py-2 uppercase">Noise generator</div>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="w-full flex items-center justify-center space-x-2">
                 <input
-                    className="px-2 py-1 text-red-900 bg-purple-100 border rounded"
+                    className="flex-1 px-2 py-1 text-red-900 bg-purple-100 border rounded"
+                    placeholder="Type anything as a seed"
                     value={seed} onChange={(event) => seedSet(event.target.value)}
                 />
                 <button
