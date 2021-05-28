@@ -4,7 +4,7 @@ import './App.css';
 import webWorker from './utils/web-worker?worker';
 import { offscreenCanvasAtom, seedAtom } from './atoms';
 
-function Canvas({seed}: {seed: string}) {
+function Canvas({ seed }: { seed: string; }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = React.useRef<Worker>();
 
@@ -15,7 +15,7 @@ function Canvas({seed}: {seed: string}) {
             return;
         }
         console.log('use on', canvas.current, 'offscreen', offscreenCanvasCashed);
-        
+
         canvas.current.dataset.tm = '444';
 
         //const hasOffscreen = "OffscreenCanvas" in window;
@@ -48,19 +48,19 @@ function Canvas({seed}: {seed: string}) {
             worker.current = undefined;
 
             offscreenCanvasCashedSet(null);
-        }
+        };
     }, [canvas]);
 
     useEffect(() => {
         if (!worker.current) {
             return;
         }
-        worker.current.postMessage({type: 're-run', seed});
+        worker.current.postMessage({ type: 're-run', seed });
     }, [seed]);
 
     // useLayoutEffect(() => {
     //     console.log('use layout on', offscreenCanvasCashed);
-        
+
     //     return () => {
     //         console.log('use layout off', offscreenCanvasCashed);
     //         offscreenCanvasCashedSet(null);
@@ -71,30 +71,35 @@ function Canvas({seed}: {seed: string}) {
         <canvas ref={canvas} className="w-96 h-96 bg-purple-200">
 
         </canvas>
-    )
+    );
 }
 
 function App() {
     const [seed, seedSet] = useAtom(seedAtom);
 
-    function doRun() {
-        
+    function doRandom() {
+
     }
     return (
         <div className="App h-screen flex flex-col items-center space-y-4 max-w-lg m-auto">
-            <div className="w-full flex justify-between">
+            <div className="w-full flex justify-between bg-purple-300">
                 <div className="py-2 px-4 bg-purple-200">logo</div>
                 <div className="py-2 px-4 bg-purple-200">menu</div>
             </div>
-            <button
-                className="px-2 py-1 border rounded text-red-600 uppercase"
-                onClick={() => doRun()}
-            >
-                Run
-            </button>
-            <div className="c">
-                <input className="p-2 text-red-900 bg-purple-200" value={seed} onChange={(event) => seedSet(event.target.value)} />
+
+            <div className="flex items-center space-x-2">
+                <input
+                    className="px-2 py-1 text-red-900 bg-purple-100 border rounded"
+                    value={seed} onChange={(event) => seedSet(event.target.value)}
+                />
+                <button
+                    className="px-2 py-1 border rounded text-red-600 uppercase"
+                    onClick={() => doRandom()}
+                >
+                    Random
+                </button>
             </div>
+
             <div className="flex-1 flex items-center">
                 <Canvas seed={seed} />
             </div>
