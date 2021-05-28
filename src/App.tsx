@@ -67,18 +67,26 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
     // }, [canvas]);
 
     return (
-        <canvas ref={canvas} className="w-full h-full bg-purple-200">
+        <canvas ref={canvas} className="w-full h-full"> {/* bg-purple-200 */}
 
         </canvas>
     );
 }
 
-function ColorPicker(props: React.CSSProperties | {className: string}) {
+function ColorPicker(props: {className: string, style: React.CSSProperties}) {
+    const {className, style} = props;
     const [color, colorSet] = useAtom(colorAtom);
     const [isDown, isDownSet] = useState<boolean>(false);
     return (
-        <div>
-            <HexColorPicker color={color} onChange={colorSet} />
+        <div className={`${className} relative`} style={{...style, backgroundColor: color}}
+            onClick={() => {
+                console.log('down', isDown);
+                isDownSet(v => !v);
+            }}
+        >
+            <div className={`absolute right-0 top-full z-10 shadow border rounded-[0.6rem] border-gray-700 ${isDown ? 'hidden' : ''}`}>
+                <HexColorPicker color={color} onChange={colorSet} />
+            </div>
         </div>
     )
 }
@@ -100,13 +108,13 @@ function App() {
 
             <div className="max-w-lg m-auto space-y-4">
                 <div className="w-full flex flex-col space-y-1">
-                    <div className="">
+                    <div className="flex">
                         <input
                             className="flex-1 w-full px-2 py-2 text-sm text-gray-900 bg-purple-100 border rounded"
                             placeholder="Type anything as a seed"
                             value={seed} onChange={(event) => seedSet(event.target.value)}
                         />
-                        <ColorPicker className="w-64 h-64"/>
+                        <ColorPicker className="w-12 h-10" style={{backgroundColor: 'red'}} />
                     </div>
                     <button
                         className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
