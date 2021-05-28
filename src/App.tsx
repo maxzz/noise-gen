@@ -69,7 +69,7 @@ function Canvas({ seed }: { seed: string; }) {
     // }, [canvas]);
 
     return (
-        <canvas ref={canvas} className="w-96 h-96 bg-purple-200">
+        <canvas ref={canvas} className="w-full h-full bg-purple-200">
 
         </canvas>
     );
@@ -83,14 +83,14 @@ function App() {
     }
     return (
         <div className="App h-screen flex flex-col items-center space-y-4 max-w-lg m-auto bg-gray-100">
-            <div className="w-full py-4 flex items-center justify-between bg-purple-300">
-                <div className="mx-4 flex-none w-6 h-6 text-red-900"><Logo /></div>
-                <div className="px-4 py-2 uppercase">Noise generator</div>
+            <div className="w-full py-2 flex items-center justify-between bg-purple-300">
+                <div className="mx-4 flex-none w-10 h-10 text-red-900"><Logo /></div>
+                <div className="px-4 py-2 text-xl uppercase">Noise generator</div>
             </div>
 
-            <div className="w-full flex items-center justify-center space-x-2">
+            <div className="w-full flex flex-col space-x-2">
                 <input
-                    className="flex-1 px-2 py-1 text-red-900 bg-purple-100 border rounded"
+                    className="flex-1 w-full px-2 py-2 text-sm text-red-900 bg-purple-100 border rounded"
                     placeholder="Type anything as a seed"
                     value={seed} onChange={(event) => seedSet(event.target.value)}
                 />
@@ -103,7 +103,9 @@ function App() {
             </div>
 
             <div className="flex-1 flex items-center">
-                <Canvas seed={seed} />
+                <div className="w-96 h-96">
+                    <Canvas seed={seed} />
+                </div>
             </div>
         </div>
     );
