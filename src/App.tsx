@@ -78,20 +78,19 @@ function ColorPicker(props: {className: string, style?: React.CSSProperties}) {
     const [color, colorSet] = useAtom(colorAtom);
     const [isDown, isDownSet] = useState<boolean>(false);
     return (
-        <div className={`${className} relative p-4 border border-gray-400`} style={{...style}}
+        <div className={`${className} relative p-1 border rounded border-gray-400 bg-purple-100 transform active:scale-95`} style={{...style}}
             onClick={() => {
                 console.log('down', isDown);
                 isDownSet(v => !v);
             }}
         >
-            <div className="" style={{backgroundColor: 'green'}}></div>
+            <div className="w-full h-full rounded" style={{backgroundColor: color}}></div>
             <div className={`absolute right-0 top-full z-10 shadow border rounded-[0.6rem] border-gray-700 ${isDown ? 'hidden' : ''}`}>
                 <HexColorPicker color={color} onChange={colorSet} />
             </div>
         </div>
     )
 }
-
 
 function App() {
     const [seed, seedSet] = useAtom(seedAtom);
@@ -109,9 +108,9 @@ function App() {
 
             <div className="max-w-lg m-auto space-y-4">
                 <div className="w-full flex flex-col space-y-1">
-                    <div className="flex">
+                    <div className="flex space-x-2">
                         <input
-                            className="flex-1 w-full px-2 py-2 text-sm text-gray-900 bg-purple-100 border rounded"
+                            className="flex-1 w-full px-2 py-2 text-sm text-gray-900 bg-purple-100 border rounded border-gray-400"
                             placeholder="Type anything as a seed"
                             value={seed} onChange={(event) => seedSet(event.target.value)}
                         />
