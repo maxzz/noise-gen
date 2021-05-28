@@ -1,5 +1,4 @@
 import SimplexNoise from 'simplex-noise';
-import { hex2rgb } from '@swiftcarrot/color-fns';
 
 type RenderContext = {
     ctx: CanvasRenderingContext2D;
