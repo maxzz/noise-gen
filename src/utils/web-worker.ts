@@ -11,16 +11,13 @@ function RunStuff() {
     runtime.onmessage = (event: MessageEvent) => {
         console.log('got', event);
 
-        let seed: string;
-        let color: string;
-
         if (event.data.type === 'init') {
             canvasElm = (event.data.canvas as HTMLCanvasElement)
             ctx = canvasElm.getContext('2d');
         }
 
-        seed = event.data.seed || undefined;
-        color = event.data.seed || 'red';
+        let seed: string = event.data.seed || undefined;
+        let color: string = event.data.color || 'red';
 
         if (ctx) {
             renderBody(ctx, seed, color);

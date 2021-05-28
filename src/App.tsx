@@ -4,6 +4,7 @@ import './App.css';
 import webWorker from './utils/web-worker?worker';
 import { colorAtom, offscreenCanvasAtom, seedAtom } from './atoms';
 import Logo from './components/Logo';
+import { HexColorPicker } from "react-colorful";
 
 function Canvas({ seed, color }: { seed: string, color: string }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
@@ -36,10 +37,7 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
         newWorker.onerror = (event: any) => {
             console.log('from worker: error', event.data);
         };
-        newWorker.postMessage({
-            type: 'init',
-            canvas: offscreen,
-        }, [offscreen]);
+        newWorker.postMessage({ type: 'init', canvas: offscreen, seed, color }, [offscreen]);
 
         worker.current = newWorker;
         return () => {
@@ -57,7 +55,7 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
             return;
         }
         worker.current.postMessage({ type: 're-run', seed, color });
-    }, [seed]);
+    }, [seed, color]);
 
     // useLayoutEffect(() => {
     //     console.log('use layout on', offscreenCanvasCashed);
@@ -91,11 +89,14 @@ function App() {
 
             <div className="max-w-lg m-auto space-y-4">
                 <div className="w-full flex flex-col space-y-1">
-                    <input
-                        className="flex-1 w-full px-2 py-2 text-sm text-gray-900 bg-purple-100 border rounded"
-                        placeholder="Type anything as a seed"
-                        value={seed} onChange={(event) => seedSet(event.target.value)}
-                    />
+                    <div className="">
+                        <input
+                            className="flex-1 w-full px-2 py-2 text-sm text-gray-900 bg-purple-100 border rounded"
+                            placeholder="Type anything as a seed"
+                            value={seed} onChange={(event) => seedSet(event.target.value)}
+                        />
+                        <HexColorPicker color={color} onChange={colorSet} />
+                    </div>
                     <button
                         className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
                         onClick={() => doRandom()}
