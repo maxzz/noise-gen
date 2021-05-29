@@ -7,3 +7,5 @@ Noise with web workers play.
 #### Credits, references, links
 
 * [Nice noise](https://noiseisnice.com)
+* [Background Patterns, Simplified by Conic Gradients](https://css-tricks.com/background-patterns-simplified-by-conic-gradients/)
+* [Lea Verou - CSS3 Patterns Gallery](https://projects.verou.me/css3patterns/)
