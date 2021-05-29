@@ -1,4 +1,5 @@
 import SimplexNoise from 'simplex-noise';
+//import colors from 'simple-color-functions';
 
 type RenderContext = {
     ctx: CanvasRenderingContext2D;
