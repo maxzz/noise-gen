@@ -18,7 +18,7 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
     let h = ctx.canvas.height;
 
     var dotMargin = 0;
-    let dotDiameter = 1;
+    let dotDiameter = 2; // def 1
     let dotRadius = dotDiameter / 2;
     let xMargin = 1;
     let distortion = renderContext.distortion;
@@ -30,14 +30,23 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
 
     let p = new Path2D();
 
+    let colorIdx = 0;
+    let colors = ['red', 'green', 'blue', ]
+
     for (let loopY = outsideMargin; loopY < numRows - outsideMargin; loopY++) {
+        colorIdx = ++colorIdx % colors.length;
+        console.log('idx', colors[colorIdx], colorIdx);
+        // for (let loopX = outsideMargin; loopX < /*numCols - outsideMargin*/outsideMargin+42; loopX++) {
         for (let loopX = outsideMargin; loopX < numCols - outsideMargin; loopX++) {
 
             let x = loopX * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
             let y = loopY * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
 
             let c = renderContext.color;
-            ctx.fillStyle = c;
+            // ctx.fillStyle = c;
+            ctx.fillStyle = colors[colorIdx];
+            //ctx.fillStyle = colors[colorIdx++ % colors.length];
+            //console.log('idx', colorIdx++ % colors.length);
 
             let noisex = fn(x / renderContext.n1, y / renderContext.n2);
             let noisey = fn(x / renderContext.n2, y / renderContext.n1);
@@ -68,14 +77,14 @@ export function renderBody(ctx: CanvasRenderingContext2D, seed: string, color: s
 
     let renderContext: RenderContext = {
         ctx,
-        n1: 10,
-        n2: 10,
-        distortion: 2,
+        n1: 6.3, // def 10
+        n2: 6.3, // def 10
+        distortion: 2, // def 2
         color: color
     };
     gridNoise(renderContext, fn);
 }
-
+/*
 export function renderBody3(ctx: CanvasRenderingContext2D) {
 
     let w = ctx.canvas.width;
@@ -114,3 +123,4 @@ export function renderBody2(ctx: CanvasRenderingContext2D) {
         //console.log([0, i, w, 5]);
     }
 }
+*/

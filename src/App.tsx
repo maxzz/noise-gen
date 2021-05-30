@@ -67,7 +67,7 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
     // }, [canvas]);
 
     return (
-        <canvas ref={canvas} className="w-full h-full"> {/* bg-purple-200 */}
+        <canvas ref={canvas} className="w-full h-full bg-purple-200"> {/* bg-purple-200 */}
 
         </canvas>
     );
