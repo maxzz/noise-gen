@@ -18,7 +18,7 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
     let h = ctx.canvas.height;
 
     var dotMargin = 0;
-    let dotDiameter = 2; // def 1
+    let dotDiameter = 12; // def 1
     let dotRadius = dotDiameter / 2;
     let xMargin = 1;
     let distortion = renderContext.distortion;
@@ -28,14 +28,15 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
 
     ctx.clearRect(0, 0, w, h);
 
-    let p = new Path2D();
+    // let p = new Path2D();
 
     let colorIdx = 0;
     let colors = ['red', 'green', 'blue', ]
 
     for (let loopY = outsideMargin; loopY < numRows - outsideMargin; loopY++) {
+        let p = new Path2D();
         colorIdx = ++colorIdx % colors.length;
-        console.log('idx', colors[colorIdx], colorIdx);
+        //console.log('idx', colors[colorIdx], colorIdx);
         // for (let loopX = outsideMargin; loopX < /*numCols - outsideMargin*/outsideMargin+42; loopX++) {
         for (let loopX = outsideMargin; loopX < numCols - outsideMargin; loopX++) {
 
@@ -45,6 +46,7 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
             let c = renderContext.color;
             // ctx.fillStyle = c;
             ctx.fillStyle = colors[colorIdx];
+            //console.log('col', colors[colorIdx]);
             //ctx.fillStyle = colors[colorIdx++ % colors.length];
             //console.log('idx', colorIdx++ % colors.length);
 
@@ -56,9 +58,10 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
 
             p.rect(x2, y2, 1, 1);
         }
+        ctx.fill(p);
     }
 
-    ctx.fill(p);
+    // ctx.fill(p);
 
     // mainCanvas.convertToBlob({ quality: 1 }).then(function (blob) {
     //   downloadData = blob;
