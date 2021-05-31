@@ -8,24 +8,24 @@ import { HexColorPicker } from "react-colorful";
 import { useMeasure } from 'react-use';
 
 function Canvas({ seed, color }: { seed: string, color: string }) {
-    //const canvas = React.useRef<HTMLCanvasElement>(null);
+    const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = React.useRef<Worker>();
 
     const [offscreenCanvasCashed, offscreenCanvasCashedSet] = useAtom(offscreenCanvasAtom);
 
-    const [canvas, { width, height }] = useMeasure<HTMLCanvasElement>();
+    const [measureRef, { width, height }] = useMeasure<HTMLDivElement>();
 
     useEffect(() => {
-        if (!canvas) {
+        if (!canvas.current) {
             return;
         }
-        console.log('use on', canvas, 'offscreen', offscreenCanvasCashed);
+        console.log('use on', canvas.current, 'offscreen', offscreenCanvasCashed);
 
-        canvas.dataset.tm = '444';
+        canvas.current.dataset.tm = '444';
 
         //const hasOffscreen = "OffscreenCanvas" in window;
 
-        const offscreen = offscreenCanvasCashed || canvas.transferControlToOffscreen();
+        const offscreen = offscreenCanvasCashed || canvas.current.transferControlToOffscreen();
 
         if (!offscreenCanvasCashed) {
             offscreenCanvasCashedSet(offscreen);
@@ -44,7 +44,7 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
 
         worker.current = newWorker;
         return () => {
-            console.log('use off', canvas, offscreenCanvasCashed);
+            console.log('use off', canvas.current, offscreenCanvasCashed);
 
             worker.current?.terminate();
             worker.current = undefined;
@@ -53,14 +53,19 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
         };
     }, [canvas]);
 
+    console.log('size', width, height);
+    
+
     useEffect(() => {
         worker.current?.postMessage({ type: 're-run', seed, color });
     }, [seed, color]);
 
     return (
-        <canvas ref={canvas}  className="w-full h-full"> {/* bg-purple-200 */} 
-        {/* width="300px" height="300px" */}
-        </canvas>
+        <div ref={measureRef} className="w-full h-full">
+            <canvas ref={canvas} width={width} height={height} className="w-full h-full"> {/* bg-purple-200 */}
+            {/* width="300px" height="300px" */}
+            </canvas>
+        </div>
     );
 }
 

@@ -19,7 +19,11 @@ function RunStuff() {
         let seed: string = event.data.seed || undefined;
         let color: string = event.data.color || 'red';
 
+        console.log('canvas', canvasElm.width, canvasElm.height);
+
         if (ctx) {
+            // ctx.canvas.width = 100;
+            // ctx.canvas.height = 100;
             renderBody(ctx, seed, color);
         }
     };
