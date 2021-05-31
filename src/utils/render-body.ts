@@ -53,6 +53,12 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
             let noisex = fn(x / renderContext.n1, y / renderContext.n2);
             let noisey = fn(x / renderContext.n2, y / renderContext.n1);
 
+            if (noisex < 0.15) {
+                continue;
+            }
+
+            //console.log('noise', noisex, noisey);
+
             let x2 = x + distortion * noisex;
             let y2 = y + distortion * noisey;
 
