@@ -1,28 +1,31 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
-import './App.css';
-import webWorker from './utils/web-worker?worker';
 import { colorAtom, offscreenCanvasAtom, seedAtom } from './atoms';
+import webWorker from './utils/web-worker?worker';
+import './App.css';
 import Logo from './components/Logo';
 import { HexColorPicker } from "react-colorful";
+import { useMeasure } from 'react-use';
 
 function Canvas({ seed, color }: { seed: string, color: string }) {
-    const canvas = React.useRef<HTMLCanvasElement>(null);
+    //const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = React.useRef<Worker>();
 
     const [offscreenCanvasCashed, offscreenCanvasCashedSet] = useAtom(offscreenCanvasAtom);
 
+    const [canvas, { width, height }] = useMeasure<HTMLCanvasElement>();
+
     useEffect(() => {
-        if (!canvas.current) {
+        if (!canvas) {
             return;
         }
-        console.log('use on', canvas.current, 'offscreen', offscreenCanvasCashed);
+        console.log('use on', canvas, 'offscreen', offscreenCanvasCashed);
 
-        canvas.current.dataset.tm = '444';
+        canvas.dataset.tm = '444';
 
         //const hasOffscreen = "OffscreenCanvas" in window;
 
-        const offscreen = offscreenCanvasCashed || canvas.current.transferControlToOffscreen();
+        const offscreen = offscreenCanvasCashed || canvas.transferControlToOffscreen();
 
         if (!offscreenCanvasCashed) {
             offscreenCanvasCashedSet(offscreen);
@@ -41,7 +44,7 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
 
         worker.current = newWorker;
         return () => {
-            console.log('use off', canvas.current, offscreenCanvasCashed);
+            console.log('use off', canvas, offscreenCanvasCashed);
 
             worker.current?.terminate();
             worker.current = undefined;
@@ -55,7 +58,8 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
     }, [seed, color]);
 
     return (
-        <canvas ref={canvas} width="300px" height="300px" className="w-full h-full"> {/* bg-purple-200 */}
+        <canvas ref={canvas}  className="w-full h-full"> {/* bg-purple-200 */} 
+        {/* width="300px" height="300px" */}
         </canvas>
     );
 }
@@ -87,7 +91,7 @@ function App() {
         <div className="App h-screen flex flex-col items-center space-y-4 bg-gray-100">
             <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300">
                 <div className="mx-4 flex-none w-10 h-10"><Logo /></div>
-                <div className="px-4 py-2 text-xl uppercase">Noise generator: xp210-525N</div>
+                <div className="px-4 py-2 text-xl uppercase">Noise generator: xp10-525N</div>
             </div>
 
             <div className="max-w-lg m-auto space-y-4">
