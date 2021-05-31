@@ -24,6 +24,8 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
         canvas.current.dataset.tm = '444';
 
         //const hasOffscreen = "OffscreenCanvas" in window;
+        canvas.current.width = 0;
+        canvas.current.height = 0;
 
         const offscreen = offscreenCanvasCashed || canvas.current.transferControlToOffscreen();
 
@@ -53,16 +55,16 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
         };
     }, [canvas]);
 
-    console.log('size', width, height);
+    console.log('main size', width, height);
     
 
     useEffect(() => {
-        worker.current?.postMessage({ type: 're-run', seed, color });
-    }, [seed, color]);
+        worker.current?.postMessage({ type: 're-run', seed, color, width, height });
+    }, [seed, color, width, height]);
 
     return (
         <div ref={measureRef} className="w-full h-full">
-            <canvas ref={canvas} width={width} height={height} className="w-full h-full"> {/* bg-purple-200 */}
+            <canvas ref={canvas} className="w-full h-full"> {/* bg-purple-200 */}
             {/* width="300px" height="300px" */}
             </canvas>
         </div>

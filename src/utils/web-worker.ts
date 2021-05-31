@@ -19,16 +19,19 @@ function RunStuff() {
         let seed: string = event.data.seed || undefined;
         let color: string = event.data.color || 'red';
 
-        console.log('canvas', canvasElm.width, canvasElm.height);
-
         if (ctx) {
-            // ctx.canvas.width = 100;
-            // ctx.canvas.height = 100;
-            renderBody(ctx, seed, color);
+            if (event.data.width && event.data.height) {
+                ctx.canvas.width = event.data.width;
+                ctx.canvas.height = event.data.height;
+            }
+            if (ctx.canvas.width && ctx.canvas.height) {
+                renderBody(ctx, seed, color);
+                console.log('canvas', canvasElm.width, canvasElm.height);
+            }
         }
     };
 
-    runtime.postMessage('result');
+    runtime.postMessage('worker done');
 }
 
 RunStuff();
