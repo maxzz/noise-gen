@@ -8,7 +8,7 @@ type RenderContext = {
     distortion: number;
     color: string;
 };
-
+/*
 function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => number) {
     const {
         ctx
@@ -95,7 +95,7 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
     //   downloadData = blob;
     // });
 }
-
+*/
 export function renderBody(ctx: CanvasRenderingContext2D, seed: string, color: string) {
 
     const simplex = new SimplexNoise(seed);
@@ -116,7 +116,6 @@ export function renderBody(ctx: CanvasRenderingContext2D, seed: string, color: s
     gridNoise(renderContext, fn);
 }
 
-/*
 function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => number) {
     const {
         ctx
@@ -155,7 +154,7 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
             let noisex = fn(x / renderContext.n1, y / renderContext.n2);
             let noisey = fn(x / renderContext.n2, y / renderContext.n1);
 
-            if (noisex < 0.15) {
+            if (noisex < 0.05) {
                 continue;
             }
 
@@ -172,8 +171,6 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
     //   downloadData = blob;
     // });
 }
-*/
-
 
 /*
 export function renderBody3(ctx: CanvasRenderingContext2D) {
