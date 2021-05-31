@@ -26,7 +26,7 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
 
         if (!offscreenCanvasCashed) {
             offscreenCanvasCashedSet(offscreen);
-            console.log('set offset');
+            //console.log('set offset');
         }
 
         const newWorker = new webWorker();
@@ -51,24 +51,11 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
     }, [canvas]);
 
     useEffect(() => {
-        if (!worker.current) {
-            return;
-        }
-        worker.current.postMessage({ type: 're-run', seed, color });
+        worker.current?.postMessage({ type: 're-run', seed, color });
     }, [seed, color]);
 
-    // useLayoutEffect(() => {
-    //     console.log('use layout on', offscreenCanvasCashed);
-
-    //     return () => {
-    //         console.log('use layout off', offscreenCanvasCashed);
-    //         offscreenCanvasCashedSet(null);
-    //     };
-    // }, [canvas]);
-
     return (
-        <canvas ref={canvas} className="w-full h-full bg-purple-200"> {/* bg-purple-200 */}
-
+        <canvas ref={canvas} width="300px" height="300px" className="w-full h-full"> {/* bg-purple-200 */}
         </canvas>
     );
 }
@@ -79,10 +66,7 @@ function ColorPicker(props: {className: string, style?: React.CSSProperties}) {
     const [isDown, isDownSet] = useState<boolean>(false);
     return (
         <div className={`${className} relative p-1 border rounded border-gray-400 bg-purple-100 transform active:scale-95`} style={{...style}}
-            onClick={() => {
-                console.log('down', isDown);
-                isDownSet(v => !v);
-            }}
+            onClick={() => isDownSet(v => !v)}
         >
             <div className="w-full h-full rounded" style={{backgroundColor: color}}></div>
             <div className={`absolute right-0 top-full z-10 shadow border rounded-[0.6rem] border-gray-700 ${isDown ? '' : 'hidden'}`}>

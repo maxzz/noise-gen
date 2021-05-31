@@ -8,7 +8,7 @@ type RenderContext = {
     distortion: number;
     color: string;
 };
-/*
+
 function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => number) {
     const {
         ctx
@@ -30,16 +30,7 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
 
     let p = new Path2D();
 
-    let p1dots: [number, number][] = [];
-    let p2dots: [number, number][] = [];
-
-    let colorIdx = 0;
-    let colors = ['red', 'green', 'blue', ]
-
-    colorIdx = ++colorIdx % colors.length;
-    //let c = renderContext.color;
-    // ctx.fillStyle = c;
-    ctx.fillStyle = colors[colorIdx];
+    ctx.fillStyle = renderContext.color;
 
     for (let loopY = outsideMargin; loopY < numRows - outsideMargin; loopY++) {
         for (let loopX = outsideMargin; loopX < numCols - outsideMargin; loopX++) {
@@ -50,21 +41,7 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
             let noisex = fn(x / renderContext.n1, y / renderContext.n2);
             let noisey = fn(x / renderContext.n2, y / renderContext.n1);
 
-            if (noisex > 0.1 && noisex < 0.15) {
-
-                let x2 = x + distortion * noisex;
-                let y2 = y + distortion * noisey;
-    
-                p1dots.push([x2, y2]);
-                continue;
-            }
-
-            if (noisex > 0.2 && noisex < 0.25) {
-
-                let x2 = x + distortion * noisex;
-                let y2 = y + distortion * noisey;
-    
-                p2dots.push([x2, y2]);
+            if (noisex > 0.1) {
                 continue;
             }
 
@@ -77,25 +54,11 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
 
     ctx.fill(p);
 
-    let p2 = new Path2D();
-    p1dots.forEach(([x2, y2]) => p2.rect(x2, y2, 1, 1));
-    ctx.fillStyle = 'red';
-    ctx.fill(p2);
-
-    if (p2dots.length) {
-        ctx.beginPath();
-        ctx.moveTo(p2dots[0][0], p2dots[0][1]);
-        p2dots.forEach(([x2, y2]) => ctx.lineTo(x2, y2));
-        ctx.fillStyle = 'blue';
-        ctx.closePath();
-        ctx.stroke();
-    }
-
     // mainCanvas.convertToBlob({ quality: 1 }).then(function (blob) {
     //   downloadData = blob;
     // });
 }
-*/
+
 export function renderBody(ctx: CanvasRenderingContext2D, seed: string, color: string) {
 
     const simplex = new SimplexNoise(seed);
@@ -114,62 +77,6 @@ export function renderBody(ctx: CanvasRenderingContext2D, seed: string, color: s
         color: color
     };
     gridNoise(renderContext, fn);
-}
-
-function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => number) {
-    const {
-        ctx
-    } = renderContext;
-
-    let w = ctx.canvas.width;
-    let h = ctx.canvas.height;
-
-    var dotMargin = 0;
-    let dotDiameter = .01; // def 1
-    let dotRadius = dotDiameter / 2;
-    let xMargin = 1;
-    let distortion = renderContext.distortion;
-    var numRows = h;
-    var numCols = w;
-    let outsideMargin = -20;
-
-    ctx.clearRect(0, 0, w, h);
-
-    let p = new Path2D();
-
-    let colorIdx = 0;
-    let colors = ['red', 'green', 'blue', ]
-
-    colorIdx = ++colorIdx % colors.length;
-    //let c = renderContext.color;
-    // ctx.fillStyle = c;
-    ctx.fillStyle = colors[colorIdx];
-
-    for (let loopY = outsideMargin; loopY < numRows - outsideMargin; loopY++) {
-        for (let loopX = outsideMargin; loopX < numCols - outsideMargin; loopX++) {
-
-            let x = loopX * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
-            let y = loopY * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
-
-            let noisex = fn(x / renderContext.n1, y / renderContext.n2);
-            let noisey = fn(x / renderContext.n2, y / renderContext.n1);
-
-            if (noisex < 0.05) {
-                continue;
-            }
-
-            let x2 = x + distortion * noisex;
-            let y2 = y + distortion * noisey;
-
-            p.rect(x2, y2, 1, 1);
-        }
-    }
-
-    ctx.fill(p);
-
-    // mainCanvas.convertToBlob({ quality: 1 }).then(function (blob) {
-    //   downloadData = blob;
-    // });
 }
 
 /*
