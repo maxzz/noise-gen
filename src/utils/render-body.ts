@@ -18,7 +18,7 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
     let h = ctx.canvas.height;
 
     var dotMargin = 0;
-    let dotDiameter = 12; // def 1
+    let dotDiameter = .01; // def 1
     let dotRadius = dotDiameter / 2;
     let xMargin = 1;
     let distortion = renderContext.distortion;
