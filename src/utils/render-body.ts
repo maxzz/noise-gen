@@ -82,10 +82,14 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
     ctx.fillStyle = 'red';
     ctx.fill(p2);
 
-    let p3 = new Path2D();
-    p2dots.forEach(([x2, y2]) => p3.rect(x2, y2, 1, 1));
-    ctx.fillStyle = 'blue';
-    ctx.fill(p3);
+    if (p2dots.length) {
+        ctx.beginPath();
+        ctx.moveTo(p2dots[0][0], p2dots[0][1]);
+        p2dots.forEach(([x2, y2]) => ctx.lineTo(x2, y2));
+        ctx.fillStyle = 'blue';
+        ctx.closePath();
+        ctx.stroke();
+    }
 
     // mainCanvas.convertToBlob({ quality: 1 }).then(function (blob) {
     //   downloadData = blob;
