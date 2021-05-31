@@ -30,6 +30,8 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
 
     let p = new Path2D();
 
+    let p1dots: [number, number][] = [];
+
     let colorIdx = 0;
     let colors = ['red', 'green', 'blue', ]
 
@@ -48,6 +50,11 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
             let noisey = fn(x / renderContext.n2, y / renderContext.n1);
 
             if (noisex > 0.1 && noisex < 0.15) {
+
+                let x2 = x + distortion * noisex;
+                let y2 = y + distortion * noisey;
+    
+                p1dots.push([x2, y2]);
                 continue;
             }
 
@@ -59,6 +66,11 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
     }
 
     ctx.fill(p);
+
+    let p2 = new Path2D();
+    p1dots.forEach(([x2, y2]) => p2.rect(x2, y2, 1, 1));
+    ctx.fillStyle = 'red';
+    ctx.fill(p2);
 
     // mainCanvas.convertToBlob({ quality: 1 }).then(function (blob) {
     //   downloadData = blob;
