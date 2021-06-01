@@ -92,6 +92,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const downPt = useRef<{ x: number; y: number; }>();
+    const downSz = useRef<{ w: number; h: number; }>();
 
     useEffect(() => {
         if (resizeActive && containerRef.current) {
@@ -102,7 +103,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
                     y: ev.clientY - downPt.current!.y,
                 };
                 console.log('ofs: ', { x: rot.x, y: rot.y });
-                manualSizeSet((v) => ({w: v.w + rot.x, h: v.h + rot.y }));
+                manualSizeSet((v) => ({w: downSz.current!.w + rot.x, h: downSz.current!.h + rot.y }));
             }
             function onDone() {
                 resizeActiveSet(false);
@@ -129,6 +130,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
                     onMouseDown={(ev) => {
                         ev.preventDefault();
                         downPt.current = { x: ev.clientX, y: ev.clientY };
+                        downSz.current = {w: manualSize.w, h: manualSize.h};
                         resizeActiveSet(true);
                     }}
                     onMouseUp={() => resizeActiveSet(false)}
