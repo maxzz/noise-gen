@@ -10,11 +10,10 @@ import { useDebounce, useMeasure } from 'react-use';
 function Canvas({ seed, color }: { seed: string, color: string; }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = React.useRef<Worker>();
-    const [size, sizeSet] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
-
     const [offscreenCanvasCashed, offscreenCanvasCashedSet] = useAtom(offscreenCanvasAtom);
-
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
+
+    const [sizeDebounced, sizeDebouncedSet] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
     const [colorDebounced, colorDebouncedSet] = useState<string>(color);
 
     useEffect(() => {
@@ -58,9 +57,9 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     }, [canvas]);
 
     useEffect(() => {
-        console.log('render', size);
-        worker.current?.postMessage({ type: 're-run', seed, color: colorDebounced, width: size.width, height: size.height });
-    }, [seed, colorDebounced, size]);
+        console.log('render', sizeDebounced);
+        worker.current?.postMessage({ type: 're-run', seed, color: colorDebounced, width: sizeDebounced.width, height: sizeDebounced.height });
+    }, [seed, colorDebounced, sizeDebounced]);
 
     useDebounce(() => {
         console.log('-------------color', color);
@@ -70,7 +69,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     useDebounce(() => {
         console.log('debounce', { width: widthRow, height: heightRow });
 
-        sizeSet({ width: widthRow, height: heightRow });
+        sizeDebouncedSet({ width: widthRow, height: heightRow });
     }, 1000, [widthRow, heightRow]);
 
     console.log('wxh', widthRow, heightRow);
