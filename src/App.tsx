@@ -10,10 +10,11 @@ import { useDebounce, useMeasure } from 'react-use';
 function Canvas({ seed, color }: { seed: string, color: string }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = React.useRef<Worker>();
+    const [size, sizeSet] = useState<{width: number, height: number}>({width: 0, height: 0});
 
     const [offscreenCanvasCashed, offscreenCanvasCashedSet] = useAtom(offscreenCanvasAtom);
 
-    const [measureRef, { width, height }] = useMeasure<HTMLDivElement>();
+    const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
 
     useEffect(() => {
         if (!canvas.current) {
@@ -56,12 +57,14 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
     }, [canvas]);
 
     useEffect(() => {
-        //worker.current?.postMessage({ type: 're-run', seed, color, width, height });
-    }, [seed, color, width, height]);
+        //worker.current?.postMessage({ type: 're-run', seed, color, width: size.width, height: size.height });
+    }, [seed, color, size]);
 
-    //useDebounce(() => {}, 1000, []);
+    useDebounce(() => {
+        sizeSet({width: widthRow, height: heightRow});
+    }, 1000, [widthRow, heightRow]);
 
-    console.log('wxh', width, height);
+    console.log('wxh', widthRow, heightRow);
 
     return (
         <div ref={measureRef} className="w-full h-full">
