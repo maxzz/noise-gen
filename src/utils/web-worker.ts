@@ -3,7 +3,7 @@ import { NoiseGenerator, renderBody } from './render-body';
 const runtime: Worker = self as any;
 
 function RunStuff() {
-    console.log('running');
+    console.log('Worker started');
 
     let canvasElm: HTMLCanvasElement;
     let ctx: CanvasRenderingContext2D | null;
@@ -11,7 +11,7 @@ function RunStuff() {
     let noiseGenerator = new NoiseGenerator();
 
     runtime.onmessage = (event: MessageEvent) => {
-        console.log('got', event);
+        console.log('Worker got', event.data);
 
         if (event.data.type === 'init') {
             canvasElm = (event.data.canvas as HTMLCanvasElement)
@@ -33,7 +33,7 @@ function RunStuff() {
         }
     };
 
-    runtime.postMessage('worker done');
+    runtime.postMessage('Worker waiting');
 }
 
 RunStuff();

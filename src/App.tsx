@@ -5,7 +5,7 @@ import webWorker from './utils/web-worker?worker';
 import './App.css';
 import Logo from './components/Logo';
 import { HexColorPicker } from "react-colorful";
-import { useMeasure } from 'react-use';
+import { useDebounce, useMeasure } from 'react-use';
 
 function Canvas({ seed, color }: { seed: string, color: string }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
@@ -56,8 +56,12 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
     }, [canvas]);
 
     useEffect(() => {
-        worker.current?.postMessage({ type: 're-run', seed, color, width, height });
+        //worker.current?.postMessage({ type: 're-run', seed, color, width, height });
     }, [seed, color, width, height]);
+
+    //useDebounce(() => {}, 1000, []);
+
+    console.log('wxh', width, height);
 
     return (
         <div ref={measureRef} className="w-full h-full">
@@ -99,8 +103,10 @@ function App() {
             </div>
 
             {/* <div className="max-w-lg m-auto space-y-4"> */}
-            <div className="flex-1 flex flex-col space-y-4">
-                <div className="w-full flex flex-col space-y-1">
+            <div className="w-full flex-1 flex flex-col space-y-4">
+
+                {/* Controls */}
+                <div className="flex flex-col space-y-1">
                     <div className="flex space-x-2">
                         <input
                             className="flex-1 w-full px-2 py-2 text-sm text-gray-900 bg-purple-100 border rounded border-gray-400"
@@ -116,6 +122,8 @@ function App() {
                         Random
                     </button>
                 </div>
+
+                {/* Canvas */}
                 <div className="flex-1 flex items-center">
                     {/* <div className="w-96 h-96"> */}
                         <Canvas seed={seed} color={color} />
