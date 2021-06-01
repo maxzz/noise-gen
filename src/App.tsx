@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import { colorAtom, offscreenCanvasAtom, seedAtom } from './atoms';
 import webWorker from './utils/web-worker?worker';
@@ -74,13 +74,53 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
 
     console.log('wxh', widthRow, heightRow);
 
+
+
+
+    const [rotActive, rotActiveSet] = useState(false);
+
+    const containerRef = useRef<HTMLDivElement>(null);
+    const downPt = useRef<{ x: number; y: number; }>();
+
+    useEffect(() => {
+        if (rotActive && containerRef.current) {
+            function onMove(ev: MouseEvent) {
+                //console.log('mouse', { x: ev.clientX, y: ev.clientY }, 'angle', angle);
+                const rot = {
+                    x: ev.clientX - downPt.current!.x,
+                    y: ev.clientY - downPt.current!.y,
+                };
+                console.log('ofs: ', { x: rot.x, y: rot.y });
+            }
+            function onDone() {
+                rotActiveSet(false);
+                document.removeEventListener('mouseup', onDone);
+            }
+            window.addEventListener('mousemove', onMove, false); //TODO: why window and not documnet?
+            document.addEventListener('mouseup', onDone, false);
+            return () => {
+                window.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onDone);
+            };
+        }
+    }, [rotActive]);
+
+
     return (
         <div ref={measureRef} className="w-full h-full relative">
             <canvas ref={canvas} className="w-full h-full"> {/* bg-purple-200 */}
-                {/* width="300px" height="300px" */}
             </canvas>
-            <div className="absolute w-4 h-4 rounded-full border-2 border-red-500 -bottom-2 -right-2">
+            <div
+                ref={containerRef}
+                className="absolute w-4 h-4 rounded-full border-2 border-red-500 -top-2 -right-2"
+                onMouseDown={(ev) => {
+                    ev.preventDefault();
+                    downPt.current = { x: ev.clientX, y: ev.clientY };
+                    rotActiveSet(true);
 
+                }}
+                onMouseUp={() => rotActiveSet(false)}
+            >
             </div>
         </div>
     );
@@ -139,7 +179,7 @@ function App() {
 
                 {/* Canvas */}
                 <div className="flex-1 flex items-center">
-                    <div className="w-96 h-96 bg-red-100">
+                    <div className="w-96 h-96 bg-red-100 overflow-hidden" style={{ resize: 'both' }}>
                         <Canvas seed={seed} color={color} />
                     </div>
                 </div>
