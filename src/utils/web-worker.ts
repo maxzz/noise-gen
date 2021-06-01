@@ -1,4 +1,4 @@
-import { renderBody } from './render-body';
+import { NoiseGenerator, renderBody } from './render-body';
 
 const runtime: Worker = self as any;
 
@@ -7,6 +7,8 @@ function RunStuff() {
 
     let canvasElm: HTMLCanvasElement;
     let ctx: CanvasRenderingContext2D | null;
+
+    let noiseGenerator = new NoiseGenerator();
 
     runtime.onmessage = (event: MessageEvent) => {
         console.log('got', event);
@@ -25,7 +27,7 @@ function RunStuff() {
                 ctx.canvas.height = event.data.height;
             }
             if (ctx.canvas.width && ctx.canvas.height) {
-                renderBody(ctx, seed, color);
+                renderBody(noiseGenerator, ctx, seed, color);
                 console.log('canvas', canvasElm.width, canvasElm.height);
             }
         }

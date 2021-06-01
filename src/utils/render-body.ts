@@ -41,9 +41,9 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
             let noisex = fn(x / renderContext.n1, y / renderContext.n2);
             let noisey = fn(x / renderContext.n2, y / renderContext.n1);
 
-            if (noisex > 0.1) {
-                continue;
-            }
+            // if (noisex > 0.1) {
+            //     continue;
+            // }
 
             let x2 = x + distortion * noisex;
             let y2 = y + distortion * noisey;
@@ -59,13 +59,13 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
     // });
 }
 
-export function renderBody(ctx: CanvasRenderingContext2D, seed: string, color: string) {
+export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingContext2D, seed: string, color: string) {
 
-    const simplex = new SimplexNoise(seed);
+    const simplex = noiseGenerator.get(seed);
 
     function fn(x: number, y: number) {
-        return simplex.noise2D(x / 36, y / 10);
-        //return simplex.noise3D(x / 10, y / 10, 0);
+        //return simplex.noise2D(x / 36, y / 10);
+        return simplex.noise3D(x / 10, y / 10, 0);
         //return simplex.noise4D(x / 20, y / 20, 1, 1);
     }
 
@@ -77,6 +77,18 @@ export function renderBody(ctx: CanvasRenderingContext2D, seed: string, color: s
         color: color
     };
     gridNoise(renderContext, fn);
+}
+
+export class NoiseGenerator {
+    private _seed: string = '';
+    private _noise: SimplexNoise | undefined;
+    get(seed: string): SimplexNoise {
+        if (this._seed !== seed || !this._noise) {
+            this._noise = new SimplexNoise(seed);
+            this._seed === seed;
+        }
+        return this._noise;
+    }
 }
 
 /*

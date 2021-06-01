@@ -55,9 +55,6 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
         };
     }, [canvas]);
 
-    console.log('main size', width, height);
-    
-
     useEffect(() => {
         worker.current?.postMessage({ type: 're-run', seed, color, width, height });
     }, [seed, color, width, height]);
