@@ -77,13 +77,24 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
 
 
 
-    const [rotActive, rotActiveSet] = useState(false);
+    const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({w: 100, h: 100});
+    useEffect(() => {
+        console.log('manualSize', { width: widthRow, height: heightRow });
+
+        if (widthRow && heightRow) {
+            manualSizeSet({w: widthRow, h: heightRow});
+        }
+    }, [widthRow, heightRow]);
+    
+    
+    
+    const [resizeActive, resizeActiveSet] = useState(false);
 
     const containerRef = useRef<HTMLDivElement>(null);
     const downPt = useRef<{ x: number; y: number; }>();
 
     useEffect(() => {
-        if (rotActive && containerRef.current) {
+        if (resizeActive && containerRef.current) {
             function onMove(ev: MouseEvent) {
                 //console.log('mouse', { x: ev.clientX, y: ev.clientY }, 'angle', angle);
                 const rot = {
@@ -93,7 +104,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
                 console.log('ofs: ', { x: rot.x, y: rot.y });
             }
             function onDone() {
-                rotActiveSet(false);
+                resizeActiveSet(false);
                 document.removeEventListener('mouseup', onDone);
             }
             window.addEventListener('mousemove', onMove, false); //TODO: why window and not documnet?
@@ -103,24 +114,25 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
                 document.removeEventListener('mouseup', onDone);
             };
         }
-    }, [rotActive]);
+    }, [resizeActive]);
 
 
     return (
-        <div ref={measureRef} className="w-full h-full relative">
-            <canvas ref={canvas} className="w-full h-full"> {/* bg-purple-200 */}
-            </canvas>
-            <div
-                ref={containerRef}
-                className="absolute w-4 h-4 rounded-full border-2 border-red-500 -top-2 -right-2"
-                onMouseDown={(ev) => {
-                    ev.preventDefault();
-                    downPt.current = { x: ev.clientX, y: ev.clientY };
-                    rotActiveSet(true);
-
-                }}
-                onMouseUp={() => rotActiveSet(false)}
-            >
+        <div className="overflow-hidden" style={{ resize: 'both', width: manualSize.w, height: manualSize.h }}>
+            <div ref={measureRef} className="w-full h-full relative">
+                <canvas ref={canvas} className="w-full h-full"> {/* bg-purple-200 */}
+                </canvas>
+                <div
+                    ref={containerRef}
+                    className="absolute w-4 h-4 rounded-full border-2 border-red-500 -top-2 -right-2"
+                    onMouseDown={(ev) => {
+                        ev.preventDefault();
+                        downPt.current = { x: ev.clientX, y: ev.clientY };
+                        resizeActiveSet(true);
+                    }}
+                    onMouseUp={() => resizeActiveSet(false)}
+                >
+                </div>
             </div>
         </div>
     );
@@ -179,7 +191,8 @@ function App() {
 
                 {/* Canvas */}
                 <div className="flex-1 flex items-center">
-                    <div className="w-96 h-96 bg-red-100 overflow-hidden" style={{ resize: 'both' }}>
+                    <div className="bg-red-100">
+                    {/* <div className="w-96 h-96 bg-red-100 overflow-hidden" style={{ resize: 'both' }}> */}
                         <Canvas seed={seed} color={color} />
                     </div>
                 </div>
