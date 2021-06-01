@@ -126,8 +126,8 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
                 </canvas>
                 <div
                     ref={containerRef}
-                    className="absolute w-4 h-4 rounded-full border-2 border-red-500 -bottom-2 -left-2"
-                    style={{cursor: 'nesw-resize'}}
+                    className="absolute w-8 h-8 rounded-full border-2 border-red-500 -bottom-2 -right-2"
+                    style={{cursor: 'nwse-resize'}}
                     onMouseDown={(ev) => {
                         ev.preventDefault();
                         downPt.current = { x: ev.clientX, y: ev.clientY };
