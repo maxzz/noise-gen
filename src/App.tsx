@@ -98,7 +98,8 @@ function App() {
                 <div className="px-4 py-2 text-xl uppercase">Noise generator: xp10-525N</div>
             </div>
 
-            <div className="max-w-lg m-auto space-y-4">
+            {/* <div className="max-w-lg m-auto space-y-4"> */}
+            <div className="flex-1 flex flex-col space-y-4">
                 <div className="w-full flex flex-col space-y-1">
                     <div className="flex space-x-2">
                         <input
@@ -116,9 +117,9 @@ function App() {
                     </button>
                 </div>
                 <div className="flex-1 flex items-center">
-                    <div className="w-96 h-96">
+                    {/* <div className="w-96 h-96"> */}
                         <Canvas seed={seed} color={color} />
-                    </div>
+                    {/* </div> */}
                 </div>
             </div>
         </div>
