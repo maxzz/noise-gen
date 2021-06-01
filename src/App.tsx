@@ -57,12 +57,15 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
     }, [canvas]);
 
     useEffect(() => {
-        //worker.current?.postMessage({ type: 're-run', seed, color, width: size.width, height: size.height });
+        console.log('render', size);
+        worker.current?.postMessage({ type: 're-run', seed, color, width: size.width, height: size.height });
     }, [seed, color, size]);
 
     useDebounce(() => {
+        console.log('debounce', {width: widthRow, height: heightRow});
+        
         sizeSet({width: widthRow, height: heightRow});
-    }, 1000, [widthRow, heightRow]);
+    }, 2000, [widthRow, heightRow]);
 
     console.log('wxh', widthRow, heightRow);
 
@@ -128,9 +131,9 @@ function App() {
 
                 {/* Canvas */}
                 <div className="flex-1 flex items-center">
-                    {/* <div className="w-96 h-96"> */}
+                    <div className="w-96 h-96">
                         <Canvas seed={seed} color={color} />
-                    {/* </div> */}
+                    </div>
                 </div>
             </div>
         </div>
