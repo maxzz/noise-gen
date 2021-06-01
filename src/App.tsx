@@ -65,7 +65,7 @@ function Canvas({ seed, color }: { seed: string, color: string }) {
         console.log('debounce', {width: widthRow, height: heightRow});
         
         sizeSet({width: widthRow, height: heightRow});
-    }, 2000, [widthRow, heightRow]);
+    }, 1000, [widthRow, heightRow]);
 
     console.log('wxh', widthRow, heightRow);
 
@@ -131,7 +131,7 @@ function App() {
 
                 {/* Canvas */}
                 <div className="flex-1 flex items-center">
-                    <div className="w-96 h-96">
+                    <div className="w-96 h-96 bg-red-100 overflow-hidden" style={{resize: 'both'}}>
                         <Canvas seed={seed} color={color} />
                     </div>
                 </div>
