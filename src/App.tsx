@@ -86,7 +86,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
         }
     }, [widthRow, heightRow]);
     
-    
+
     
     const [resizeActive, resizeActiveSet] = useState(false);
 
@@ -102,6 +102,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
                     y: ev.clientY - downPt.current!.y,
                 };
                 console.log('ofs: ', { x: rot.x, y: rot.y });
+                manualSizeSet((v) => ({w: v.w + rot.x, h: v.h + rot.y }));
             }
             function onDone() {
                 resizeActiveSet(false);
@@ -118,7 +119,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
 
 
     return (
-        <div className="overflow-hidden" style={{ resize: 'both', width: manualSize.w, height: manualSize.h }}>
+        <div className="overflow-hidden" style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}>
             <div ref={measureRef} className="w-full h-full relative">
                 <canvas ref={canvas} className="w-full h-full"> {/* bg-purple-200 */}
                 </canvas>
@@ -143,7 +144,9 @@ function ColorPicker(props: { className: string, style?: React.CSSProperties; })
     const [color, colorSet] = useAtom(colorAtom);
     const [isDown, isDownSet] = useState<boolean>(false);
     return (
-        <div className={`${className} relative p-1 border rounded border-gray-400 bg-purple-100 transform active:scale-95`} style={{ ...style }}
+        <div
+            className={`${className} relative p-1 border rounded border-gray-400 bg-purple-100 transform active:scale-95`}
+            style={{ ...style }}
             onClick={() => isDownSet(v => !v)}
         >
             <div className="w-full h-full rounded" style={{ backgroundColor: color }}></div>
