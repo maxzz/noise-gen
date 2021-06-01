@@ -75,10 +75,13 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     console.log('wxh', widthRow, heightRow);
 
     return (
-        <div ref={measureRef} className="w-full h-full">
+        <div ref={measureRef} className="w-full h-full relative">
             <canvas ref={canvas} className="w-full h-full"> {/* bg-purple-200 */}
                 {/* width="300px" height="300px" */}
             </canvas>
+            <div className="absolute w-4 h-4 rounded-full border-2 border-red-500 -bottom-2 -right-2">
+
+            </div>
         </div>
     );
 }
@@ -136,7 +139,7 @@ function App() {
 
                 {/* Canvas */}
                 <div className="flex-1 flex items-center">
-                    <div className="w-96 h-96 bg-red-100 overflow-hidden" style={{ resize: 'both' }}>
+                    <div className="w-96 h-96 bg-red-100">
                         <Canvas seed={seed} color={color} />
                     </div>
                 </div>
