@@ -19,7 +19,8 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     const [debouncedSize, SetDebouncedSize] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
     const [debouncedColor, SetDebouncedColor] = useState<string>(color);
 
-    const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
+    // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
+    const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 150, h: 220 });
     useEffect(() => {
         widthRow && heightRow && manualSizeSet({ w: widthRow, h: heightRow });
     }, [widthRow, heightRow]);

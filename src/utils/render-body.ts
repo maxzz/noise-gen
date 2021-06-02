@@ -24,7 +24,6 @@ function gridNoise(renderContext: RenderContext): Path2D[] {
             n1,
             n2,
             distortion,
-            color,
             dotDiameter,
         }
     } = renderContext;
@@ -71,7 +70,7 @@ export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingC
     const simplex = noiseGenerator.get(seed);
 
     function fn(x: number, y: number) {
-        //return simplex.noise2D(x / 36, y / 10);
+        //return simplex.noise2D(x / 10, y / 10);
         return simplex.noise3D(x / 10, y / 10, 0);
         //return simplex.noise4D(x / 20, y / 20, 1, 1);
     }
@@ -107,7 +106,7 @@ export class NoiseGenerator {
     get(seed: string): SimplexNoise {
         if (this._seed !== seed || !this._noise) {
             this._noise = new SimplexNoise(seed);
-            this._seed === seed;
+            this._seed = seed;
         }
         return this._noise;
     }
