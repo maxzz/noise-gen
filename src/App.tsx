@@ -12,10 +12,9 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = useCanvasWorker(canvas);
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
-
+    const [dragActive, setDragActive] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const isHovered = useHoverDirty(containerRef);
-    const [dragActive, setDragActive] = useState(false);
 
     const [debouncedSize, SetDebouncedSize] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
     const [debouncedColor, SetDebouncedColor] = useState<string>(color);
@@ -26,7 +25,13 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     }, [widthRow, heightRow]);
 
     useEffect(() => {
-        worker.current?.postMessage({ type: 're-run', seed, color: debouncedColor, width: debouncedSize.width, height: debouncedSize.height });
+        worker.current?.postMessage({
+            type: 're-run',
+            seed,
+            color: debouncedColor,
+            width: debouncedSize.width,
+            height: debouncedSize.height,
+        });
     }, [seed, debouncedColor, debouncedSize]);
 
     useDebounce(() => SetDebouncedColor(color), 100, [color]);
@@ -45,9 +50,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
                 className="absolute w-5 h-5 rounded-full border-2 -bottom-2 -right-2 z-10 
                     bg-green-500 border-green-700 active:border-green-600
                     transform active:scale-0"
-                size={manualSize} setSize={manualSizeSet} onActivated={(active) => {
-                    setDragActive(active);
-                }}
+                size={manualSize} setSize={manualSizeSet} onActivated={(active: boolean) => setDragActive(active)}
             />
             {(dragActive || isHovered) && <div className="absolute text-[.6rem] text-gray-700">{widthRow} x {heightRow}</div>}
         </div>
