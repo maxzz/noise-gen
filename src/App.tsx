@@ -4,7 +4,7 @@ import { colorAtom, seedAtom } from './atoms';
 import './App.css';
 import Logo from './components/Logo';
 import { HexColorPicker } from "react-colorful";
-import { useDebounce, useMeasure } from 'react-use';
+import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import DragZone from './components/DragZone';
 import useCanvasWorker from './hooks/useCanvasWorker';
 
@@ -12,6 +12,12 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = useCanvasWorker(canvas);
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
+
+    const containerRef = useRef<HTMLDivElement>(null);
+    const isHovered = useHoverDirty(containerRef);
+    console.log('hover', isHovered);
+    
+
     const [sizeDebounced, sizeDebouncedSet] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
     const [colorDebounced, colorDebouncedSet] = useState<string>(color);
 
@@ -33,7 +39,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     }, [widthRow, heightRow]);
 
     return (
-        <div className="relative">
+        <div className={`relative ${isHovered ? 'border-2 border-red-600' : 'border-2 border-green-600'}`} ref={containerRef}>
             <div 
                 className="w-full h-full overflow-hidden"
                 style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
