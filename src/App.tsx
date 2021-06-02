@@ -16,9 +16,6 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const isHovered = useHoverDirty(containerRef);
 
-    const [debouncedSize, SetDebouncedSize] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
-    const [debouncedColor, SetDebouncedColor] = useState<string>(color);
-
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
     const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 150, h: 220 });
     useEffect(() => {
@@ -35,19 +32,6 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
         });
     }, 100, [color, widthRow, heightRow]);
 
-/*     useEffect(() => {
-        worker.current?.postMessage({
-            type: 're-run',
-            seed,
-            color: debouncedColor,
-            width: debouncedSize.width,
-            height: debouncedSize.height,
-        });
-    }, [seed, debouncedColor, debouncedSize]);
-
-    useDebounce(() => SetDebouncedColor(color), 100, [color]);
-    useDebounce(() => SetDebouncedSize({ width: widthRow, height: heightRow }), 100, [widthRow, heightRow]);
- */
     return (
         <div className={`relative ${dragActive ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}> {/* bg-red-100 */}
             <div 
