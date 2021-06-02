@@ -38,7 +38,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     }, [widthRow, heightRow]);
 
     return (
-        <div className={`relative ${isHovered ? 'border-2 border-red-600' : 'border-2 border-green-600'}`} ref={containerRef}>
+        <div className={`relative ${dragActive ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}>
             <div 
                 className="w-full h-full overflow-hidden"
                 style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
@@ -54,7 +54,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
                     setDragActive(active);
                 }}
             />
-            {dragActive && <div className="absolute text-[.6rem] text-gray-700">{widthRow} x {heightRow}</div>}
+            {(dragActive || isHovered) && <div className="absolute text-[.6rem] text-gray-700">{widthRow} x {heightRow}</div>}
         </div>
     );
 }
