@@ -57,37 +57,31 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     }, [canvas]);
 
     useEffect(() => {
-        console.log('render', sizeDebounced);
         worker.current?.postMessage({ type: 're-run', seed, color: colorDebounced, width: sizeDebounced.width, height: sizeDebounced.height });
     }, [seed, colorDebounced, sizeDebounced]);
 
     useDebounce(() => {
-        console.log('-------------color', color);
         colorDebouncedSet(color);
-    }, 500, [color]);
+    }, 100, [color]);
 
     useDebounce(() => {
-        console.log('debounce', { width: widthRow, height: heightRow });
-
         sizeDebouncedSet({ width: widthRow, height: heightRow });
-    }, 1000, [widthRow, heightRow]);
-
-    console.log('wxh', widthRow, heightRow);
+    }, 100, [widthRow, heightRow]);
 
 
 
 
-    const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({w: 100, h: 100});
+    const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 100, h: 100 });
     useEffect(() => {
         console.log('manualSize', { width: widthRow, height: heightRow });
 
         if (widthRow && heightRow) {
-            manualSizeSet({w: widthRow, h: heightRow});
+            manualSizeSet({ w: widthRow, h: heightRow });
         }
     }, [widthRow, heightRow]);
-    
 
-    
+
+
     const [resizeActive, resizeActiveSet] = useState(false);
 
     const containerRef = useRef<HTMLDivElement>(null);
@@ -103,7 +97,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
                     y: ev.clientY - downPt.current!.y,
                 };
                 console.log('ofs: ', { x: rot.x, y: rot.y });
-                manualSizeSet((v) => ({w: downSz.current!.w + rot.x, h: downSz.current!.h + rot.y }));
+                manualSizeSet((v) => ({ w: downSz.current!.w + rot.x, h: downSz.current!.h + rot.y }));
             }
             function onDone() {
                 resizeActiveSet(false);
@@ -120,18 +114,21 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
 
 
     return (
-        <div className="overflow-hidden" style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}>
+        <div
+            className="overflow-hidden"
+            style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
+        >
             <div ref={measureRef} className="w-full h-full relative">
                 <canvas ref={canvas} className="w-full h-full"> {/* bg-purple-200 */}
                 </canvas>
                 <div
                     ref={containerRef}
-                    className="absolute w-8 h-8 rounded-full border-2 border-red-500 -bottom-2 -right-2"
-                    style={{cursor: 'nwse-resize'}}
+                    className="absolute w-8 h-8 rounded-full border-2 border-red-500 -bottom-2 -right-2 z-10"
+                    style={{ cursor: 'nwse-resize' }}
                     onMouseDown={(ev) => {
                         ev.preventDefault();
                         downPt.current = { x: ev.clientX, y: ev.clientY };
-                        downSz.current = {w: manualSize.w, h: manualSize.h};
+                        downSz.current = { w: manualSize.w, h: manualSize.h };
                         resizeActiveSet(true);
                     }}
                     onMouseUp={() => resizeActiveSet(false)}
@@ -198,7 +195,7 @@ function App() {
                 {/* Canvas */}
                 <div className="flex-1 flex items-center">
                     <div className="bg-red-100">
-                    {/* <div className="w-96 h-96 bg-red-100 overflow-hidden" style={{ resize: 'both' }}> */}
+                        {/* <div className="w-96 h-96 bg-red-100 overflow-hidden" style={{ resize: 'both' }}> */}
                         <Canvas seed={seed} color={color} />
                     </div>
                 </div>
