@@ -49,7 +49,9 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
                 className="absolute w-5 h-5 rounded-full border-2 -bottom-2 -right-2 z-10 
                     bg-green-500 border-green-700 active:border-green-600
                     transform active:scale-0"
-                size={manualSize} setSize={manualSizeSet}
+                size={manualSize} setSize={manualSizeSet} onActivated={(active) => {
+                    console.log('zzzzzzzz', active);
+                }}
             />
         </div>
     );

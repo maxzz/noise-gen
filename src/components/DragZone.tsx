@@ -6,10 +6,10 @@ type Size2D = { w: number, h: number; };
 export type DragZoneProps = {
     size: Size2D;
     setSize: (v: Size2D) => void;
-    onActived?: (v: boolean) => void;
+    onActivated?: (v: boolean) => void;
 } & React.HTMLAttributes<Element>;
 
-function DragZone({ size, setSize, onActived = () => {}, ...rest }: DragZoneProps ) {
+function DragZone({ size, setSize, onActivated = () => { }, ...rest }: DragZoneProps) {
     const downPt = useRef<{ x: number; y: number; }>();
     const downSz = useRef<{ w: number; h: number; }>();
 
@@ -24,6 +24,8 @@ function DragZone({ size, setSize, onActived = () => {}, ...rest }: DragZoneProp
         }
     }, [clientPt]);
 
+    useEffect(() => onActivated(active), [active]);
+
     return (
         <div
             {...rest}
@@ -33,9 +35,9 @@ function DragZone({ size, setSize, onActived = () => {}, ...rest }: DragZoneProp
                 downPt.current = { x: event.clientX, y: event.clientY };
                 downSz.current = { w: size.w, h: size.h };
                 setActive(true);
-                onActived(true);
+
             }}
-            onMouseUp={() => (setActive(false), onActived(false)) }
+            onMouseUp={() => setActive(false)}
         >
         </div>
     );
