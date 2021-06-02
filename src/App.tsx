@@ -17,25 +17,20 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     const isHovered = useHoverDirty(containerRef);
     const [dragActive, setDragActive] = useState(false);
 
-    const [sizeDebounced, sizeDebouncedSet] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
-    const [colorDebounced, colorDebouncedSet] = useState<string>(color);
-
-    useEffect(() => {
-        worker.current?.postMessage({ type: 're-run', seed, color: colorDebounced, width: sizeDebounced.width, height: sizeDebounced.height });
-    }, [seed, colorDebounced, sizeDebounced]);
-
-    useDebounce(() => {
-        colorDebouncedSet(color);
-    }, 100, [color]);
-
-    useDebounce(() => {
-        sizeDebouncedSet({ width: widthRow, height: heightRow });
-    }, 100, [widthRow, heightRow]);
+    const [debouncedSize, SetDebouncedSize] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
+    const [debouncedColor, SetDebouncedColor] = useState<string>(color);
 
     const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 300, h: 300 });
     useEffect(() => {
         widthRow && heightRow && manualSizeSet({ w: widthRow, h: heightRow });
     }, [widthRow, heightRow]);
+
+    useEffect(() => {
+        worker.current?.postMessage({ type: 're-run', seed, color: debouncedColor, width: debouncedSize.width, height: debouncedSize.height });
+    }, [seed, debouncedColor, debouncedSize]);
+
+    useDebounce(() => SetDebouncedColor(color), 100, [color]);
+    useDebounce(() => SetDebouncedSize({ width: widthRow, height: heightRow }), 100, [widthRow, heightRow]);
 
     return (
         <div className={`relative ${dragActive ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}>
