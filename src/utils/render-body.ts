@@ -30,17 +30,15 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
 
     let xMargin = 1;
     let dotMargin = 0;
+    let outsideMargin = -20;
     let dotRadius = dotDiameter / 2;
 
     let numCols = ctx.canvas.width;
     let numRows = ctx.canvas.height;
-    let outsideMargin = -20;
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     let p = new Path2D();
-
-    ctx.fillStyle = color;
 
     for (let loopY = outsideMargin; loopY < numRows - outsideMargin; loopY++) {
         for (let loopX = outsideMargin; loopX < numCols - outsideMargin; loopX++) {
@@ -62,6 +60,7 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
         }
     }
 
+    ctx.fillStyle = color;
     ctx.fill(p);
 
     // mainCanvas.convertToBlob({ quality: 1 }).then(function (blob) {
@@ -84,7 +83,7 @@ export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingC
         params: {
             n1: 6.3, // def 10
             n2: 6.3, // def 10
-            distortion: 2, // def 2
+            distortion: 1, // def 2
             dotDiameter: .1, // def 1
             color: color
         },
