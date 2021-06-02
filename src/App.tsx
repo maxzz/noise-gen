@@ -1,22 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
-import { colorAtom, offscreenCanvasAtom, seedAtom } from './atoms';
-import webWorker from './utils/web-worker?worker';
+import { colorAtom, seedAtom } from './atoms';
 import './App.css';
 import Logo from './components/Logo';
 import { HexColorPicker } from "react-colorful";
 import { useDebounce, useMeasure } from 'react-use';
 import DragZone from './components/DragZone';
+import useCanvasWorker from './hooks/useCanvasWorker';
 
 function Canvas({ seed, color }: { seed: string, color: string; }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
-    const worker = React.useRef<Worker>();
-    const [offscreenCanvasCashed, offscreenCanvasCashedSet] = useAtom(offscreenCanvasAtom);
+    const worker = useCanvasWorker(canvas);
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
 
     const [sizeDebounced, sizeDebouncedSet] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
     const [colorDebounced, colorDebouncedSet] = useState<string>(color);
 
+    useEffect(() => {
+        if (!worker.current) {
+            return;
+        }
+    }, [worker]);
+
+    /*
     useEffect(() => {
         if (!canvas.current) {
             return;
@@ -54,6 +60,9 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
             offscreenCanvasCashedSet(null);
         };
     }, [canvas]);
+    */
+
+    
 
     useEffect(() => {
         worker.current?.postMessage({ type: 're-run', seed, color: colorDebounced, width: sizeDebounced.width, height: sizeDebounced.height });

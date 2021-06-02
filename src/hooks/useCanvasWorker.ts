@@ -1,9 +1,9 @@
 import React, { RefObject, useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { offscreenCanvasAtom } from '../atoms';
-import webWorker from './utils/web-worker?worker';
+import webWorker from '../utils/web-worker?worker';
 
-export default function useCanvasworker(canvas: RefObject<HTMLCanvasElement>) {
+export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): RefObject<Worker | undefined> {
 
     const worker = React.useRef<Worker>();
     const [offscreenCanvasCashed, offscreenCanvasCashedSet] = useAtom(offscreenCanvasAtom);
@@ -33,7 +33,8 @@ export default function useCanvasworker(canvas: RefObject<HTMLCanvasElement>) {
         newWorker.onerror = (event: any) => {
             console.log('from worker: error', event.data);
         };
-    // newWorker.postMessage({ type: 'init', canvas: offscreen, seed, color: colorDebounced }, [offscreen]);
+        //newWorker.postMessage({ type: 'init', canvas: offscreen, seed, color: colorDebounced }, [offscreen]);
+        newWorker.postMessage({ type: 'init', canvas: offscreen }, [offscreen]);
 
         worker.current = newWorker;
         return () => {
