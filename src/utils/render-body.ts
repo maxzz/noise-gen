@@ -3,52 +3,62 @@ import SimplexNoise from 'simplex-noise';
 
 type RenderContext = {
     ctx: CanvasRenderingContext2D;
+    noiseFn?: (x: number, y: number) => number;
+    progress?: (v: number) => boolean;    // v - progress [0..1]; running time in ms; returns boolean: continue or stop
+    params: RenderParams;
+};
+
+type RenderParams = {
     n1: number;
     n2: number;
     distortion: number;
+    dotDiameter: number;
     color: string;
 };
 
 function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => number) {
     const {
-        ctx
+        ctx,
+        params: {
+            n1,
+            n2,
+            distortion,
+            color,
+            dotDiameter,
+        }
     } = renderContext;
 
-    let w = ctx.canvas.width;
-    let h = ctx.canvas.height;
-
-    var dotMargin = 0;
-    let dotDiameter = .01; // def 1
-    let dotRadius = dotDiameter / 2;
     let xMargin = 1;
-    let distortion = renderContext.distortion;
-    var numRows = h;
-    var numCols = w;
+    let dotMargin = 0;
+    let dotRadius = dotDiameter / 2;
+
+    let numCols = ctx.canvas.width;
+    let numRows = ctx.canvas.height;
     let outsideMargin = -20;
 
-    ctx.clearRect(0, 0, w, h);
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     let p = new Path2D();
 
-    ctx.fillStyle = renderContext.color;
+    ctx.fillStyle = color;
 
     for (let loopY = outsideMargin; loopY < numRows - outsideMargin; loopY++) {
         for (let loopX = outsideMargin; loopX < numCols - outsideMargin; loopX++) {
 
-            let x = loopX * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
-            let y = loopY * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
+            let xIn = loopX * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
+            let yIn = loopY * (dotDiameter + xMargin) + dotMargin + xMargin / 2 + dotRadius;
 
-            let noisex = fn(x / renderContext.n1, y / renderContext.n2);
-            let noisey = fn(x / renderContext.n2, y / renderContext.n1);
+            let noisex = fn(xIn / n1, yIn / n2);
+            let noisey = fn(xIn / n2, yIn / n1);
 
             // if (noisex > 0.02) {
             //     continue;
             // }
 
-            let x2 = x + distortion * noisex;
-            let y2 = y + distortion * noisey;
+            let xOut = xIn + distortion * noisex;
+            let yOut = yIn + distortion * noisey;
 
-            p.rect(x2, y2, 1, 1);
+            p.rect(xOut, yOut, 1, 1);
         }
     }
 
@@ -71,12 +81,21 @@ export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingC
 
     let renderContext: RenderContext = {
         ctx,
-        n1: 6.3, // def 10
-        n2: 6.3, // def 10
-        distortion: 2, // def 2
-        color: color
+        params: {
+            n1: 6.3, // def 10
+            n2: 6.3, // def 10
+            distortion: 2, // def 2
+            dotDiameter: .1, // def 1
+            color: color
+        },
     };
     gridNoise(renderContext, fn);
+}
+
+export class NoiseRender {
+    async render() {
+        
+    }
 }
 
 export class NoiseGenerator {
