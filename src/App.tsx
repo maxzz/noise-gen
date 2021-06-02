@@ -6,6 +6,7 @@ import './App.css';
 import Logo from './components/Logo';
 import { HexColorPicker } from "react-colorful";
 import { useDebounce, useMeasure } from 'react-use';
+import DragZone from './components/DragZone';
 
 function Canvas({ seed, color }: { seed: string, color: string; }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
@@ -80,39 +81,6 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
         }
     }, [widthRow, heightRow]);
 
-
-
-    const [resizeActive, resizeActiveSet] = useState(false);
-
-    const containerRef = useRef<HTMLDivElement>(null);
-    const downPt = useRef<{ x: number; y: number; }>();
-    const downSz = useRef<{ w: number; h: number; }>();
-
-    useEffect(() => {
-        if (resizeActive && containerRef.current) {
-            function onMove(ev: MouseEvent) {
-                //console.log('mouse', { x: ev.clientX, y: ev.clientY }, 'angle', angle);
-                const rot = {
-                    x: ev.clientX - downPt.current!.x,
-                    y: ev.clientY - downPt.current!.y,
-                };
-                console.log('ofs: ', { x: rot.x, y: rot.y });
-                manualSizeSet((v) => ({ w: downSz.current!.w + rot.x, h: downSz.current!.h + rot.y }));
-            }
-            function onDone() {
-                resizeActiveSet(false);
-                document.removeEventListener('mouseup', onDone);
-            }
-            window.addEventListener('mousemove', onMove, false); //TODO: why window and not documnet?
-            document.addEventListener('mouseup', onDone, false);
-            return () => {
-                window.removeEventListener('mousemove', onMove);
-                document.removeEventListener('mouseup', onDone);
-            };
-        }
-    }, [resizeActive]);
-
-
     return (
         <div
             className="overflow-hidden"
@@ -121,19 +89,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
             <div ref={measureRef} className="w-full h-full relative">
                 <canvas ref={canvas} className="w-full h-full"> {/* bg-purple-200 */}
                 </canvas>
-                <div
-                    ref={containerRef}
-                    className="absolute w-8 h-8 rounded-full border-2 border-red-500 -bottom-2 -right-2 z-10"
-                    style={{ cursor: 'nwse-resize' }}
-                    onMouseDown={(ev) => {
-                        ev.preventDefault();
-                        downPt.current = { x: ev.clientX, y: ev.clientY };
-                        downSz.current = { w: manualSize.w, h: manualSize.h };
-                        resizeActiveSet(true);
-                    }}
-                    onMouseUp={() => resizeActiveSet(false)}
-                >
-                </div>
+                <DragZone size={manualSize} setSize={manualSizeSet} />
             </div>
         </div>
     );
