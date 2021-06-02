@@ -3,7 +3,7 @@ import { NoiseGenerator, renderBody } from './render-body';
 const runtime: Worker = self as any;
 
 function RunStuff() {
-    console.log('Worker started');
+    //console.log('Worker started');
 
     let canvasElm: HTMLCanvasElement;
     let ctx: CanvasRenderingContext2D | null;
@@ -28,12 +28,12 @@ function RunStuff() {
             }
             if (ctx.canvas.width && ctx.canvas.height) {
                 renderBody(noiseGenerator, ctx, seed, color);
-                console.log('canvas', canvasElm.width, canvasElm.height);
+                //console.log('canvas', canvasElm.width, canvasElm.height);
             }
         }
     };
 
-    runtime.postMessage('Worker waiting');
+    //runtime.postMessage('Worker waiting');
 }
 
 RunStuff();

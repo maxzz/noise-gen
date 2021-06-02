@@ -19,7 +19,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     const [debouncedSize, SetDebouncedSize] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
     const [debouncedColor, SetDebouncedColor] = useState<string>(color);
 
-    const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 300, h: 300 });
+    const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
     useEffect(() => {
         widthRow && heightRow && manualSizeSet({ w: widthRow, h: heightRow });
     }, [widthRow, heightRow]);
@@ -38,7 +38,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     useDebounce(() => SetDebouncedSize({ width: widthRow, height: heightRow }), 100, [widthRow, heightRow]);
 
     return (
-        <div className={`relative ${dragActive ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}>
+        <div className={`relative ${dragActive ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}> {/* bg-red-100 */}
             <div 
                 className="w-full h-full overflow-hidden"
                 style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
@@ -90,7 +90,7 @@ function App() {
             </div>
 
             {/* <div className="max-w-lg m-auto space-y-4"> */}
-            <div className="max-w-md w-full flex-1 flex flex-col items-center space-y-4">
+            <div className="max-w-md w-full flex-1 flex flex-col items-center">
 
                 {/* Controls */}
                 <div className="w-full flex flex-col space-y-1">
@@ -111,11 +111,8 @@ function App() {
                 </div>
 
                 {/* Canvas */}
-                <div className="flex-1 flex items-center">
-                    <div className="bg-red-100">
-                        {/* <div className="w-96 h-96 bg-red-100 overflow-hidden" style={{ resize: 'both' }}> */}
-                        <Canvas seed={seed} color={color} />
-                    </div>
+                <div className="flex-1 flex items-center mt-1">
+                    <Canvas seed={seed} color={color} />
                 </div>
             </div>
         </div>
