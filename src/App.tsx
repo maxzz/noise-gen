@@ -21,9 +21,8 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
         if (!canvas.current) {
             return;
         }
-        console.log('use on', canvas.current, 'offscreen', offscreenCanvasCashed);
-
-        canvas.current.dataset.tm = '444';
+        //console.log('use on', canvas.current, 'offscreen', offscreenCanvasCashed);
+        //canvas.current.dataset.tm = '444';
 
         //const hasOffscreen = "OffscreenCanvas" in window;
         canvas.current.width = 0;
@@ -33,7 +32,6 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
 
         if (!offscreenCanvasCashed) {
             offscreenCanvasCashedSet(offscreen);
-            //console.log('set offset');
         }
 
         const newWorker = new webWorker();
@@ -82,17 +80,18 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     }, [widthRow, heightRow]);
 
     return (
-        <div
-            className="overflow-hidden"
-            style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
-        >
-            <div ref={measureRef} className="w-full h-full relative">
-                <canvas ref={canvas} className="w-full h-full"> {/* bg-purple-200 */}
-                </canvas>
+        <div className="relative">
+            <div 
+                className="w-full h-full overflow-hidden"
+                style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
+                ref={measureRef}
+            >
+                <canvas ref={canvas} className="w-full h-full"></canvas>
             </div>
             <DragZone 
                 className="absolute w-8 h-8 rounded-full border-2 border-red-700 -bottom-2 -right-2 z-10"
-            size={manualSize} setSize={manualSizeSet} />
+                size={manualSize} setSize={manualSizeSet}
+            />
         </div>
     );
 }
