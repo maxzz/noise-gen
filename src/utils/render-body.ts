@@ -16,7 +16,7 @@ type RenderParams = {
     color: string;
 };
 
-function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => number) {
+function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => number): Path2D[] {
     const {
         ctx,
         params: {
@@ -35,8 +35,6 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
 
     let numCols = ctx.canvas.width;
     let numRows = ctx.canvas.height;
-
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     let p = new Path2D();
 
@@ -60,8 +58,7 @@ function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => n
         }
     }
 
-    ctx.fillStyle = color;
-    ctx.fill(p);
+    return [p];
 
     // mainCanvas.convertToBlob({ quality: 1 }).then(function (blob) {
     //   downloadData = blob;
@@ -88,7 +85,12 @@ export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingC
             color: color
         },
     };
-    gridNoise(renderContext, fn);
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    let paths = gridNoise(renderContext, fn);
+
+    ctx.fillStyle = color;
+    ctx.fill(paths[0]);
 }
 
 export class NoiseRender {
