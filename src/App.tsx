@@ -72,9 +72,9 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
 
 
 
-    const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 100, h: 100 });
+    const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 300, h: 300 });
     useEffect(() => {
-        console.log('manualSize', { width: widthRow, height: heightRow });
+        //console.log('manualSize', { width: widthRow, height: heightRow });
 
         if (widthRow && heightRow) {
             manualSizeSet({ w: widthRow, h: heightRow });
@@ -89,8 +89,10 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
             <div ref={measureRef} className="w-full h-full relative">
                 <canvas ref={canvas} className="w-full h-full"> {/* bg-purple-200 */}
                 </canvas>
-                <DragZone size={manualSize} setSize={manualSizeSet} />
             </div>
+            <DragZone 
+                className="absolute w-8 h-8 rounded-full border-2 border-red-700 -bottom-2 -right-2 z-10"
+            size={manualSize} setSize={manualSizeSet} />
         </div>
     );
 }
