@@ -15,6 +15,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const isHovered = useHoverDirty(containerRef);
+    const [dragActive, setDragActive] = useState(false);
 
     const [sizeDebounced, sizeDebouncedSet] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
     const [colorDebounced, colorDebouncedSet] = useState<string>(color);
@@ -50,9 +51,10 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
                     bg-green-500 border-green-700 active:border-green-600
                     transform active:scale-0"
                 size={manualSize} setSize={manualSizeSet} onActivated={(active) => {
-                    console.log('zzzzzzzz', active);
+                    setDragActive(active);
                 }}
             />
+            {dragActive && <div className="absolute text-[.6rem] text-gray-700">{widthRow} x {heightRow}</div>}
         </div>
     );
 }
