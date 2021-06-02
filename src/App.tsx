@@ -15,8 +15,6 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const isHovered = useHoverDirty(containerRef);
-    console.log('hover', isHovered);
-    
 
     const [sizeDebounced, sizeDebouncedSet] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
     const [colorDebounced, colorDebouncedSet] = useState<string>(color);
