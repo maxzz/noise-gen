@@ -1,4 +1,3 @@
-import debounce from './debounce';
 import { NoiseGenerator, renderBody } from './render-body';
 
 const runtime: Worker = self as any;
@@ -28,8 +27,7 @@ function RunStuff() {
                 ctx.canvas.height = event.data.height;
             }
             if (ctx.canvas.width && ctx.canvas.height) {
-                //debounce(() => renderBody(noiseGenerator, ctx, seed, color), 100);
-                debounce(renderBody, 100)(noiseGenerator, ctx, seed, color);
+                renderBody(noiseGenerator, ctx, seed, color);
                 //console.log('canvas', canvasElm.width, canvasElm.height);
             }
         }

@@ -71,7 +71,7 @@ export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingC
 
     function fn(x: number, y: number) {
         //return simplex.noise2D(x / 10, y / 10);
-        return simplex.noise3D(x / 10, y / 10, 0);
+        return simplex.noise3D(x / 10, y / 10, 1);
         //return simplex.noise4D(x / 20, y / 20, 1, 1);
     }
 

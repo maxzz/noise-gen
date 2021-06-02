@@ -25,7 +25,17 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
         widthRow && heightRow && manualSizeSet({ w: widthRow, h: heightRow });
     }, [widthRow, heightRow]);
 
-    useEffect(() => {
+    useDebounce(() => {
+        worker.current?.postMessage({
+            type: 're-run',
+            seed,
+            color,
+            width: widthRow,
+            height: heightRow,
+        });
+    }, 100, [color, widthRow, heightRow]);
+
+/*     useEffect(() => {
         worker.current?.postMessage({
             type: 're-run',
             seed,
@@ -37,7 +47,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
 
     useDebounce(() => SetDebouncedColor(color), 100, [color]);
     useDebounce(() => SetDebouncedSize({ width: widthRow, height: heightRow }), 100, [widthRow, heightRow]);
-
+ */
     return (
         <div className={`relative ${dragActive ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}> {/* bg-red-100 */}
             <div 
