@@ -12,57 +12,8 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = useCanvasWorker(canvas);
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
-
     const [sizeDebounced, sizeDebouncedSet] = useState<{ width: number, height: number; }>({ width: 0, height: 0 });
     const [colorDebounced, colorDebouncedSet] = useState<string>(color);
-
-    useEffect(() => {
-        if (!worker.current) {
-            return;
-        }
-    }, [worker]);
-
-    /*
-    useEffect(() => {
-        if (!canvas.current) {
-            return;
-        }
-        //console.log('use on', canvas.current, 'offscreen', offscreenCanvasCashed);
-        //canvas.current.dataset.tm = '444';
-
-        //const hasOffscreen = "OffscreenCanvas" in window;
-        canvas.current.width = 0;
-        canvas.current.height = 0;
-
-        const offscreen = offscreenCanvasCashed || canvas.current.transferControlToOffscreen();
-
-        if (!offscreenCanvasCashed) {
-            offscreenCanvasCashedSet(offscreen);
-        }
-
-        const newWorker = new webWorker();
-
-        newWorker.onmessage = (event: any) => {
-            console.log('from worker:', event.data);
-        };
-        newWorker.onerror = (event: any) => {
-            console.log('from worker: error', event.data);
-        };
-        newWorker.postMessage({ type: 'init', canvas: offscreen, seed, color: colorDebounced }, [offscreen]);
-
-        worker.current = newWorker;
-        return () => {
-            console.log('use off', canvas.current, offscreenCanvasCashed);
-
-            worker.current?.terminate();
-            worker.current = undefined;
-
-            offscreenCanvasCashedSet(null);
-        };
-    }, [canvas]);
-    */
-
-    
 
     useEffect(() => {
         worker.current?.postMessage({ type: 're-run', seed, color: colorDebounced, width: sizeDebounced.width, height: sizeDebounced.height });
@@ -76,16 +27,9 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
         sizeDebouncedSet({ width: widthRow, height: heightRow });
     }, 100, [widthRow, heightRow]);
 
-
-
-
     const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 300, h: 300 });
     useEffect(() => {
-        //console.log('manualSize', { width: widthRow, height: heightRow });
-
-        if (widthRow && heightRow) {
-            manualSizeSet({ w: widthRow, h: heightRow });
-        }
+        widthRow && heightRow && manualSizeSet({ w: widthRow, h: heightRow });
     }, [widthRow, heightRow]);
 
     return (
@@ -100,7 +44,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
             <DragZone 
                 className="absolute w-5 h-5 rounded-full border-2 -bottom-2 -right-2 z-10 
                     bg-green-500 border-green-700 active:border-green-600
-                    transform active:scale-75"
+                    transform active:scale-0"
                 size={manualSize} setSize={manualSizeSet}
             />
         </div>
