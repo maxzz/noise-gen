@@ -3,7 +3,7 @@ import SimplexNoise from 'simplex-noise';
 
 type RenderContext = {
     ctx: CanvasRenderingContext2D;
-    noiseFn?: (x: number, y: number) => number;
+    noiseFn: (x: number, y: number) => number;
     progress?: (v: number) => boolean;    // v - progress [0..1]; running time in ms; returns boolean: continue or stop
     params: RenderParams;
 };
@@ -16,9 +16,10 @@ type RenderParams = {
     color: string;
 };
 
-function gridNoise(renderContext: RenderContext, fn: (x: number, y: number) => number): Path2D[] {
+function gridNoise(renderContext: RenderContext): Path2D[] {
     const {
         ctx,
+        noiseFn: fn,
         params: {
             n1,
             n2,
@@ -77,6 +78,7 @@ export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingC
 
     let renderContext: RenderContext = {
         ctx,
+        noiseFn: fn,
         params: {
             n1: 6.3, // def 10
             n2: 6.3, // def 10
@@ -87,7 +89,7 @@ export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingC
     };
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    let paths = gridNoise(renderContext, fn);
+    let paths = gridNoise(renderContext);
 
     ctx.fillStyle = color;
     ctx.fill(paths[0]);
