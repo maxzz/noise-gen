@@ -21,9 +21,20 @@ function RunStuff() {
     runtime.onmessage = (event: MessageEvent) => {
         console.log('Worker got', event.data);
 
-        if (event.data.type === 'init') {
+        if (event.data.canvas) {
             canvasElm = event.data.canvas as HTMLCanvasElement;
             ctx = canvasElm.getContext('2d');
+            return;
+        }
+
+        if (!ctx) {
+            console.log('not yet');
+        }
+
+        switch (event.data.type) {
+            case 'run': {
+                break;
+            }
         }
 
         let seed: string = event.data.seed || undefined;
@@ -41,7 +52,7 @@ function RunStuff() {
         }
     };
 
-    //runtime.postMessage('Worker waiting');
+    runtime.postMessage('Worker waiting');
 }
 
 RunStuff();

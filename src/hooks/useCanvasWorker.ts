@@ -6,7 +6,7 @@ import webWorker from '../utils/web-worker?worker';
 export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): RefObject<Worker | undefined> {
 
     const worker = React.useRef<Worker>();
-    const [offscreenCanvasCashed, offscreenCanvasCashedSet] = useAtom(offscreenCanvasAtom);
+    const [offscreenCanvasCashed, setOffscreenCanvasCashed] = useAtom(offscreenCanvasAtom);
 
     useEffect(() => {
         if (!canvas.current) {
@@ -22,19 +22,19 @@ export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): R
         const offscreen = offscreenCanvasCashed || canvas.current.transferControlToOffscreen();
 
         if (!offscreenCanvasCashed) {
-            offscreenCanvasCashedSet(offscreen);
+            setOffscreenCanvasCashed(offscreen);
         }
 
         const newWorker = new webWorker();
 
         newWorker.onmessage = (event: any) => {
-            console.log('from worker:', event.data);
+            console.log('From worker:', event.data);
         };
         newWorker.onerror = (event: any) => {
-            console.log('from worker: error', event.data);
+            console.log('From worker: Error:', event.data);
         };
-        //newWorker.postMessage({ type: 'init', canvas: offscreen, seed, color: colorDebounced }, [offscreen]);
-        newWorker.postMessage({ type: 'init', canvas: offscreen }, [offscreen]);
+        
+        newWorker.postMessage({ canvas: offscreen }, [offscreen]);
 
         worker.current = newWorker;
         return () => {
@@ -43,7 +43,7 @@ export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): R
             worker.current?.terminate();
             worker.current = undefined;
 
-            offscreenCanvasCashedSet(null);
+            setOffscreenCanvasCashed(null);
         };
     }, [canvas]);
 
