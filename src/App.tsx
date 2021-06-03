@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import { colorAtom, seedAtom } from './atoms';
 import './App.css';
-import { ChromePicker } from 'react-color';
 import Logo from './components/Logo';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import DragZone from './components/DragZone';
 import useCanvasWorker from './hooks/useCanvasWorker';
+import ColorPicker from './components/ColorPicker';
 
 function Canvas({ seed, color }: { seed: string, color: string; }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
@@ -48,30 +48,6 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
                 size={manualSize} setSize={manualSizeSet} onActivated={(active: boolean) => setDragActive(active)}
             />
             {(dragActive || isHovered) && <div className="absolute text-[.6rem] text-gray-700">{widthRow} x {heightRow}</div>}
-        </div>
-    );
-}
-
-function ColorPicker(props: { className: string, style?: React.CSSProperties; }) {
-    const { className, style = {} } = props;
-    const [color, colorSet] = useAtom(colorAtom);
-    const [isDown, isDownSet] = useState<boolean>(false);
-    return (
-        <div className="relative">
-            <div
-                className={`${className} p-1 border rounded border-gray-400 bg-purple-100 transform active:scale-95`}
-                style={{ ...style }}
-                onClick={() => isDownSet(v => !v)}
-            >
-                <div className="w-full h-full rounded" style={{ backgroundColor: color }}></div>
-            </div>
-            <div className={`absolute right-0 top-full z-10 shadow border rounded-[0.6rem] border-gray-700 ${isDown ? '' : 'hidden'}`}>
-                {/* <ChromePicker color={color} onChange={(color) => colorSet(color.hex)} /> */}
-                <ChromePicker color={color} onChange={(color) => {
-                    let s = `rgba(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`;
-                    colorSet(s);
-                }} />
-            </div>
         </div>
     );
 }
