@@ -3,7 +3,6 @@ import { useAtom } from 'jotai';
 import { colorAtom, seedAtom } from './atoms';
 import './App.css';
 import Logo from './components/Logo';
-import { HexColorPicker } from "react-colorful";
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import DragZone from './components/DragZone';
 import useCanvasWorker from './hooks/useCanvasWorker';
@@ -64,7 +63,7 @@ function ColorPicker(props: { className: string, style?: React.CSSProperties; })
         >
             <div className="w-full h-full rounded" style={{ backgroundColor: color }}></div>
             <div className={`absolute right-0 top-full z-10 shadow border rounded-[0.6rem] border-gray-700 ${isDown ? '' : 'hidden'}`}>
-                <HexColorPicker color={color} onChange={colorSet} />
+                {/* <HexColorPicker color={color} onChange={colorSet} /> */}
             </div>
         </div>
     );
