@@ -14,7 +14,7 @@ function RunStuff() {
     //console.log('Worker started');
 
     let canvasElm: OffscreenCanvas;
-    let ctx: OffscreenCanvasRenderingContext2D | null;
+    let ctx: CanvasRenderingContext2D | null;
     let noiseGenerator = new NoiseGenerator();
     let seed: string;
     let color: string = 'red';
@@ -24,7 +24,7 @@ function RunStuff() {
 
         if (event.data.canvas) {
             canvasElm = event.data.canvas as OffscreenCanvas;
-            ctx = canvasElm.getContext('2d');
+            ctx = (canvasElm as any as HTMLCanvasElement).getContext('2d');
             return;
         }
 

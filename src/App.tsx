@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { useAtom } from 'jotai';
-import { colorAtom, DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, seedAtom } from './atoms';
+import { colorAtom, seedAtom } from './atoms';
 import Logo from './components/Logo';
 import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
@@ -32,7 +32,7 @@ function App() {
                         <ColorPicker className="w-12 h-10" />
                     </div>
 
-                    <Sliders />
+                    <Sliders onAddPreview={() => {}} />
                     
                     <button
                         className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"

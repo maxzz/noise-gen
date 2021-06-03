@@ -26,7 +26,7 @@ function Slider({
     );
 }
 
-function Sliders() {
+function Sliders({onAddPreview}: {onAddPreview: () => void}) {
     const [n1, setN1] = useAtom(N1Atom);
     const [n2, setN2] = useAtom(N2Atom);
     const [distortion, setDistortion] = useAtom(DistortionAtom);
