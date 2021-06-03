@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import { colorAtom, seedAtom } from './atoms';
 import './App.css';
-import {ChromePicker} from 'react-color';
+import { ChromePicker } from 'react-color';
 import Logo from './components/Logo';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import DragZone from './components/DragZone';
@@ -34,14 +34,14 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
 
     return (
         <div className={`relative ${dragActive ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}> {/* bg-red-100 */}
-            <div 
+            <div
                 className="w-full h-full overflow-hidden"
                 style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
                 ref={measureRef}
             >
                 <canvas ref={canvas} className="w-full h-full"></canvas>
             </div>
-            <DragZone 
+            <DragZone
                 className="absolute w-5 h-5 rounded-full border-2 -bottom-2 -right-2 z-10 
                     bg-green-500 border-green-700 active:border-green-600
                     transform active:scale-0"
@@ -57,14 +57,20 @@ function ColorPicker(props: { className: string, style?: React.CSSProperties; })
     const [color, colorSet] = useAtom(colorAtom);
     const [isDown, isDownSet] = useState<boolean>(false);
     return (
-        <div
-            className={`${className} relative p-1 border rounded border-gray-400 bg-purple-100 transform active:scale-95`}
-            style={{ ...style }}
-            onClick={() => isDownSet(v => !v)}
-        >
-            <div className="w-full h-full rounded" style={{ backgroundColor: color }}></div>
+        <div className="relative">
+            <div
+                className={`${className} p-1 border rounded border-gray-400 bg-purple-100 transform active:scale-95`}
+                style={{ ...style }}
+                onClick={() => isDownSet(v => !v)}
+            >
+                <div className="w-full h-full rounded" style={{ backgroundColor: color }}></div>
+            </div>
             <div className={`absolute right-0 top-full z-10 shadow border rounded-[0.6rem] border-gray-700 ${isDown ? '' : 'hidden'}`}>
-                <ChromePicker color={color} onChange={(color) => colorSet(color.hex)}/>
+                {/* <ChromePicker color={color} onChange={(color) => colorSet(color.hex)} /> */}
+                <ChromePicker color={color} onChange={(color) => {
+                    let s = `rgba(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`;
+                    colorSet(s);
+                }} />
             </div>
         </div>
     );
