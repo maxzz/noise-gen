@@ -14,6 +14,13 @@ export const renderParamsAtom = atom<RenderParams>({
     color: 'red'
 });
 
+export const N1Atom = atom(
+    (get) => get(renderParamsAtom).n1,
+    (get, set, update: number) => {
+        set(renderParamsAtom, {...get(renderParamsAtom), n1: update});
+    }
+);
+
 const writeColorAtom = atom(
     null,
     (get, set, color: string) => {
