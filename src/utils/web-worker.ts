@@ -15,8 +15,9 @@ function RunStuff() {
 
     let canvasElm: HTMLCanvasElement;
     let ctx: CanvasRenderingContext2D | null;
-
     let noiseGenerator = new NoiseGenerator();
+    let seed: string;
+    let color: string = 'red';
 
     runtime.onmessage = (event: MessageEvent) => {
         console.log('Worker got', event.data);
@@ -28,26 +29,33 @@ function RunStuff() {
         }
 
         if (!ctx) {
-            console.log('not yet');
+            console.log('no ctx yet');
+            return;
+        }
+
+        if (event.data.width && event.data.height) {
+            ctx.canvas.width = event.data.width;
+            ctx.canvas.height = event.data.height;
+        }
+
+        if (!ctx.canvas.width || !ctx.canvas.height) {
+            console.log('no dim yet');
+            return;
         }
 
         switch (event.data.type) {
             case 'run': {
-                break;
-            }
-        }
+                seed = event.data.seed || undefined;
+                color = event.data.color || 'red';
 
-        let seed: string = event.data.seed || undefined;
-        let color: string = event.data.color || 'red';
-
-        if (ctx) {
-            if (event.data.width && event.data.height) {
-                ctx.canvas.width = event.data.width;
-                ctx.canvas.height = event.data.height;
-            }
-            if (ctx.canvas.width && ctx.canvas.height) {
                 renderBody(noiseGenerator, ctx, seed, color);
                 //console.log('canvas', canvasElm.width, canvasElm.height);
+                break;
+            }
+            case 'params': {
+                renderBody(noiseGenerator, ctx, seed, color);
+                //console.log('canvas', canvasElm.width, canvasElm.height);
+                break;
             }
         }
     };

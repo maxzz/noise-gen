@@ -1,5 +1,7 @@
+import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
+import { renderParamsAtom } from '../atoms';
 import useCanvasWorker from '../hooks/useCanvasWorker';
 import DragZone from './DragZone';
 
@@ -10,6 +12,7 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
     const isHovered = useHoverDirty(containerRef);
     const [dragging, setDragging] = useState(false);
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
+    const [renderParams] = useAtom(renderParamsAtom);
 
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
     const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 325, h: 300 });
@@ -33,7 +36,17 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
             width: widthRow,
             height: heightRow,
         });
-    }, 100, [seed, color, widthRow, heightRow]);
+    }, 100, [seed, color, widthRow, heightRow, renderParams]);
+
+    // useDebounce(() => {
+    //     worker.current?.postMessage({
+    //         type: 'params',
+    //         seed,
+    //         color,
+    //         width: widthRow,
+    //         height: heightRow,
+    //     });
+    // }, 100, [renderParams]);
 
     return (
         <div className={`relative ${dragging ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}>
