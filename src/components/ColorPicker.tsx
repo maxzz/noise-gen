@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import { colorAtom } from '../atoms';
 import { SketchPicker, ColorResult } from 'react-color';
 import './ColorPicker.scss';
+import { useClickAway } from 'react-use';
 
 export default function ColorPicker(props: { className: string, style?: React.CSSProperties; }) {
     const { className, style = {} } = props;
     const [color, setColor] = useAtom(colorAtom);
     const [isDown, isDownSet] = useState<boolean>(false);
+    const ref = useRef<HTMLInputElement>(null);
+    useClickAway(ref, () => {
+        isDownSet(false);
+    });
     return (
-        <div className="relative select-none">
+        <div className="relative select-none" ref={ref}>
             <div
                 className={`${className} p-1 border rounded border-gray-400 bg-purple-100 transform active:scale-95`}
                 style={{ ...style }}
@@ -25,4 +30,3 @@ export default function ColorPicker(props: { className: string, style?: React.CS
         </div>
     );
 }
-//TODO: click outside
