@@ -30,7 +30,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
             width: widthRow,
             height: heightRow,
         });
-    }, 100, [color, widthRow, heightRow]);
+    }, 100, [seed, color, widthRow, heightRow]);
 
     return (
         <div className={`relative ${dragActive ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}> {/* bg-red-100 */}
