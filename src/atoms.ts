@@ -13,3 +13,10 @@ export const renderParamsAtom = atom<RenderParams>({
     dotDiameter: .1, // def 1
     color: 'red'
 });
+
+const writeColorAtom = atom(
+    null,
+    (get, set, color: string) => {
+        set(renderParamsAtom, {...get(renderParamsAtom), color: color});
+    }
+);

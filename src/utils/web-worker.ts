@@ -22,7 +22,7 @@ function RunStuff() {
         console.log('Worker got', event.data);
 
         if (event.data.type === 'init') {
-            canvasElm = (event.data.canvas as HTMLCanvasElement)
+            canvasElm = event.data.canvas as HTMLCanvasElement;
             ctx = canvasElm.getContext('2d');
         }
 
