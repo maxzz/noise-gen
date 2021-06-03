@@ -1,17 +1,17 @@
 import React from 'react';
+import './App.css';
 import { useAtom } from 'jotai';
 import { colorAtom, seedAtom } from './atoms';
-import './App.css';
 import Logo from './components/Logo';
 import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
 
 function App() {
-    const [seed, seedSet] = useAtom(seedAtom);
+    const [seed, setSeed] = useAtom(seedAtom);
     const [color] = useAtom(colorAtom);
 
     function doRandom() {
-        seedSet(`${Math.random()}`.replace(/^0\./, ''));
+        setSeed(`${Math.random()}`.replace(/^0\./, ''));
     }
     return (
         <div className="App h-screen flex flex-col items-center space-y-4 bg-gray-100">
@@ -29,7 +29,7 @@ function App() {
                         <input
                             className="flex-1 w-full px-2 py-2 text-sm text-gray-900 bg-purple-100 border rounded border-gray-400"
                             placeholder="Type anything as a seed"
-                            value={seed} onChange={(event) => seedSet(event.target.value)}
+                            value={seed} onChange={(event) => setSeed(event.target.value)}
                         />
                         <ColorPicker className="w-12 h-10" />
                     </div>

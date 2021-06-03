@@ -28,7 +28,7 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
     }, 100, [seed, color, widthRow, heightRow]);
 
     return (
-        <div className={`relative ${dragActive ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}> {/* bg-red-100 */}
+        <div className={`relative ${dragActive ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}>
             <div
                 className="w-full h-full overflow-hidden"
                 style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
