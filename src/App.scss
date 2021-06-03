@@ -1,0 +1,57 @@
+.carbon {
+    background: 
+        radial-gradient(black 15%, transparent 16%) 0 0, 
+        radial-gradient(black 15%, transparent 16%) 8px 8px,
+        radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 20%) 0 1px,
+        radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 20%) 8px 9px;
+    background-color: #282828;
+    background-size: 16px 16px;
+}
+
+$range-handle-color: rgb(255, 255, 255) !default;
+$range-handle-color-hover: rgb(212, 212, 212) !default;
+$range-handle-size: 16px !default;
+
+$range-track-color: rgba(28, 1, 126, 0.314) !default;
+$range-track-height: 2px !default;
+
+$range-label-width: 60px !default;
+
+input[type=range] {
+	-webkit-appearance: none;
+	width: calc(100% - (#{$range-label-width + 10px}));
+	height: $range-track-height;
+	border-radius: 5px;
+	background: $range-track-color;
+	outline: none;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+
+	// Range Handle
+	&::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		width: $range-handle-size;
+		height: $range-handle-size;
+		border-radius: 50%;
+		background: $range-handle-color;
+		cursor: pointer;
+		transition: all 0.15s ease-in-out;
+		&:hover {
+			background: $range-handle-color-hover;
+			transform: scale(1.2);
+		}
+	}
+	&::-moz-range-thumb {
+		width: $range-handle-size;
+		height: $range-handle-size;
+		border: 0;
+		border-radius: 50%;
+		background: $range-handle-color;
+		cursor: pointer;
+		transition: background 0.15s ease-in-out;
+		&:hover {
+			background: $range-handle-color-hover;
+		}
+	}
+}

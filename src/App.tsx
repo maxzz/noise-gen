@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import { useAtom } from 'jotai';
 import { colorAtom, DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, seedAtom } from './atoms';
 import Logo from './components/Logo';
@@ -35,11 +35,14 @@ function App() {
                         <ColorPicker className="w-12 h-10" />
                     </div>
 
-                    <input type="range" value={n1} onChange={(event) => setN1(+event.target.value)}/>
-                    <input type="range" value={n2} onChange={(event) => setN2(+event.target.value)}/>
-                    <input type="range" value={distortion} onChange={(event) => setDistortion(+event.target.value)}/>
-                    <input type="range" value={dotDiameter} onChange={(event) => setDotDiameter(+event.target.value)}/>
-
+                    <div className="">
+                    {/* <div className="flex flex-col items-center"> */}
+                        <input type="range" value={n1} onChange={(event) => setN1(+event.target.value)}/>
+                        <input type="range" value={n2} onChange={(event) => setN2(+event.target.value)}/>
+                        <input type="range" value={distortion} onChange={(event) => setDistortion(+event.target.value)}/>
+                        <input type="range" value={dotDiameter} onChange={(event) => setDotDiameter(+event.target.value)}/>
+                    </div>
+                    
                     <button
                         className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
                         onClick={() => setSeed(`${Math.random()}`.replace(/^0\./, ''))}
