@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAtom } from 'jotai';
 import { colorAtom } from '../atoms';
 import { ChromePicker, ColorResult } from 'react-color';
+import './ColorPicker.scss';
 
 export default function ColorPicker(props: { className: string, style?: React.CSSProperties; }) {
     const { className, style = {} } = props;
