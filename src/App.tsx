@@ -17,7 +17,7 @@ function Canvas({ seed, color }: { seed: string, color: string; }) {
     const isHovered = useHoverDirty(containerRef);
 
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
-    const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 150, h: 220 });
+    const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 325, h: 300 });
     useEffect(() => {
         widthRow && heightRow && manualSizeSet({ w: widthRow, h: heightRow });
     }, [widthRow, heightRow]);
