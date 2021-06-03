@@ -47,14 +47,9 @@ function RunStuff() {
             case 'run': {
                 seed = event.data.seed || undefined;
                 color = event.data.color || 'red';
+                let pm = event.data.params as RenderParams;
 
-                renderBody(noiseGenerator, ctx, seed, color);
-                //console.log('canvas', canvasElm.width, canvasElm.height);
-                break;
-            }
-            case 'params': {
-                renderBody(noiseGenerator, ctx, seed, color);
-                //console.log('canvas', canvasElm.width, canvasElm.height);
+                renderBody(noiseGenerator, ctx, seed, color, pm);
                 break;
             }
         }

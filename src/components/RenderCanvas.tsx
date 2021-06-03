@@ -35,18 +35,9 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
             color,
             width: widthRow,
             height: heightRow,
+            params: renderParams,
         });
     }, 100, [seed, color, widthRow, heightRow, renderParams]);
-
-    // useDebounce(() => {
-    //     worker.current?.postMessage({
-    //         type: 'params',
-    //         seed,
-    //         color,
-    //         width: widthRow,
-    //         height: heightRow,
-    //     });
-    // }, 100, [renderParams]);
 
     return (
         <div className={`relative ${dragging ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}>

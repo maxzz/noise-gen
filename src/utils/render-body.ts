@@ -58,7 +58,7 @@ function gridNoise(renderContext: RenderContext): Path2D[] {
     // });
 }
 
-export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingContext2D, seed: string, color: string) {
+export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingContext2D, seed: string, color: string, pm: RenderParams) {
 
     const simplex = noiseGenerator.get(seed);
 
@@ -71,13 +71,14 @@ export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingC
     let renderContext: RenderContext = {
         ctx,
         noiseFn: fn,
-        params: {
-            n1: 6.3, // def 10
-            n2: 6.3, // def 10
-            distortion: 1, // def 2
-            dotDiameter: .1, // def 1
-            color: color
-        },
+        params: pm,
+        // params: {
+        //     n1: 6.3, // def 10
+        //     n2: 6.3, // def 10
+        //     distortion: 1, // def 2
+        //     dotDiameter: .1, // def 1
+        //     color: color
+        // },
     };
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
