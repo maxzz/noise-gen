@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import { colorAtom, seedAtom } from './atoms';
 import './App.css';
+import {ChromePicker} from 'react-color';
 import Logo from './components/Logo';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import DragZone from './components/DragZone';
@@ -63,7 +64,7 @@ function ColorPicker(props: { className: string, style?: React.CSSProperties; })
         >
             <div className="w-full h-full rounded" style={{ backgroundColor: color }}></div>
             <div className={`absolute right-0 top-full z-10 shadow border rounded-[0.6rem] border-gray-700 ${isDown ? '' : 'hidden'}`}>
-                {/* <HexColorPicker color={color} onChange={colorSet} /> */}
+                <ChromePicker color={color} onChange={(color) => colorSet(color.hex)}/>
             </div>
         </div>
     );
