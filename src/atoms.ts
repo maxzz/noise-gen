@@ -28,9 +28,23 @@ export const N2Atom = atom(
     }
 );
 
-const writeColorAtom = atom(
-    null,
+export const DistortionAtom = atom(
+    (get) => get(renderParamsAtom).distortion,
+    (get, set, update: number) => {
+        set(renderParamsAtom, {...get(renderParamsAtom), distortion: update});
+    }
+);
+
+export const DotDiameterAtom = atom(
+    (get) => get(renderParamsAtom).dotDiameter,
+    (get, set, update: number) => {
+        set(renderParamsAtom, {...get(renderParamsAtom), dotDiameter: update});
+    }
+);
+
+const ColorAtom = atom(
+    (get) => get(renderParamsAtom).color,
     (get, set, color: string) => {
-        set(renderParamsAtom, {...get(renderParamsAtom), color: color});
+        set(renderParamsAtom, {...get(renderParamsAtom), color});
     }
 );
