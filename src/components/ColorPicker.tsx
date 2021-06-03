@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAtom } from 'jotai';
 import { colorAtom } from '../atoms';
-import { ChromePicker, ColorResult } from 'react-color';
+import { SketchPicker, ColorResult } from 'react-color';
 import './ColorPicker.scss';
 
 export default function ColorPicker(props: { className: string, style?: React.CSSProperties; }) {
@@ -18,7 +18,7 @@ export default function ColorPicker(props: { className: string, style?: React.CS
                 <div className="w-full h-full rounded" style={{ backgroundColor: color }}></div>
             </div>
             <div className={`absolute right-0 top-full z-10 ${isDown ? '' : 'hidden'}`}>
-                <ChromePicker color={color} onChange={(color: ColorResult) => {
+                <SketchPicker color={color} onChange={(color: ColorResult) => {
                     setColor(`rgba(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`);
                 }} />
             </div>
