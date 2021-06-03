@@ -1,15 +1,14 @@
-$range-handle-color: rgb(255, 255, 255) !default;
-$range-handle-color-hover: rgb(212, 212, 212) !default;
-$range-handle-size: 16px !default;
-
-$range-track-color: rgba(28, 1, 126, 0.314) !default;
-$range-track-height: 2px !default;
-
-$range-label-width: 60px !default;
-
-input[type=range] {
+input[type=range].slider-ui {
+    $range-handle-color: rgb(255, 255, 255) !default;
+    $range-handle-color-hover: rgb(212, 212, 212) !default;
+    $range-handle-size: 12px !default; // def 16px
+    $range-handle-radius: 25%; // def 50%
+    
+    $range-track-color: rgba(108, 72, 240, 0.314) !default;
+    $range-track-height: 1px !default; // def 2px
+    
 	-webkit-appearance: none;
-	width: calc(100% - (#{$range-label-width + 10px}));
+    width: 100%; //$range-label-width: 60px !default; width: calc(100% - (#{$range-label-width + 10px}));
 	height: $range-track-height;
 	border-radius: 5px;
 	background: $range-track-color;
@@ -23,7 +22,7 @@ input[type=range] {
 		-webkit-appearance: none;
 		width: $range-handle-size;
 		height: $range-handle-size;
-		border-radius: 50%;
+		border-radius: $range-handle-radius;
 		background: $range-handle-color;
 		cursor: pointer;
 		transition: all 0.15s ease-in-out;
@@ -36,7 +35,7 @@ input[type=range] {
 		width: $range-handle-size;
 		height: $range-handle-size;
 		border: 0;
-		border-radius: 50%;
+		border-radius: $range-handle-radius;
 		background: $range-handle-color;
 		cursor: pointer;
 		transition: background 0.15s ease-in-out;

@@ -6,7 +6,7 @@ import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom } from '../atoms';
 function Slider({ value, onChange }: { value: number, onChange: (value: number) => void; }) {
     return (
         <div className="h-5 w-full flex items-center justify-center">
-            <input type="range" value={value} onChange={(event) => onChange(+event.target.value)} />
+            <input className="slider-ui" type="range" value={value} onChange={(event) => onChange(+event.target.value)} />
         </div>
     );
 }
@@ -17,7 +17,7 @@ function Sliders() {
     const [distortion, setDistortion] = useAtom(DistortionAtom);
     const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
     return (
-        <div>
+        <div className="py-2 bg-purple-100 border rounded border-gray-400">
             <Slider value={n1} onChange={setN1} />
             <Slider value={n2} onChange={setN2} />
             <Slider value={distortion} onChange={setDistortion} />
