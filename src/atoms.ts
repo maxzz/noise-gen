@@ -21,6 +21,13 @@ export const N1Atom = atom(
     }
 );
 
+export const N2Atom = atom(
+    (get) => get(renderParamsAtom).n2,
+    (get, set, update: number) => {
+        set(renderParamsAtom, {...get(renderParamsAtom), n2: update});
+    }
+);
+
 const writeColorAtom = atom(
     null,
     (get, set, color: string) => {
