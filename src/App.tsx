@@ -5,6 +5,7 @@ import { colorAtom, DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, seedAtom } 
 import Logo from './components/Logo';
 import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
+import Sliders from './components/Sliders';
 
 function App() {
     const [seed, setSeed] = useAtom(seedAtom);
@@ -35,13 +36,14 @@ function App() {
                         <ColorPicker className="w-12 h-10" />
                     </div>
 
-                    {/* <div className=""> */}
                     <div className="py-2 flex flex-col items-center space-y-1">
                         <div className="h-5 w-full flex items-center justify-center"><input type="range" value={n1} onChange={(event) => setN1(+event.target.value)}/></div>
                         <div className="h-5 w-full flex items-center justify-center"><input type="range" value={n2} onChange={(event) => setN2(+event.target.value)}/></div>
                         <div className="h-5 w-full flex items-center justify-center"><input type="range" value={distortion} onChange={(event) => setDistortion(+event.target.value)}/></div>
                         <div className="h-5 w-full flex items-center justify-center"><input type="range" value={dotDiameter} onChange={(event) => setDotDiameter(+event.target.value)}/></div>
                     </div>
+                    
+                    <Sliders />
                     
                     <button
                         className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
