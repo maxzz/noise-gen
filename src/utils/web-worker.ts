@@ -1,5 +1,13 @@
 import { NoiseGenerator, renderBody } from './render-body';
 
+export type RenderParams = {
+    n1: number;
+    n2: number;
+    distortion: number;
+    dotDiameter: number;
+    color: string;
+};
+
 const runtime: Worker = self as any;
 
 function RunStuff() {

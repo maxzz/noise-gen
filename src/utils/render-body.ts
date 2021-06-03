@@ -1,4 +1,5 @@
 import SimplexNoise from 'simplex-noise';
+import { RenderParams } from './web-worker';
 //import colors from 'simple-color-functions';
 
 type RenderContext = {
@@ -6,14 +7,6 @@ type RenderContext = {
     noiseFn: (x: number, y: number) => number;
     progress?: (v: number) => boolean;    // v - progress [0..1]; running time in ms; returns boolean: continue or stop
     params: RenderParams;
-};
-
-type RenderParams = {
-    n1: number;
-    n2: number;
-    distortion: number;
-    dotDiameter: number;
-    color: string;
 };
 
 function gridNoise(renderContext: RenderContext): Path2D[] {
