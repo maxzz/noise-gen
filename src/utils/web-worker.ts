@@ -13,8 +13,8 @@ const runtime: Worker = self as any;
 function RunStuff() {
     //console.log('Worker started');
 
-    let canvasElm: HTMLCanvasElement;
-    let ctx: CanvasRenderingContext2D | null;
+    let canvasElm: OffscreenCanvas;
+    let ctx: OffscreenCanvasRenderingContext2D | null;
     let noiseGenerator = new NoiseGenerator();
     let seed: string;
     let color: string = 'red';
@@ -23,7 +23,7 @@ function RunStuff() {
         console.log('Worker got', event.data);
 
         if (event.data.canvas) {
-            canvasElm = event.data.canvas as HTMLCanvasElement;
+            canvasElm = event.data.canvas as OffscreenCanvas;
             ctx = canvasElm.getContext('2d');
             return;
         }
@@ -50,6 +50,14 @@ function RunStuff() {
                 let pm = event.data.params as RenderParams;
 
                 renderBody(noiseGenerator, ctx, seed, color, pm);
+                break;
+            }
+            case 'get-render': {
+                canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {
+                    //
+                    console.log('blob', blob);
+                });
+
                 break;
             }
         }
