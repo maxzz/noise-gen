@@ -37,6 +37,9 @@ function Sliders() {
             <Slider min={-20} max={20} value={n2} onChange={setN2} label="N2" />
             <Slider min={0} max={200} value={distortion} onChange={setDistortion} label="Distortion" />
             <Slider min={0} max={100} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
+            <div className="p-2">
+                <div className="w-8 h-8 border rounded border-gray-400"></div>
+            </div>
         </div>
     );
 }
