@@ -35,12 +35,12 @@ function App() {
                         <ColorPicker className="w-12 h-10" />
                     </div>
 
-                    <div className="">
-                    {/* <div className="flex flex-col items-center"> */}
-                        <input type="range" value={n1} onChange={(event) => setN1(+event.target.value)}/>
-                        <input type="range" value={n2} onChange={(event) => setN2(+event.target.value)}/>
-                        <input type="range" value={distortion} onChange={(event) => setDistortion(+event.target.value)}/>
-                        <input type="range" value={dotDiameter} onChange={(event) => setDotDiameter(+event.target.value)}/>
+                    {/* <div className=""> */}
+                    <div className="py-2 flex flex-col items-center space-y-1">
+                        <div className="h-5 w-full flex items-center justify-center"><input type="range" value={n1} onChange={(event) => setN1(+event.target.value)}/></div>
+                        <div className="h-5 w-full flex items-center justify-center"><input type="range" value={n2} onChange={(event) => setN2(+event.target.value)}/></div>
+                        <div className="h-5 w-full flex items-center justify-center"><input type="range" value={distortion} onChange={(event) => setDistortion(+event.target.value)}/></div>
+                        <div className="h-5 w-full flex items-center justify-center"><input type="range" value={dotDiameter} onChange={(event) => setDotDiameter(+event.target.value)}/></div>
                     </div>
                     
                     <button
