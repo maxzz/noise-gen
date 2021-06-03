@@ -1,4 +1,5 @@
 import React from 'react';
+import './Sliders.scss';
 import { useAtom } from 'jotai';
 import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom } from '../atoms';
 
