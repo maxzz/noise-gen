@@ -46,6 +46,3 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
         </div>
     );
 }
-function useRef<T>(arg0: null) {
-    throw new Error('Function not implemented.');
-}

@@ -1,11 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useAtom } from 'jotai';
 import { colorAtom, seedAtom } from './atoms';
 import './App.css';
 import Logo from './components/Logo';
-import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
-import DragZone from './components/DragZone';
-import useCanvasWorker from './hooks/useCanvasWorker';
 import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
 
@@ -18,12 +15,12 @@ function App() {
     }
     return (
         <div className="App h-screen flex flex-col items-center space-y-4 bg-gray-100">
+            {/* Header */}
             <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300">
                 <div className="mx-4 flex-none w-10 h-10"><Logo /></div>
                 <div className="px-4 py-2 text-xl uppercase">Noise generator: xp10-525N</div>
             </div>
 
-            {/* <div className="max-w-lg m-auto space-y-4"> */}
             <div className="max-w-md w-full flex-1 flex flex-col items-center">
 
                 {/* Controls */}
