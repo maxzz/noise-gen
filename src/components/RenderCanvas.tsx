@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { AddPreviewAtom, GenParamsAtom } from '../atoms';
 import useCanvasWorker from '../hooks/useCanvasWorker';
+import { isMsgPreview } from '../utils/web-worker';
 import DragZone from './DragZone';
 
 export default function Canvas({ seed, color }: { seed: string, color: string; }) {
@@ -24,8 +25,9 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
     useEffect(() => {
         if (worker) {
             worker.onmessage = (event: MessageEvent) => {
-                console.log('from worker2:', event.data);
-                if (event.data.type === 'preview-blob') {
+                //console.log('from worker2:', event.data);
+
+                if (isMsgPreview(event.data)) {
                     var reader = new FileReader();
                     reader.onloadend = function () {
                         var base64data = reader.result;
