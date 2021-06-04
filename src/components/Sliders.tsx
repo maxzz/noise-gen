@@ -26,7 +26,7 @@ function Slider({
     );
 }
 
-function PreviewBox({ item, getPreview }: { item: string, getPreview: () => void; }) {
+function PreviewBox({ item, getPreview }: { item: string, getPreview: () => void }) {
     return (<div className="p-2">
         <div className="w-8 h-8" onClick={getPreview}>
             <img className="ring-1 ring-gray-600 rounded border-gray-400" src={item} alt="preview" />
@@ -57,11 +57,10 @@ function Sliders() {
                 {previews.map((item, index) => (
                     <PreviewBox key={index} item={item} getPreview={getPreview} />
                 ))}
+                <div className="p-2">
+                    <div className="w-8 h-8 border rounded border-gray-400" onClick={getPreview}></div>
+                </div>
             </div>
-
-            {/* <div className="p-2">
-                <div className="w-8 h-8 border rounded border-gray-400" onClick={getPreview}></div>
-            </div> */}
         </div>
     );
 }

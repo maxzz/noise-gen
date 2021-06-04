@@ -18,6 +18,7 @@ function RunStuff() {
     let noiseGenerator = new NoiseGenerator();
     let seed: string;
     let color: string = 'red';
+    let params: RenderParams;
 
     runtime.onmessage = (event: MessageEvent) => {
         console.log('Worker got', event.data);
@@ -47,9 +48,9 @@ function RunStuff() {
             case 'run': {
                 seed = event.data.seed || undefined;
                 color = event.data.color || 'red';
-                let pm = event.data.params as RenderParams;
+                params = event.data.params as RenderParams;
 
-                renderBody(noiseGenerator, ctx, seed, color, pm);
+                renderBody(noiseGenerator, ctx, seed, color, params);
                 break;
             }
             case 'get-image': {
@@ -64,11 +65,19 @@ function RunStuff() {
                 const smallCanvas = new OffscreenCanvas(dimention, dimention);
                 const smallCtx = smallCanvas.getContext('2d');
                 if (smallCtx) {
-                    let ratio = canvasElm.width / canvasElm.height;
-                    let x = canvasElm.width - dimention * ratio;
-                    let y = canvasElm.height - dimention;
-                    smallCtx.drawImage(canvasElm, 0, 0, canvasElm.width, canvasElm.height, x, y, dimention * ratio, dimention);
-                    smallCanvas.convertToBlob().then(function (blob) { runtime.postMessage({ type: 'preview-blob', blob }); });
+                    let min = Math.min(canvasElm.width, canvasElm.height);
+                    smallCtx.drawImage(canvasElm, 0, 0, min, min, 0, 0, dimention, dimention);
+
+                    smallCanvas.convertToBlob().then(function (blob) {
+                        let msg = {
+                            type: 'preview-blob',
+                            blob,
+                            params,
+                            seed,
+                            color,
+                        };
+                        runtime.postMessage(msg);
+                    });
                 }
                 break;
             }
