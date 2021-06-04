@@ -3,16 +3,19 @@ import './ColorPicker.scss';
 import { SketchPicker, ColorResult } from 'react-color';
 import { useClickAway } from 'react-use';
 import { useAtom } from 'jotai';
-import { colorAtom } from '../atoms';
+import { ColorAtom } from '../atoms';
 
 export default function ColorPicker(props: { className: string, style?: React.CSSProperties; }) {
-    const { className, style = {} } = props;
-    const [color, setColor] = useAtom(colorAtom);
+    const {
+        className,
+        style = {}
+    } = props;
+
+    const [color, setColor] = useAtom(ColorAtom);
     const [isDown, isDownSet] = useState<boolean>(false);
     const ref = useRef<HTMLInputElement>(null);
-    useClickAway(ref, () => {
-        isDownSet(false);
-    });
+    useClickAway(ref, () => isDownSet(false));
+
     return (
         <div className="relative select-none" ref={ref}>
             <div

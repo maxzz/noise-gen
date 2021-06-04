@@ -1,12 +1,12 @@
 import SimplexNoise from 'simplex-noise';
-import { RenderParams } from './web-worker';
+import { GenParams } from './web-worker';
 //import colors from 'simple-color-functions';
 
 type RenderContext = {
     ctx: CanvasRenderingContext2D;
     noiseFn: (x: number, y: number) => number;
     progress?: (v: number) => boolean;    // v - progress [0..1]; running time in ms; returns boolean: continue or stop
-    params: RenderParams;
+    params: GenParams;
 };
 
 function gridNoise(renderContext: RenderContext): Path2D[] {
@@ -58,7 +58,7 @@ function gridNoise(renderContext: RenderContext): Path2D[] {
     // });
 }
 
-export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingContext2D, seed: string, color: string, pm: RenderParams) {
+export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingContext2D, seed: string, color: string, pm: GenParams) {
 
     const simplex = noiseGenerator.get(seed);
 

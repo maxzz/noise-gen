@@ -1,12 +1,12 @@
 import React, { RefObject, useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { offscreenCanvasAtom, RenderWorkerAtom } from '../atoms';
+import { OffscreenCanvasAtom, RenderWorkerAtom } from '../atoms';
 import webWorker from '../utils/web-worker?worker';
 
 export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): Worker | null {
 
     const [worker, setWorker] = useAtom(RenderWorkerAtom);
-    const [offscreenCanvasCashed, setOffscreenCanvasCashed] = useAtom(offscreenCanvasAtom);
+    const [offscreenCanvasCashed, setOffscreenCanvasCashed] = useAtom(OffscreenCanvasAtom);
 
     useEffect(() => {
         if (!canvas.current) {

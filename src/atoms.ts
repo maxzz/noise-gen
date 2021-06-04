@@ -1,52 +1,44 @@
 import { atom } from 'jotai';
-import { RenderParams } from '../src/utils/web-worker';
+import { GenParams } from '../src/utils/web-worker';
 
-export const offscreenCanvasAtom = atom<OffscreenCanvas | null>(null);
+export const OffscreenCanvasAtom = atom<OffscreenCanvas | null>(null);
 export const RenderWorkerAtom = atom<Worker | null>(null);
 
-export const seedAtom = atom<string>("13753932482421605");
-export const colorAtom = atom<string>("#887ed6");
+export const SeedAtom = atom<string>("13753932482421605");
+export const ColorAtom = atom<string>("#887ed6");
 
-export const renderParamsAtom = atom<RenderParams>({
+export const GenParamsAtom = atom<GenParams>({
     n1: 6.3, // def 10
     n2: 6.3, // def 10
     distortion: 1, // def 2
     dotDiameter: .1, // def 1
-    color: 'red'
 });
 
 export const N1Atom = atom(
-    (get) => get(renderParamsAtom).n1,
+    (get) => get(GenParamsAtom).n1,
     (get, set, update: number) => {
-        set(renderParamsAtom, {...get(renderParamsAtom), n1: update});
+        set(GenParamsAtom, {...get(GenParamsAtom), n1: update});
     }
 );
 
 export const N2Atom = atom(
-    (get) => get(renderParamsAtom).n2,
+    (get) => get(GenParamsAtom).n2,
     (get, set, update: number) => {
-        set(renderParamsAtom, {...get(renderParamsAtom), n2: update});
+        set(GenParamsAtom, {...get(GenParamsAtom), n2: update});
     }
 );
 
 export const DistortionAtom = atom(
-    (get) => get(renderParamsAtom).distortion,
+    (get) => get(GenParamsAtom).distortion,
     (get, set, update: number) => {
-        set(renderParamsAtom, {...get(renderParamsAtom), distortion: update});
+        set(GenParamsAtom, {...get(GenParamsAtom), distortion: update});
     }
 );
 
 export const DotDiameterAtom = atom(
-    (get) => get(renderParamsAtom).dotDiameter,
+    (get) => get(GenParamsAtom).dotDiameter,
     (get, set, update: number) => {
-        set(renderParamsAtom, {...get(renderParamsAtom), dotDiameter: update});
-    }
-);
-
-const ColorAtom = atom(
-    (get) => get(renderParamsAtom).color,
-    (get, set, color: string) => {
-        set(renderParamsAtom, {...get(renderParamsAtom), color});
+        set(GenParamsAtom, {...get(GenParamsAtom), dotDiameter: update});
     }
 );
 

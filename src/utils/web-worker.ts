@@ -1,11 +1,16 @@
 import { NoiseGenerator, renderBody } from './render-body';
 
-export type RenderParams = {
+export type GenParams = {
     n1: number;
     n2: number;
     distortion: number;
     dotDiameter: number;
+};
+
+export type RenderParams2 = {
+    seed: string;
     color: string;
+    genParams: GenParams;
 };
 
 const runtime: Worker = self as any;
@@ -18,7 +23,7 @@ function RunStuff() {
     let noiseGenerator = new NoiseGenerator();
     let seed: string;
     let color: string = 'red';
-    let params: RenderParams;
+    let params: GenParams;
 
     runtime.onmessage = (event: MessageEvent) => {
         console.log('Worker got', event.data);
@@ -48,7 +53,7 @@ function RunStuff() {
             case 'run': {
                 seed = event.data.seed || undefined;
                 color = event.data.color || 'red';
-                params = event.data.params as RenderParams;
+                params = event.data.params as GenParams;
 
                 renderBody(noiseGenerator, ctx, seed, color, params);
                 break;

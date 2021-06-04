@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.scss';
 import { useAtom } from 'jotai';
-import { colorAtom, seedAtom } from './atoms';
+import { ColorAtom, SeedAtom } from './atoms';
 import Logo from './components/Logo';
 import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
 import Sliders from './components/Sliders';
 
 function App() {
-    const [seed, setSeed] = useAtom(seedAtom);
-    const [color] = useAtom(colorAtom);
+    const [seed, setSeed] = useAtom(SeedAtom);
+    const [color] = useAtom(ColorAtom);
 
     return (
         <div className="App h-screen flex flex-col items-center space-y-4 bg-gray-100">
