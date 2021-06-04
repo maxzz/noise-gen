@@ -52,13 +52,20 @@ function RunStuff() {
                 renderBody(noiseGenerator, ctx, seed, color, pm);
                 break;
             }
-            case 'get-preview': {
+            case 'get-image': {
                 canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {
-                    //
-                    console.log('blob', blob);
-                    runtime.postMessage({type: 'preview-blob', blob});
+                    runtime.postMessage({type: 'image-blob', blob});
                 });
+                break;
+            }
+            case 'get-preview': {
+                let dimention = event.data.dimention;
+                console.log('dimention', dimention);
 
+                const smallCanvas = document.createElement('canvas');
+                console.log('ca', smallCanvas);
+
+                //canvasElm.convertToBlob({ quality: 1 }).then(function (blob) { runtime.postMessage({type: 'preview-blob', blob}); });
                 break;
             }
         }
