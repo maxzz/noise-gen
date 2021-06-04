@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
-import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom } from '../atoms';
+import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, RenderWorkerAtom } from '../atoms';
 
 function Slider({
     label,
@@ -26,11 +26,13 @@ function Slider({
     );
 }
 
-function Sliders({onAddPreview}: {onAddPreview: () => void}) {
+function Sliders({ onAddPreview }: { onAddPreview: () => void; }) {
     const [n1, setN1] = useAtom(N1Atom);
     const [n2, setN2] = useAtom(N2Atom);
     const [distortion, setDistortion] = useAtom(DistortionAtom);
     const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
+    const [worker] = useAtom(RenderWorkerAtom);
+
     return (
         <div className="py-2 bg-purple-100 border rounded border-gray-400">
             <Slider min={-20} max={20} value={n1} onChange={setN1} label="N1" />
@@ -38,7 +40,9 @@ function Sliders({onAddPreview}: {onAddPreview: () => void}) {
             <Slider min={0} max={200} value={distortion} onChange={setDistortion} label="Distortion" />
             <Slider min={0} max={100} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
             <div className="p-2">
-                <div className="w-8 h-8 border rounded border-gray-400"></div>
+                <div className="w-8 h-8 border rounded border-gray-400" onClick={() => {
+                    worker?.postMessage({type: 'get-render'});
+                }}></div>
             </div>
         </div>
     );

@@ -56,6 +56,7 @@ function RunStuff() {
                 canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {
                     //
                     console.log('blob', blob);
+                    runtime.postMessage({type: 'render', blob});
                 });
 
                 break;
