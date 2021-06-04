@@ -50,3 +50,11 @@ const ColorAtom = atom(
     }
 );
 
+export const PreviewsAtom = atom<string[]>([]);
+
+export const AddPreviewAtom = atom(
+    null,
+    (get, set, preview: string) => {
+        set(PreviewsAtom, [...get(PreviewsAtom), preview]);
+    }
+);
