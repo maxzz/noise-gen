@@ -26,6 +26,14 @@ function Slider({
     );
 }
 
+function PreviewBox({ item, getPreview }: { item: string, getPreview: () => void; }) {
+    return (<div className="p-2">
+        <div className="w-8 h-8" onClick={getPreview}>
+            <img className="ring-1 ring-gray-600 rounded border-gray-400" src={item} alt="preview" />
+        </div>
+    </div>);
+}
+
 function Sliders() {
     const [n1, setN1] = useAtom(N1Atom);
     const [n2, setN2] = useAtom(N2Atom);
@@ -47,17 +55,13 @@ function Sliders() {
 
             <div className="flex flex-wrap">
                 {previews.map((item, index) => (
-                    <div className="p-2" key={index}>
-                        <div className="w-8 h-8" onClick={getPreview}>
-                            <img className="ring-1 ring-gray-600 rounded border-gray-400" src={item} alt="preview" />
-                        </div>
-                    </div>
+                    <PreviewBox key={index} item={item} getPreview={getPreview} />
                 ))}
             </div>
 
-            <div className="p-2">
+            {/* <div className="p-2">
                 <div className="w-8 h-8 border rounded border-gray-400" onClick={getPreview}></div>
-            </div>
+            </div> */}
         </div>
     );
 }
