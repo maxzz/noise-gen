@@ -13,6 +13,11 @@ export const GenParamsAtom = atom<GenParams>({
     distortion: 1, // def 2
     dotDiameter: .1, // def 1
 });
+// pre-defined previews:
+//-17.4,6.3,34,2.24
+//-17.76,6.3,30.87,0.1
+//-11.68,-13.65,116.78,0.1
+//15.08,14.54,0.74,0
 
 export const N1Atom = atom(
     (get) => get(GenParamsAtom).n1,
