@@ -52,11 +52,11 @@ function RunStuff() {
                 renderBody(noiseGenerator, ctx, seed, color, pm);
                 break;
             }
-            case 'get-render': {
+            case 'get-preview': {
                 canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {
                     //
                     console.log('blob', blob);
-                    runtime.postMessage({type: 'render-blob', blob});
+                    runtime.postMessage({type: 'preview-blob', blob});
                 });
 
                 break;

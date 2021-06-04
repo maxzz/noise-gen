@@ -32,7 +32,7 @@ function App() {
                         <ColorPicker className="w-12 h-10" />
                     </div>
 
-                    <Sliders onAddPreview={() => {}} />
+                    <Sliders />
                     
                     <button
                         className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"

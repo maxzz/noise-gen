@@ -26,13 +26,17 @@ function Slider({
     );
 }
 
-function Sliders({ onAddPreview }: { onAddPreview: () => void; }) {
+function Sliders() {
     const [n1, setN1] = useAtom(N1Atom);
     const [n2, setN2] = useAtom(N2Atom);
     const [distortion, setDistortion] = useAtom(DistortionAtom);
     const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
     const [worker] = useAtom(RenderWorkerAtom);
     const [previews] = useAtom(PreviewsAtom);
+
+    function getPreview() {
+        worker?.postMessage({ type: 'get-preview' });
+    }
 
     return (
         <div className="py-2 bg-purple-100 border rounded border-gray-400">
@@ -43,20 +47,14 @@ function Sliders({ onAddPreview }: { onAddPreview: () => void; }) {
 
             {previews.map((item, index) => (
                 <div className="p-2" key={index}>
-                    <div className="w-8 h-8 border rounded border-gray-400" onClick={() => {
-                        worker?.postMessage({ type: 'get-render' });
-                    }}>
+                    <div className="w-8 h-8 border rounded border-gray-400" onClick={getPreview}>
                         <img src={item} alt="preview" />
                     </div>
                 </div>
             ))}
 
-
-
             <div className="p-2">
-                <div className="w-8 h-8 border rounded border-gray-400" onClick={() => {
-                    worker?.postMessage({ type: 'get-render' });
-                }}></div>
+                <div className="w-8 h-8 border rounded border-gray-400" onClick={getPreview}></div>
             </div>
         </div>
     );
