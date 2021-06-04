@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { AddPreviewAtom, GenParamsAtom } from '../atoms';
 import useCanvasWorker from '../hooks/useCanvasWorker';
-import { isMsgPreview } from '../utils/web-worker';
 import DragZone from './DragZone';
 
 export default function Canvas({ seed, color }: { seed: string, color: string; }) {
