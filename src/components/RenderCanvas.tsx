@@ -27,7 +27,7 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
             worker.onmessage = (event: MessageEvent) => {
                 //console.log('from worker2:', event.data);
 
-                if (isMsgPreview(event.data)) {
+                if (event.data.type === 'preview-blob') {
                     var reader = new FileReader();
                     reader.onloadend = function () {
                         var base64data = reader.result;

@@ -24,10 +24,6 @@ export namespace I4W { // From Worker
     }
 }
 
-export function isMsgPreview(data: any): data is I4W.Preview {
-    return data.type === 'preview-blob';
-}
-
 const runtime: Worker = self as any;
 
 function RunStuff() {
