@@ -6,7 +6,6 @@ import webWorker from '../utils/web-worker?worker';
 export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): Worker | null {
 
     const [worker, setWorker] = useAtom(RenderWorkerAtom);
-    //const worker = React.useRef<Worker>();
     const [offscreenCanvasCashed, setOffscreenCanvasCashed] = useAtom(offscreenCanvasAtom);
 
     useEffect(() => {
@@ -28,25 +27,22 @@ export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): W
 
         const newWorker = new webWorker();
 
-        newWorker.onmessage = (event: any) => {
-            console.log('From worker:', event.data);
-        };
-        newWorker.onerror = (event: any) => {
-            console.log('From worker: Error:', event.data);
-        };
+        // newWorker.onmessage = (event: any) => {
+        //     console.log('From worker:', event.data);
+        // };
+        // newWorker.onerror = (event: any) => {
+        //     console.log('From worker: Error:', event.data);
+        // };
+
+        setWorker(newWorker);
         
         newWorker.postMessage({ canvas: offscreen }, [offscreen]);
 
-        setWorker(newWorker);
-        //worker.current = newWorker;
         return () => {
             console.log('use off', canvas.current, offscreenCanvasCashed);
 
             worker?.terminate();
             setWorker(null);
-            //worker.current?.terminate();
-            //worker.current = undefined;
-
             setOffscreenCanvasCashed(null);
         };
     }, [canvas]);
