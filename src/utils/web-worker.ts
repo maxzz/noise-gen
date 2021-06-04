@@ -62,8 +62,20 @@ function RunStuff() {
                 let dimention = event.data.dimention;
                 console.log('dimention', dimention);
 
-                const smallCanvas = document.createElement('canvas');
-                console.log('ca', smallCanvas);
+                const smallCanvas = new OffscreenCanvas(100, 100);
+                const smallCtx = smallCanvas.getContext('2d');
+                smallCtx?.drawImage(canvasElm, 0, 0);
+
+                //const imageData = smallCtx?.getImageData(0, 0, 100, 100);
+
+                // canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {
+                //     runtime.postMessage({type: 'preview-blob', blob});
+                // });
+                
+                //console.log('ca', imageData);
+
+                smallCanvas.convertToBlob().then(function (blob) { runtime.postMessage({type: 'preview-blob', blob}); })
+
 
                 //canvasElm.convertToBlob({ quality: 1 }).then(function (blob) { runtime.postMessage({type: 'preview-blob', blob}); });
                 break;
