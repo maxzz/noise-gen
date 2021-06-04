@@ -64,7 +64,8 @@ function RunStuff() {
                 const smallCanvas = new OffscreenCanvas(dimention, dimention);
                 const smallCtx = smallCanvas.getContext('2d');
                 if (smallCtx) {
-                    smallCtx.drawImage(canvasElm, 0, 0, canvasElm.width, canvasElm.height, 0, 0, dimention, dimention);
+                    let ratio = canvasElm.width / canvasElm.height;
+                    smallCtx.drawImage(canvasElm, 0, 0, canvasElm.width, canvasElm.height, 0, 0, dimention * ratio, dimention * ratio);
                     smallCanvas.convertToBlob().then(function (blob) { runtime.postMessage({ type: 'preview-blob', blob }); });
                 }
                 break;
