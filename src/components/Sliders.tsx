@@ -35,7 +35,7 @@ function Sliders() {
     const [previews] = useAtom(PreviewsAtom);
 
     function getPreview() {
-        worker?.postMessage({ type: 'get-preview', dimention: 32 });
+        worker?.postMessage({ type: 'get-preview', dimention: 64 });
     }
 
     return (
@@ -45,13 +45,15 @@ function Sliders() {
             <Slider min={0} max={200} value={distortion} onChange={setDistortion} label="Distortion" />
             <Slider min={0} max={100} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
 
-            {previews.map((item, index) => (
-                <div className="p-2" key={index}>
-                    <div className="w-8 h-8 border rounded border-gray-400" onClick={getPreview}>
-                        <img src={item} alt="preview" />
+            <div className="flex flex-wrap">
+                {previews.map((item, index) => (
+                    <div className="p-2" key={index}>
+                        <div className="w-8 h-8" onClick={getPreview}>
+                            <img className="ring-1 ring-gray-600 rounded border-gray-400" src={item} alt="preview" />
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
 
             <div className="p-2">
                 <div className="w-8 h-8 border rounded border-gray-400" onClick={getPreview}></div>
