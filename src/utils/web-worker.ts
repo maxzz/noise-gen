@@ -59,12 +59,12 @@ function RunStuff() {
                 break;
             }
             case 'get-preview': {
-                let dimention = event.data.dimention || 32;
+                let dimention = event.data.dimention * 4 || 32;
 
                 const smallCanvas = new OffscreenCanvas(dimention, dimention);
                 const smallCtx = smallCanvas.getContext('2d');
                 if (smallCtx) {
-                    smallCtx.drawImage(canvasElm, 0, 0);
+                    smallCtx.drawImage(canvasElm, 0, 0, canvasElm.width, canvasElm.height, 0, 0, dimention, dimention);
                     smallCanvas.convertToBlob().then(function (blob) { runtime.postMessage({ type: 'preview-blob', blob }); });
                 }
                 break;
