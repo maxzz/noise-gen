@@ -7,11 +7,22 @@ export type GenParams = {
     dotDiameter: number;
 };
 
-export type RenderParams2 = {
+export type RenderParams = {
     seed: string;
     color: string;
     genParams: GenParams;
 };
+
+export namespace I2W { // To Worker
+}
+
+export namespace I4W { // From Worker
+    export type Preview = {
+        type: 'preview-blob';
+        blob: Blob,
+        renderParams: RenderParams;
+    }
+}
 
 const runtime: Worker = self as any;
 
@@ -23,7 +34,7 @@ function RunStuff() {
     let noiseGenerator = new NoiseGenerator();
     let seed: string;
     let color: string = 'red';
-    let params: GenParams;
+    let genParams: GenParams;
 
     runtime.onmessage = (event: MessageEvent) => {
         console.log('Worker got', event.data);
@@ -53,9 +64,9 @@ function RunStuff() {
             case 'run': {
                 seed = event.data.seed || undefined;
                 color = event.data.color || 'red';
-                params = event.data.params as GenParams;
+                genParams = event.data.params as GenParams;
 
-                renderBody(noiseGenerator, ctx, seed, color, params);
+                renderBody(noiseGenerator, ctx, seed, color, genParams);
                 break;
             }
             case 'get-image': {
@@ -65,7 +76,7 @@ function RunStuff() {
                 break;
             }
             case 'get-preview': {
-                let dimention = event.data.dimention * 4 || 32;
+                let dimention = event.data.dimention || 32;
 
                 const smallCanvas = new OffscreenCanvas(dimention, dimention);
                 const smallCtx = smallCanvas.getContext('2d');
@@ -73,13 +84,15 @@ function RunStuff() {
                     let min = Math.min(canvasElm.width, canvasElm.height);
                     smallCtx.drawImage(canvasElm, 0, 0, min, min, 0, 0, dimention, dimention);
 
-                    smallCanvas.convertToBlob().then(function (blob) {
-                        let msg = {
+                    smallCanvas.convertToBlob().then(function _toBlob(blob) {
+                        let msg: I4W.Preview = {
                             type: 'preview-blob',
                             blob,
-                            params,
-                            seed,
-                            color,
+                            renderParams: {
+                                seed,
+                                color,
+                                genParams,
+                            }
                         };
                         runtime.postMessage(msg);
                     });

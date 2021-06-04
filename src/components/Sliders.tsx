@@ -43,7 +43,7 @@ function Sliders() {
     const [previews] = useAtom(PreviewsAtom);
 
     function getPreview() {
-        worker?.postMessage({ type: 'get-preview', dimention: 48 });
+        worker?.postMessage({ type: 'get-preview', dimention: 32 });
     }
 
     return (
