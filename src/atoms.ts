@@ -2,6 +2,7 @@ import { atom } from 'jotai';
 import { RenderParams } from '../src/utils/web-worker';
 
 export const offscreenCanvasAtom = atom<OffscreenCanvas | null>(null);
+export const RenderWorkerAtom = atom<Worker | null>(null);
 
 export const seedAtom = atom<string>("13753932482421605");
 export const colorAtom = atom<string>("#887ed6");
@@ -48,3 +49,4 @@ const ColorAtom = atom(
         set(renderParamsAtom, {...get(renderParamsAtom), color});
     }
 );
+

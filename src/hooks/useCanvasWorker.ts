@@ -1,11 +1,12 @@
 import React, { RefObject, useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { offscreenCanvasAtom } from '../atoms';
+import { offscreenCanvasAtom, RenderWorkerAtom } from '../atoms';
 import webWorker from '../utils/web-worker?worker';
 
-export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): RefObject<Worker | undefined> {
+export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): Worker | null {
 
-    const worker = React.useRef<Worker>();
+    const [worker, setWorker] = useAtom(RenderWorkerAtom);
+    //const worker = React.useRef<Worker>();
     const [offscreenCanvasCashed, setOffscreenCanvasCashed] = useAtom(offscreenCanvasAtom);
 
     useEffect(() => {
@@ -36,12 +37,15 @@ export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): R
         
         newWorker.postMessage({ canvas: offscreen }, [offscreen]);
 
-        worker.current = newWorker;
+        setWorker(newWorker);
+        //worker.current = newWorker;
         return () => {
             console.log('use off', canvas.current, offscreenCanvasCashed);
 
-            worker.current?.terminate();
-            worker.current = undefined;
+            worker?.terminate();
+            setWorker(null);
+            //worker.current?.terminate();
+            //worker.current = undefined;
 
             setOffscreenCanvasCashed(null);
         };

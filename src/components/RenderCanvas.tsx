@@ -21,15 +21,15 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
     }, [widthRow, heightRow]);
 
     useEffect(() => {
-        if (worker.current) {
-            worker.current.onmessage = (event: MessageEvent) => {
+        if (worker) {
+            worker.onmessage = (event: MessageEvent) => {
                 console.log('from worker2:', event.data);
             };
         }
     }, [worker]);
 
     useDebounce(() => {
-        worker.current?.postMessage({
+        worker?.postMessage({
             type: 'run',
             seed,
             color,
