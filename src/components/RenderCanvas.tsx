@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { AppendPresetAtom, GenParamsAtom } from '../atoms';
 import uuid from '../utils/uuid';
-import { I2W, I4W, PresetData } from '../utils/web-worker';
 import useCanvasWorker from '../hooks/useCanvasWorker';
 import DragZone from './DragZone';
+import { I2W, I4W, PresetData } from '../utils/types';
 
 export default function Canvas({ seed, color }: { seed: string, color: string; }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);

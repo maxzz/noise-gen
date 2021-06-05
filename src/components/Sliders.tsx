@@ -2,7 +2,7 @@ import React from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
 import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RenderWorkerAtom } from '../atoms';
-import { I2W, PresetData } from '../utils/web-worker';
+import { I2W, PresetData } from '../utils/types';
 
 function Slider({
     label,
