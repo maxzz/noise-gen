@@ -25,21 +25,31 @@ function App() {
                 <div className="w-full flex flex-col space-y-1">
                     <div className="flex space-x-1">
                         <input
-                            className="flex-1 w-full px-2 py-2 text-sm text-gray-900 bg-purple-100 border rounded border-gray-400"
+                            className="flex-1 w-full px-2 py-1 text-sm text-purple-900 bg-purple-100 border rounded border-gray-400"
                             placeholder="Type anything as a seed"
                             value={seed} onChange={(event) => setSeed(event.target.value)}
                         />
-                        <ColorPicker className="w-12 h-10" />
+
+                        <button
+                            className="h-8 px-3 pb-0.5 text-sm
+                                rounded border border-gray-500 text-gray-100 bg-purple-400 
+                                uppercase transform active:scale-95"
+                            onClick={() => setSeed(`${Math.random()}`.replace(/^0\./, ''))}
+                        >
+                            Random Seed
+                        </button>
+
+                        <ColorPicker className="w-8 h-8" />
                     </div>
 
                     <Sliders />
-                    
-                    <button
+
+                    {/* <button
                         className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
                         onClick={() => setSeed(`${Math.random()}`.replace(/^0\./, ''))}
                     >
                         Random Seed
-                    </button>
+                    </button> */}
                 </div>
 
                 {/* Canvas */}
