@@ -25,16 +25,12 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
     useEffect(() => {
         if (worker) {
             worker.onmessage = (event: I4W.Message) => {
-                //console.log('from worker2:', event.data);
-
                 if (event.data.type === 'preview-blob') {
                     var reader = new FileReader();
                     reader.onloadend = function () {
-                        var base64data = reader.result;
-                        if (base64data) {
-                            addPreview((base64data as string));
+                        if (reader.result) {
+                            addPreview((reader.result as string));
                         }
-                        console.log(base64data);
                     };
                     reader.readAsDataURL(event.data.blob);
                 }

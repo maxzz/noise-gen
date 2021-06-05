@@ -4,8 +4,23 @@ import { GenParams } from '../src/utils/web-worker';
 export const OffscreenCanvasAtom = atom<OffscreenCanvas | null>(null);
 export const RenderWorkerAtom = atom<Worker | null>(null);
 
+export const PreviewsAtom = atom<string[]>([]);
+
+export const AddPreviewAtom = atom(
+    null,
+    (get, set, preview: string) => {
+        set(PreviewsAtom, [...get(PreviewsAtom), preview]);
+    }
+);
+
 export const SeedAtom = atom<string>("13753932482421605");
 export const ColorAtom = atom<string>("#887ed6");
+
+// pre-defined previews:
+//-17.4,6.3,34,2.24
+//-17.76,6.3,30.87,0.1
+//-11.68,-13.65,116.78,0.1
+//15.08,14.54,0.74,0
 
 export const GenParamsAtom = atom<GenParams>({
     n1: 6.3, // def 10
@@ -13,11 +28,6 @@ export const GenParamsAtom = atom<GenParams>({
     distortion: 1, // def 2
     dotDiameter: .1, // def 1
 });
-// pre-defined previews:
-//-17.4,6.3,34,2.24
-//-17.76,6.3,30.87,0.1
-//-11.68,-13.65,116.78,0.1
-//15.08,14.54,0.74,0
 
 export const N1Atom = atom(
     (get) => get(GenParamsAtom).n1,
@@ -44,14 +54,5 @@ export const DotDiameterAtom = atom(
     (get) => get(GenParamsAtom).dotDiameter,
     (get, set, update: number) => {
         set(GenParamsAtom, {...get(GenParamsAtom), dotDiameter: update});
-    }
-);
-
-export const PreviewsAtom = atom<string[]>([]);
-
-export const AddPreviewAtom = atom(
-    null,
-    (get, set, preview: string) => {
-        set(PreviewsAtom, [...get(PreviewsAtom), preview]);
     }
 );
