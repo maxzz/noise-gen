@@ -28,14 +28,20 @@ function Slider({
 }
 
 function PreviewBox({ item, getPreview }: { item: PresetData, getPreview: () => void; }) {
-    return (<div className="p-2">
-        <div className="w-8 h-8 relative" onClick={getPreview}>
+    return (
+        <div className="p-2">
             {item.preview
-                ? <img className="ring-1 ring-gray-600 rounded border-gray-400 maybe-broken" width="32px" height="32px" src={item.preview} alt="preset" />
-                : <div className="ring-1 ring-gray-600 rounded border-gray-400"></div>
+                ?
+                <div className="w-8 h-8 relative" onClick={getPreview}>
+                    <img className="ring-1 ring-gray-600 rounded border-gray-400 maybe-broken" width="32px" height="32px" src={item.preview} alt="preset" />
+                </div>
+                :
+                <div className="w-8 h-8 relative" onClick={getPreview}>
+                    <div className="ring-1 ring-gray-600 rounded border-gray-400"></div>
+                </div>
             }
         </div>
-    </div>);
+    );
 }
 
 function Sliders() {
