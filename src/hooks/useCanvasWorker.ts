@@ -2,6 +2,7 @@ import React, { RefObject, useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { OffscreenCanvasAtom, RenderWorkerAtom } from '../atoms';
 import webWorker from '../utils/web-worker?worker';
+import { I2W } from '../utils/types';
 
 export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): Worker | null {
 
@@ -36,7 +37,7 @@ export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): W
 
         setWorker(newWorker);
         
-        newWorker.postMessage({ canvas: offscreen }, [offscreen]);
+        newWorker.postMessage({ type: 'init', canvas: offscreen } as I2W.Init, [offscreen]);
 
         return () => {
             console.log('use off', canvas.current, offscreenCanvasCashed);

@@ -16,7 +16,7 @@ function RunStuff() {
     runtime.onmessage = (event: I2W.Message) => {
         console.log('Worker got', event.data);
 
-        if (event.data.canvas) {
+        if (event.data.type === 'init') {
             canvasElm = event.data.canvas as OffscreenCanvas;
             ctx = (canvasElm as any as HTMLCanvasElement).getContext('2d');
             return;

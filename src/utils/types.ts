@@ -19,11 +19,15 @@ export type PresetData = {
 
 export namespace I2W { // To Worker
     export type Message = {
-        data: (Run | GetPreview) & {
-            canvas: OffscreenCanvas;
+        data: (Init | Run | GetPreview) & {
             width: number;
             height: number;
         };
+    };
+
+    export type Init = {
+        type: 'init';
+        canvas: OffscreenCanvas;
     };
 
     export type Run = {

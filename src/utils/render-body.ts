@@ -1,5 +1,5 @@
 import SimplexNoise from 'simplex-noise';
-import { GenParams } from './web-worker';
+import { GenParams } from './types';
 //import colors from 'simple-color-functions';
 
 type RenderContext = {

@@ -48,7 +48,7 @@ function App() {
                         className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
                         onClick={() => setSeed(`${Math.random()}`.replace(/^0\./, ''))}
                     >
-                        Random Seed
+                        Random Preset
                     </button> */}
                 </div>
 
