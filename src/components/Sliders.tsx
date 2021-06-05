@@ -1,5 +1,6 @@
 import React from 'react';
 import './Sliders.scss';
+import './Sliders.slider.scss';
 import { useAtom } from 'jotai';
 import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RenderWorkerAtom } from '../atoms';
 import { PresetData } from '../utils/web-worker';
@@ -31,7 +32,7 @@ function PreviewBox({ item, getPreview }: { item: PresetData, getPreview: () => 
     return (<div className="p-2">
         <div className="w-8 h-8 relative" onClick={getPreview}>
             {item.preview
-                ? <img className="ring-1 ring-gray-600 rounded border-gray-400 maybe-broken" width="32px" height="32px" src={'1'+item.preview} alt="" />
+                ? <img className="ring-1 ring-gray-600 rounded border-gray-400 maybe-broken" width="32px" height="32px" src={item.preview} alt="preset" />
                 : <div className="ring-1 ring-gray-600 rounded border-gray-400"></div>
             }
         </div>
