@@ -27,20 +27,12 @@ function Slider({
     );
 }
 
-function PreviewBox({ item, appendNew }: { item: PresetData, appendNew?: () => void; }) {
+function PreviewBox({ item, deleteItem, saveItem }: { item: PresetData, deleteItem?: (id: number) => void, saveItem?: (id: number) => void }) {
     return (
         <div className="p-2">
-            {!appendNew
-                ?
-                <div className="w-8 h-8 relative">
-                    <img className="ring-1 ring-gray-600 rounded border-gray-400 maybe-broken" width="32px" height="32px" src={item.preview} alt="preset" />
-                </div>
-                :
-                <div className="w-8 h-8 relative" onClick={appendNew}>
-                    <div className="ring-1 ring-gray-600 rounded border-gray-400">
-                    </div>
-                </div>
-            }
+            <div className="w-8 h-8 relative">
+                <img className="ring-1 ring-gray-600 rounded border-gray-400 maybe-broken" width="32px" height="32px" src={item.preview} alt="preset" />
+            </div>
         </div>
     );
 }
@@ -57,16 +49,22 @@ function Sliders() {
         worker?.postMessage({ type: 'get-preview', dimention: 32 });
     }
 
+    function deleteItem(id: number) {
+    }
+    
+    function saveItem(id: number) {
+    }
+
     return (
         <div className="py-2 bg-purple-100 border rounded border-gray-400">
             <Slider min={-20} max={20} value={n1} onChange={setN1} label="N1" />
             <Slider min={-20} max={20} value={n2} onChange={setN2} label="N2" />
             <Slider min={0} max={200} value={distortion} onChange={setDistortion} label="Distortion" />
-            <Slider min={0} max={100} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
+            <Slider min={0} max={50} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
 
             <div className="flex flex-wrap">
                 {presets.map((item) => (
-                    <PreviewBox key={item.id} item={item} />
+                    <PreviewBox key={item.id} item={item} deleteItem={deleteItem} saveItem={saveItem} />
                 ))}
                 <div className="p-2">
                     <div className="w-8 h-8 border rounded border-gray-400" onClick={appendNew}>+</div>
