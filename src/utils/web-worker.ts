@@ -14,7 +14,7 @@ export type RenderParams = {
 };
 
 export type PresetData = {
-    id: number;
+    id: string;
     preview?: string;
     renderParams: RenderParams;
 };

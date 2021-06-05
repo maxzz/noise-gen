@@ -4,6 +4,6 @@ function now(): number {
     return (now as any).last = timeNow > last ? timeNow : last + 1;
 }
 
-export default function time(): number {
-    return +now().toString(36);
+export default function time(): string {
+    return now().toString(36);
 }

@@ -29,18 +29,19 @@ function Slider({
 
 interface PreviewBoxProps {
     item: PresetData;
-    deleteItem?: (id: number) => void;
-    selectItem?: (id: number) => void;
+    deleteItem: (id: string) => void;
+    selectItem: (id: string) => void;
 }
 
 function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     return (
-        <div className="p-2">
+        <div className="preset p-2" onClick={() => selectItem(item.id)}>
             <div className="w-8 h-8 relative">
                 <img className="ring-1 ring-gray-600 rounded border-gray-400 maybe-broken" width="32px" height="32px" src={item.preview} alt="preset" />
 
                 <div
-                    className="absolute p-1 -top-2 -right-2 border rounded-full text-gray-500 border-gray-500 bg-gray-50"
+                    className="remove-preset hidden absolute p-1 -top-2 -right-2 border rounded-full text-gray-500 border-gray-500 bg-gray-50"
+                    onClick={() => deleteItem(item.id)}
                 >
                     <svg className="h-3 w-3" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeWidth={4} d="M6 18L18 6M6 6l12 12" />
@@ -64,12 +65,12 @@ function Sliders() {
         worker?.postMessage({ type: 'get-preview', dimention: 32 });
     }
 
-    function deleteItem(id: number) {
+    function deleteItem(id: string) {
         console.log('delete', id);
-        
+
     }
 
-    function selectItem(id: number) {
+    function selectItem(id: string) {
         console.log('select', id);
     }
 
@@ -81,9 +82,6 @@ function Sliders() {
             <Slider min={0} max={50} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
 
             <div className="flex flex-wrap">
-                {presets.map((item) => (
-                    <PreviewBox key={item.id} item={item} deleteItem={deleteItem} selectItem={selectItem} />
-                ))}
                 <div className="p-2">
                     <div className="w-8 h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 transform active:scale-95" onClick={appendNew}>
                         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -91,6 +89,9 @@ function Sliders() {
                         </svg>
                     </div>
                 </div>
+                {presets.map((item) => (
+                    <PreviewBox key={item.id} item={item} deleteItem={deleteItem} selectItem={selectItem} />
+                ))}
             </div>
         </div>
     );
