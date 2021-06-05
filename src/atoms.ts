@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { GenParams, PresetData } from '../src/utils/web-worker';
+import { GenParams, PresetData } from './utils/types';
 
 // Offscreen canvas and Worker
 
@@ -8,8 +8,15 @@ export const RenderWorkerAtom = atom<Worker | null>(null);
 
 // Current seed and color
 
-export const SeedAtom = atom<string>("13753932482421605");
 export const ColorAtom = atom<string>("#887ed6");
+export const SeedAtom = atom<string>("13753932482421605");
+
+export const RandomSeedAtom = atom(
+    (get) => get(SeedAtom),
+    (_get, set) => {
+        set(SeedAtom, `${Math.random()}`.replace(/^0\./, ''));
+    }
+);
 
 // Current generator params
 
