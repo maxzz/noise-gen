@@ -27,10 +27,13 @@ function Slider({
     );
 }
 
-function PreviewBox({ item, getPreview }: { item: PresetData, getPreview: () => void }) {
+function PreviewBox({ item, getPreview }: { item: PresetData, getPreview: () => void; }) {
     return (<div className="p-2">
-        <div className="w-8 h-8" onClick={getPreview}>
-            <img className="ring-1 ring-gray-600 rounded border-gray-400" src={''} alt="preview" />
+        <div className="w-8 h-8 relative" onClick={getPreview}>
+            {item.preview
+                ? <img className="ring-1 ring-gray-600 rounded border-gray-400 maybe-broken" width="32px" height="32px" src={'1'+item.preview} alt="" />
+                : <div className="ring-1 ring-gray-600 rounded border-gray-400"></div>
+            }
         </div>
     </div>);
 }
