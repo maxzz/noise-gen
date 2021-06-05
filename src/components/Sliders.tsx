@@ -27,7 +27,7 @@ function Slider({
     );
 }
 
-function PreviewBox({ item, deleteItem, saveItem }: { item: PresetData, deleteItem?: (id: number) => void, saveItem?: (id: number) => void }) {
+function PreviewBox({ item, deleteItem, saveItem }: { item: PresetData, deleteItem?: (id: number) => void, saveItem?: (id: number) => void; }) {
     return (
         <div className="p-2">
             <div className="w-8 h-8 relative">
@@ -51,7 +51,7 @@ function Sliders() {
 
     function deleteItem(id: number) {
     }
-    
+
     function saveItem(id: number) {
     }
 
@@ -67,7 +67,11 @@ function Sliders() {
                     <PreviewBox key={item.id} item={item} deleteItem={deleteItem} saveItem={saveItem} />
                 ))}
                 <div className="p-2">
-                    <div className="w-8 h-8 border rounded border-gray-400" onClick={appendNew}>+</div>
+                    <div className="w-8 h-8 border rounded border-gray-400 flex items-center justify-center text-purple-800" onClick={appendNew}>
+                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
