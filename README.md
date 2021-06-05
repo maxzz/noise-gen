@@ -2,7 +2,7 @@
 
 Noise with web workers play. Noise generator: xp10-525N (as experimental 21.05.25 Noise).
 
-![](src/assets/previews/2021-05-30_15-52-41.png)
+![](src/assets/previews/2021-06-05_14-56-39.png)
 
 #### Credits, references, links
 
