@@ -2,7 +2,7 @@ import React from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
 import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RenderWorkerAtom } from '../atoms';
-import { PresetData } from '../utils/web-worker';
+import { I2W, PresetData } from '../utils/web-worker';
 
 function Slider({
     label,
@@ -68,7 +68,7 @@ function Sliders() {
     const [presets] = useAtom(PresetsAtom);
 
     function appendNew() {
-        worker?.postMessage({ type: 'get-preview', dimention: 32 });
+        worker?.postMessage({ type: 'get-preview', dimention: 32 } as I2W.GetPreview);
     }
 
     function deleteItem(id: string) {

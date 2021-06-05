@@ -20,6 +20,27 @@ export type PresetData = {
 };
 
 export namespace I2W { // To Worker
+    export type Message = {
+        data: (Run | GetPreview) & {
+            canvas: OffscreenCanvas;
+            width: number;
+            height: number;
+        };
+    };
+
+    export type Run = {
+        type: 'run';
+        seed: string;
+        color: string;
+        width: number;
+        height: number;
+        params: GenParams;
+    };
+
+    export type GetPreview = {
+        type: 'get-preview';
+        dimention: number;
+    };
 }
 
 export namespace I4W { // From Worker
@@ -31,7 +52,7 @@ export namespace I4W { // From Worker
         type: 'preview-blob';
         blob: Blob,
         renderParams: RenderParams;
-    }
+    };
 }
 
 const runtime: Worker = self as any;
@@ -42,11 +63,11 @@ function RunStuff() {
     let canvasElm: OffscreenCanvas;
     let ctx: CanvasRenderingContext2D | null;
     let noiseGenerator = new NoiseGenerator();
-    let seed: string;
+    let seed: string = '';
     let color: string = 'red';
     let genParams: GenParams;
 
-    runtime.onmessage = (event: MessageEvent) => {
+    runtime.onmessage = (event: I2W.Message) => {
         console.log('Worker got', event.data);
 
         if (event.data.canvas) {
@@ -72,17 +93,11 @@ function RunStuff() {
 
         switch (event.data.type) {
             case 'run': {
-                seed = event.data.seed || undefined;
+                seed = event.data.seed;
                 color = event.data.color || 'red';
                 genParams = event.data.params as GenParams;
 
                 renderBody(noiseGenerator, ctx, seed, color, genParams);
-                break;
-            }
-            case 'get-image': {
-                canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {
-                    runtime.postMessage({ type: 'image-blob', blob });
-                });
                 break;
             }
             case 'get-preview': {
@@ -109,10 +124,16 @@ function RunStuff() {
                 }
                 break;
             }
+            // case 'get-image': {
+            //     canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {
+            //         runtime.postMessage({ type: 'image-blob', blob });
+            //     });
+            //     break;
+            // }
         }
     };
 
-    runtime.postMessage('Worker waiting');
+    //runtime.postMessage('Worker waiting');
 }
 
 RunStuff();

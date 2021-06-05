@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { AppendPresetAtom, GenParamsAtom } from '../atoms';
 import uuid from '../utils/uuid';
-import { I4W, PresetData } from '../utils/web-worker';
+import { I2W, I4W, PresetData } from '../utils/web-worker';
 import useCanvasWorker from '../hooks/useCanvasWorker';
 import DragZone from './DragZone';
 
@@ -52,7 +52,7 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
             width: widthRow,
             height: heightRow,
             params: genParams,
-        });
+        } as I2W.Run);
     }, 100, [seed, color, widthRow, heightRow, genParams]);
 
     return (
