@@ -13,6 +13,12 @@ export type RenderParams = {
     genParams: GenParams;
 };
 
+export type PresetData = {
+    id: string;
+    preview?: string;
+    renderParams: RenderParams;
+};
+
 export namespace I2W { // To Worker
 }
 

@@ -1,20 +1,26 @@
 import { atom } from 'jotai';
-import { GenParams } from '../src/utils/web-worker';
+import { GenParams, PresetData } from '../src/utils/web-worker';
 
 export const OffscreenCanvasAtom = atom<OffscreenCanvas | null>(null);
 export const RenderWorkerAtom = atom<Worker | null>(null);
 
-export const PreviewsAtom = atom<string[]>([]);
+// Presets
 
-export const AddPreviewAtom = atom(
+export const PresetsAtom = atom<PresetData[]>([]);
+
+export const AppendPresetAtom = atom(
     null,
-    (get, set, preview: string) => {
-        set(PreviewsAtom, [...get(PreviewsAtom), preview]);
+    (get, set, preset: PresetData) => {
+        set(PresetsAtom, [...get(PresetsAtom), preset]);
     }
 );
 
+// Current seed and color
+
 export const SeedAtom = atom<string>("13753932482421605");
 export const ColorAtom = atom<string>("#887ed6");
+
+// Current generator params
 
 // pre-defined previews:
 //-17.4,6.3,34,2.24

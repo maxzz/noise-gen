@@ -1,8 +1,9 @@
 import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
-import { AddPreviewAtom, GenParamsAtom } from '../atoms';
-import { I4W } from '../utils/web-worker';
+import { AppendPresetAtom, GenParamsAtom } from '../atoms';
+import uuid from '../utils/uuid';
+import { I4W, PresetData } from '../utils/web-worker';
 import useCanvasWorker from '../hooks/useCanvasWorker';
 import DragZone from './DragZone';
 
@@ -14,7 +15,8 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
     const [dragging, setDragging] = useState(false);
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
     const [genParams] = useAtom(GenParamsAtom);
-    const [, addPreview] = useAtom(AddPreviewAtom);
+    //const [, addPreview] = useAtom(AddPreviewAtom);
+    const [, appendPreset] = useAtom(AppendPresetAtom);
 
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
     const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 325, h: 300 });
@@ -29,7 +31,14 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
                     var reader = new FileReader();
                     reader.onloadend = function () {
                         if (reader.result) {
-                            addPreview((reader.result as string));
+                            const preset: PresetData = {
+                                id: uuid(),
+                                preview: reader.result as string,
+                                renderParams: event.data.renderParams,
+                            };
+                            appendPreset(preset);
+                            
+                            //addPreview((reader.result as string));
                         }
                     };
                     reader.readAsDataURL(event.data.blob);

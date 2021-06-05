@@ -1,7 +1,8 @@
 import React from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
-import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PreviewsAtom, RenderWorkerAtom } from '../atoms';
+import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RenderWorkerAtom } from '../atoms';
+import { PresetData } from '../utils/web-worker';
 
 function Slider({
     label,
@@ -26,10 +27,10 @@ function Slider({
     );
 }
 
-function PreviewBox({ item, getPreview }: { item: string, getPreview: () => void }) {
+function PreviewBox({ item, getPreview }: { item: PresetData, getPreview: () => void }) {
     return (<div className="p-2">
         <div className="w-8 h-8" onClick={getPreview}>
-            <img className="ring-1 ring-gray-600 rounded border-gray-400" src={item} alt="preview" />
+            <img className="ring-1 ring-gray-600 rounded border-gray-400" src={''} alt="preview" />
         </div>
     </div>);
 }
@@ -40,7 +41,7 @@ function Sliders() {
     const [distortion, setDistortion] = useAtom(DistortionAtom);
     const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
     const [worker] = useAtom(RenderWorkerAtom);
-    const [previews] = useAtom(PreviewsAtom);
+    const [presets] = useAtom(PresetsAtom);
 
     function getPreview() {
         worker?.postMessage({ type: 'get-preview', dimention: 32 });
@@ -54,7 +55,7 @@ function Sliders() {
             <Slider min={0} max={100} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
 
             <div className="flex flex-wrap">
-                {previews.map((item, index) => (
+                {presets.map((item, index) => (
                     <PreviewBox key={index} item={item} getPreview={getPreview} />
                 ))}
                 <div className="p-2">
