@@ -35,20 +35,20 @@ interface PreviewBoxProps {
 
 function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     return (
-        <div className="preset p-2 select-none" onClick={() => selectItem(item.id)}>
+        <div className="preset p-2 cursor-pointer select-none" onClick={() => selectItem(item.id)}>
             <div className="w-8 h-8 relative">
-                <img 
+                <img
                     className="ring-1 ring-gray-600 rounded border-gray-400 maybe-broken"
                     width="32px" height="32px" src={item.preview} alt="preset"
                 />
 
                 <div
-                    className="remove-preset absolute p-1 -top-2 -right-2 border rounded-full text-gray-500 border-gray-500 bg-gray-50"
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        deleteItem(item.id);
-                    }}
+                    className="remove-preset absolute p-1 -top-2 -right-2 
+                        border rounded-full text-gray-500 border-gray-500 bg-gray-50
+                        "
+                    onClick={(event) => { event.stopPropagation(); deleteItem(item.id); }}
                 >
+                    {/* X mark */}
                     <svg className="h-3 w-3" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeWidth={4} d="M6 18L18 6M6 6l12 12" />
                     </svg>

@@ -19,10 +19,9 @@
 
 .preset .remove-preset {
     opacity: 0;
-    transition: opacity 0.5s;
+    transition: opacity 0.3s;
 }
 
 .preset:hover .remove-preset {
-    display: block;
     opacity: 1;
 }
