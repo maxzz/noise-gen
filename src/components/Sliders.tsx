@@ -55,8 +55,8 @@ function Sliders() {
             <Slider min={0} max={100} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
 
             <div className="flex flex-wrap">
-                {presets.map((item, index) => (
-                    <PreviewBox key={index} item={item} getPreview={getPreview} />
+                {presets.map((item) => (
+                    <PreviewBox key={item.id} item={item} getPreview={getPreview} />
                 ))}
                 <div className="p-2">
                     <div className="w-8 h-8 border rounded border-gray-400" onClick={getPreview}></div>

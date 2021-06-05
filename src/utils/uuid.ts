@@ -1,9 +1,9 @@
 function now(): number {
-    var time = Date.now();
-    var last = (now as any).last || time;
-    return (now as any).last = time > last ? time : last + 1;
+    const timeNow = Date.now();
+    const last = (now as any).last || timeNow;
+    return (now as any).last = timeNow > last ? timeNow : last + 1;
 }
 
-export default function time(): string {
-    return now().toString(36);
+export default function time(): number {
+    return +now().toString(36);
 }

@@ -15,7 +15,6 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
     const [dragging, setDragging] = useState(false);
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
     const [genParams] = useAtom(GenParamsAtom);
-    //const [, addPreview] = useAtom(AddPreviewAtom);
     const [, appendPreset] = useAtom(AppendPresetAtom);
 
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
@@ -37,8 +36,6 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
                                 renderParams: event.data.renderParams,
                             };
                             appendPreset(preset);
-                            
-                            //addPreview((reader.result as string));
                         }
                     };
                     reader.readAsDataURL(event.data.blob);

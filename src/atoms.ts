@@ -1,19 +1,10 @@
 import { atom } from 'jotai';
 import { GenParams, PresetData } from '../src/utils/web-worker';
 
+// Offscreen canvas and Worker
+
 export const OffscreenCanvasAtom = atom<OffscreenCanvas | null>(null);
 export const RenderWorkerAtom = atom<Worker | null>(null);
-
-// Presets
-
-export const PresetsAtom = atom<PresetData[]>([]);
-
-export const AppendPresetAtom = atom(
-    null,
-    (get, set, preset: PresetData) => {
-        set(PresetsAtom, [...get(PresetsAtom), preset]);
-    }
-);
 
 // Current seed and color
 
@@ -60,5 +51,16 @@ export const DotDiameterAtom = atom(
     (get) => get(GenParamsAtom).dotDiameter,
     (get, set, update: number) => {
         set(GenParamsAtom, {...get(GenParamsAtom), dotDiameter: update});
+    }
+);
+
+// Presets
+
+export const PresetsAtom = atom<PresetData[]>([]);
+
+export const AppendPresetAtom = atom(
+    null,
+    (get, set, preset: PresetData) => {
+        set(PresetsAtom, [...get(PresetsAtom), preset]);
     }
 );
