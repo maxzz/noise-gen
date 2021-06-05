@@ -23,7 +23,7 @@ function App() {
 
                 {/* Controls */}
                 <div className="w-full flex flex-col space-y-1">
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-1">
                         <input
                             className="flex-1 w-full px-2 py-2 text-sm text-gray-900 bg-purple-100 border rounded border-gray-400"
                             placeholder="Type anything as a seed"
