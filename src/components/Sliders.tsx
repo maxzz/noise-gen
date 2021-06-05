@@ -27,17 +27,18 @@ function Slider({
     );
 }
 
-function PreviewBox({ item, getPreview }: { item: PresetData, getPreview: () => void; }) {
+function PreviewBox({ item, appendNew }: { item: PresetData, appendNew?: () => void; }) {
     return (
         <div className="p-2">
-            {item.preview
+            {!appendNew
                 ?
-                <div className="w-8 h-8 relative" onClick={getPreview}>
+                <div className="w-8 h-8 relative">
                     <img className="ring-1 ring-gray-600 rounded border-gray-400 maybe-broken" width="32px" height="32px" src={item.preview} alt="preset" />
                 </div>
                 :
-                <div className="w-8 h-8 relative" onClick={getPreview}>
-                    <div className="ring-1 ring-gray-600 rounded border-gray-400"></div>
+                <div className="w-8 h-8 relative" onClick={appendNew}>
+                    <div className="ring-1 ring-gray-600 rounded border-gray-400">
+                    </div>
                 </div>
             }
         </div>
@@ -52,7 +53,7 @@ function Sliders() {
     const [worker] = useAtom(RenderWorkerAtom);
     const [presets] = useAtom(PresetsAtom);
 
-    function getPreview() {
+    function appendNew() {
         worker?.postMessage({ type: 'get-preview', dimention: 32 });
     }
 
@@ -65,10 +66,10 @@ function Sliders() {
 
             <div className="flex flex-wrap">
                 {presets.map((item) => (
-                    <PreviewBox key={item.id} item={item} getPreview={getPreview} />
+                    <PreviewBox key={item.id} item={item} />
                 ))}
                 <div className="p-2">
-                    <div className="w-8 h-8 border rounded border-gray-400" onClick={getPreview}></div>
+                    <div className="w-8 h-8 border rounded border-gray-400" onClick={appendNew}>+</div>
                 </div>
             </div>
         </div>
