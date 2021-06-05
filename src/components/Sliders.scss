@@ -1,11 +1,11 @@
-@import './Sliders.slider.scss';
+@import "./Sliders.slider.scss";
 
 .maybe-broken {
     overflow: hidden;
 }
 
 .maybe-broken:before {
-    content: '';
+    content: "";
     display: block;
 
     position: absolute;
@@ -17,6 +17,12 @@
     border-radius: 0.25rem;
 }
 
+.preset .remove-preset {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
 .preset:hover .remove-preset {
     display: block;
+    opacity: 1;
 }
