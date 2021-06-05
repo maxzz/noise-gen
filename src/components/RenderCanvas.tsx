@@ -2,6 +2,7 @@ import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { AddPreviewAtom, GenParamsAtom } from '../atoms';
+import { I4W } from '../utils/web-worker';
 import useCanvasWorker from '../hooks/useCanvasWorker';
 import DragZone from './DragZone';
 
@@ -23,7 +24,7 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
 
     useEffect(() => {
         if (worker) {
-            worker.onmessage = (event: MessageEvent) => {
+            worker.onmessage = (event: I4W.Message) => {
                 //console.log('from worker2:', event.data);
 
                 if (event.data.type === 'preview-blob') {

@@ -17,6 +17,10 @@ export namespace I2W { // To Worker
 }
 
 export namespace I4W { // From Worker
+    export type Message = {
+        data: Preview;
+    };
+
     export type Preview = {
         type: 'preview-blob';
         blob: Blob,
