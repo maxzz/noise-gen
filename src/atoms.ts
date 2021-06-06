@@ -36,30 +36,22 @@ export const GenParamsAtom = atom<GenParams>({
 
 export const N1Atom = atom(
     (get) => get(GenParamsAtom).n1,
-    (get, set, update: number) => {
-        set(GenParamsAtom, {...get(GenParamsAtom), n1: update});
-    }
+    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), n1: update })
 );
 
 export const N2Atom = atom(
     (get) => get(GenParamsAtom).n2,
-    (get, set, update: number) => {
-        set(GenParamsAtom, {...get(GenParamsAtom), n2: update});
-    }
+    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), n2: update })
 );
 
 export const DistortionAtom = atom(
     (get) => get(GenParamsAtom).distortion,
-    (get, set, update: number) => {
-        set(GenParamsAtom, {...get(GenParamsAtom), distortion: update});
-    }
+    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), distortion: update })
 );
 
 export const DotDiameterAtom = atom(
     (get) => get(GenParamsAtom).dotDiameter,
-    (get, set, update: number) => {
-        set(GenParamsAtom, {...get(GenParamsAtom), dotDiameter: update});
-    }
+    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), dotDiameter: update })
 );
 
 // Presets
@@ -68,16 +60,12 @@ export const PresetsAtom = atom<PresetData[]>([]);
 
 const AppendPresetAtom = atom(
     null,
-    (get, set, preset: PresetData) => {
-        set(PresetsAtom, [...get(PresetsAtom), preset]);
-    }
+    (get, set, preset: PresetData) => set(PresetsAtom, [...get(PresetsAtom), preset])
 );
 
 export const RemovePresetAtom = atom(
     null,
-    (get, set, id: string) => {
-        set(PresetsAtom, get(PresetsAtom).filter((item: PresetData) => item.id !== id));
-    }
+    (get, set, id: string) => set(PresetsAtom, get(PresetsAtom).filter((item: PresetData) => item.id !== id))
 );
 
 export const CreateAppendPresetAtom = atom(
