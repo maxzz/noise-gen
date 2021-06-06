@@ -75,6 +75,10 @@ function Sliders() {
         worker?.postMessage({ type: 'get-preview', smallWidth: 64, smallHeight: 96 } as I2W.GetPreview);
     }
 
+    function saveItemPng() {
+        console.log('save');
+    }
+
     function deleteItem(id: string) {
         removePreset(id);
     }
@@ -90,11 +94,24 @@ function Sliders() {
             <Slider min={0} max={200} value={distortion} onChange={setDistortion} label="Distortion" />
             <Slider min={0} max={50} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
 
-            {/* Preset + */}
-            <div className="px-2 py-2">
-                <div className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 transform active:scale-95" onClick={appendNew}>
+            {/* Actions */}
+            <div className="px-2 py-2 flex space-x-2">
+                {/* Preset + */}
+                <div
+                    className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 transform active:scale-95"
+                    onClick={appendNew}
+                >
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                {/* Preset save */}
+                <div
+                    className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 transform active:scale-95"
+                    onClick={saveItemPng}
+                >
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                     </svg>
                 </div>
             </div>
