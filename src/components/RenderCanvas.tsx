@@ -35,11 +35,13 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
     useDebounce(() => {
         worker?.postMessage({
             type: 'run',
-            seed,
-            color,
-            width: widthRow,
-            height: heightRow,
-            params: genParams,
+            canvasWidth: widthRow,
+            canvasHeight: heightRow,
+            renderParams: {
+                seed,
+                color,
+                genParams,
+            }
         } as I2W.Run);
     }, 100, [seed, color, widthRow, heightRow, genParams]);
 

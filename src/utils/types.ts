@@ -29,11 +29,9 @@ export namespace I2W { // To Worker
 
     export type Run = {
         type: 'run';
-        seed: string;
-        color: string;
         canvasWidth: number;
         canvasHeight: number;
-        params: GenParams;
+        renderParams: RenderParams;
     };
 
     export type GetPreview = {

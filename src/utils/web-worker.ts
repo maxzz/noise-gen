@@ -1,5 +1,5 @@
 import { gridNoise, NoiseGenerator, RenderContext } from './render-body';
-import { GenParams, I2W, I4W, RenderParams } from './types';
+import { I2W, I4W, RenderParams } from './types';
 
 const runtime: Worker = self as any;
 
@@ -47,21 +47,21 @@ function RunStuff() {
             return;
         }
 
-        if (event.data.width && event.data.height) {
-            ctx.canvas.width = event.data.width;
-            ctx.canvas.height = event.data.height;
+        if (event.data.type === 'run') {
+            if (event.data.canvasWidth && event.data.canvasHeight) {
+                ctx.canvas.width = event.data.canvasWidth;
+                ctx.canvas.height = event.data.canvasHeight;
+            }
         }
 
         if (!ctx.canvas.width || !ctx.canvas.height) {
-            console.log('no dim yet');
+            console.log('no canvas size');
             return;
         }
 
         switch (event.data.type) {
             case 'run': {
-                renderParams.seed = event.data.seed;
-                renderParams.color = event.data.color;
-                renderParams.genParams = event.data.params as GenParams;
+                renderParams = event.data.renderParams;
                 renderBody(noiseGenerator, ctx, renderParams);
                 break;
             }
