@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
-import { AppendPresetAtom, GenParamsAtom } from '../atoms';
+import { AppendPresetAtom, CreateAppendPresetAtom, GenParamsAtom } from '../atoms';
 import uuid from '../utils/uuid';
 import useCanvasWorker from '../hooks/useCanvasWorker';
 import DragZone from './DragZone';
@@ -16,6 +16,7 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
     const [genParams] = useAtom(GenParamsAtom);
     const [, appendPreset] = useAtom(AppendPresetAtom);
+    const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
 
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
     const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 325, h: 300 });
@@ -27,6 +28,8 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
         if (worker) {
             worker.onmessage = (event: I4W.Message) => {
                 if (event.data.type === 'preview-blob') {
+                    createAppendPreset(event);
+                    /*
                     var reader = new FileReader();
                     reader.onloadend = function () {
                         if (reader.result) {
@@ -39,6 +42,8 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
                         }
                     };
                     reader.readAsDataURL(event.data.blob);
+                    */
+                    
                 }
             };
         }

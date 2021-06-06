@@ -82,7 +82,7 @@ export const RemovePresetAtom = atom(
 
 export const CreateAppendPresetAtom = atom(
     null,
-    (get, set, event: I4W.Message) => {
+    (_get, set, event: I4W.Message) => {
         var reader = new FileReader();
         reader.onloadend = function () {
             if (reader.result) {
