@@ -43,9 +43,9 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
                 />
 
                 <div
-                    className="remove-preset absolute p-1 -top-2 -right-2 
+                    className="absolute p-1 -top-2 -right-2 
                         border rounded-full text-gray-500 border-gray-500 bg-gray-50
-                        "
+                        remove-preset"
                     onClick={(event) => { event.stopPropagation(); deleteItem(item.id); }}
                 >
                     {/* X mark */}
@@ -87,7 +87,8 @@ function Sliders() {
             <Slider min={0} max={200} value={distortion} onChange={setDistortion} label="Distortion" />
             <Slider min={0} max={50} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
 
-            <div className="flex flex-wrap">
+            <div className="px-1 flex flex-wrap">
+                {/* Preset + */}
                 <div className="px-1 py-2">
                     <div className="w-8 h-24 border rounded border-gray-400 flex items-center justify-center text-gray-400 transform active:scale-95" onClick={appendNew}>
                         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -95,6 +96,8 @@ function Sliders() {
                         </svg>
                     </div>
                 </div>
+
+                {/* Presets */}
                 {presets.map((item) => (
                     <PreviewBox key={item.id} item={item} deleteItem={deleteItem} selectItem={selectItem} />
                 ))}
