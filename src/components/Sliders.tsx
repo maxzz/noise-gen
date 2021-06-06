@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
-import { DistortionAtom, DotDiameterAtom, GenParamsAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderWorkerAtom } from '../atoms';
+import { DistortionAtom, DotDiameterAtom, GenParamsAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom } from '../atoms';
 import { I2W, PresetData } from '../utils/types';
 
 function Slider({
@@ -35,7 +35,7 @@ interface PreviewBoxProps {
 
 function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     return (
-        <div className="preset px-1 py-2 cursor-pointer select-none" onClick={() => selectItem(item)}>
+        <div className="preset px-1 py-2 cursor-pointer select-none transform active:scale-[.97]" onClick={() => selectItem(item)}>
             <div className="w-8 h-24 relative ring-1 ring-gray-600 rounded border-gray-400">
                 <img
                     className="maybe-broken"
@@ -66,7 +66,7 @@ function Sliders() {
     const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
     const [worker] = useAtom(RenderWorkerAtom);
     const [presets] = useAtom(PresetsAtom);
-    const [, SetGenParams] = useAtom(GenParamsAtom);
+    const [, SetRenderParams] = useAtom(RenderParamsAtom);
     const [, removePreset] = useAtom(RemovePresetAtom);
 
     function appendNew() {
@@ -78,8 +78,7 @@ function Sliders() {
     }
 
     function selectItem(item: PresetData) {
-        console.log('select', item.id);
-        SetGenParams(item.renderParams.genParams);
+        SetRenderParams(item.renderParams);
     }
 
     return (
