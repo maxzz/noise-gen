@@ -1,7 +1,29 @@
-import { NoiseGenerator, renderBody } from './render-body';
-import { GenParams, I2W, I4W } from './types';
+import { gridNoise, NoiseGenerator, RenderContext } from './render-body';
+import { GenParams, I2W, I4W, RenderParams } from './types';
 
 const runtime: Worker = self as any;
+
+function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingContext2D, renderParams: RenderParams) {
+
+    const simplex = noiseGenerator.get(renderParams.seed);
+
+    function fn(x: number, y: number) {
+        //return simplex.noise2D(x / 10, y / 10);
+        return simplex.noise3D(x / 10, y / 10, 1);
+        //return simplex.noise4D(x / 20, y / 20, 1, 1);
+    }
+
+    let renderContext: RenderContext = {
+        ctx,
+        noiseFn: fn,
+        params: renderParams.genParams,
+    };
+
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    let paths = gridNoise(renderContext);
+    ctx.fillStyle = renderParams.color;
+    ctx.fill(paths[0]);
+}
 
 function RunStuff() {
     //console.log('Worker started');
@@ -9,9 +31,7 @@ function RunStuff() {
     let canvasElm: OffscreenCanvas;
     let ctx: CanvasRenderingContext2D | null;
     let noiseGenerator = new NoiseGenerator();
-    let seed: string = '';
-    let color: string = 'red';
-    let genParams: GenParams;
+    let renderParams: RenderParams = {} as RenderParams;
 
     runtime.onmessage = (event: I2W.Message) => {
         console.log('Worker got', event.data);
@@ -39,11 +59,10 @@ function RunStuff() {
 
         switch (event.data.type) {
             case 'run': {
-                seed = event.data.seed;
-                color = event.data.color || 'red';
-                genParams = event.data.params as GenParams;
-
-                renderBody(noiseGenerator, ctx, seed, color, genParams);
+                renderParams.seed = event.data.seed;
+                renderParams.color = event.data.color;
+                renderParams.genParams = event.data.params as GenParams;
+                renderBody(noiseGenerator, ctx, renderParams);
                 break;
             }
             case 'get-preview': {
@@ -57,16 +76,11 @@ function RunStuff() {
                     smallCtx.drawImage(canvasElm, 0, 0, min, min, 0, 0, w, h);
 
                     smallCanvas.convertToBlob().then(function _toBlob(blob) {
-                        let msg: I4W.Preview = {
+                        runtime.postMessage({
                             type: 'preview-blob',
                             blob,
-                            renderParams: {
-                                seed,
-                                color,
-                                genParams,
-                            }
-                        };
-                        runtime.postMessage(msg);
+                            renderParams
+                        } as I4W.Preview);
                     });
                 }
                 break;

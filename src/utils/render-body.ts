@@ -2,14 +2,14 @@ import SimplexNoise from 'simplex-noise';
 import { GenParams } from './types';
 //import colors from 'simple-color-functions';
 
-type RenderContext = {
+export type RenderContext = {
     ctx: CanvasRenderingContext2D;
     noiseFn: (x: number, y: number) => number;
     progress?: (v: number) => boolean;    // v - progress [0..1]; running time in ms; returns boolean: continue or stop
     params: GenParams;
 };
 
-function gridNoise(renderContext: RenderContext): Path2D[] {
+export function gridNoise(renderContext: RenderContext): Path2D[] {
     const {
         ctx,
         noiseFn: fn,
@@ -52,43 +52,9 @@ function gridNoise(renderContext: RenderContext): Path2D[] {
     }
 
     return [p];
-
-    // mainCanvas.convertToBlob({ quality: 1 }).then(function (blob) {
-    //   downloadData = blob;
-    // });
 }
 
-export function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingContext2D, seed: string, color: string, pm: GenParams) {
-
-    const simplex = noiseGenerator.get(seed);
-
-    function fn(x: number, y: number) {
-        //return simplex.noise2D(x / 10, y / 10);
-        return simplex.noise3D(x / 10, y / 10, 1);
-        //return simplex.noise4D(x / 20, y / 20, 1, 1);
-    }
-
-    let renderContext: RenderContext = {
-        ctx,
-        noiseFn: fn,
-        params: pm,
-        // params: {
-        //     n1: 6.3, // def 10
-        //     n2: 6.3, // def 10
-        //     distortion: 1, // def 2
-        //     dotDiameter: .1, // def 1
-        //     color: color
-        // },
-    };
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-    let paths = gridNoise(renderContext);
-
-    ctx.fillStyle = color;
-    ctx.fill(paths[0]);
-}
-
-export class NoiseRender {
+class NoiseRender {
     async render() {
         
     }
