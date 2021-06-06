@@ -1,5 +1,6 @@
 import { atom } from 'jotai';
-import { GenParams, PresetData } from './utils/types';
+import { GenParams, I4W, PresetData } from './utils/types';
+import uuid from './utils/uuid';
 
 // Offscreen canvas and Worker
 
@@ -76,5 +77,23 @@ export const RemovePresetAtom = atom(
     null,
     (get, set, id: string) => {
         set(PresetsAtom, get(PresetsAtom).filter((item: PresetData) => item.id !== id));
+    }
+);
+
+export const CreateAppendPresetAtom = atom(
+    null,
+    (get, set, event: I4W.Message) => {
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            if (reader.result) {
+                const preset: PresetData = {
+                    id: uuid(),
+                    preview: reader.result as string,
+                    renderParams: event.data.renderParams,
+                };
+                set(AppendPresetAtom, preset);
+            }
+        };
+        reader.readAsDataURL(event.data.blob);
     }
 );
