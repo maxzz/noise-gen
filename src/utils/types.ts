@@ -19,10 +19,7 @@ export type PresetData = {
 
 export namespace I2W { // To Worker
     export type Message = {
-        data: (Init | Run | GetPreview) & {
-            width: number;
-            height: number;
-        };
+        data: Init | Run | GetPreview;
     };
 
     export type Init = {
@@ -34,8 +31,8 @@ export namespace I2W { // To Worker
         type: 'run';
         seed: string;
         color: string;
-        width: number;
-        height: number;
+        canvasWidth: number;
+        canvasHeight: number;
         params: GenParams;
     };
 
