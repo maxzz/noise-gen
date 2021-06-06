@@ -36,14 +36,16 @@ interface PreviewBoxProps {
 function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     return (
         <div className="preset px-1 py-2 cursor-pointer select-none transform active:scale-[.97]" onClick={() => selectItem(item)}>
-            <div className="w-16 h-24 relative ring-1 ring-gray-600 rounded border-gray-400">
+            <div className="w-16 h-24 relative 
+             ">
+                {/*border  border-gray-400 rounded ring-1 ring-gray-600 */}
                 <img
-                    className="maybe-broken"
+                    className="maybe-broken w-full h-full object-cover"
                     src={item.preview} alt="preset"
                 />
 
                 <div
-                    className="absolute p-1 -top-2 -right-2 
+                    className="absolute p-1 -top-2 -right-1.5
                         border rounded-full text-gray-500 border-gray-500 bg-gray-50
                         remove-preset"
                     onClick={(event) => { event.stopPropagation(); deleteItem(item.id); }}
