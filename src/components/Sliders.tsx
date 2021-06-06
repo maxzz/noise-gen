@@ -90,16 +90,16 @@ function Sliders() {
             <Slider min={0} max={200} value={distortion} onChange={setDistortion} label="Distortion" />
             <Slider min={0} max={50} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
 
-            <div className="px-1 flex flex-wrap">
-                {/* Preset + */}
-                <div className="px-1 py-2">
-                    <div className="w-8 h-24 border rounded border-gray-400 flex items-center justify-center text-gray-400 transform active:scale-95" onClick={appendNew}>
-                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
-                        </svg>
-                    </div>
+            {/* Preset + */}
+            <div className="px-2 py-2">
+                <div className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 transform active:scale-95" onClick={appendNew}>
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                    </svg>
                 </div>
+            </div>
 
+            <div className="px-1 flex flex-wrap">
                 {/* Presets */}
                 {presets.map((item) => (
                     <PreviewBox key={item.id} item={item} deleteItem={deleteItem} selectItem={selectItem} />
