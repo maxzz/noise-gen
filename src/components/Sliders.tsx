@@ -68,7 +68,7 @@ function Sliders() {
     const [presets] = useAtom(PresetsAtom);
 
     function appendNew() {
-        worker?.postMessage({ type: 'get-preview', dimention: 32 } as I2W.GetPreview);
+        worker?.postMessage({ type: 'get-preview', smallWidth: 32, smallHeight: 96 } as I2W.GetPreview);
     }
 
     function deleteItem(id: string) {

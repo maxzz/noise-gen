@@ -47,13 +47,14 @@ function RunStuff() {
                 break;
             }
             case 'get-preview': {
-                let dimention = event.data.dimention || 32;
+                let w = event.data.smallWidth;
+                let h = event.data.smallHeight;
 
-                const smallCanvas = new OffscreenCanvas(dimention, dimention);
+                const smallCanvas = new OffscreenCanvas(w, h);
                 const smallCtx = smallCanvas.getContext('2d');
                 if (smallCtx) {
                     let min = Math.min(canvasElm.width, canvasElm.height);
-                    smallCtx.drawImage(canvasElm, 0, 0, min, min, 0, 0, dimention, dimention);
+                    smallCtx.drawImage(canvasElm, 0, 0, min, min, 0, 0, w, h);
 
                     smallCanvas.convertToBlob().then(function _toBlob(blob) {
                         let msg: I4W.Preview = {

@@ -41,7 +41,8 @@ export namespace I2W { // To Worker
 
     export type GetPreview = {
         type: 'get-preview';
-        dimention: number;
+        smallWidth: number;
+        smallHeight: number;
     };
 }
 
