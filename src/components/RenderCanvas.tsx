@@ -45,7 +45,7 @@ export default function Canvas() {
                 genParams,
             }
         } as I2W.Run);
-    }, 100, [seed, color, widthRow, heightRow, genParams]);
+    }, 100, [widthRow, heightRow, seed, color, genParams]);
 
     return (
         <div className={`relative ${dragging ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}>

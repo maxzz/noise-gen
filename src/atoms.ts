@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { GenParams, I4W, PresetData } from './utils/types';
+import { GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
 
 // Offscreen canvas and Worker
@@ -52,6 +52,21 @@ export const DistortionAtom = atom(
 export const DotDiameterAtom = atom(
     (get) => get(GenParamsAtom).dotDiameter,
     (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), dotDiameter: update })
+);
+
+export const RenderParamsAtom = atom(
+    (get) => {
+        return {
+            seed: get(SeedAtom),
+            color: get(ColorAtom),
+            genParams: get(GenParamsAtom)
+        } as RenderParams;
+    },
+    (get, set, renderParams: RenderParams) => {
+        set(ColorAtom, renderParams.color);
+        set(SeedAtom, renderParams.seed);
+        set(GenParamsAtom, renderParams.genParams);
+    }
 );
 
 // Presets
