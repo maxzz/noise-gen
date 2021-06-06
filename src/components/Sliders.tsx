@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
-import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RenderWorkerAtom } from '../atoms';
+import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderWorkerAtom } from '../atoms';
 import { I2W, PresetData } from '../utils/types';
 
 function Slider({
@@ -66,6 +66,7 @@ function Sliders() {
     const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
     const [worker] = useAtom(RenderWorkerAtom);
     const [presets] = useAtom(PresetsAtom);
+    const [, removePreset] = useAtom(RemovePresetAtom);
 
     function appendNew() {
         worker?.postMessage({ type: 'get-preview', smallWidth: 32, smallHeight: 96 } as I2W.GetPreview);
@@ -73,7 +74,7 @@ function Sliders() {
 
     function deleteItem(id: string) {
         console.log('delete', id);
-
+        removePreset(id);
     }
 
     function selectItem(id: string) {

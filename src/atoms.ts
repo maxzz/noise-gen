@@ -71,3 +71,10 @@ export const AppendPresetAtom = atom(
         set(PresetsAtom, [...get(PresetsAtom), preset]);
     }
 );
+
+export const RemovePresetAtom = atom(
+    null,
+    (get, set, id: string) => {
+        set(PresetsAtom, get(PresetsAtom).filter((item: PresetData) => item.id !== id));
+    }
+);
