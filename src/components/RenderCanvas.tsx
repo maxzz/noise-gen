@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
-import { ColorAtom, CreateAppendPresetAtom, GenParamsAtom, RandomSeedAtom } from '../atoms';
+import { ColorAtom, CreateAppendPresetAtom, GenParamsAtom, RandomSeedAtom, RenderParamsAtom } from '../atoms';
 import useCanvasWorker from '../hooks/useCanvasWorker';
 import DragZone from './DragZone';
 import { I2W, I4W } from '../utils/types';
@@ -13,9 +13,7 @@ export default function Canvas() {
     const isHovered = useHoverDirty(containerRef);
     const [dragging, setDragging] = useState(false);
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
-    const [seed] = useAtom(RandomSeedAtom);
-    const [color] = useAtom(ColorAtom);
-    const [genParams] = useAtom(GenParamsAtom);
+    const [renderParams] = useAtom(RenderParamsAtom);
     const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
 
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
@@ -39,13 +37,9 @@ export default function Canvas() {
             type: 'run',
             canvasWidth: widthRow,
             canvasHeight: heightRow,
-            renderParams: {
-                seed,
-                color,
-                genParams,
-            }
+            renderParams
         } as I2W.Run);
-    }, 100, [widthRow, heightRow, seed, color, genParams]);
+    }, 100, [widthRow, heightRow, renderParams]);
 
     return (
         <div className={`relative ${dragging ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}>

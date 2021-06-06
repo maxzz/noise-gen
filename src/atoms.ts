@@ -54,13 +54,13 @@ export const DotDiameterAtom = atom(
     (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), dotDiameter: update })
 );
 
-export const RenderParamsAtom = atom(
+export const RenderParamsAtom = atom<RenderParams, RenderParams>(
     (get) => {
         return {
             seed: get(SeedAtom),
             color: get(ColorAtom),
             genParams: get(GenParamsAtom)
-        } as RenderParams;
+        };
     },
     (get, set, renderParams: RenderParams) => {
         set(ColorAtom, renderParams.color);
