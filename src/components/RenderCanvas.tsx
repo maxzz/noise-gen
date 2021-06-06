@@ -1,11 +1,10 @@
 import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
-import { AppendPresetAtom, CreateAppendPresetAtom, GenParamsAtom } from '../atoms';
-import uuid from '../utils/uuid';
+import { CreateAppendPresetAtom, GenParamsAtom } from '../atoms';
 import useCanvasWorker from '../hooks/useCanvasWorker';
 import DragZone from './DragZone';
-import { I2W, I4W, PresetData } from '../utils/types';
+import { I2W, I4W } from '../utils/types';
 
 export default function Canvas({ seed, color }: { seed: string, color: string; }) {
     const canvas = React.useRef<HTMLCanvasElement>(null);
@@ -15,7 +14,6 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
     const [dragging, setDragging] = useState(false);
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
     const [genParams] = useAtom(GenParamsAtom);
-    const [, appendPreset] = useAtom(AppendPresetAtom);
     const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
 
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
@@ -29,21 +27,6 @@ export default function Canvas({ seed, color }: { seed: string, color: string; }
             worker.onmessage = (event: I4W.Message) => {
                 if (event.data.type === 'preview-blob') {
                     createAppendPreset(event);
-                    /*
-                    var reader = new FileReader();
-                    reader.onloadend = function () {
-                        if (reader.result) {
-                            const preset: PresetData = {
-                                id: uuid(),
-                                preview: reader.result as string,
-                                renderParams: event.data.renderParams,
-                            };
-                            appendPreset(preset);
-                        }
-                    };
-                    reader.readAsDataURL(event.data.blob);
-                    */
-                    
                 }
             };
         }

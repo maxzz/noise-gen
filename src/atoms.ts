@@ -66,7 +66,7 @@ export const DotDiameterAtom = atom(
 
 export const PresetsAtom = atom<PresetData[]>([]);
 
-export const AppendPresetAtom = atom(
+const AppendPresetAtom = atom(
     null,
     (get, set, preset: PresetData) => {
         set(PresetsAtom, [...get(PresetsAtom), preset]);
@@ -83,7 +83,7 @@ export const RemovePresetAtom = atom(
 export const CreateAppendPresetAtom = atom(
     null,
     (_get, set, event: I4W.Message) => {
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.onloadend = function () {
             if (reader.result) {
                 const preset: PresetData = {
