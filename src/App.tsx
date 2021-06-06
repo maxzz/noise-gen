@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { useAtom } from 'jotai';
-import { ColorAtom, RandomSeedAtom } from './atoms';
+import { RandomSeedAtom } from './atoms';
 import Logo from './components/Logo';
 import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
@@ -9,8 +9,6 @@ import Sliders from './components/Sliders';
 
 function App() {
     const [seed, setSeed] = useAtom(RandomSeedAtom);
-    const [color] = useAtom(ColorAtom);
-
     return (
         <div className="App h-screen flex flex-col items-center space-y-4 bg-gray-100">
             {/* Header */}
@@ -54,7 +52,7 @@ function App() {
 
                 {/* Canvas */}
                 <div className="flex-1 flex items-center mt-1">
-                    <Canvas seed={seed} color={color} />
+                    <Canvas />
                 </div>
             </div>
         </div>

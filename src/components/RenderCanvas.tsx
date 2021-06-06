@@ -1,18 +1,20 @@
 import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
-import { CreateAppendPresetAtom, GenParamsAtom } from '../atoms';
+import { ColorAtom, CreateAppendPresetAtom, GenParamsAtom, RandomSeedAtom } from '../atoms';
 import useCanvasWorker from '../hooks/useCanvasWorker';
 import DragZone from './DragZone';
 import { I2W, I4W } from '../utils/types';
 
-export default function Canvas({ seed, color }: { seed: string, color: string; }) {
+export default function Canvas() {
     const canvas = React.useRef<HTMLCanvasElement>(null);
     const worker = useCanvasWorker(canvas);
     const containerRef = React.useRef<HTMLDivElement>(null);
     const isHovered = useHoverDirty(containerRef);
     const [dragging, setDragging] = useState(false);
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
+    const [seed] = useAtom(RandomSeedAtom);
+    const [color] = useAtom(ColorAtom);
     const [genParams] = useAtom(GenParamsAtom);
     const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
 

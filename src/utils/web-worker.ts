@@ -55,7 +55,7 @@ function RunStuff() {
         }
 
         if (!ctx.canvas.width || !ctx.canvas.height) {
-            console.log('no canvas size');
+            console.log('no canvas size yet');
             return;
         }
 
