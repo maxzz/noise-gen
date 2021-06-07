@@ -36,8 +36,7 @@ interface PreviewBoxProps {
 function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     return (
         <div className="preset px-1 py-2 cursor-pointer select-none transform active:scale-[.97]" onClick={() => selectItem(item)}>
-            <div className="w-16 h-24 relative 
-             ">
+            <div className="w-[56px] h-[56px] relative border-4 border-gray-50">
                 {/*border  border-gray-400 rounded ring-1 ring-gray-600 */}
                 <img
                     className="maybe-broken w-full h-full object-cover"
@@ -72,7 +71,7 @@ function Sliders() {
     const [, removePreset] = useAtom(RemovePresetAtom);
 
     function appendNew() {
-        worker?.postMessage({ type: 'get-preview', smallWidth: 64, smallHeight: 96 } as I2W.GetPreview);
+        worker?.postMessage({ type: 'get-preview', smallWidth: 56, smallHeight: 56 } as I2W.GetPreview);
     }
 
     function saveItemPng() {
@@ -98,7 +97,8 @@ function Sliders() {
             <div className="px-2 py-2 flex space-x-2">
                 {/* Preset + */}
                 <div
-                    className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 transform active:scale-95"
+                    className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 
+                        transform active:scale-95 cursor-pointer"
                     onClick={appendNew}
                 >
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -107,7 +107,8 @@ function Sliders() {
                 </div>
                 {/* Preset save */}
                 <div
-                    className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 transform active:scale-95"
+                    className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 
+                        transform active:scale-95 cursor-pointer"
                     onClick={saveItemPng}
                 >
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
