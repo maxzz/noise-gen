@@ -63,6 +63,12 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     );
 }
 
+async function delay() {
+    return new Promise((resolve) => {
+        setTimeout(resolve, 1000)
+    })
+}
+
 function Sliders() {
     const [n1, setN1] = useAtom(N1Atom);
     const [n2, setN2] = useAtom(N2Atom);
@@ -77,8 +83,10 @@ function Sliders() {
         worker?.postMessage({ type: 'get-preview', smallWidth: PRESET_W, smallHeight: PRESET_H } as I2W.GetPreview);
     }
 
-    function saveItemPng() {
-        console.log('save');
+    async function saveItemPng(event: React.MouseEvent) {
+        //console.log('save b', event);
+        await delay();
+        console.log('save a', event);
     }
 
     function deleteItem(id: string) {
@@ -101,7 +109,8 @@ function Sliders() {
                 {/* Preset + */}
                 <div
                     className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 
-                        transform active:scale-95 cursor-pointer"
+                        transform active:scale-[.97] cursor-pointer"
+                    title="Save preset"
                     onClick={appendNew}
                 >
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -111,8 +120,9 @@ function Sliders() {
                 {/* Preset save */}
                 <div
                     className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 
-                        transform active:scale-95 cursor-pointer"
-                    onClick={saveItemPng}
+                        transform active:scale-[.97] cursor-pointer"
+                    title="Save image"
+                    onClick={(event) => saveItemPng(event)}
                 >
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
