@@ -134,6 +134,10 @@ function Sliders() {
         SetRenderParams(item.renderParams);
     }
 
+    function setSize(w: number, h: number) {
+        
+    }
+
     return (
         <div className="py-2 bg-purple-100 border rounded border-gray-400">
             <Slider min={-20} max={20} value={n1} onChange={setN1} label="N1" />
@@ -144,45 +148,45 @@ function Sliders() {
             {/* Actions */}
             <div className="px-2 py-2 flex space-x-2">
                 <div className="px-1 flex items-center justify-center space-x-1 border rounded border-gray-400">
-                    {/* Preset size */}
+                    {/* Preset size 1 */}
                     <div
                         className="w-full h-6 border rounded border-gray-400 flex items-center justify-center text-gray-400
                             transform active:scale-[.97] cursor-pointer"
-                        title="Save preset"
-                        onClick={appendNew}
+                        title="300 x 300"
+                        onClick={() => {setSize(300, 300)}}
                     >
                         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    {/* Preset size */}
+                    {/* Preset size 2 */}
                     <div
                         className="w-full h-6 border rounded border-gray-400 flex items-center justify-center text-gray-400
                             transform active:scale-[.97] cursor-pointer"
-                        title="Save preset"
-                        onClick={appendNew}
+                        title="500 x 500"
+                        onClick={() => {setSize(500, 500)}}
                     >
                         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    {/* Preset size */}
+                    {/* Preset size 3 */}
                     <div
                         className="w-full h-6 border rounded border-gray-400 flex items-center justify-center text-gray-400
                             transform active:scale-[.97] cursor-pointer"
-                        title="Save preset"
-                        onClick={appendNew}
+                        title="700 x 700"
+                        onClick={() => {setSize(700, 700)}}
                     >
                         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    {/* Preset size */}
+                    {/* Preset size 4 */}
                     <div
                         className="w-full h-6 border rounded border-gray-400 flex items-center justify-center text-gray-400
                             transform active:scale-[.97] cursor-pointer"
-                        title="Save preset"
-                        onClick={appendNew}
+                        title="1000 x 1000"
+                        onClick={() => {setSize(1000, 1000)}}
                     >
                         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
