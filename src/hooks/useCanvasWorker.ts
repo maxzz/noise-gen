@@ -58,7 +58,7 @@ export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): W
         };
 
         newWorker.addEventListener('message', (event: I4W.Message) => {
-            if (event.data.type === 'image-blob') {
+            if (event.data.type === 'got-image') {
                 let resolve = newWorker.queries.get(event.data.resolveId);
                 if (!resolve) {
                     console.error('missing promise ID');

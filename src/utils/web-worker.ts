@@ -89,7 +89,7 @@ function RunStuff() {
                 const promiseId = event.data.promiseId;
                 canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {
                     runtime.postMessage({
-                        type: 'image-blob',
+                        type: 'got-image',
                         blob,
                         resolveId: promiseId,
                     } as I4W.Image);

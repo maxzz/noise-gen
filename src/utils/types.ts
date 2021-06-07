@@ -58,7 +58,7 @@ export namespace I4W { // From Worker
     };
 
     export type Image = {
-        type: 'image-blob';
+        type: 'got-image';
         blob: Blob,
         resolveId: string;
     };

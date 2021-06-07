@@ -1,10 +1,10 @@
-import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
-import { ColorAtom, CreateAppendPresetAtom, GenParamsAtom, RandomSeedAtom, RenderParamsAtom } from '../atoms';
-import useCanvasWorker from '../hooks/useCanvasWorker';
+import { useAtom } from 'jotai';
+import { CreateAppendPresetAtom, RenderParamsAtom } from '../atoms';
 import DragZone from './DragZone';
 import { I2W, I4W } from '../utils/types';
+import useCanvasWorker from '../hooks/useCanvasWorker';
 
 export default function Canvas() {
     const canvas = React.useRef<HTMLCanvasElement>(null);
@@ -28,7 +28,6 @@ export default function Canvas() {
                 if (event.data.type === 'preview-blob') {
                     createAppendPreset(event.data);
                 }
-                console.log('message', worker);
             };
         }
     }, [worker]);
