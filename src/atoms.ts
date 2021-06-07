@@ -87,18 +87,18 @@ export const RemovePresetAtom = atom(
 
 export const CreateAppendPresetAtom = atom(
     null,
-    (_get, set, event: I4W.Message) => {
+    (_get, set, data: I4W.Preview) => {
         let reader = new FileReader();
         reader.onloadend = function () {
             if (reader.result) {
                 const preset: PresetData = {
                     id: uuid(),
                     preview: reader.result as string,
-                    renderParams: event.data.renderParams,
+                    renderParams: data.renderParams,
                 };
                 set(AppendPresetAtom, preset);
             }
         };
-        reader.readAsDataURL(event.data.blob);
+        reader.readAsDataURL(data.blob);
     }
 );

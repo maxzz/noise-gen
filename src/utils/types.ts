@@ -19,7 +19,7 @@ export type PresetData = {
 
 export namespace I2W { // To Worker
     export type Message = {
-        data: Init | Run | GetPreview;
+        data: Init | Run | GetPreview | GetImage;
     };
 
     export type Init = {
@@ -39,16 +39,27 @@ export namespace I2W { // To Worker
         smallWidth: number;
         smallHeight: number;
     };
+
+    export type GetImage = {
+        type: 'get-image';
+        promiseId: string;
+    };
 }
 
 export namespace I4W { // From Worker
     export type Message = {
-        data: Preview;
+        data: Preview | Image;
     };
 
     export type Preview = {
         type: 'preview-blob';
         blob: Blob,
         renderParams: RenderParams;
+    };
+
+    export type Image = {
+        type: 'image-blob';
+        blob: Blob,
+        resolveId: string;
     };
 }

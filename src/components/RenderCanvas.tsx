@@ -26,8 +26,9 @@ export default function Canvas() {
         if (worker) {
             worker.onmessage = (event: I4W.Message) => {
                 if (event.data.type === 'preview-blob') {
-                    createAppendPreset(event);
+                    createAppendPreset(event.data);
                 }
+                console.log('message', worker);
             };
         }
     }, [worker]);

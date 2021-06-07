@@ -3,6 +3,7 @@ import './Sliders.scss';
 import { useAtom } from 'jotai';
 import { DistortionAtom, DotDiameterAtom, GenParamsAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom } from '../atoms';
 import { I2W, PresetData } from '../utils/types';
+import { WorkerEx } from '../hooks/useCanvasWorker';
 
 function Slider({
     label,
@@ -39,7 +40,7 @@ const PRESET_H = 56;
 function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     return (
         <div className="preset px-1 py-2 cursor-pointer select-none transform active:scale-[.97]" onClick={() => selectItem(item)}>
-            <div className="relative border-4 border-gray-50" style={{width: `${PRESET_W + 8}px`, height: `${PRESET_H + 8}px`}}>
+            <div className="relative border-4 border-gray-50" style={{ width: `${PRESET_W + 8}px`, height: `${PRESET_H + 8}px` }}>
                 {/* +8 for double border size */}
                 <img
                     className="maybe-broken w-full h-full object-cover"
@@ -65,8 +66,8 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
 
 async function delay() {
     return new Promise((resolve) => {
-        setTimeout(resolve, 1000)
-    })
+        setTimeout(resolve, 1000);
+    });
 }
 
 var saveUrlData = (function () {
@@ -77,6 +78,19 @@ var saveUrlData = (function () {
         a.href = url;
         a.download = fileName;
         a.click();
+    };
+}());
+
+var saveBlobData = (function () {
+    let a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style.display = 'none';
+    return function (blob: Blob, fileName: string) {
+        let url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
     };
 }());
 
@@ -95,6 +109,7 @@ function Sliders() {
     }
 
     async function saveItemPng(event: React.MouseEvent) {
+        /*
         if (!presets.length) {
             return;
         }
@@ -103,6 +118,12 @@ function Sliders() {
         await delay();
         saveUrlData(url, 'testtest.png');
         console.log('save a', event);
+        */
+        if (worker) {
+            let thisWorker = worker as WorkerEx;
+            let blob = await thisWorker.getImage();
+            saveBlobData(blob, 'testtest.png');
+        }
     }
 
     function deleteItem(id: string) {

@@ -85,12 +85,17 @@ function RunStuff() {
                 }
                 break;
             }
-            // case 'get-image': {
-            //     canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {
-            //         runtime.postMessage({ type: 'image-blob', blob });
-            //     });
-            //     break;
-            // }
+            case 'get-image': {
+                const promiseId = event.data.promiseId;
+                canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {
+                    runtime.postMessage({
+                        type: 'image-blob',
+                        blob,
+                        resolveId: promiseId,
+                    } as I4W.Image);
+                });
+                break;
+            }
         }
     };
 

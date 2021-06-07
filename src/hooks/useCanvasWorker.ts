@@ -2,7 +2,17 @@ import React, { RefObject, useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { OffscreenCanvasAtom, RenderWorkerAtom } from '../atoms';
 import webWorker from '../utils/web-worker?worker';
-import { I2W } from '../utils/types';
+import { I2W, I4W } from '../utils/types';
+import uuid from '../utils/uuid';
+
+type PromissedQuery = {
+    resolve: (value: any) => void;
+};
+
+export interface WorkerEx extends Worker {
+    queries: Map<string, PromissedQuery>;
+    getImage(): Promise<any>;
+};
 
 export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): Worker | null {
 
@@ -26,7 +36,7 @@ export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): W
             setOffscreenCanvasCashed(offscreen);
         }
 
-        const newWorker = new webWorker();
+        const newWorker = new webWorker() as WorkerEx;
 
         // newWorker.onmessage = (event: any) => {
         //     console.log('From worker:', event.data);
@@ -35,8 +45,33 @@ export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): W
         //     console.log('From worker: Error:', event.data);
         // };
 
+        newWorker.queries = new Map();
+        newWorker.getImage = () => {
+            return new Promise((resolve) => {
+                let id = uuid();
+                newWorker.queries.set(id, { resolve });
+                newWorker.postMessage({
+                    type: 'get-image',
+                    promiseId: id,
+                } as I2W.GetImage);
+            });
+        };
+
+        newWorker.addEventListener('message', (event: I4W.Message) => {
+            if (event.data.type === 'image-blob') {
+                let resolve = newWorker.queries.get(event.data.resolveId);
+                if (!resolve) {
+                    console.error('missing promise ID');
+                    return;
+                }
+                newWorker.queries.delete(event.data.resolveId);
+                resolve.resolve(event.data.blob);
+            }
+            console.log('reply');
+        });
+
         setWorker(newWorker);
-        
+
         newWorker.postMessage({ type: 'init', canvas: offscreen } as I2W.Init, [offscreen]);
 
         return () => {
