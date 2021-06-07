@@ -69,6 +69,17 @@ async function delay() {
     })
 }
 
+var saveUrlData = (function () {
+    let a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style.display = 'none';
+    return function (url: string, fileName: string) {
+        a.href = url;
+        a.download = fileName;
+        a.click();
+    };
+}());
+
 function Sliders() {
     const [n1, setN1] = useAtom(N1Atom);
     const [n2, setN2] = useAtom(N2Atom);
@@ -84,8 +95,13 @@ function Sliders() {
     }
 
     async function saveItemPng(event: React.MouseEvent) {
+        if (!presets.length) {
+            return;
+        }
+        let url = presets[0].preview || '';
         //console.log('save b', event);
         await delay();
+        saveUrlData(url, 'testtest.png');
         console.log('save a', event);
     }
 
@@ -108,7 +124,7 @@ function Sliders() {
             <div className="px-2 py-2 flex space-x-2">
                 {/* Preset + */}
                 <div
-                    className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 
+                    className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
                         transform active:scale-[.97] cursor-pointer"
                     title="Save preset"
                     onClick={appendNew}
@@ -119,7 +135,7 @@ function Sliders() {
                 </div>
                 {/* Preset save */}
                 <div
-                    className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400 
+                    className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
                         transform active:scale-[.97] cursor-pointer"
                     title="Save image"
                     onClick={(event) => saveItemPng(event)}
