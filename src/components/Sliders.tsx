@@ -64,23 +64,6 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     );
 }
 
-async function delay() {
-    return new Promise((resolve) => {
-        setTimeout(resolve, 1000);
-    });
-}
-
-var saveUrlData = (function () {
-    let a = document.createElement("a");
-    document.body.appendChild(a);
-    a.style.display = 'none';
-    return function (url: string, fileName: string) {
-        a.href = url;
-        a.download = fileName;
-        a.click();
-    };
-}());
-
 var saveBlobData = (function () {
     let a = document.createElement("a");
     document.body.appendChild(a);
@@ -109,16 +92,6 @@ function Sliders() {
     }
 
     async function saveItemPng(event: React.MouseEvent) {
-        /*
-        if (!presets.length) {
-            return;
-        }
-        let url = presets[0].preview || '';
-        //console.log('save b', event);
-        await delay();
-        saveUrlData(url, 'testtest.png');
-        console.log('save a', event);
-        */
         if (worker) {
             let thisWorker = worker as WorkerEx;
             let blob = await thisWorker.getImage();

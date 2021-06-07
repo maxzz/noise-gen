@@ -17,9 +17,9 @@ export default function Canvas() {
     const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
 
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
-    const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 325, h: 300 });
+    const [manualSize, setManualSize] = useState<{ w: number; h: number; }>({ w: 325, h: 300 });
     useEffect(() => {
-        widthRow && heightRow && manualSizeSet({ w: widthRow, h: heightRow });
+        widthRow && heightRow && setManualSize({ w: widthRow, h: heightRow });
     }, [widthRow, heightRow]);
 
     useEffect(() => {
@@ -54,7 +54,7 @@ export default function Canvas() {
                 className="absolute w-5 h-5 rounded-full border-2 -bottom-2 -right-2 z-10
                     bg-green-500 border-green-700 active:border-green-600
                     transform active:scale-0"
-                size={manualSize} setSize={manualSizeSet} onActivated={(active: boolean) => setDragging(active)}
+                size={manualSize} setSize={setManualSize} onActivated={(active: boolean) => setDragging(active)}
             />
             {(dragging || isHovered) && <div className="absolute text-[.6rem] text-gray-700">{widthRow} x {heightRow}</div>}
         </div>
