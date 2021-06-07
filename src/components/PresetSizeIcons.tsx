@@ -2,13 +2,15 @@ import { useAtom } from 'jotai';
 import React from 'react';
 import { ManualSizeAtom } from '../atoms';
 
+const SIZES = [[300, 300], [500, 500], [700, 700], [1000, 1000]];
+
 function SizeIcon({ select, step }: { select: () => void, step: number; }) {
     return (
         <div
             className="flex items-center justify-center
                 text-gray-400
                 transform active:scale-[.97] cursor-pointer"
-            title="300 x 300"
+            title={`Set canvas ${SIZES[step][0]} x ${SIZES[step][1]}`}
             onClick={select}
         >
             {/* border rounded-sm border-gray-400 text-gray-400 */}
