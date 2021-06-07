@@ -143,6 +143,53 @@ function Sliders() {
 
             {/* Actions */}
             <div className="px-2 py-2 flex space-x-2">
+                <div className="flex">
+                    {/* Preset size */}
+                    <div
+                        className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
+                            transform active:scale-[.97] cursor-pointer"
+                        title="Save preset"
+                        onClick={appendNew}
+                    >
+                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    {/* Preset size */}
+                    <div
+                        className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
+                            transform active:scale-[.97] cursor-pointer"
+                        title="Save preset"
+                        onClick={appendNew}
+                    >
+                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    {/* Preset size */}
+                    <div
+                        className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
+                            transform active:scale-[.97] cursor-pointer"
+                        title="Save preset"
+                        onClick={appendNew}
+                    >
+                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    {/* Preset size */}
+                    <div
+                        className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
+                            transform active:scale-[.97] cursor-pointer"
+                        title="Save preset"
+                        onClick={appendNew}
+                    >
+                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                </div>
+
                 {/* Preset + */}
                 <div
                     className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
