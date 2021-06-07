@@ -102,3 +102,7 @@ export const CreateAppendPresetAtom = atom(
         reader.readAsDataURL(data.blob);
     }
 );
+
+// Canvas size
+
+export const ManualSizeAtom = atom({ w: 325, h: 300 });

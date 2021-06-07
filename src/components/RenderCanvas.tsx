@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { useAtom } from 'jotai';
-import { CreateAppendPresetAtom, RenderParamsAtom } from '../atoms';
+import { CreateAppendPresetAtom, ManualSizeAtom, RenderParamsAtom } from '../atoms';
 import DragZone from './DragZone';
 import { I2W, I4W } from '../utils/types';
 import useCanvasWorker from '../hooks/useCanvasWorker';
@@ -17,7 +17,7 @@ export default function Canvas() {
     const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
 
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
-    const [manualSize, setManualSize] = useState<{ w: number; h: number; }>({ w: 325, h: 300 });
+    const [manualSize, setManualSize] = useAtom(ManualSizeAtom);
     useEffect(() => {
         widthRow && heightRow && setManualSize({ w: widthRow, h: heightRow });
     }, [widthRow, heightRow]);

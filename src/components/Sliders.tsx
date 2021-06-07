@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
-import { DistortionAtom, DotDiameterAtom, GenParamsAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom } from '../atoms';
+import { DistortionAtom, DotDiameterAtom, GenParamsAtom, ManualSizeAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom } from '../atoms';
 import { I2W, PresetData } from '../utils/types';
 import { WorkerEx } from '../hooks/useCanvasWorker';
 
@@ -82,6 +82,7 @@ function Sliders() {
     const [n2, setN2] = useAtom(N2Atom);
     const [distortion, setDistortion] = useAtom(DistortionAtom);
     const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
+    const [manualSize, setManualSize] = useAtom(ManualSizeAtom);
     const [worker] = useAtom(RenderWorkerAtom);
     const [presets] = useAtom(PresetsAtom);
     const [, SetRenderParams] = useAtom(RenderParamsAtom);
@@ -108,7 +109,7 @@ function Sliders() {
     }
 
     function setSize(w: number, h: number) {
-        
+        setManualSize({w, h});
     }
 
     return (
