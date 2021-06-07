@@ -42,10 +42,7 @@ function PresetSizeIcons() {
 
     return (
         <>
-            <SizeIcon select={() => setSize(300, 300)} step={0} />
-            <SizeIcon select={() => setSize(500, 500)} step={1} />
-            <SizeIcon select={() => setSize(700, 700)} step={2} />
-            <SizeIcon select={() => setSize(1000, 1000)} step={3} />
+            {SIZES.map(([w, h], index) => <SizeIcon key={index} select={() => setSize(w, h)} step={index} />)}
         </>
     );
 }
