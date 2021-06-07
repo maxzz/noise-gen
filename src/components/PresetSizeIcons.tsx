@@ -8,7 +8,7 @@ function SizeIcon({ select, step }: { select: () => void, step: number; }) {
     return (
         <div
             className="flex items-center justify-center
-                text-gray-400
+                text-gray-400 hover:text-purple-600
                 transform active:scale-[.97] cursor-pointer"
             title={`Set canvas ${SIZES[step][0]} x ${SIZES[step][1]}`}
             onClick={select}
@@ -40,11 +40,9 @@ function PresetSizeIcons() {
         setManualSize({ w, h });
     }
 
-    return (
-        <>
-            {SIZES.map(([w, h], index) => <SizeIcon key={index} select={() => setSize(w, h)} step={index} />)}
-        </>
-    );
+    return (<>
+        {SIZES.map(([w, h], index) => <SizeIcon key={index} select={() => setSize(w, h)} step={index} />)}
+    </>);
 }
 
 export default PresetSizeIcons;
