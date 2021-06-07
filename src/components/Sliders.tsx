@@ -143,10 +143,10 @@ function Sliders() {
 
             {/* Actions */}
             <div className="px-2 py-2 flex space-x-2">
-                <div className="flex">
+                <div className="px-1 flex items-center justify-center space-x-1 border rounded border-gray-400">
                     {/* Preset size */}
                     <div
-                        className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
+                        className="w-full h-6 border rounded border-gray-400 flex items-center justify-center text-gray-400
                             transform active:scale-[.97] cursor-pointer"
                         title="Save preset"
                         onClick={appendNew}
@@ -157,7 +157,7 @@ function Sliders() {
                     </div>
                     {/* Preset size */}
                     <div
-                        className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
+                        className="w-full h-6 border rounded border-gray-400 flex items-center justify-center text-gray-400
                             transform active:scale-[.97] cursor-pointer"
                         title="Save preset"
                         onClick={appendNew}
@@ -168,7 +168,7 @@ function Sliders() {
                     </div>
                     {/* Preset size */}
                     <div
-                        className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
+                        className="w-full h-6 border rounded border-gray-400 flex items-center justify-center text-gray-400
                             transform active:scale-[.97] cursor-pointer"
                         title="Save preset"
                         onClick={appendNew}
@@ -179,7 +179,7 @@ function Sliders() {
                     </div>
                     {/* Preset size */}
                     <div
-                        className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
+                        className="w-full h-6 border rounded border-gray-400 flex items-center justify-center text-gray-400
                             transform active:scale-[.97] cursor-pointer"
                         title="Save preset"
                         onClick={appendNew}
