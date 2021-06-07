@@ -33,11 +33,14 @@ interface PreviewBoxProps {
     selectItem: (item: PresetData) => void;
 }
 
+const PRESET_W = 56;
+const PRESET_H = 56;
+
 function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     return (
         <div className="preset px-1 py-2 cursor-pointer select-none transform active:scale-[.97]" onClick={() => selectItem(item)}>
-            <div className="w-[56px] h-[56px] relative border-4 border-gray-50">
-                {/*border  border-gray-400 rounded ring-1 ring-gray-600 */}
+            <div className="relative border-4 border-gray-50" style={{width: `${PRESET_W + 8}px`, height: `${PRESET_H + 8}px`}}>
+                {/* +8 for double border size */}
                 <img
                     className="maybe-broken w-full h-full object-cover"
                     src={item.preview} alt="preset"
@@ -71,7 +74,7 @@ function Sliders() {
     const [, removePreset] = useAtom(RemovePresetAtom);
 
     function appendNew() {
-        worker?.postMessage({ type: 'get-preview', smallWidth: 56, smallHeight: 56 } as I2W.GetPreview);
+        worker?.postMessage({ type: 'get-preview', smallWidth: PRESET_W, smallHeight: PRESET_H } as I2W.GetPreview);
     }
 
     function saveItemPng() {
