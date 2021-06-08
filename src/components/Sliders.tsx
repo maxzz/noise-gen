@@ -40,11 +40,11 @@ const PRESET_H = 56;
 
 function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     return (
-        <div className="preset px-1 py-2 cursor-pointer select-none transform active:scale-[.97]" onClick={() => selectItem(item)}>
-            <div className="relative border-4 border-gray-50" style={{ width: `${PRESET_W + 8}px`, height: `${PRESET_H + 8}px` }}>
-                {/* +8 for double border size */}
+        <div className="preset mx-1 my-2 cursor-pointer select-none transform active:scale-[.97] border border-gray-300" onClick={() => selectItem(item)}>
+            <div className="relative border-4 border-gray-50" style={{ width: `${PRESET_W + 10}px`, height: `${PRESET_H + 10}px` }}>
+                {/* +8 for double border size & +2 for image border  */}
                 <img
-                    className="maybe-broken w-full h-full object-cover"
+                    className="maybe-broken w-full h-full object-cover border border-gray-300"
                     src={item.preview} alt="preset"
                 />
 
@@ -66,9 +66,10 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
 }
 
 const saveBlobData = (function () {
-    let a = document.createElement("a");
+    const a = document.createElement("a");
     document.body.appendChild(a);
     a.style.display = 'none';
+    a.id = 'noise-gen-image';
     return function (blob: Blob, fileName: string) {
         let url = window.URL.createObjectURL(blob);
         a.href = url;
