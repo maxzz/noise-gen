@@ -51,7 +51,7 @@ function App() {
                 </div>
 
                 {/* Canvas */}
-                <div className="flex-1 flex items-center mt-1">
+                <div className="flex-1 mt-1">
                     <Canvas />
                 </div>
             </div>
