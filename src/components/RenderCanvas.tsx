@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { useAtom } from 'jotai';
-import { CreateAppendPresetAtom, ManualSizeAtom, RenderParamsAtom } from '../atoms';
+import { CreateAppendPresetAtom, ManualSizeAtom, previewRectAtom, RenderParamsAtom } from '../atoms';
 import DragZone from './DragZone';
 import { I2W, I4W } from '../utils/types';
 import useCanvasWorker from '../hooks/useCanvasWorker';
@@ -15,6 +15,7 @@ export default function Canvas() {
     const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
     const [renderParams] = useAtom(RenderParamsAtom);
     const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
+    const [previewRect,] = useAtom(previewRectAtom);
 
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
     const [manualSize, setManualSize] = useAtom(ManualSizeAtom);
@@ -58,11 +59,14 @@ export default function Canvas() {
             </div>
 
             {/* Preview */}
-            <div 
-                className="absolute bg-pink-500 opacity-25"
-                style={{left: previewX, top: previewY, width: previewW, height: previewH}}
-            >
-            </div>
+            {!!previewRect.w && !!previewRect.h &&
+                <div
+                    className="absolute border border-green-400 shadow-md"
+                    style={{ left: previewRect.x, top: previewRect.y, width: previewRect.w, height: previewRect.h }}
+                >
+                    <div className="w-full h-full bg-green-500 opacity-25"></div>
+                </div>
+            }
 
             <DragZone
                 className="absolute w-5 h-5 rounded-full border-2 -bottom-2 -right-2 z-10
