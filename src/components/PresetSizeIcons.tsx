@@ -11,6 +11,7 @@ function SizeIcon({ select, step }: { select: () => void, step: number; }) {
     const [, setPreviewSize] = useAtom(previewSizeAtom);
 
     useEffect(() => {
+        document.body.style.overflow = hovered ? 'hidden' : ''; // to eliminate shift
         setPreviewSize(hovered ? { w: SIZES[step][0], h: SIZES[step][1] } : { w: 0, h: 0 });
     }, [hovered]);
 
