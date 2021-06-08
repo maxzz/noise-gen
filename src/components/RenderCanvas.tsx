@@ -12,7 +12,8 @@ export default function Canvas() {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const isHovered = useHoverDirty(containerRef);
     const [dragging, setDragging] = useState(false);
-    const [measureRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
+    const [parentSizeRef, { width: widthParent, height: heightParent }] = useMeasure<HTMLDivElement>();
+    const [canvasSizeRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
     const [renderParams] = useAtom(RenderParamsAtom);
     const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
     const [previewRect,] = useAtom(previewRectAtom);
@@ -48,13 +49,13 @@ export default function Canvas() {
     let previewY = manualSize.h / 2 - previewH / 2;
 
     return (
-        <div className="w-full h-full flex items-center">
+        <div className="w-full h-full flex items-center" ref={parentSizeRef}>
             <div className={`relative ${dragging ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}>
                 {/* Canvas */}
                 <div
                     className="w-full h-full overflow-hidden"
                     style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
-                    ref={measureRef}
+                    ref={canvasSizeRef}
                 >
                     <canvas ref={canvas} className="w-full h-full"></canvas>
                 </div>
