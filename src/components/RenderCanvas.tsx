@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { useAtom } from 'jotai';
-import { CreateAppendPresetAtom, ManualSizeAtom, previewRectAtom, RenderParamsAtom } from '../atoms';
+import { CreateAppendPresetAtom, ManualSizeAtom, previewRectAtom, previewSizeAtom, RenderParamsAtom } from '../atoms';
 import DragZone from './DragZone';
 import { I2W, I4W } from '../utils/types';
 import useCanvasWorker from '../hooks/useCanvasWorker';
@@ -17,7 +17,7 @@ export default function Canvas() {
     const [renderParams] = useAtom(RenderParamsAtom);
     const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
     const [previewRect,] = useAtom(previewRectAtom);
-
+   
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
     const [manualSize, setManualSize] = useAtom(ManualSizeAtom);
     useEffect(() => {
@@ -43,10 +43,16 @@ export default function Canvas() {
         } as I2W.Run);
     }, 100, [widthRow, heightRow, renderParams]);
 
-    let previewW = 284;
-    let previewH = 284;
-    let previewX = manualSize.w / 2 - previewW / 2;
-    let previewY = manualSize.h / 2 - previewH / 2;
+    // let previewW = 284;
+    // let previewH = 284;
+    // let previewX = manualSize.w / 2 - previewW / 2;
+    // let previewY = manualSize.h / 2 - previewH / 2;
+
+    let [previewSize] = useAtom(previewSizeAtom);
+    let w = Math.min(previewSize.w, widthParent);
+    let h = Math.min(previewSize.h, heightParent);
+    let x = manualSize.w / 2 - w / 2;
+    let y = manualSize.h / 2 - h / 2;
 
     return (
         <div className="w-full h-full flex items-center" ref={parentSizeRef}>
@@ -63,7 +69,7 @@ export default function Canvas() {
                 {!!previewRect.w && !!previewRect.h &&
                     <div
                         className="absolute border border-green-400 shadow-md"
-                        style={{ left: previewRect.x, top: previewRect.y, width: previewRect.w, height: previewRect.h }}
+                        style={{ left: x, top: y, width: w, height: h }}
                     >
                         <div className="w-full h-full bg-green-500 opacity-25"></div>
                     </div>
