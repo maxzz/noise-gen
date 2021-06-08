@@ -41,8 +41,14 @@ export default function Canvas() {
         } as I2W.Run);
     }, 100, [widthRow, heightRow, renderParams]);
 
+    let previewW = 284;
+    let previewH = 284;
+    let previewX = manualSize.w / 2 - previewW / 2;
+    let previewY = manualSize.h / 2 - previewH / 2;
+
     return (
         <div className={`relative ${dragging ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}>
+            {/* Canvas */}
             <div
                 className="w-full h-full overflow-hidden"
                 style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
@@ -50,6 +56,14 @@ export default function Canvas() {
             >
                 <canvas ref={canvas} className="w-full h-full"></canvas>
             </div>
+
+            {/* Preview */}
+            <div 
+                className="absolute bg-pink-500 opacity-25"
+                style={{left: previewX, top: previewY, width: previewW, height: previewH}}
+            >
+            </div>
+
             <DragZone
                 className="absolute w-5 h-5 rounded-full border-2 -bottom-2 -right-2 z-10
                     bg-green-500 border-green-700 active:border-green-600
