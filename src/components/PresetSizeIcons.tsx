@@ -11,7 +11,7 @@ function SizeIcon({ select, step }: { select: () => void, step: number; }) {
     const [, setPreviewSize] = useAtom(previewSizeAtom);
 
     useEffect(() => {
-        setPreviewSize(hovered ? { w: 300, h: 300 } : { w: 0, h: 0 });
+        setPreviewSize(hovered ? { w: SIZES[step][0], h: SIZES[step][1] } : { w: 0, h: 0 });
     }, [hovered]);
 
     return (
