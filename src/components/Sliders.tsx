@@ -40,11 +40,11 @@ const PRESET_H = 56;
 
 function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     return (
-        <div className="preset mx-1 my-2 cursor-pointer select-none transform active:scale-[.97] border border-gray-300" onClick={() => selectItem(item)}>
-            <div className="relative border-4 border-gray-50" style={{ width: `${PRESET_W + 10}px`, height: `${PRESET_H + 10}px` }}>
-                {/* +8 for double border size & +2 for image border  */}
+        <div className="preset px-1 py-2 cursor-pointer select-none transform active:scale-[.97]" onClick={() => selectItem(item)}>
+            <div className="relative border-4 border-gray-50" style={{ width: `${PRESET_W + 8}px`, height: `${PRESET_H + 8}px` }}>
+                {/* +8 for double border size */}
                 <img
-                    className="maybe-broken w-full h-full object-cover border border-gray-300"
+                    className="maybe-broken w-full h-full object-cover"
                     src={item.preview} alt="preset"
                 />
 
