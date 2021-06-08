@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useAtom } from 'jotai';
 import { ManualSizeAtom, previewSizeAtom } from '../atoms';
-import { useHoverDirty } from 'react-use';
+import { useDebounce, useHoverDirty } from 'react-use';
 
 const SIZES = [[300, 300], [500, 500], [700, 700], [1000, 1000]];
 
@@ -10,10 +10,11 @@ function SizeIcon({ select, step }: { select: () => void, step: number; }) {
     const hovered = useHoverDirty(ref, true);
     const [, setPreviewSize] = useAtom(previewSizeAtom);
 
-    useEffect(() => {
+    useDebounce(() => {
         document.body.style.overflow = hovered ? 'hidden' : ''; // to eliminate shift
         setPreviewSize(hovered ? { w: SIZES[step][0], h: SIZES[step][1] } : { w: 0, h: 0 });
-    }, [hovered]);
+    }, 100, [hovered]);
+
 
     return (
         <div
