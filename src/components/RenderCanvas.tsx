@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { useAtom } from 'jotai';
-import { CreateAppendPresetAtom, ManualSizeAtom, previewRectAtom, previewSizeAtom, RenderParamsAtom } from '../atoms';
+import { CreateAppendPresetAtom, ManualSizeAtom, RenderParamsAtom } from '../atoms';
 import DragZone from './DragZone';
 import { I2W, I4W } from '../utils/types';
 import useCanvasWorker from '../hooks/useCanvasWorker';
@@ -12,11 +12,9 @@ export default function Canvas() {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const isHovered = useHoverDirty(containerRef);
     const [dragging, setDragging] = useState(false);
-    const [parentSizeRef, { width: widthParent, height: heightParent }] = useMeasure<HTMLDivElement>();
     const [canvasSizeRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
     const [renderParams] = useAtom(RenderParamsAtom);
     const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
-    const [previewRect,] = useAtom(previewRectAtom);
    
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
     const [manualSize, setManualSize] = useAtom(ManualSizeAtom);
@@ -43,19 +41,8 @@ export default function Canvas() {
         } as I2W.Run);
     }, 100, [widthRow, heightRow, renderParams]);
 
-    // let previewW = 284;
-    // let previewH = 284;
-    // let previewX = manualSize.w / 2 - previewW / 2;
-    // let previewY = manualSize.h / 2 - previewH / 2;
-
-    let [previewSize] = useAtom(previewSizeAtom);
-    let w = Math.min(previewSize.w, widthParent);
-    let h = Math.min(previewSize.h, heightParent);
-    let x = manualSize.w / 2 - w / 2;
-    let y = manualSize.h / 2 - h / 2;
-
     return (
-        <div className="w-full h-full flex items-center" ref={parentSizeRef}>
+        <div className="w-full h-full flex items-center">
             <div className={`relative ${dragging ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}>
                 {/* Canvas */}
                 <div
@@ -65,15 +52,7 @@ export default function Canvas() {
                 >
                     <canvas ref={canvas} className="w-full h-full"></canvas>
                 </div>
-                {/* Preview */}
-                {!!previewRect.w && !!previewRect.h &&
-                    <div
-                        className="absolute border border-green-400 shadow-md"
-                        style={{ left: x, top: y, width: w, height: h }}
-                    >
-                        <div className="w-full h-full bg-green-500 opacity-25"></div>
-                    </div>
-                }
+
                 <DragZone
                     className="absolute w-5 h-5 rounded-full border-2 -bottom-2 -right-2 z-10
                         bg-green-500 border-green-700 active:border-green-600

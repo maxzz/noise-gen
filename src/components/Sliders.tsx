@@ -65,7 +65,7 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     );
 }
 
-var saveBlobData = (function () {
+const saveBlobData = (function () {
     let a = document.createElement("a");
     document.body.appendChild(a);
     a.style.display = 'none';
@@ -94,9 +94,8 @@ function Sliders() {
 
     async function saveItemPng(event: React.MouseEvent) {
         if (worker) {
-            let thisWorker = worker as WorkerEx;
-            let blob = await thisWorker.getImage();
-            saveBlobData(blob, 'testtest.png');
+            let blob = await worker.getImage();
+            saveBlobData(blob, 'noise-gen.png');
         }
     }
 

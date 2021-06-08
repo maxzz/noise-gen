@@ -1,11 +1,12 @@
 import { atom } from 'jotai';
+import { WorkerEx } from './hooks/useCanvasWorker';
 import { GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
 
 // Offscreen canvas and Worker
 
 export const OffscreenCanvasAtom = atom<OffscreenCanvas | null>(null);
-export const RenderWorkerAtom = atom<Worker | null>(null);
+export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 
 // Current seed and color
 

@@ -1,21 +1,10 @@
-import React, { useRef } from 'react';
 import { useAtom } from 'jotai';
-import { ManualSizeAtom, previewSizeAtom } from '../atoms';
-import { useDebounce, useHoverDirty } from 'react-use';
+import React from 'react';
+import { ManualSizeAtom } from '../atoms';
 
-const SIZES = [[300, 300], [500, 500], [700, 700], [1000, 1000]];
+const SIZES = [[300, 300], [500, 500], [700, 700], [900, 900]];
 
 function SizeIcon({ select, step }: { select: () => void, step: number; }) {
-    const ref = useRef<HTMLDivElement>(null);
-    const hovered = useHoverDirty(ref, true);
-    const [, setPreviewSize] = useAtom(previewSizeAtom);
-
-    useDebounce(() => {
-        document.body.style.overflow = hovered ? 'hidden' : ''; // to eliminate shift
-        setPreviewSize(hovered ? { w: SIZES[step][0], h: SIZES[step][1] } : { w: 0, h: 0 });
-    }, 100, [hovered]);
-
-
     return (
         <div
             className="flex items-center justify-center
@@ -23,7 +12,6 @@ function SizeIcon({ select, step }: { select: () => void, step: number; }) {
                 transform active:scale-[.97] cursor-pointer"
             title={`Set canvas ${SIZES[step][0]} x ${SIZES[step][1]}`}
             onClick={select}
-            ref={ref}
         >
             {/* border rounded-sm border-gray-400 text-gray-400 */}
             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" >

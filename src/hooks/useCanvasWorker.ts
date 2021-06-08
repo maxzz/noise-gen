@@ -14,7 +14,7 @@ export interface WorkerEx extends Worker {
     getImage(): Promise<any>;
 };
 
-export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): Worker | null {
+export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): WorkerEx | null {
 
     const [worker, setWorker] = useAtom(RenderWorkerAtom);
     const [offscreenCanvasCashed, setOffscreenCanvasCashed] = useAtom(OffscreenCanvasAtom);
