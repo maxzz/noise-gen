@@ -106,3 +106,20 @@ export const CreateAppendPresetAtom = atom(
 // Canvas size
 
 export const ManualSizeAtom = atom({ w: 325, h: 300 });
+
+// Preview rect
+
+export const previewSizeAtom = atom({ w: 0, h: 0 });
+
+export const previewRectAtom = atom(
+    (get) => {
+        let { w, h } = get(previewSizeAtom);
+        let canvas = get(ManualSizeAtom);
+        return {
+            x: canvas.w / 2 - w / 2,
+            y: canvas.h / 2 - h / 2,
+            w,
+            h,
+        };
+    }
+);
