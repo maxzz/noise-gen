@@ -12,7 +12,7 @@ function App() {
     return (
         <div className="App h-screen flex flex-col items-center space-y-4 bg-purple-200" style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}>
             {/* Header */}
-            <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300">
+            <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 shadow-sm">
                 <div className="mx-4 flex-none w-10 h-10"><Logo /></div>
                 <div className="px-4 py-2 text-xl uppercase">Noise generator: xp10-525N</div>
             </div>
