@@ -1,20 +1,7 @@
 import React from 'react';
-import dice from '../assets/raw/dice.svg';
 
 function Logo() {
     return (
-        // <svg viewBox="0 0 90 90" className="w-full h-full">
-        //     <path className="st0" stroke="currentColor" strokeWidth="2" fill="none" d="M85 22.3v44.9L44.5 86M5 22.8L45.5 4 85 22.3M44.5 86L5 67.7V22.8M44.5 41.1L5 22.8M85 22.3L44.5 41.1M44.5 41.1V86" />
-        //     <ellipse className="st1" stroke="currentColor" strokeWidth="2" fill="none" cx="17.1" cy="42" rx="3.7" ry="3.4" />
-        //     <ellipse className="st1" stroke="currentColor" strokeWidth="2" fill="none" cx="25" cy="54.4" rx="3.7" ry="3.4" />
-        //     <ellipse className="st1" stroke="currentColor" strokeWidth="2" fill="none" cx="33.4" cy="67.8" rx="3.7" ry="3.4" />
-        //     <ellipse className="st1" stroke="currentColor" strokeWidth="2" fill="none" cx="58.3" cy="57.1" rx="3.7" ry="3.4" />
-        //     <ellipse className="st1" stroke="currentColor" strokeWidth="2" fill="none" cx="45" cy="22.3" rx="3.7" ry="3.4" />
-        //     <ellipse className="st1" stroke="currentColor" strokeWidth="2" fill="none" cx="73.5" cy="50.2" rx="3.7" ry="3.4" />
-        // </svg>
-
-        // <img className="w-full h-full" src={dice} alt="dice" />
-
         <svg viewBox="0 0 128 172.4" className="w-full h-full" fill="currentColor">
             <g>
                 <path d="M126.9 38.1v.8l.1-.1.1-.1c.1 0 0-.1 0-.1v-.1-.1-.1l-.2-.2M66.4 84.5l-61.5-26 60.5-46.9 58.7 27.3-57.7 45.6m-1-74.9l-.3.1-.2.1-.2.1-.2.1L2 58.4l-.2.1-.1.2-.1.2V59.2l.1.1.1.1.1.1.2.1v-.4-.2l.1-.2.1-.1.1-.1H3.2L50 78.4l15.9 6.7.1-.1.1-.1.1-.1.1-.1 59.9-47-18-8.4-42-19.6H65.6l-.2-.1" />
