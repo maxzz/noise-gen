@@ -14,7 +14,7 @@ function App() {
     return (
         <div
             className="App h-screen flex flex-col items-center space-y-4 bg-purple-200"
-            style={{background: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}
+            style={{background: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply'}}
             >
             {/* style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}} */}
 
