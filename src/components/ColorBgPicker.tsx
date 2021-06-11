@@ -12,11 +12,11 @@ function ColorBgPicker() {
     }
     return (
         <div
-            className="w-8 h-8 rounded border-gray-500"
+            className="w-8 h-8 rounded border-gray-500 transform active:scale-[.97]"
             onClick={changeBackground}
             style={{borderWidth: backgorund === 'transparent' ? 1 : 0}}
         >
-            <div className="p-1 h-full flex items-center justify-between border-4 border-gray-500 rounded"
+            <div className="px-0.5 py-1 h-full flex items-center justify-between border-4 border-gray-500 rounded space-x-[2px]"
                 title={`Canvas background: white/black/transparent`}
                 style={{borderColor: backgorund}}
             >
