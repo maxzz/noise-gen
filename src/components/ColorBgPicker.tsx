@@ -2,7 +2,7 @@ import { useAtom } from 'jotai';
 import React from 'react';
 import { ColorCanvasAtom } from '../atoms';
 
-const bgColors = ['white', 'black', 'transparent'];
+const bgColors = ['black', 'white', 'transparent'];
 const bgTitle = `Perview canvas background: white/black/transparent.
 The saved image will have a transparent background.`;
 
@@ -25,8 +25,8 @@ function ColorBgPicker() {
 
                 style={{borderColor: backgorund}}
             >
-                <div className="w-1.5 h-1/2 bg-white"></div>
                 <div className="w-1.5 h-1/2 bg-black"></div>
+                <div className="w-1.5 h-1/2 bg-white"></div>
                 <div className="w-1.5 h-1/2 border border-gray-500"></div>
             </div>
         </div>
