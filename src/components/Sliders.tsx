@@ -110,9 +110,9 @@ function Sliders() {
 
     return (
         <div className="py-2 bg-purple-100 border rounded border-gray-400">
-            <Slider min={-20} max={20} value={n1} onChange={setN1} label="N1" />
-            <Slider min={-20} max={20} value={n2} onChange={setN2} label="N2" />
-            <Slider min={0} max={200} value={distortion} onChange={setDistortion} label="Distortion" />
+            <Slider min={-40} max={40} value={n1} onChange={setN1} label="Noise 1" />
+            <Slider min={-40} max={40} value={n2} onChange={setN2} label="Noise 2" />
+            <Slider min={0} max={400} value={distortion} onChange={setDistortion} label="Distortion" />
             <Slider min={0} max={50} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
 
             {/* Actions */}
