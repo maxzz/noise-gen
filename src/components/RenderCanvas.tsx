@@ -50,7 +50,7 @@ export default function Canvas() {
                     style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
                     ref={canvasSizeRef}
                 >
-                    <canvas ref={canvas} className="w-full h-full"></canvas>
+                    <canvas ref={canvas} className="w-full h-full bg-black"></canvas>
                 </div>
 
                 <DragZone
