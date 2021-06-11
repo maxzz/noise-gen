@@ -11,8 +11,11 @@ function ColorBgPicker() {
         setBackgorund(bgColors[newColor]);
     }
     return (
-        <div className="w-8 h-8 p-1 border border-gray-500 rounded" style={{backgroundColor: backgorund}} onClick={changeBackground}>
-            <div className="p-1 h-full flex items-center justify-between border border-gray-500 rounded">
+        <div className="w-8 h-8" onClick={changeBackground}>
+            <div className="p-1 h-full flex items-center justify-between border-4 border-gray-500 rounded"
+                title={`Canvas background: white/black/transparent`}
+                style={{borderColor: backgorund}}
+            >
                 <div className="w-1.5 h-1/2 bg-white"></div>
                 <div className="w-1.5 h-1/2 bg-black"></div>
                 <div className="w-1.5 h-1/2 border border-gray-500"></div>
