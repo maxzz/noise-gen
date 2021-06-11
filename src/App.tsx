@@ -6,6 +6,7 @@ import Logo from './components/Logo';
 import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
 import Sliders from './components/Sliders';
+import ColorBgPicker from './components/ColorBgPicker';
 
 function App() {
     const [seed, setSeed] = useAtom(RandomSeedAtom);
@@ -39,6 +40,8 @@ function App() {
                         </button>
 
                         <ColorPicker className="w-8 h-8" />
+
+                        <ColorBgPicker />
                     </div>
 
                     <Sliders />
