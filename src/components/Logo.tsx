@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Logo() {
+function Cube() {
     return (
         <svg viewBox="0 0 128 172.4" className="w-full h-full" fill="currentColor">
             <g>
@@ -15,6 +15,19 @@ function Logo() {
                 <path d="M98.9 89.9l-.6.2-.6.3-.7.4a13.2 13.2 0 00-3 2.9 22 22 0 00-1.9 3c-.5 1.1-1 2.2-1.3 3.3a9 9 0 00-.3 4.9c.2.5.4.9.7 1.2l1 .7h1.3l.6-.2.6-.3.7-.4.7-.5c.8-.6 1.6-1.5 2.3-2.4a22 22 0 001.9-3l1.3-3.2a9 9 0 00.3-4.9l-.7-1.3-1-.7h-1.3" />
             </g>
         </svg>
+    );
+}
+
+function Logo() {
+    return (
+        <div className="relative w-full h-full">
+            <div className="absolute left-0 top-0 w-full h-full transform rotate-45 scale-75 translate-x-6">
+                <Cube />
+            </div>
+            <div className="absolute left-0 top-0 w-full h-full transform rotate-12 scale-75">
+                <Cube />
+            </div>
+        </div>
     );
 }
 
