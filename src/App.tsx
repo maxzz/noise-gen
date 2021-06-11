@@ -32,6 +32,7 @@ function App() {
                             className="h-8 px-3 pb-0.5 text-sm
                                 rounded border border-gray-500 text-gray-100 bg-purple-400 
                                 uppercase transform active:scale-95"
+                            style={{background:'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
                             onClick={setSeed}
                         >
                             Random Seed
