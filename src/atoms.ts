@@ -10,8 +10,9 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 
 // Current seed and color
 
-export const ColorAtom = atom<string>("#887ed6");
-export const SeedAtom = atom<string>("13753932482421605");
+export const ColorAtom = atom<string>('#887ed6');
+export const ColorCanvasAtom = atom('transparent');
+export const SeedAtom = atom<string>('13753932482421605');
 
 export const RandomSeedAtom = atom(
     (get) => get(SeedAtom),

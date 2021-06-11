@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { useAtom } from 'jotai';
-import { CreateAppendPresetAtom, ManualSizeAtom, RenderParamsAtom } from '../atoms';
+import { ColorCanvasAtom, CreateAppendPresetAtom, ManualSizeAtom, RenderParamsAtom } from '../atoms';
 import DragZone from './DragZone';
 import { I2W, I4W } from '../utils/types';
 import useCanvasWorker from '../hooks/useCanvasWorker';
@@ -14,6 +14,7 @@ export default function Canvas() {
     const [dragging, setDragging] = useState(false);
     const [canvasSizeRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
     const [renderParams] = useAtom(RenderParamsAtom);
+    const [colorCanvas] = useAtom(ColorCanvasAtom);
     const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
    
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
@@ -50,7 +51,7 @@ export default function Canvas() {
                     style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
                     ref={canvasSizeRef}
                 >
-                    <canvas ref={canvas} className="w-full h-full bg-black"></canvas>
+                    <canvas ref={canvas} className="w-full h-full" style={{backgroundColor: colorCanvas}}></canvas>
                 </div>
 
                 <DragZone
