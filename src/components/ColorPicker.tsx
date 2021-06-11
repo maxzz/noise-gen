@@ -23,7 +23,7 @@ export default function ColorPicker(props: { className: string, style?: React.CS
                 style={{ ...style }}
                 onClick={() => isDownSet(v => !v)}
             >
-                <div className="w-full h-full rounded" style={{ backgroundColor: color }}></div>
+                <div className="w-full h-full rounded-[0.15rem]" style={{ backgroundColor: color }}></div>
             </div>
             <div className={`absolute right-0 top-full z-10 ${isDown ? '' : 'hidden'}`}>
                 <SketchPicker color={color} onChange={(color: ColorResult) => {
