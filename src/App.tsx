@@ -11,9 +11,12 @@ import ColorBgPicker from './components/ColorBgPicker';
 function App() {
     const [seed, setSeed] = useAtom(RandomSeedAtom);
     return (
-        <div className="App h-screen flex flex-col items-center space-y-4 bg-purple-200" style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}>
+        <div
+            className="App h-screen flex flex-col items-center space-y-4 bg-purple-200"
+            style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}
+        >
             {/* Header */}
-            <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 shadow-sm">
+            <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 shadow-sm select-none">
                 <div className="mx-4 flex-none w-10 h-10"><Logo /></div>
                 <div className="px-4 py-2 text-xl uppercase">Noise generator: xp10-525N</div>
             </div>
@@ -31,7 +34,7 @@ function App() {
 
                         <button
                             className="h-8 px-3 pb-0.5 text-sm
-                                rounded border border-gray-500 text-gray-100 bg-purple-400 
+                                rounded border border-gray-500 text-gray-100 bg-purple-400
                                 uppercase transform active:scale-95"
                             style={{background:'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
                             onClick={setSeed}
