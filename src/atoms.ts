@@ -112,3 +112,10 @@ export const CreateAppendPresetAtom = atom(
 // Canvas size
 
 export const ManualSizeAtom = atom({ w: 325, h: 300 });
+
+// Application background
+
+export const AppBackgroundUrlAtom = atom('');
+export const AppBackgroundActiveAtom = atom(
+    (get) => !!get(AppBackgroundUrlAtom)
+);

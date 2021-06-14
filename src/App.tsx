@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { useAtom } from 'jotai';
-import { RandomSeedAtom } from './atoms';
+import { AppBackgroundActiveAtom, AppBackgroundUrlAtom, RandomSeedAtom } from './atoms';
 import Logo from './components/Logo';
 import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
@@ -11,12 +11,19 @@ import bkgImage from './assets/noise-gen.png';
 
 function App() {
     const [seed, setSeed] = useAtom(RandomSeedAtom);
+    const [appBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
+    const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
     return (
         <div
             className="App h-screen flex flex-col items-center space-y-4 bg-purple-200"
             // style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}
             // style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}}
-            style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}}
+            style={
+                appBackgroundActive ?
+                    { backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge' }
+                    :
+                    { backgroundImage: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)` }
+            }
         >
             {/* Header */}
             <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 shadow-sm select-none">
@@ -39,7 +46,7 @@ function App() {
                             className="h-8 px-3 pb-0.5 text-sm
                                 rounded border border-gray-500 text-gray-100 bg-purple-400
                                 uppercase transform active:scale-95"
-                            style={{background:'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
+                            style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
                             onClick={setSeed}
                         >
                             Random Seed
