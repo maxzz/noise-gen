@@ -7,17 +7,17 @@ import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
 import Sliders from './components/Sliders';
 import ColorBgPicker from './components/ColorBgPicker';
-import bkgImage from './assets/dark-denim.png';
+import bkgImage from './assets/noise-gen.png';
 
 function App() {
     const [seed, setSeed] = useAtom(RandomSeedAtom);
     return (
         <div
             className="App h-screen flex flex-col items-center space-y-4 bg-purple-200"
-            style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}
+            // style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}
+            // style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}}
+            style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}}
         >
-            {/* style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}} */}
-
             {/* Header */}
             <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 shadow-sm select-none">
                 <div className="mx-4 flex-none w-10 h-10"><Logo /></div>
