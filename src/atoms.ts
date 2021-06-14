@@ -33,6 +33,7 @@ export const RandomSeedAtom = atom(
 //-16.29,15.48,23.94,0.39
 //-14.5,-0.27,0.95,0.62
 //-2.68,-26.85,12.08,2.4
+//21.3,-22.55,161.52,0.1 good for default
 
 export const GenParamsAtom = atom<GenParams>({
     n1: 6.3, // def 10

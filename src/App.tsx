@@ -45,19 +45,19 @@ function App() {
                             Random Seed
                         </button>
 
+                        {/* <button
+                            className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
+                            onClick={() => setSeed(`${Math.random()}`.replace(/^0\./, ''))}
+                        >
+                            Random Set
+                        </button> */}
+
                         <ColorPicker className="w-8 h-8" />
 
                         <ColorBgPicker />
                     </div>
 
                     <Sliders />
-
-                    {/* <button
-                        className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
-                        onClick={() => setSeed(`${Math.random()}`.replace(/^0\./, ''))}
-                    >
-                        Random Preset
-                    </button> */}
                 </div>
 
                 {/* Canvas */}

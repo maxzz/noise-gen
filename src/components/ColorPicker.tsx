@@ -17,7 +17,7 @@ export default function ColorPicker(props: { className: string, style?: React.CS
     useClickAway(ref, () => isDownSet(false));
 
     return (
-        <div className="relative select-none" ref={ref}>
+        <div className="relative select-none" ref={ref} title="Color choice">
             <div
                 className={`${className} p-1 border rounded border-gray-400 bg-purple-100 transform active:scale-95`}
                 style={{ ...style }}
