@@ -7,7 +7,6 @@ import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
 import Sliders from './components/Sliders';
 import ColorBgPicker from './components/ColorBgPicker';
-import bkgImage from './assets/noise-gen.png';
 
 function App() {
     const [seed, setSeed] = useAtom(RandomSeedAtom);
@@ -20,7 +19,7 @@ function App() {
             // style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}}
             style={
                 appBackgroundActive ?
-                    { backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge' }
+                    { backgroundImage: `url(${appBackgroundUrl}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge' }
                     :
                     { backgroundImage: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)` }
             }

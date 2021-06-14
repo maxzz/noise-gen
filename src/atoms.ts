@@ -116,6 +116,18 @@ export const ManualSizeAtom = atom({ w: 325, h: 300 });
 // Application background
 
 export const AppBackgroundUrlAtom = atom('');
+
 export const AppBackgroundActiveAtom = atom(
     (get) => !!get(AppBackgroundUrlAtom)
+);
+
+export const SetAppBackgroundUrlAtom = atom(
+    null,
+    (get, set, blob: Blob) => {
+        let current = get(AppBackgroundUrlAtom);
+        if (current) {
+            window.URL.revokeObjectURL(current);
+        }
+        set(AppBackgroundUrlAtom, window.URL.createObjectURL(blob));
+    }
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
-import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom } from '../atoms';
+import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom, SetAppBackgroundUrlAtom } from '../atoms';
 import { I2W, PresetData } from '../utils/types';
 import { WorkerEx } from '../hooks/useCanvasWorker';
 import PresetSizeIcons from './PresetSizeIcons';
@@ -86,8 +86,9 @@ function Sliders() {
     const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
     const [worker] = useAtom(RenderWorkerAtom);
     const [presets] = useAtom(PresetsAtom);
-    const [, SetRenderParams] = useAtom(RenderParamsAtom);
+    const [, setRenderParams] = useAtom(RenderParamsAtom);
     const [, removePreset] = useAtom(RemovePresetAtom);
+    const [, setAppBackgroundUrl] = useAtom(SetAppBackgroundUrlAtom);
 
     function appendNew() {
         worker?.postMessage({ type: 'get-preview', smallWidth: PRESET_W, smallHeight: PRESET_H } as I2W.GetPreview);
@@ -100,12 +101,19 @@ function Sliders() {
         }
     }
 
+    async function setAsBackground(event: React.MouseEvent) {
+        if (worker) {
+            let blob = await worker.getImage();
+            setAppBackgroundUrl(blob);
+        }
+    }
+
     function deleteItem(id: string) {
         removePreset(id);
     }
 
     function selectItem(item: PresetData) {
-        SetRenderParams(item.renderParams);
+        setRenderParams(item.renderParams);
     }
 
     return (
@@ -127,6 +135,18 @@ function Sliders() {
                 <div
                     className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
                         transform active:scale-[.97] cursor-pointer"
+                    title="Set canvas image as application background"
+                    onClick={setAsBackground}
+                >
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                    </svg>
+                </div>
+
+                {/* Preset + */}
+                <div
+                    className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
+                        transform active:scale-[.97] cursor-pointer"
                     title="Save preset"
                     onClick={appendNew}
                 >
@@ -134,7 +154,7 @@ function Sliders() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.6} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
                     </svg>
                 </div>
-                
+
                 {/* Preset save */}
                 <div
                     className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-400
