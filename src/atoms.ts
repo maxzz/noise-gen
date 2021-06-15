@@ -1,4 +1,6 @@
-import { atom } from 'jotai';
+import { atom, useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
+import { useEffect } from 'react';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
@@ -36,6 +38,7 @@ export const RandomSeedAtom = atom(
 //21.3,-22.55,161.52,0.1 good for default
 //6.3,6.3,321.7,1.96 good for default
 //40,40,17.45,0 good for default
+//21.3,-36.51,13.87,0.73 good for default
 
 
 export const GenParamsAtom = atom<GenParams>({
@@ -134,3 +137,27 @@ export const SetAppBackgroundUrlAtom = atom(
         set(AppBackgroundUrlAtom, window.URL.createObjectURL(blob));
     }
 );
+
+// Local storage
+
+const ConfigStorageAtom = atomWithStorage('noise-gen-xp10-525n', '');
+
+/* const ConfigWatchAtom = atom(
+    null,
+    (get, set, value) => {
+
+    }
+);
+*/
+
+/* function useAtomsStorage() {
+    const color = useAtom(ColorAtom);
+    const seed = useAtom(SeedAtom);
+    
+    useEffect(() => {
+    }, [ConfigStorageAtom])
+
+    useEffect(() => {
+    }, [color, seed]);
+}
+*/

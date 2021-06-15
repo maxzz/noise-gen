@@ -2,7 +2,7 @@
 
 Noise generator with web worker and OffscreenCanvas. So far, only Chromium browsers.
 
-Noise generator: xp10-525N (as "Experimental 21.05.25 Noise").
+Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
 
 <!-- ![](src/assets/previews/2021-06-14_16-56-56.png) -->
 
