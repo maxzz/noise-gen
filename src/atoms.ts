@@ -142,6 +142,10 @@ export const SetAppBackgroundUrlAtom = atom(
 
 const ConfigStorageAtom = atomWithStorage('noise-gen-xp10-525n', '');
 
+ConfigStorageAtom.onMount = (setAtom) => {
+    console.log('config mounted');
+}
+
 /* const ConfigWatchAtom = atom(
     null,
     (get, set, value) => {
@@ -154,6 +158,8 @@ export function useAtomsStorage() {
     const [color, setColor] = useAtom(ColorAtom);
     const [seed, setSeed] = useAtom(SeedAtom);
     const [configStorage, setConfigStorage] = useAtom(ConfigStorageAtom);
+
+    console.log(`useAtomsStorage(): seed: ${seed} storage: "${configStorage}"`);
     
     useEffect(() => {
         // get ConfigStorageAtom
