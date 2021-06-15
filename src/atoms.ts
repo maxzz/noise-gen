@@ -150,14 +150,33 @@ const ConfigStorageAtom = atomWithStorage('noise-gen-xp10-525n', '');
 );
 */
 
-/* function useAtomsStorage() {
-    const color = useAtom(ColorAtom);
-    const seed = useAtom(SeedAtom);
+export function useAtomsStorage() {
+    const [color, setColor] = useAtom(ColorAtom);
+    const [seed, setSeed] = useAtom(SeedAtom);
+    const [configStorage, setConfigStorage] = useAtom(ConfigStorageAtom);
     
     useEffect(() => {
-    }, [ConfigStorageAtom])
+        // get ConfigStorageAtom
+        try {
+            let current = configStorage && JSON.parse(configStorage);
+            console.log(`read storage: "${configStorage}"`);
+
+            if (current) {
+                current.color && setColor(current.color);
+                current.seed && setSeed(current.seed);
+            }
+        } catch (error) {
+            console.log('error', error);
+        }
+    }, []);
 
     useEffect(() => {
+        //set ConfigStorageAtom
+        let current = {
+            color,
+            seed,
+        }
+        console.log('write storage', current);
+        setConfigStorage(JSON.stringify(current));
     }, [color, seed]);
 }
-*/

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { useAtom } from 'jotai';
-import { AppBackgroundActiveAtom, AppBackgroundUrlAtom, RandomSeedAtom } from './atoms';
+import { AppBackgroundActiveAtom, AppBackgroundUrlAtom, RandomSeedAtom, useAtomsStorage } from './atoms';
 import Logo from './components/Logo';
 import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
@@ -12,6 +12,10 @@ function App() {
     const [seed, setSeed] = useAtom(RandomSeedAtom);
     const [appBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
     const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
+
+    //useAtomsStorage();
+    //console.log('app seed', seed);
+
     return (
         <div
             className="App h-screen flex flex-col items-center space-y-4 bg-purple-200"
