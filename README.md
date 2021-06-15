@@ -4,6 +4,8 @@ Noise with web workers play. Noise generator: xp10-525N (as experimental 21.05.2
 
 ![](src/assets/previews/2021-06-14_16-56-56.png)
 
+<img src="src/assets/previews/2021-06-14_16-56-56.png" width="400px" />
+
 #### Credits, references, links
 
 * [Nice noise](https://noiseisnice.com)
