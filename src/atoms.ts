@@ -138,7 +138,16 @@ export const SetAppBackgroundUrlAtom = atom(
     }
 );
 
+// TODO: generated texture size
+// TODO: edge less textures
+
 // Local storage
+
+type StorageConfig = {
+    renderParams: RenderParams;
+    predefined: RenderParams[]; // predefined presets (shown by click)
+    custom: RenderParams[]; // custom presets (always shown)
+};
 
 const ConfigStorageAtom = atomWithStorage('noise-gen-xp10-525n', '');
 

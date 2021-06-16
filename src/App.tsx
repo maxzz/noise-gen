@@ -13,8 +13,8 @@ function App() {
     const [appBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
     const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
 
-    useAtomsStorage();
-    console.log('app seed', seed);
+    // useAtomsStorage();
+    // console.log('app seed', seed);
 
     return (
         <div
