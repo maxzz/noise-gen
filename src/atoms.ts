@@ -86,6 +86,25 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
     }
 );
 
+type AppConfig = {
+    renderParams: RenderParams;
+    canvasBg: string;
+};
+
+const GenParamsBigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
+    canvasBg: 'transparent',
+    renderParams: {
+        seed: '13753932482421605',
+        color: '#887ed6',
+        genParams: {
+            n1: 6.3, // def 10
+            n2: 6.3, // def 10
+            distortion: 1, // def 2
+            dotDiameter: .1, // def 1
+        }
+    }
+});
+
 // Presets
 
 export const PresetsAtom = atom<PresetData[]>([]);
