@@ -4,10 +4,12 @@ import { WorkerEx } from './hooks/useCanvasWorker';
 import { GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
 
-// Offscreen canvas and Worker
+//#region Offscreen canvas and Worker
 
 export const OffscreenCanvasAtom = atom<OffscreenCanvas | null>(null);
 export const RenderWorkerAtom = atom<WorkerEx | null>(null);
+
+//#endregion Offscreen canvas and Worker
 
 // Current generator params
 
@@ -25,6 +27,7 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 //6.3,6.3,321.7,1.96 good for default
 //40,40,17.45,0 good for default
 //21.3,-36.51,13.87,0.73 good for default
+//{"canvasBg":"black","renderParams":{"seed":"43780585678984507","color":"rgba(212,133,30,1)","genParams":{"n1":31.95,"n2":-24.52,"distortion":106.94,"dotDiameter":0.5}}}
 
 const STORAGE_KEY = 'noise-gen-xp10-525n';
 
@@ -46,6 +49,8 @@ const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
         }
     }
 });
+
+//#region RenderParams, GenParams,  Current seed, color, and canvas color
 
 export const RenderParamsAtom = atom(
     (get) => get(AppConfigAtom).renderParams,
@@ -105,7 +110,9 @@ export const RandomSeedAtom = atom(
     (_get, set) => set(SeedAtom, `${Math.random()}`.replace(/^0\./, ''))
 );
 
-// Presets
+//#endregion RenderParams, GenParams,  Current seed, color, and canvas color
+
+//#region Presets
 
 export const PresetsAtom = atom<PresetData[]>([]);
 
@@ -137,9 +144,13 @@ export const CreateAppendPresetAtom = atom(
     }
 );
 
+//#endregion Presets
+
 // Canvas size
 
 export const ManualSizeAtom = atom({ w: 325, h: 300 });
+
+//#region Application background
 
 // Set Application background
 
@@ -159,3 +170,5 @@ export const AppBackgroundUrlAtom = atom(
 export const AppBackgroundActiveAtom = atom(
     (get) => !!get(_AppBackgroundUrlAtom)
 );
+
+//#endregion Application background
