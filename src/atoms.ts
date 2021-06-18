@@ -40,8 +40,11 @@ export const RandomSeedAtom = atom(
 //40,40,17.45,0 good for default
 //21.3,-36.51,13.87,0.73 good for default
 
+const STORAGE_KEY = 'noise-gen-xp10-525n';
 
-export const GenParamsAtom = atom<GenParams>({
+
+// const GenParamsAtom = atom<GenParams>({
+const GenParamsAtom = atomWithStorage<GenParams>(`${STORAGE_KEY}-params`, {
     n1: 6.3, // def 10
     n2: 6.3, // def 10
     distortion: 1, // def 2
@@ -149,11 +152,26 @@ type StorageConfig = {
     custom: RenderParams[]; // custom presets (always shown)
 };
 
-const ConfigStorageAtom = atomWithStorage('noise-gen-xp10-525n', '');
+var defaultStorage = {
+    getItem: function getItem(key: string) {
+        var storedValue = localStorage.getItem(key);
+
+        if (storedValue === null) {
+            throw new Error('no value stored');
+        }
+
+        return JSON.parse(storedValue);
+    },
+    setItem: function setItem(key: string, newValue: any) {
+        localStorage.setItem(key, JSON.stringify(newValue));
+    }
+};
+
+const ConfigStorageAtom = atomWithStorage(`${STORAGE_KEY}-old`, '');
 
 ConfigStorageAtom.onMount = (setAtom) => {
     console.log('config mounted');
-}
+};
 
 /* const ConfigWatchAtom = atom(
     null,
@@ -169,7 +187,7 @@ export function useAtomsStorage() {
     const [configStorage, setConfigStorage] = useAtom(ConfigStorageAtom);
 
     console.log(`useAtomsStorage(): seed: ${seed} storage: "${configStorage}"`);
-    
+
     useEffect(() => {
         // get ConfigStorageAtom
         try {
@@ -190,7 +208,7 @@ export function useAtomsStorage() {
         let current = {
             color,
             seed,
-        }
+        };
         console.log('write storage', current);
         setConfigStorage(JSON.stringify(current));
     }, [color, seed]);
