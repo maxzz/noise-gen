@@ -16,7 +16,7 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
     [x] Predefined image sizes (squere): 25%, 50%, 75%, 100%.
     [x] Allow to change the background of the rendering canvas.
     [x] Set the currnent canvas image as the page background.
-    [ ] Allow to clear the page background from the canvas image.
+    [x] Allow to clear the page background from the canvas image.
     [x] Add persistance of the current generated parameters.
     [ ] Add predefined presets (that exist always).
     [x] Persist the user defined presets.
