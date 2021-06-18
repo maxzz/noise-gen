@@ -44,8 +44,8 @@ const STORAGE_KEY = 'noise-gen-xp10-525n';
 
 
 // const GenParamsAtom = atom<GenParams>({
-/*
-const GenParamsAtom = atomWithStorage<GenParams>(`${STORAGE_KEY}-params`, {
+/**/
+const GenParamsAtom = atomWithStorage<GenParams>(`${STORAGE_KEY}-params2`, {
     n1: 6.3, // def 10
     n2: 6.3, // def 10
     distortion: 1, // def 2
@@ -86,8 +86,8 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
         set(GenParamsAtom, renderParams.genParams);
     }
 );
-*/
-
+/**/
+/*
 type AppConfig = {
     canvasBg: string;
     renderParams: RenderParams;
@@ -140,7 +140,7 @@ export const DotDiameterAtom = atom(
     (get) => get(GenParamsAtom).dotDiameter,
     (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), dotDiameter: update })
 );
-
+*/
 // Presets
 
 export const PresetsAtom = atom<PresetData[]>([]);
