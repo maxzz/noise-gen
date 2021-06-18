@@ -15,7 +15,7 @@ function App() {
     const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
     return (
         <div
-            className="App h-screen flex flex-col items-center space-y-4 bg-purple-200"
+            className="App relative h-screen flex flex-col items-center space-y-4 bg-purple-200"
             // style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}
             // style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}}
             style={
@@ -25,8 +25,10 @@ function App() {
                     { backgroundImage: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)` }
             }
         >
+            <button className="absolute top-0 left-0">Clear bkg</button>
+
             {/* Header */}
-            <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 shadow-sm select-none">
+            <div className="!mt-0 w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 shadow-sm select-none">
                 <div className="mx-4 flex-none w-10 h-10"><Logo /></div>
                 <div className="px-4 py-2 text-xl uppercase">Noise generator: xp10-525N</div>
             </div>
@@ -47,9 +49,21 @@ function App() {
                                 rounded border border-gray-500 text-gray-100 bg-purple-400
                                 uppercase transform active:scale-95"
                             style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
+                            title="Generate random seed"
                             onClick={setRansomSeed}
                         >
                             Random Seed
+                        </button>
+
+                        <button
+                            className="h-8 px-3 pb-0.5 text-sm
+                                rounded border border-gray-500 text-gray-100 bg-purple-400
+                                uppercase transform active:scale-95"
+                            style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
+                            title="Generate random preset"
+                            onClick={setRansomSeed}
+                        >
+                            Preset
                         </button>
 
                         {/* <button
@@ -69,7 +83,7 @@ function App() {
 
                 {/* Canvas */}
                 <div className="flex-1 mt-1">
-                    <Canvas />
+                    {/* <Canvas /> */}
                 </div>
             </div>
         </div>
