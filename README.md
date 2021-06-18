@@ -12,6 +12,7 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
     [x] Allow user-specified seeds and random seeds.
     [ ] Allow to generate ramdom preset (except the color).
     [x] Noise generator sliders.
+    [ ] Allow choose noise: noise2D, noise3D, noise4D,
     [x] Predefined image sizes (squere): 25%, 50%, 75%, 100%.
     [x] Allow to change the background of the rendering canvas.
     [x] Set the currnent canvas image as the page background.
