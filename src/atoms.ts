@@ -114,7 +114,7 @@ export const RandomSeedAtom = atom(
 
 //#region Presets
 
-export const PresetsAtom = atom<PresetData[]>([]);
+export const PresetsAtom = atomWithStorage<PresetData[]>(`${STORAGE_KEY}-presets`, []);
 
 const AppendPresetAtom = atom(
     null,
