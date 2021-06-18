@@ -44,6 +44,7 @@ const STORAGE_KEY = 'noise-gen-xp10-525n';
 
 
 // const GenParamsAtom = atom<GenParams>({
+/*
 const GenParamsAtom = atomWithStorage<GenParams>(`${STORAGE_KEY}-params`, {
     n1: 6.3, // def 10
     n2: 6.3, // def 10
@@ -85,10 +86,11 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
         set(GenParamsAtom, renderParams.genParams);
     }
 );
+*/
 
 type AppConfig = {
-    renderParams: RenderParams;
     canvasBg: string;
+    renderParams: RenderParams;
 };
 
 const GenParamsBigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
@@ -104,6 +106,40 @@ const GenParamsBigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
         }
     }
 });
+
+export const RenderParamsAtom = atom(
+    (get) => get(GenParamsBigAtom).renderParams,
+    (get, set, params: RenderParams) => {
+        set(GenParamsBigAtom, { ...get(GenParamsBigAtom), renderParams: params });
+    }
+);
+
+const GenParamsAtom = atom(
+    (get) => get(RenderParamsAtom).genParams,
+    (get, set, params: GenParams) => {
+        set(RenderParamsAtom, { ...get(RenderParamsAtom), genParams: params });
+    }
+);
+
+export const N1Atom = atom(
+    (get) => get(GenParamsAtom).n1,
+    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), n1: update })
+);
+
+export const N2Atom = atom(
+    (get) => get(GenParamsAtom).n2,
+    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), n2: update })
+);
+
+export const DistortionAtom = atom(
+    (get) => get(GenParamsAtom).distortion,
+    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), distortion: update })
+);
+
+export const DotDiameterAtom = atom(
+    (get) => get(GenParamsAtom).dotDiameter,
+    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), dotDiameter: update })
+);
 
 // Presets
 
