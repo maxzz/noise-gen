@@ -1,6 +1,5 @@
-import { atom, useAtom } from 'jotai';
+import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import { useEffect } from 'react';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
@@ -9,21 +8,6 @@ import uuid from './utils/uuid';
 
 export const OffscreenCanvasAtom = atom<OffscreenCanvas | null>(null);
 export const RenderWorkerAtom = atom<WorkerEx | null>(null);
-
-// Current seed and color
-
-/** /
-export const ColorAtom = atom<string>('#887ed6');
-export const ColorCanvasAtom = atom('transparent');
-export const SeedAtom = atom<string>('13753932482421605');
-
-export const RandomSeedAtom = atom(
-    (get) => get(SeedAtom),
-    (_get, set) => {
-        set(SeedAtom, `${Math.random()}`.replace(/^0\./, ''));
-    }
-);
-/**/
 
 // Current generator params
 
@@ -157,91 +141,21 @@ export const CreateAppendPresetAtom = atom(
 
 export const ManualSizeAtom = atom({ w: 325, h: 300 });
 
-// Application background
+// Set Application background
 
-export const AppBackgroundUrlAtom = atom('');
+const _AppBackgroundUrlAtom = atom('');
 
-export const AppBackgroundActiveAtom = atom(
-    (get) => !!get(AppBackgroundUrlAtom)
-);
-
-export const SetAppBackgroundUrlAtom = atom(
-    null,
+export const AppBackgroundUrlAtom = atom(
+    (get) => get(_AppBackgroundUrlAtom),
     (get, set, blob: Blob) => {
-        let current = get(AppBackgroundUrlAtom);
+        let current = get(_AppBackgroundUrlAtom);
         if (current) {
             window.URL.revokeObjectURL(current);
         }
-        set(AppBackgroundUrlAtom, window.URL.createObjectURL(blob));
+        set(_AppBackgroundUrlAtom, window.URL.createObjectURL(blob));
     }
 );
 
-// Local storage
-
-type StorageConfig = {
-    renderParams: RenderParams;
-    predefined: RenderParams[]; // predefined presets (shown by click)
-    custom: RenderParams[]; // custom presets (always shown)
-};
-
-var defaultStorage = {
-    getItem: function getItem(key: string) {
-        var storedValue = localStorage.getItem(key);
-
-        if (storedValue === null) {
-            throw new Error('no value stored');
-        }
-
-        return JSON.parse(storedValue);
-    },
-    setItem: function setItem(key: string, newValue: any) {
-        localStorage.setItem(key, JSON.stringify(newValue));
-    }
-};
-
-const ConfigStorageAtom = atomWithStorage(`${STORAGE_KEY}-old`, '');
-
-ConfigStorageAtom.onMount = (setAtom) => {
-    console.log('config mounted');
-};
-
-/* const ConfigWatchAtom = atom(
-    null,
-    (get, set, value) => {
-
-    }
+export const AppBackgroundActiveAtom = atom(
+    (get) => !!get(_AppBackgroundUrlAtom)
 );
-*/
-
-export function useAtomsStorage() {
-    const [color, setColor] = useAtom(ColorAtom);
-    const [seed, setSeed] = useAtom(SeedAtom);
-    const [configStorage, setConfigStorage] = useAtom(ConfigStorageAtom);
-
-    console.log(`useAtomsStorage(): seed: ${seed} storage: "${configStorage}"`);
-
-    useEffect(() => {
-        // get ConfigStorageAtom
-        try {
-            let current = configStorage && JSON.parse(configStorage);
-            console.log(`read storage: "${configStorage}"`);
-
-            if (current) {
-                current.color && setColor(current.color);
-                current.seed && setSeed(current.seed);
-            }
-        } catch (error) {
-            console.log('error', error);
-        }
-    }, []);
-
-    useEffect(() => {
-        //set ConfigStorageAtom
-        let current = {
-            color,
-            seed,
-        };
-        console.log('write storage', current);
-        setConfigStorage(JSON.stringify(current));
-    }, [color, seed]);
-}

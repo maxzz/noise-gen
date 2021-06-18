@@ -1,9 +1,8 @@
 import React from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
-import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom, SetAppBackgroundUrlAtom } from '../atoms';
+import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom, AppBackgroundUrlAtom } from '../atoms';
 import { I2W, PresetData } from '../utils/types';
-import { WorkerEx } from '../hooks/useCanvasWorker';
 import PresetSizeIcons from './PresetSizeIcons';
 
 function Slider({
@@ -88,7 +87,7 @@ function Sliders() {
     const [presets] = useAtom(PresetsAtom);
     const [, setRenderParams] = useAtom(RenderParamsAtom);
     const [, removePreset] = useAtom(RemovePresetAtom);
-    const [, setAppBackgroundUrl] = useAtom(SetAppBackgroundUrlAtom);
+    const [, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
 
     function appendNew() {
         worker?.postMessage({ type: 'get-preview', smallWidth: PRESET_W, smallHeight: PRESET_H } as I2W.GetPreview);

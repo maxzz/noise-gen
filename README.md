@@ -19,5 +19,6 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
 #### Roadmap
 
     [ ] Persist presets
+    [ ] Progress bar on slow reders
     [ ] Let the user choose the size of the generated texture
     [ ] Create seamless textures using 4x4 algorithm
