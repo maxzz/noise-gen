@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { useAtom } from 'jotai';
-import { AppBackgroundActiveAtom, AppBackgroundUrlAtom, RandomSeedAtom } from './atoms';
+import { AppBackgroundActiveAtom, AppBackgroundUrlAtom, RandomSeedAtom, SeedAtom } from './atoms';
 import Logo from './components/Logo';
 import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
@@ -9,7 +9,8 @@ import Sliders from './components/Sliders';
 import ColorBgPicker from './components/ColorBgPicker';
 
 function App() {
-    const [seed, setSeed] = useAtom(RandomSeedAtom);
+    const [seed, setSeed] = useAtom(SeedAtom);
+    const [, setRansomSeed] = useAtom(RandomSeedAtom);
     const [appBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
     const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
     return (
@@ -46,7 +47,7 @@ function App() {
                                 rounded border border-gray-500 text-gray-100 bg-purple-400
                                 uppercase transform active:scale-95"
                             style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
-                            onClick={setSeed}
+                            onClick={setRansomSeed}
                         >
                             Random Seed
                         </button>
