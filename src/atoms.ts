@@ -158,12 +158,12 @@ const _AppBackgroundUrlAtom = atom('');
 
 export const AppBackgroundUrlAtom = atom(
     (get) => get(_AppBackgroundUrlAtom),
-    (get, set, blob: Blob) => {
+    (get, set, blob: Blob | null) => {
         let current = get(_AppBackgroundUrlAtom);
         if (current) {
             window.URL.revokeObjectURL(current);
         }
-        set(_AppBackgroundUrlAtom, window.URL.createObjectURL(blob));
+        set(_AppBackgroundUrlAtom, blob ? window.URL.createObjectURL(blob) : '');
     }
 );
 

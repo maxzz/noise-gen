@@ -24,7 +24,7 @@ function Logo() {
             <div className="absolute left-0 -top-1 w-10 h-10 transform rotate-45 scale-75 translate-x-6">
                 <Cube />
             </div>
-            <div className="absolute left-0 -top-1 w-10 h-10 transform rotate-[196deg] scale-75">
+            <div className="absolute left-0 -top-1 w-10 h-10 transform rotate-12 scale-75">
                 <Cube />
             </div>
         </div>
