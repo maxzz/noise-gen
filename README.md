@@ -15,3 +15,9 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
 * [Lea Verou - CSS3 Patterns Gallery](https://projects.verou.me/css3patterns/)
 * [React cool dimensions](https://react-cool-dimensions.netlify.app/)
 * [Sliders from Password Generator](codepen.io/maxzz/pen/LYZJmbb) [by Sikriti Dakua](https://codepen.io/dev_loop/pen/vYYxvbz)
+
+#### Roadmap
+
+    [ ] Persist presets
+    [ ] Let the user choose the size of the generated texture
+    [ ] Create seamless textures using 4x4 algorithm

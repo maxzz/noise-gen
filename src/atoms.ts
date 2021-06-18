@@ -44,53 +44,6 @@ export const RandomSeedAtom = atom(
 
 const STORAGE_KEY = 'noise-gen-xp10-525n';
 
-
-// const GenParamsAtom = atom<GenParams>({
-/** /
-const GenParamsAtom = atomWithStorage<GenParams>(`${STORAGE_KEY}-params2`, {
-    n1: 6.3, // def 10
-    n2: 6.3, // def 10
-    distortion: 1, // def 2
-    dotDiameter: .1, // def 1
-});
-
-export const N1Atom = atom(
-    (get) => get(GenParamsAtom).n1,
-    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), n1: update })
-);
-
-export const N2Atom = atom(
-    (get) => get(GenParamsAtom).n2,
-    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), n2: update })
-);
-
-export const DistortionAtom = atom(
-    (get) => get(GenParamsAtom).distortion,
-    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), distortion: update })
-);
-
-export const DotDiameterAtom = atom(
-    (get) => get(GenParamsAtom).dotDiameter,
-    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), dotDiameter: update })
-);
-
-export const RenderParamsAtom = atom<RenderParams, RenderParams>(
-    (get) => {
-        return {
-            seed: get(SeedAtom),
-            color: get(ColorAtom),
-            genParams: get(GenParamsAtom)
-        };
-    },
-    (get, set, renderParams: RenderParams) => {
-        set(ColorAtom, renderParams.color);
-        set(SeedAtom, renderParams.seed);
-        set(GenParamsAtom, renderParams.genParams);
-    }
-);
-/**/
-
-/**/
 type AppConfig = {
     canvasBg: string;
     renderParams: RenderParams;
@@ -116,6 +69,8 @@ export const RenderParamsAtom = atom(
         set(AppConfigAtom, { ...get(AppConfigAtom), renderParams: params });
     }
 );
+
+// GenParams
 
 const GenParamsAtom = atom(
     (get) => get(RenderParamsAtom).genParams,
@@ -143,9 +98,8 @@ export const DotDiameterAtom = atom(
     (get) => get(GenParamsAtom).dotDiameter,
     (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), dotDiameter: update })
 );
-/**/
 
-// Current seed and color
+// Current seed, color, and canvas color
 
 export const ColorAtom = atom(
     (get) => get(RenderParamsAtom).color,
@@ -154,9 +108,7 @@ export const ColorAtom = atom(
 
 export const ColorCanvasAtom = atom(
     (get) => get(AppConfigAtom).canvasBg,
-    (get, set, color: string) => {
-        set(AppConfigAtom, { ...get(AppConfigAtom), canvasBg: color });
-    }
+    (get, set, color: string) => set(AppConfigAtom, { ...get(AppConfigAtom), canvasBg: color })
 );
 
 export const SeedAtom = atom(
@@ -166,9 +118,7 @@ export const SeedAtom = atom(
 
 export const RandomSeedAtom = atom(
     (get) => get(SeedAtom),
-    (_get, set) => {
-        set(SeedAtom, `${Math.random()}`.replace(/^0\./, ''));
-    }
+    (_get, set) => set(SeedAtom, `${Math.random()}`.replace(/^0\./, ''))
 );
 
 // Presets
@@ -225,9 +175,6 @@ export const SetAppBackgroundUrlAtom = atom(
         set(AppBackgroundUrlAtom, window.URL.createObjectURL(blob));
     }
 );
-
-// TODO: generated texture size
-// TODO: edge less textures
 
 // Local storage
 
