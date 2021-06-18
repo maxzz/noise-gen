@@ -12,6 +12,7 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 
 // Current seed and color
 
+/** /
 export const ColorAtom = atom<string>('#887ed6');
 export const ColorCanvasAtom = atom('transparent');
 export const SeedAtom = atom<string>('13753932482421605');
@@ -22,6 +23,7 @@ export const RandomSeedAtom = atom(
         set(SeedAtom, `${Math.random()}`.replace(/^0\./, ''));
     }
 );
+/**/
 
 // Current generator params
 
@@ -44,7 +46,7 @@ const STORAGE_KEY = 'noise-gen-xp10-525n';
 
 
 // const GenParamsAtom = atom<GenParams>({
-/**/
+/** /
 const GenParamsAtom = atomWithStorage<GenParams>(`${STORAGE_KEY}-params2`, {
     n1: 6.3, // def 10
     n2: 6.3, // def 10
@@ -87,13 +89,14 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
     }
 );
 /**/
-/*
+
+/**/
 type AppConfig = {
     canvasBg: string;
     renderParams: RenderParams;
 };
 
-const GenParamsBigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
+const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
     canvasBg: 'transparent',
     renderParams: {
         seed: '13753932482421605',
@@ -108,9 +111,9 @@ const GenParamsBigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
 });
 
 export const RenderParamsAtom = atom(
-    (get) => get(GenParamsBigAtom).renderParams,
+    (get) => get(AppConfigAtom).renderParams,
     (get, set, params: RenderParams) => {
-        set(GenParamsBigAtom, { ...get(GenParamsBigAtom), renderParams: params });
+        set(AppConfigAtom, { ...get(AppConfigAtom), renderParams: params });
     }
 );
 
@@ -140,7 +143,34 @@ export const DotDiameterAtom = atom(
     (get) => get(GenParamsAtom).dotDiameter,
     (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), dotDiameter: update })
 );
-*/
+/**/
+
+// Current seed and color
+
+export const ColorAtom = atom(
+    (get) => get(RenderParamsAtom).color,
+    (get, set, color: string) => set(RenderParamsAtom, { ...get(RenderParamsAtom), color: color })
+);
+
+export const ColorCanvasAtom = atom(
+    (get) => get(AppConfigAtom).canvasBg,
+    (get, set, color: string) => {
+        set(AppConfigAtom, { ...get(AppConfigAtom), canvasBg: color });
+    }
+);
+
+export const SeedAtom = atom(
+    (get) => get(RenderParamsAtom).seed,
+    (get, set, seed: string) => set(RenderParamsAtom, { ...get(RenderParamsAtom), seed: seed })
+);
+
+export const RandomSeedAtom = atom(
+    (get) => get(SeedAtom),
+    (_get, set) => {
+        set(SeedAtom, `${Math.random()}`.replace(/^0\./, ''));
+    }
+);
+
 // Presets
 
 export const PresetsAtom = atom<PresetData[]>([]);

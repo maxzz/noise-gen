@@ -34,7 +34,7 @@ function RunStuff() {
     let renderParams: RenderParams = {} as RenderParams;
 
     runtime.onmessage = (event: I2W.Message) => {
-        console.log('Worker got', event.data);
+        //console.log('Worker got', event.data);
 
         if (event.data.type === 'init') {
             canvasElm = event.data.canvas as OffscreenCanvas;
