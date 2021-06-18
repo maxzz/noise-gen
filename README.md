@@ -17,8 +17,15 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
 * [Sliders from Password Generator](codepen.io/maxzz/pen/LYZJmbb) [by Sikriti Dakua](https://codepen.io/dev_loop/pen/vYYxvbz)
 
 #### Roadmap
-
-    [ ] Persist presets
+    [x] Random and the user typed seeds
+    [x] Noise generator sliders
+    [x] Predefined image sizes (squere): 25%, 50%, 75%, 100%
+    [x] Allow to change the background of the rendering canvas
+    [x] Set the currnent canvas image as the page background
+    [ ] Allow to clear the page background from the canvas image
+    [x] Add persistance of the current generated parameters
+    [ ] Add predefined presets (that exist always)
+    [x] Persist the user defined presets
     [ ] Progress bar on slow reders
     [ ] Let the user choose the size of the generated texture
     [ ] Create seamless textures using 4x4 algorithm
