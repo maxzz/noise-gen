@@ -20,11 +20,11 @@ function Cube() {
 
 function Logo() {
     return (
-        <div className="relative w-full h-full active:animate-bounce">
-            <div className="absolute left-0 top-0 w-full h-full transform rotate-45 scale-75 translate-x-6">
+        <div className="relative h-8 w-16 active:animate-bounce">
+            <div className="absolute left-0 -top-1 w-10 h-10 transform rotate-45 scale-75 translate-x-6">
                 <Cube />
             </div>
-            <div className="absolute left-0 top-0 w-full h-full transform rotate-12 scale-75">
+            <div className="absolute left-0 -top-1 w-10 h-10 transform rotate-[196deg] scale-75">
                 <Cube />
             </div>
         </div>

@@ -26,17 +26,18 @@ function App() {
             }
         >
             {/* Header */}
-            <div className="relative w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 shadow-sm select-none">
-                <div className="mx-4 flex-none w-10 h-10"><Logo /></div>
-                <div className="px-4 py-2 text-xl uppercase">Noise generator: xp10-525N</div>
-
-                <div className="absolute -bottom-6 left-1">
-                    <button className="">Clear bkg</button>
+            <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 shadow-sm select-none">
+                <div className="mx-4 flex-none flex items-center justify-center">
+                    <Logo />
+                    <div className="">
+                        <button className="ml-2 px-2 border rounded border-gray-400 uppercase">Clear bkg</button>
+                    </div>
                 </div>
+                <div className="px-4 py-2 text-xl uppercase"><span>Noise generator: xp10-525N</span></div>
             </div>
 
             <div className="relative max-w-md w-full flex-1 flex flex-col items-center">
-            
+
                 {/* Controls */}
                 <div className="w-full flex flex-col space-y-1">
                     <div className="flex space-x-1">
