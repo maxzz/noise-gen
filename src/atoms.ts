@@ -126,10 +126,10 @@ export const GENPARAMS: {min: GenParams, max: GenParams} = {
         n2: 40,
         distortion: 400,
         dotDiameter: 50,
-    }
+    },
 }
 
-export const GeneratePreset = atom(
+export const GeneratePresetAtom = atom(
     null,
     (get, set) => {
         set(GenParamsAtom, {

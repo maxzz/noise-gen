@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { useAtom } from 'jotai';
-import { AppBackgroundActiveAtom, AppBackgroundUrlAtom, RandomSeedAtom, SeedAtom } from './atoms';
+import { AppBackgroundActiveAtom, AppBackgroundUrlAtom, GeneratePresetAtom, RandomSeedAtom, SeedAtom } from './atoms';
 import Logo from './components/Logo';
 import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
@@ -11,6 +11,7 @@ import ColorBgPicker from './components/ColorBgPicker';
 function App() {
     const [seed, setSeed] = useAtom(SeedAtom);
     const [, setRansomSeed] = useAtom(RandomSeedAtom);
+    const [, generatePreset] = useAtom(GeneratePresetAtom);
     const [appBackgroundUrl, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
     const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
     return (
@@ -74,7 +75,7 @@ function App() {
                                 uppercase transform active:scale-95"
                             style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
                             title="Generate random preset"
-                            onClick={setRansomSeed}
+                            onClick={generatePreset}
                         >
                             Preset
                         </button>
