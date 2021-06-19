@@ -55,7 +55,11 @@ const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
 export const RenderParamsAtom = atom(
     (get) => get(AppConfigAtom).renderParams,
     (get, set, params: RenderParams) => {
-        set(AppConfigAtom, { ...get(AppConfigAtom), renderParams: { ...params } });
+        //set(AppConfigAtom, { ...get(AppConfigAtom), renderParams: { ...params } });
+
+        set(SeedAtom, params.seed);
+        set(ColorAtom, params.color);
+        set(GenParamsAtom, params.genParams);
     }
 );
 
