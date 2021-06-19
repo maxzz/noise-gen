@@ -55,7 +55,7 @@ const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
 export const RenderParamsAtom = atom(
     (get) => get(AppConfigAtom).renderParams,
     (get, set, params: RenderParams) => {
-        set(AppConfigAtom, { ...get(AppConfigAtom), renderParams: params });
+        set(AppConfigAtom, { ...get(AppConfigAtom), renderParams: { ...params } });
     }
 );
 
@@ -64,7 +64,7 @@ export const RenderParamsAtom = atom(
 const GenParamsAtom = atom(
     (get) => get(RenderParamsAtom).genParams,
     (get, set, params: GenParams) => {
-        set(RenderParamsAtom, { ...get(RenderParamsAtom), genParams: params });
+        set(RenderParamsAtom, { ...get(RenderParamsAtom), genParams: { ...params } });
     }
 );
 

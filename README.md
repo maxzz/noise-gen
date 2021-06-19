@@ -10,14 +10,16 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
 
 #### Project roadmap
 
-    [x] Main controls
+    [ ] Main controls
         [x] Allow user-specified seeds and random seeds.
-        [x] Allow to generate ramdom preset (except the color).s
         [x] Noise generator sliders.
+        [x] Allow to generate ramdom preset (except the color). (button animation?)
+        [ ] Generated presets history.
     [ ] Additional controls
         [x] Allow the user to select the color of pixels on the canvas.
         [x] Allow to change the background of the rendering canvas: bkack, white, and transparent.
         [x] Predefined image sizes (squere): 25%, 50%, 75%, 100%.
+        [ ] Allow the user to customize the predefined image sizes.
         [ ] Allow choose noise: noise2D, noise3D, noise4D.
         [x] Add current preset to presets.
         [x] Download image as PNG.
