@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
-import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom, AppBackgroundUrlAtom } from '../atoms';
+import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom, AppBackgroundUrlAtom, GENPARAMS } from '../atoms';
 import { I2W, PresetData } from '../utils/types';
 import PresetSizeIcons from './PresetSizeIcons';
 
@@ -117,10 +117,10 @@ function Sliders() {
 
     return (
         <div className="py-2 bg-purple-100 border rounded border-gray-400">
-            <Slider min={-40} max={40} value={n1} onChange={setN1} label="Noise 1" />
-            <Slider min={-40} max={40} value={n2} onChange={setN2} label="Noise 2" />
-            <Slider min={0} max={400} value={distortion} onChange={setDistortion} label="Distortion" />
-            <Slider min={0} max={50} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
+            <Slider min={GENPARAMS.min.n1} max={GENPARAMS.max.n1} value={n1} onChange={setN1} label="Noise 1" />
+            <Slider min={GENPARAMS.min.n2} max={GENPARAMS.max.n2} value={n2} onChange={setN2} label="Noise 2" />
+            <Slider min={GENPARAMS.min.distortion} max={GENPARAMS.max.distortion} value={distortion} onChange={setDistortion} label="Distortion" />
+            <Slider min={GENPARAMS.min.dotDiameter} max={GENPARAMS.max.dotDiameter} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
 
             {/* Actions */}
             <div className="px-2 py-2 flex space-x-2">
