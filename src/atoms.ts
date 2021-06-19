@@ -68,7 +68,12 @@ export const RenderParamsAtom = atom(
 const GenParamsAtom = atom(
     (get) => get(RenderParamsAtom).genParams,
     (get, set, params: GenParams) => {
-        set(RenderParamsAtom, { ...get(RenderParamsAtom), genParams: { ...params } });
+        //set(RenderParamsAtom, { ...get(RenderParamsAtom), genParams: { ...params } });
+
+        let ac = get(AppConfigAtom);
+        ac.renderParams.genParams = params;
+
+        set(AppConfigAtom, ac);
     }
 );
 
