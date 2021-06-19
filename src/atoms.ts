@@ -121,12 +121,6 @@ export const GeneratePresetAtom = atom(
         set(N2Atom, Random(GENPARAMS.min.n2, GENPARAMS.gen.n2));
         set(DistortionAtom, Random(GENPARAMS.min.distortion, GENPARAMS.gen.distortion));
         set(DotDiameterAtom, Random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter));
-        // set(GenParamsAtom, {
-        //     n1: Random(GENPARAMS.min.n1, GENPARAMS.gen.n1),
-        //     n2: Random(GENPARAMS.min.n2, GENPARAMS.gen.n2),
-        //     distortion: Random(GENPARAMS.min.distortion, GENPARAMS.gen.distortion),
-        //     dotDiameter: Random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter),
-        // });
     }
 );
 
