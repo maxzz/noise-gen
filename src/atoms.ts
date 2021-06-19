@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
+import { atomWithStorage, selectAtom } from 'jotai/utils';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
@@ -52,16 +52,18 @@ const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
 
 //#region RenderParams, GenParams,  Current seed, color, and canvas color
 
-export const RenderParamsAtom = atom(
-    (get) => get(AppConfigAtom).renderParams,
-    (get, set, params: RenderParams) => {
-        set(AppConfigAtom, { ...get(AppConfigAtom), renderParams: { ...params } });
+export const RenderParamsAtom = selectAtom(AppConfigAtom, (config) => config.renderParams);
 
-        // set(SeedAtom, params.seed);
-        // set(ColorAtom, params.color);
-        // set(GenParamsAtom, params.genParams);
-    }
-);
+// export const RenderParamsAtom = atom(
+//     (get) => get(AppConfigAtom).renderParams,
+//     (get, set, params: RenderParams) => {
+//         set(AppConfigAtom, { ...get(AppConfigAtom), renderParams: { ...params } });
+
+//         // set(SeedAtom, params.seed);
+//         // set(ColorAtom, params.color);
+//         // set(GenParamsAtom, params.genParams);
+//     }
+// );
 
 // GenParams
 
