@@ -12,7 +12,7 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
 
     [ ] Main controls
         [x] Allow user-specified seeds and random seeds.
-        [ ] Allow to generate ramdom preset (except the color).
+        [x] Allow to generate ramdom preset (except the color).s
         [x] Noise generator sliders.
     [ ] Additional controls
         [ ] Select canvas color

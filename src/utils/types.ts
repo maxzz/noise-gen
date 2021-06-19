@@ -34,7 +34,7 @@ export const GENPARAMS: GenParamsLimits = {
         n1: 40,
         n2: 40,
         distortion: 400,
-        dotDiameter: 2,
+        dotDiameter: 1,
     },
 };
 
