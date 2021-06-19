@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { WorkerEx } from './hooks/useCanvasWorker';
-import { GenParams, I4W, PresetData, RenderParams } from './utils/types';
+import { GENPARAMS, GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
 
 //#region Offscreen canvas and Worker
@@ -114,29 +114,14 @@ function Random(min: number, max: number): number {
     return Math.random() * (max - min) + min;
 }
 
-export const GENPARAMS: {min: GenParams, max: GenParams} = {
-    min: {
-        n1: -40,
-        n2: -40,
-        distortion: 0,
-        dotDiameter: 0,
-    },
-    max: {
-        n1: 40,
-        n2: 40,
-        distortion: 400,
-        dotDiameter: 50,
-    },
-}
-
 export const GeneratePresetAtom = atom(
     null,
-    (get, set) => {
+    (_get, set) => {
         set(GenParamsAtom, {
             n1: Random(GENPARAMS.min.n1, GENPARAMS.max.n1),
             n2: Random(GENPARAMS.min.n2, GENPARAMS.max.n2),
             distortion: Random(GENPARAMS.min.distortion, GENPARAMS.max.distortion),
-            dotDiameter: Random(GENPARAMS.min.dotDiameter, GENPARAMS.max.dotDiameter),
+            dotDiameter: Random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter),
         });
     }
 );

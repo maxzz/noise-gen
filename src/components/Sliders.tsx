@@ -1,8 +1,8 @@
 import React from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
-import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom, AppBackgroundUrlAtom, GENPARAMS } from '../atoms';
-import { I2W, PresetData } from '../utils/types';
+import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom, AppBackgroundUrlAtom } from '../atoms';
+import { GENPARAMS, I2W, PresetData } from '../utils/types';
 import PresetSizeIcons from './PresetSizeIcons';
 
 function Slider({
