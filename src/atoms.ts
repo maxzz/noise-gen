@@ -72,12 +72,26 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
 
 // GenParams
 
-export const GenParamsAtom = atom<GenParams>({
+export const GenParamsRawAtom = atom<GenParams>({
     n1: 6.3, // def 10
     n2: 6.3, // def 10
     distortion: 1, // def 2
     dotDiameter: .1, // def 1
 });
+
+export const GenParamsAtom = atom(
+    (get) => get(GenParamsRawAtom),
+    (_get, set, params: GenParams) => {
+        console.log('store params', params);
+        set(GenParamsRawAtom, { ...params });
+    }
+);
+// export const GenParamsAtom = atom<GenParams>({
+//     n1: 6.3, // def 10
+//     n2: 6.3, // def 10
+//     distortion: 1, // def 2
+//     dotDiameter: .1, // def 1
+// });
 
 export const N1Atom = atom(
     (get) => get(GenParamsAtom).n1,
@@ -116,10 +130,18 @@ function Random(min: number, max: number): number {
 export const GeneratePresetAtom = atom(
     null,
     (_get, set) => {
-        set(N1Atom, Random(GENPARAMS.min.n1, GENPARAMS.gen.n1));
-        set(N2Atom, Random(GENPARAMS.min.n2, GENPARAMS.gen.n2));
-        set(DistortionAtom, Random(GENPARAMS.min.distortion, GENPARAMS.gen.distortion));
-        set(DotDiameterAtom, Random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter));
+        let newSet: GenParams = {
+            n1: Random(GENPARAMS.min.n1, GENPARAMS.gen.n1),
+            n2: Random(GENPARAMS.min.n2, GENPARAMS.gen.n2),
+            distortion: Random(GENPARAMS.min.distortion, GENPARAMS.gen.distortion),
+            dotDiameter: Random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter),
+        };
+        set(GenParamsAtom, newSet);
+
+        // set(N1Atom, Random(GENPARAMS.min.n1, GENPARAMS.gen.n1));
+        // set(N2Atom, Random(GENPARAMS.min.n2, GENPARAMS.gen.n2));
+        // set(DistortionAtom, Random(GENPARAMS.min.distortion, GENPARAMS.gen.distortion));
+        // set(DotDiameterAtom, Random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter));
     }
 );
 
