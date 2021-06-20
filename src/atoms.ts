@@ -52,26 +52,38 @@ const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
 
 //#region RenderParams, GenParams,  Current seed, color, and canvas color
 
-export const RenderParamsAtom = selectAtom(AppConfigAtom, (config) => config.renderParams);
+//export const RenderParamsAtom = selectAtom(AppConfigAtom, (config) => config.renderParams);
 
-// export const RenderParamsAtom = atom(
-//     (get) => get(AppConfigAtom).renderParams,
-//     (get, set, params: RenderParams) => {
-//         set(AppConfigAtom, { ...get(AppConfigAtom), renderParams: { ...params } });
+export const RenderParamsAtom = atom(
+    (get) => {
+        let v= get(AppConfigAtom).renderParams;
+        console.log('RenderParamsAtom read', v);
+        return v;
+    },
+    (get, set, params: RenderParams) => {
+        console.log('RenderParamsAtom write', params);
 
-//         // set(SeedAtom, params.seed);
-//         // set(ColorAtom, params.color);
-//         // set(GenParamsAtom, params.genParams);
-//     }
-// );
+        set(AppConfigAtom, { ...get(AppConfigAtom), renderParams: params });
+
+        // set(SeedAtom, params.seed);
+        // set(ColorAtom, params.color);
+        // set(GenParamsAtom, params.genParams);
+    }
+);
 
 // GenParams
 
 const GenParamsAtom = atom(
-    (get) => get(RenderParamsAtom).genParams,
+    (get) => {
+        let v = get(RenderParamsAtom).genParams;
+        console.log('GenParamsAtom read', v);
+        return v;
+    },
     //(get) => get(AppConfigAtom).renderParams.genParams,
     (get, set, params: GenParams) => {
-        set(RenderParamsAtom, { ...get(RenderParamsAtom), genParams: { ...params } });
+        console.log('GenParamsAtom write', params);
+
+        set(RenderParamsAtom, { ...get(RenderParamsAtom), genParams: params });
 
         // let ac = get(AppConfigAtom);
         // ac.renderParams.genParams = params;
@@ -80,13 +92,29 @@ const GenParamsAtom = atom(
 );
 
 export const N1Atom = atom(
-    (get) => get(GenParamsAtom).n1,
-    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), n1: update })
+    (get) => {
+        let v = get(GenParamsAtom).n1;
+        console.log('N1Atom read', v);
+        return v;
+    },
+    (get, set, update: number) => {
+        console.log('N1Atom write', update);
+
+        set(GenParamsAtom, { ...get(GenParamsAtom), n1: update });
+    }
 );
 
 export const N2Atom = atom(
-    (get) => get(GenParamsAtom).n2,
-    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), n2: update })
+    (get) => {
+        let v = get(GenParamsAtom).n2;
+        console.log('N2Atom read', v);
+        return v;
+    },
+    (get, set, update: number) => {
+        console.log('N1Atom write', update);
+
+        set(GenParamsAtom, { ...get(GenParamsAtom), n2: update });
+    }
 );
 
 export const DistortionAtom = atom(
@@ -112,8 +140,15 @@ export const ColorCanvasAtom = atom(
 );
 
 export const SeedAtom = atom(
-    (get) => get(RenderParamsAtom).seed,
-    (get, set, seed: string) => set(RenderParamsAtom, { ...get(RenderParamsAtom), seed: seed })
+    (get) => {
+        let v = get(RenderParamsAtom).seed;
+        console.log('SeedAtom read', v);
+        return v;
+    },
+    (get, set, seed: string) => {
+        console.log('SeedAtom write', seed);
+        set(RenderParamsAtom, { ...get(RenderParamsAtom), seed: seed })
+    }
 );
 
 export const RandomSeedAtom = atom(
