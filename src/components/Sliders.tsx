@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
-import { DistortionAtom, DotDiameterAtom, N1Atom, N2Atom, PresetsAtom, RemovePresetAtom, RenderParamsAtom, RenderWorkerAtom, AppBackgroundUrlAtom } from '../atoms';
+import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, RenderWorkerAtom, PresetsAtom, RenderParamsAtom, RemovePresetAtom, AppBackgroundUrlAtom } from '../atoms';
 import { GENPARAMS, I2W, PresetData } from '../utils/types';
 import PresetSizeIcons from './PresetSizeIcons';
 
@@ -114,6 +114,8 @@ function Sliders() {
     function selectItem(item: PresetData) {
         setRenderParams(item.renderParams);
     }
+
+    console.log('sliders');
 
     return (
         <div className="py-2 bg-purple-100 border rounded border-gray-400">

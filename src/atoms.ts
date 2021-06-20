@@ -82,6 +82,7 @@ export const ColorCanvasAtom = atom(
 );
 */
 
+//export const SeedAtom = focusAtom(RenderParamsAtom, (optic) => optic.prop('seed'));
 export const SeedAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('seed'));
 /** /
 export const SeedAtom = atom(
@@ -99,7 +100,11 @@ export const SeedAtom = atom(
 
 export const RandomSeedAtom = atom(
     (get) => get(SeedAtom),
-    (_get, set) => set(SeedAtom, `${Math.random()}`.replace(/^0\./, ''))
+    (_get, set) => {
+        let s = `${Math.random()}`.replace(/^0\./, '');
+        console.log('random seed', s);
+        set(SeedAtom, s);
+    }
 );
 
 function Random(min: number, max: number): number {
