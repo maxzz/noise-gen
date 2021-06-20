@@ -14,6 +14,8 @@ function App() {
     const [, generatePreset] = useAtom(GeneratePresetAtom);
     const [appBackgroundUrl, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
     const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
+    console.log('seed', seed);
+    
     return (
         <div
             className="App h-screen flex flex-col items-center space-y-4 bg-purple-200"

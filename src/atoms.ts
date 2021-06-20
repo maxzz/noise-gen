@@ -37,7 +37,7 @@ type AppConfig = {
     renderParams: RenderParams;
 };
 
-const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
+export const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
     canvasBg: 'transparent',
     renderParams: {
         seed: '13753932482421605',
@@ -66,18 +66,36 @@ export const DotDiameterAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('r
 
 // Current seed, color, and canvas color
 
+export const ColorAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('color'));
+/** /
 export const ColorAtom = atom(
     (get) => get(RenderParamsAtom).color,
     (get, set, color: string) => set(RenderParamsAtom, { ...get(RenderParamsAtom), color: color })
 );
+/**/
 
+export const ColorCanvasAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('canvasBg'));
+/*
 export const ColorCanvasAtom = atom(
     (get) => get(AppConfigAtom).canvasBg,
     (get, set, color: string) => set(AppConfigAtom, { ...get(AppConfigAtom), canvasBg: color })
 );
+*/
 
-//export const SeedAtom = focusAtom(RenderParamsAtom, (optic) => optic.prop('seed'));
 export const SeedAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('seed'));
+/** /
+export const SeedAtom = atom(
+    (get) => {
+        let v = get(RenderParamsAtom).seed;
+        console.log('SeedAtom read', v);
+        return v;
+    },
+    (get, set, seed: string) => {
+        console.log('SeedAtom write', seed);
+        set(RenderParamsAtom, { ...get(RenderParamsAtom), seed: seed });
+    }
+);
+/**/
 
 export const RandomSeedAtom = atom(
     (get) => get(SeedAtom),
