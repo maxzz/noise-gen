@@ -83,7 +83,7 @@ export const ColorCanvasAtom = atom(
 */
 
 //export const SeedAtom = focusAtom(RenderParamsAtom, (optic) => optic.prop('seed'));
-export const SeedAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('seed'));
+//export const SeedAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('seed'));
 /** /
 export const SeedAtom = atom(
     (get) => {
@@ -97,6 +97,7 @@ export const SeedAtom = atom(
     }
 );
 /**/
+export const SeedAtom = atom('');
 
 export const RandomSeedAtom = atom(
     (get) => get(SeedAtom),
