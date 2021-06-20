@@ -76,17 +76,8 @@ export const ColorCanvasAtom = atom(
     (get, set, color: string) => set(AppConfigAtom, { ...get(AppConfigAtom), canvasBg: color })
 );
 
-export const SeedAtom = atom(
-    (get) => {
-        let v = get(RenderParamsAtom).seed;
-        console.log('SeedAtom read', v);
-        return v;
-    },
-    (get, set, seed: string) => {
-        console.log('SeedAtom write', seed);
-        set(RenderParamsAtom, { ...get(RenderParamsAtom), seed: seed });
-    }
-);
+//export const SeedAtom = focusAtom(RenderParamsAtom, (optic) => optic.prop('seed'));
+export const SeedAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('seed'));
 
 export const RandomSeedAtom = atom(
     (get) => get(SeedAtom),
