@@ -1,5 +1,6 @@
 import { atom } from 'jotai';
-import { atomWithStorage, selectAtom } from 'jotai/utils';
+import { atomWithStorage } from 'jotai/utils';
+import {focusAtom} from 'jotai/optics';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
@@ -54,6 +55,8 @@ const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
 
 //export const RenderParamsAtom = selectAtom(AppConfigAtom, (config) => config.renderParams);
 
+export const RenderParamsAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams'));
+/*
 export const RenderParamsAtom = atom(
     (get) => {
         let v= get(AppConfigAtom).renderParams;
@@ -70,9 +73,11 @@ export const RenderParamsAtom = atom(
         // set(GenParamsAtom, params.genParams);
     }
 );
-
+*/
 // GenParams
 
+export const GenParamsAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('genParams'));
+/*
 const GenParamsAtom = atom(
     (get) => {
         let v = get(RenderParamsAtom).genParams;
@@ -90,7 +95,10 @@ const GenParamsAtom = atom(
         // set(AppConfigAtom, ac);
     }
 );
+*/
 
+export const N1Atom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('genParams').prop('n1'));
+/*
 export const N1Atom = atom(
     (get) => {
         let v = get(GenParamsAtom).n1;
@@ -103,7 +111,7 @@ export const N1Atom = atom(
         set(GenParamsAtom, { ...get(GenParamsAtom), n1: update });
     }
 );
-
+*/
 export const N2Atom = atom(
     (get) => {
         let v = get(GenParamsAtom).n2;
@@ -111,7 +119,7 @@ export const N2Atom = atom(
         return v;
     },
     (get, set, update: number) => {
-        console.log('N1Atom write', update);
+        console.log('N2Atom write', update);
 
         set(GenParamsAtom, { ...get(GenParamsAtom), n2: update });
     }
