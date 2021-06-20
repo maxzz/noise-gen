@@ -1,21 +1,15 @@
 import React from 'react';
 import './App.scss';
 import { useAtom } from 'jotai';
-import { AppBackgroundActiveAtom, AppBackgroundUrlAtom, GeneratePresetAtom, RandomSeedAtom, SeedAtom } from './atoms';
+import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from './atoms';
 import Logo from './components/Logo';
-import ColorPicker from './components/ColorPicker';
 import Canvas from './components/RenderCanvas';
 import Sliders from './components/Sliders';
-import ColorBgPicker from './components/ColorBgPicker';
+import MainControls from './components/MainControls';
 
 function App() {
-    const [seed, setSeed] = useAtom(SeedAtom);
-    const [, setRansomSeed] = useAtom(RandomSeedAtom);
-    const [, generatePreset] = useAtom(GeneratePresetAtom);
     const [appBackgroundUrl, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
     const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
-    console.log('seed', seed);
-    
     return (
         <div
             className="App h-screen flex flex-col items-center space-y-4 bg-purple-200"
@@ -50,50 +44,9 @@ function App() {
             </div>
 
             <div className="relative max-w-md w-full flex-1 flex flex-col items-center">
-
                 {/* Controls */}
                 <div className="w-full flex flex-col space-y-1">
-                    <div className="flex space-x-1">
-                        <input
-                            className="flex-1 w-full px-2 py-1 text-sm text-purple-900 bg-purple-100 border rounded border-gray-400"
-                            placeholder="Type anything as a seed"
-                            value={seed} onChange={(event) => setSeed(event.target.value)}
-                        />
-
-                        <button
-                            className="h-8 px-3 pb-0.5 text-sm
-                                rounded border border-gray-500 text-gray-100 bg-purple-400
-                                uppercase transform active:scale-95"
-                            style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
-                            title="Generate random seed"
-                            onClick={setRansomSeed}
-                        >
-                            Random Seed
-                        </button>
-
-                        <button
-                            className="h-8 px-3 pb-0.5 text-sm
-                                rounded border border-gray-500 text-gray-100 bg-purple-400
-                                uppercase transform active:scale-95"
-                            style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
-                            title="Generate random preset"
-                            onClick={generatePreset}
-                        >
-                            Preset
-                        </button>
-
-                        {/* <button
-                            className="px-2 py-1 self-center border rounded text-gray-300 bg-gray-600 uppercase transform active:scale-95"
-                            onClick={() => setSeed(`${Math.random()}`.replace(/^0\./, ''))}
-                        >
-                            Random Set
-                        </button> */}
-
-                        <ColorPicker className="w-8 h-8" />
-
-                        <ColorBgPicker />
-                    </div>
-
+                    <MainControls />
                     <Sliders />
                 </div>
 
