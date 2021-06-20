@@ -53,10 +53,21 @@ export const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`,
 });
 */
 
+class Storage {
+    static read() {
+
+    }
+    static write(params: any) {
+        console.log('store params', params);
+    }
+}
+
 //#region RenderParams, GenParams,  Current seed, color, and canvas color
 
 export const RenderParamsAtom = atom<RenderParams, RenderParams>(
     (get) => {
+        console.log('get RenderParamsAtom');
+
         return {
             seed: get(SeedAtom),
             color: get(ColorAtom),
@@ -64,6 +75,8 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
         };
     },
     (_get, set, renderParams: RenderParams) => {
+        console.log('set RenderParamsAtom');
+
         set(ColorAtom, renderParams.color);
         set(SeedAtom, renderParams.seed);
         set(GenParamsAtom, renderParams.genParams);
@@ -81,9 +94,11 @@ export const GenParamsRawAtom = atom<GenParams>({
 
 export const GenParamsAtom = atom(
     (get) => get(GenParamsRawAtom),
-    (_get, set, params: GenParams) => {
-        console.log('store params', params);
+    (get, set, params: GenParams) => {
+        console.log('set GenParamsAtom');
+        
         set(GenParamsRawAtom, { ...params });
+        Storage.write(get(RenderParamsAtom));
     }
 );
 // export const GenParamsAtom = atom<GenParams>({
@@ -137,11 +152,6 @@ export const GeneratePresetAtom = atom(
             dotDiameter: Random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter),
         };
         set(GenParamsAtom, newSet);
-
-        // set(N1Atom, Random(GENPARAMS.min.n1, GENPARAMS.gen.n1));
-        // set(N2Atom, Random(GENPARAMS.min.n2, GENPARAMS.gen.n2));
-        // set(DistortionAtom, Random(GENPARAMS.min.distortion, GENPARAMS.gen.distortion));
-        // set(DotDiameterAtom, Random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter));
     }
 );
 
