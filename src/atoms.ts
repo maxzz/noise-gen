@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import {focusAtom} from 'jotai/optics';
+import { focusAtom } from 'jotai/optics';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
@@ -53,87 +53,16 @@ const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
 
 //#region RenderParams, GenParams,  Current seed, color, and canvas color
 
-//export const RenderParamsAtom = selectAtom(AppConfigAtom, (config) => config.renderParams);
-
 export const RenderParamsAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams'));
-/*
-export const RenderParamsAtom = atom(
-    (get) => {
-        let v= get(AppConfigAtom).renderParams;
-        console.log('RenderParamsAtom read', v);
-        return v;
-    },
-    (get, set, params: RenderParams) => {
-        console.log('RenderParamsAtom write', params);
 
-        set(AppConfigAtom, { ...get(AppConfigAtom), renderParams: params });
-
-        // set(SeedAtom, params.seed);
-        // set(ColorAtom, params.color);
-        // set(GenParamsAtom, params.genParams);
-    }
-);
-*/
 // GenParams
 
 export const GenParamsAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('genParams'));
-/*
-const GenParamsAtom = atom(
-    (get) => {
-        let v = get(RenderParamsAtom).genParams;
-        console.log('GenParamsAtom read', v);
-        return v;
-    },
-    //(get) => get(AppConfigAtom).renderParams.genParams,
-    (get, set, params: GenParams) => {
-        console.log('GenParamsAtom write', params);
-
-        set(RenderParamsAtom, { ...get(RenderParamsAtom), genParams: params });
-
-        // let ac = get(AppConfigAtom);
-        // ac.renderParams.genParams = params;
-        // set(AppConfigAtom, ac);
-    }
-);
-*/
 
 export const N1Atom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('genParams').prop('n1'));
-/*
-export const N1Atom = atom(
-    (get) => {
-        let v = get(GenParamsAtom).n1;
-        console.log('N1Atom read', v);
-        return v;
-    },
-    (get, set, update: number) => {
-        console.log('N1Atom write', update);
-
-        set(GenParamsAtom, { ...get(GenParamsAtom), n1: update });
-    }
-);
-*/
-export const N2Atom = atom(
-    (get) => {
-        let v = get(GenParamsAtom).n2;
-        console.log('N2Atom read', v);
-        return v;
-    },
-    (get, set, update: number) => {
-        console.log('N2Atom write', update);
-
-        set(GenParamsAtom, { ...get(GenParamsAtom), n2: update });
-    }
-);
-
-export const DistortionAtom = atom(
-    (get) => get(GenParamsAtom).distortion,
-    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), distortion: update })
-);
-
-export const DotDiameterAtom = atom(
-    (get) => get(GenParamsAtom).dotDiameter,
-    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), dotDiameter: update })
-);
+export const N2Atom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('genParams').prop('n2'));
+export const DistortionAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('genParams').prop('distortion'));
+export const DotDiameterAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('genParams').prop('dotDiameter'));
 
 // Current seed, color, and canvas color
 
@@ -155,7 +84,7 @@ export const SeedAtom = atom(
     },
     (get, set, seed: string) => {
         console.log('SeedAtom write', seed);
-        set(RenderParamsAtom, { ...get(RenderParamsAtom), seed: seed })
+        set(RenderParamsAtom, { ...get(RenderParamsAtom), seed: seed });
     }
 );
 
