@@ -53,20 +53,62 @@ export const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`,
 
 //#region RenderParams, GenParams,  Current seed, color, and canvas color
 
-export const RenderParamsAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams'));
+//export const RenderParamsAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams'));
+export const RenderParamsAtom = atom<RenderParams, RenderParams>(
+    (get) => {
+        return {
+            seed: get(SeedAtom),
+            color: get(ColorAtom),
+            genParams: get(GenParamsAtom)
+        };
+    },
+    (get, set, renderParams: RenderParams) => {
+        set(ColorAtom, renderParams.color);
+        set(SeedAtom, renderParams.seed);
+        set(GenParamsAtom, renderParams.genParams);
+    }
+);
 
 // GenParams
-
+/*
 export const GenParamsAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('genParams'));
 
 export const N1Atom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('genParams').prop('n1'));
 export const N2Atom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('genParams').prop('n2'));
 export const DistortionAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('genParams').prop('distortion'));
 export const DotDiameterAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('genParams').prop('dotDiameter'));
+*/
+export const GenParamsAtom = atom<GenParams>({
+    n1: 6.3, // def 10
+    n2: 6.3, // def 10
+    distortion: 1, // def 2
+    dotDiameter: .1, // def 1
+});
+
+export const N1Atom = atom(
+    (get) => get(GenParamsAtom).n1,
+    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), n1: update })
+);
+
+export const N2Atom = atom(
+    (get) => get(GenParamsAtom).n2,
+    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), n2: update })
+);
+
+export const DistortionAtom = atom(
+    (get) => get(GenParamsAtom).distortion,
+    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), distortion: update })
+);
+
+export const DotDiameterAtom = atom(
+    (get) => get(GenParamsAtom).dotDiameter,
+    (get, set, update: number) => set(GenParamsAtom, { ...get(GenParamsAtom), dotDiameter: update })
+);
 
 // Current seed, color, and canvas color
 
-export const ColorAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('color'));
+export const ColorAtom = atom<string>('#887ed6');
+//export const ColorAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('renderParams').prop('color'));
 /** /
 export const ColorAtom = atom(
     (get) => get(RenderParamsAtom).color,
@@ -74,7 +116,8 @@ export const ColorAtom = atom(
 );
 /**/
 
-export const ColorCanvasAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('canvasBg'));
+//export const ColorCanvasAtom = focusAtom(AppConfigAtom, (optic) => optic.prop('canvasBg'));
+export const ColorCanvasAtom = atom('transparent');
 /*
 export const ColorCanvasAtom = atom(
     (get) => get(AppConfigAtom).canvasBg,
@@ -97,7 +140,7 @@ export const SeedAtom = atom(
     }
 );
 /**/
-export const SeedAtom = atom('');
+export const SeedAtom = atom('13753932482421605');
 
 export const RandomSeedAtom = atom(
     (get) => get(SeedAtom),
