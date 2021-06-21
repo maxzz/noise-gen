@@ -54,20 +54,40 @@ export const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`,
 });
 */
 
-const storeChangedebounce = debounce((data: any) => {
-    console.log('debounced store params', data);
+const storeChangesDebounced = debounce((get: Getter) => {
+    let data: AppConfig = {
+        canvasBg: get(ColorCanvasRawAtom),
+        renderParams: get(RenderParamsAtom),
+    };
+    console.log('debounced store params', { canvasBg: data.canvasBg, render: data.renderParams });
 }, 1000);
 
 class Storage {
-    static read() {
+    static read(): AppConfig | undefined {
 
+        let raw = localStorage.getItem(`${STORAGE_KEY}-params`);
+        try {
+            let config: AppConfig = raw && JSON.parse(raw);
+            return config;
+        } catch (error) {
+        }
+        return {
+            canvasBg: 'transparent',
+            renderParams: {
+                seed: '13753932482421605',
+                color: '#887ed6',
+                genParams: {
+                    n1: 6.3, // def 10
+                    n2: 6.3, // def 10
+                    distortion: 1, // def 2
+                    dotDiameter: .1, // def 1
+                }
+            }
+        };
     }
     static write(get: Getter) {
-        let data = {
-            renderParams: get(RenderParamsAtom)
-        };
-        console.log('store params');
-        storeChangedebounce(data);
+        console.log('---------- store params');
+        storeChangesDebounced(get);
     }
 }
 
@@ -91,6 +111,10 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
         set(GenParamsAtom, renderParams.genParams);
     }
 );
+
+RenderParamsAtom.onMount = (setAtom) => {
+    console.log('RenderParamsAtom.onMount');
+};
 
 // GenParams
 
