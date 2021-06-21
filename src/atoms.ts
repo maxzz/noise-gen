@@ -4,6 +4,7 @@ import { focusAtom } from 'jotai/optics';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
+import debounce from './utils/debounce';
 
 //#region Offscreen canvas and Worker
 
@@ -53,6 +54,10 @@ export const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`,
 });
 */
 
+const storeChangedebounce = debounce((data: any) => {
+    console.log('debounced store params', data);
+}, 1000);
+
 class Storage {
     static read() {
 
@@ -61,7 +66,8 @@ class Storage {
         let data = {
             renderParams: get(RenderParamsAtom)
         };
-        console.log('store params', data);
+        console.log('store params');
+        storeChangedebounce(data);
     }
 }
 
