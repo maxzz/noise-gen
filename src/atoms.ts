@@ -14,25 +14,6 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 
 //#region Generator current params
 
-export const RenderParamsAtom = atom<RenderParams, RenderParams>(
-    (get) => {
-        return {
-            seed: get(SeedAtom),
-            color: get(ColorAtom),
-            genParams: get(GenParamsAtom)
-        };
-    },
-    (_get, set, renderParams: RenderParams) => {
-        set(ColorAtom, renderParams.color);
-        set(SeedAtom, renderParams.seed);
-        set(GenParamsAtom, renderParams.genParams);
-    }
-);
-
-RenderParamsAtom.onMount = (setAtom) => {
-    setAtom(defAppSettings.renderParams);
-};
-
 // GenParams
 
 export const GenParamsRawAtom = atom<GenParams>(defAppSettings.renderParams.genParams);
@@ -78,6 +59,7 @@ export const ColorAtom = atom(
         storeChangesDebounced(get);
     }
 );
+
 export const ColorCanvasAtom = atom(
     (get) => get(ColorCanvasRawAtom),
     (get, set, update: string) => {
@@ -85,6 +67,11 @@ export const ColorCanvasAtom = atom(
         storeChangesDebounced(get);
     }
 );
+
+ColorCanvasAtom.onMount = (setAtom) => {
+    setAtom(defAppSettings.canvasBg);
+};
+
 export const SeedAtom = atom(
     (get) => get(SeedRawAtom),
     (get, set, update: string) => {
@@ -113,6 +100,25 @@ export const GeneratePresetAtom = atom(
         set(GenParamsAtom, newSet);
     }
 );
+
+export const RenderParamsAtom = atom<RenderParams, RenderParams>(
+    (get) => {
+        return {
+            seed: get(SeedAtom),
+            color: get(ColorAtom),
+            genParams: get(GenParamsAtom)
+        };
+    },
+    (_get, set, renderParams: RenderParams) => {
+        set(ColorAtom, renderParams.color);
+        set(SeedAtom, renderParams.seed);
+        set(GenParamsAtom, renderParams.genParams);
+    }
+);
+
+RenderParamsAtom.onMount = (setAtom) => {
+    setAtom(defAppSettings.renderParams);
+};
 
 //#endregion Generator current params
 
