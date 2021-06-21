@@ -1,10 +1,10 @@
 input[type="range"].ui-slider {
-    $range-handle-color: rgb(255, 255, 255) !default;
-    $range-handle-color-hover: rgb(212, 212, 212) !default;
+    $range-handle-color: #ffffff !default;
+    $range-handle-color-hover: #907aff54 !default;
     $range-handle-size: 12px !default; // def 16px
     $range-handle-radius: 25%; // def 50%
 
-    $range-track-color: rgba(108, 72, 240, 0.3) !default;
+    $range-track-color: #6c48f04d !default;
     $range-track-height: 1px !default; // def 2px
     $range-track-border-color: rgba(108, 72, 240, 0.5) !default;
 
@@ -33,6 +33,7 @@ input[type="range"].ui-slider {
         &:hover {
             background: $range-handle-color-hover;
             transform: scale(1.2);
+            border: 1px solid white;
         }
     }
     &::-moz-range-thumb {
@@ -43,8 +44,12 @@ input[type="range"].ui-slider {
         background: $range-handle-color;
         cursor: pointer;
         transition: background 0.15s ease-in-out;
+        border: 1px solid $range-track-color;
+        border-bottom: 1px solid $range-track-border-color;
+        border-right: 1px solid $range-track-border-color;
         &:hover {
             background: $range-handle-color-hover;
+            border: 1px solid white;
         }
     }
 }
