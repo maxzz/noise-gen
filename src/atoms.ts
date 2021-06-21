@@ -4,6 +4,7 @@ import { defAppSettings, STORAGE_KEY, storeChangesDebounced } from './utils/Loca
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
+import { atomWithCallback } from './hooks/atomsX';
 
 //#region Offscreen canvas and Worker
 
@@ -48,17 +49,18 @@ export const DotDiameterAtom = atom(
 
 // Current seed, color, and canvas color
 
-export const ColorRawAtom = atom(defAppSettings.renderParams.color);
+//export const ColorRawAtom = atom(defAppSettings.renderParams.color);
+export const ColorAtom = atomWithCallback(defAppSettings.renderParams.color, (nextValue, get) => storeChangesDebounced(get));
 export const ColorCanvasRawAtom = atom(defAppSettings.canvasBg);
 export const SeedRawAtom = atom(defAppSettings.renderParams.seed);
 
-export const ColorAtom = atom(
-    (get) => get(ColorRawAtom),
-    (get, set, update: string) => {
-        set(ColorRawAtom, update);
-        storeChangesDebounced(get);
-    }
-);
+// export const ColorAtom = atom(
+//     (get) => get(ColorRawAtom),
+//     (get, set, update: string) => {
+//         set(ColorRawAtom, update);
+//         storeChangesDebounced(get);
+//     }
+// );
 
 export const ColorCanvasAtom = atom(
     (get) => get(ColorCanvasRawAtom),
