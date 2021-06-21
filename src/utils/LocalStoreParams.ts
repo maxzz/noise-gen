@@ -60,22 +60,22 @@ export const storeChangesDebounced = debounce((get: Getter) => {
 
 function renderParams2Store(v: RenderParams): string {
     let arr = [v.color, v.seed, v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter];
-    return arr.join('|');
+    return `v7|${arr.join('|')}`;
 }
 
 function renderParams4Store(packed: string): RenderParams | undefined {
     let arr = (packed || '').split('|');
-    if (arr.length !== 6) {
+    if (arr.length !== 7 || arr[0] !== 'v7') {
         return;
     }
     let v: RenderParams = {
-        color: arr[0],
-        seed: arr[1],
+        color: arr[1],
+        seed: arr[2],
         genParams: {
-            n1: +arr[2],
-            n2: +arr[3],
-            distortion: +arr[4],
-            dotDiameter: +arr[5],
+            n1: +arr[3],
+            n2: +arr[4],
+            distortion: +arr[5],
+            dotDiameter: +arr[6],
         }
     };
     return v;
