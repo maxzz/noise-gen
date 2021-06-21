@@ -94,17 +94,16 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
 
 //#region Presets
 
-//export const PresetsAtom = atomWithStorage<PresetData[]>(`${STORAGE_KEY}-presets`, []);
 export const PresetsAtom = atomWithCallback<PresetData[]>(defPresets(), (_, get) => storePresets(get));
-
-const AppendPresetAtom = atom(
-    null,
-    (get, set, preset: PresetData) => set(PresetsAtom, [...get(PresetsAtom), preset])
-);
 
 export const RemovePresetAtom = atom(
     null,
     (get, set, id: string) => set(PresetsAtom, get(PresetsAtom).filter((item: PresetData) => item.id !== id))
+);
+
+const AppendPresetAtom = atom(
+    null,
+    (get, set, preset: PresetData) => set(PresetsAtom, [...get(PresetsAtom), preset])
 );
 
 export const CreateAppendPresetAtom = atom(
