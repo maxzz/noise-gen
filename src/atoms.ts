@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import { defConfig, STORAGE_KEY, storeChangesDebounced } from './components/LocalStore';
+import { defAppSettings, STORAGE_KEY, storeChangesDebounced } from './components/LocalStore';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
@@ -14,27 +14,11 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 
 // Current generator params
 
-// pre-defined previews:
-//-17.4,6.3,34,2.24
-//-17.76,6.3,30.87,0.1
-//-11.68,-13.65,116.78,0.1
-//15.08,14.54,0.74,0
-//-17.09,-0.45,52.13,0
-//-18.17,-13.96,5.15,0
-//-16.29,15.48,23.94,0.39
-//-14.5,-0.27,0.95,0.62
-//-2.68,-26.85,12.08,2.4
-//21.3,-22.55,161.52,0.1 good for default
-//6.3,6.3,321.7,1.96 good for default
-//40,40,17.45,0 good for default
-//21.3,-36.51,13.87,0.73 good for default
-//{"canvasBg":"black","renderParams":{"seed":"43780585678984507","color":"rgba(212,133,30,1)","genParams":{"n1":31.95,"n2":-24.52,"distortion":106.94,"dotDiameter":0.5}}}
-
 //#region RenderParams, GenParams,  Current seed, color, and canvas color
 
 export const RenderParamsAtom = atom<RenderParams, RenderParams>(
     (get) => {
-        console.log('get RenderParamsAtom');
+        //console.log('get RenderParamsAtom');
 
         return {
             seed: get(SeedAtom),
@@ -43,7 +27,7 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
         };
     },
     (_get, set, renderParams: RenderParams) => {
-        console.log('set RenderParamsAtom');
+        //console.log('set RenderParamsAtom');
 
         set(ColorAtom, renderParams.color);
         set(SeedAtom, renderParams.seed);
@@ -52,8 +36,8 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
 );
 
 RenderParamsAtom.onMount = (setAtom) => {
-    console.log('RenderParamsAtom.onMount');
-    setAtom(defConfig.renderParams);
+    //console.log('RenderParamsAtom.onMount');
+    setAtom(defAppSettings.renderParams);
 };
 
 // GenParams
@@ -68,7 +52,7 @@ export const GenParamsRawAtom = atom<GenParams>({
 export const GenParamsAtom = atom(
     (get) => get(GenParamsRawAtom),
     (get, set, params: GenParams) => {
-        console.log('set GenParamsAtom');
+        //console.log('set GenParamsAtom');
 
         set(GenParamsRawAtom, params);
         storeChangesDebounced(get);
