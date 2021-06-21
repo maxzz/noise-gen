@@ -4,8 +4,9 @@ input[type="range"].ui-slider {
     $range-handle-size: 12px !default; // def 16px
     $range-handle-radius: 25%; // def 50%
 
-    $range-track-color: rgba(108, 72, 240, 0.314) !default;
+    $range-track-color: rgba(108, 72, 240, 0.3) !default;
     $range-track-height: 1px !default; // def 2px
+    $range-track-border-color: rgba(108, 72, 240, 0.5) !default;
 
     -webkit-appearance: none;
     width: 100%; //$range-label-width: 60px !default; width: calc(100% - (#{$range-label-width + 10px}));
@@ -26,6 +27,9 @@ input[type="range"].ui-slider {
         background: $range-handle-color;
         cursor: pointer;
         transition: all 0.15s ease-in-out;
+        border: 1px solid $range-track-color;
+        border-bottom: 1px solid $range-track-border-color;
+        border-right: 1px solid $range-track-border-color;
         &:hover {
             background: $range-handle-color-hover;
             transform: scale(1.2);
