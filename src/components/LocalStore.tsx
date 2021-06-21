@@ -71,17 +71,5 @@ export const storeChangesDebounced = debounce((get: Getter) => {
         renderParams: get(RenderParamsAtom),
     };
     localStorage.setItem(`${STORAGE_KEY}-params`, JSON.stringify(data));
-    console.log('debounced store params', { canvasBg: data.canvasBg, render: data.renderParams });
 }, 1000);
-
-const LocalStore: React.FC = ({ children }) => {
-    console.log('------init------');
-    return (
-        <>
-            {children}
-        </>
-    );
-};
-
-export default LocalStore;
 

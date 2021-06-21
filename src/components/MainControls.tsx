@@ -9,7 +9,7 @@ function MainControls() {
     const [, setRansomSeed] = useAtom(RandomSeedAtom);
     const [, generatePreset] = useAtom(GeneratePresetAtom);
 
-    console.log('seed', seed);
+    //console.log('seed', seed);
 
     return (
         <div className="flex space-x-1">

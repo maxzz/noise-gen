@@ -115,7 +115,7 @@ function Sliders() {
         setRenderParams(item.renderParams);
     }
 
-    console.log('sliders');
+    //console.log('sliders');
 
     return (
         <div className="py-2 bg-purple-100 border rounded border-gray-400">

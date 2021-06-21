@@ -67,7 +67,7 @@ export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): W
                 newWorker.queries.delete(event.data.resolveId);
                 resolve.resolve(event.data.blob);
             }
-            console.log('reply');
+            //console.log('reply');
         });
 
         setWorker(newWorker);
