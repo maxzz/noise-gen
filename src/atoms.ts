@@ -12,14 +12,10 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 
 //#endregion Offscreen canvas and Worker
 
-// Current generator params
-
-//#region RenderParams, GenParams,  Current seed, color, and canvas color
+//#region Generator current params
 
 export const RenderParamsAtom = atom<RenderParams, RenderParams>(
     (get) => {
-        //console.log('get RenderParamsAtom');
-
         return {
             seed: get(SeedAtom),
             color: get(ColorAtom),
@@ -27,8 +23,6 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
         };
     },
     (_get, set, renderParams: RenderParams) => {
-        //console.log('set RenderParamsAtom');
-
         set(ColorAtom, renderParams.color);
         set(SeedAtom, renderParams.seed);
         set(GenParamsAtom, renderParams.genParams);
@@ -36,24 +30,16 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
 );
 
 RenderParamsAtom.onMount = (setAtom) => {
-    //console.log('RenderParamsAtom.onMount');
     setAtom(defAppSettings.renderParams);
 };
 
 // GenParams
 
-export const GenParamsRawAtom = atom<GenParams>({
-    n1: 6.3, // def 10
-    n2: 6.3, // def 10
-    distortion: 1, // def 2
-    dotDiameter: .1, // def 1
-});
+export const GenParamsRawAtom = atom<GenParams>(defAppSettings.renderParams.genParams);
 
 export const GenParamsAtom = atom(
     (get) => get(GenParamsRawAtom),
     (get, set, params: GenParams) => {
-        //console.log('set GenParamsAtom');
-
         set(GenParamsRawAtom, params);
         storeChangesDebounced(get);
     }
@@ -128,7 +114,7 @@ export const GeneratePresetAtom = atom(
     }
 );
 
-//#endregion RenderParams, GenParams,  Current seed, color, and canvas color
+//#endregion Generator current params
 
 //#region Presets
 
