@@ -1,8 +1,7 @@
-import React from 'react';
+import { RenderParams } from './types';
 import { Getter } from 'jotai';
 import { ColorCanvasRawAtom, RenderParamsAtom } from '../atoms';
-import debounce from '../utils/debounce';
-import { RenderParams } from '../utils/types';
+import debounce from './debounce';
 
 export const STORAGE_KEY = 'noise-gen-xp10-525n';
 

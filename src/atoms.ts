@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import { defAppSettings, STORAGE_KEY, storeChangesDebounced } from './components/LocalStore';
+import { defAppSettings, STORAGE_KEY, storeChangesDebounced } from './utils/LocalStoreParams';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
