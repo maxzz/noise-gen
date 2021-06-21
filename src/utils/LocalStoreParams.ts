@@ -26,22 +26,6 @@ type AppConfig = {
 //21.3,-36.51,13.87,0.73 good for default
 //{"canvasBg":"black","renderParams":{"seed":"43780585678984507","color":"rgba(212,133,30,1)","genParams":{"n1":31.95,"n2":-24.52,"distortion":106.94,"dotDiameter":0.5}}}
 
-/*
-export const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
-    canvasBg: 'transparent',
-    renderParams: {
-        seed: '13753932482421605',
-        color: '#887ed6',
-        genParams: {
-            n1: 6.3, // def 10
-            n2: 6.3, // def 10
-            distortion: 1, // def 2
-            dotDiameter: .1, // def 1
-        }
-    }
-});
-*/
-
 export const defAppSettings: AppConfig = function () {
     let raw = localStorage.getItem(`${STORAGE_KEY}-params`);
     try {
