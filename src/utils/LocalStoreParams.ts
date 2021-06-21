@@ -27,7 +27,7 @@ type AppConfig = {
 //{"canvasBg":"black","renderParams":{"seed":"43780585678984507","color":"rgba(212,133,30,1)","genParams":{"n1":31.95,"n2":-24.52,"distortion":106.94,"dotDiameter":0.5}}}
 
 type PackedAppConfig = {
-    canvasBg: string;
+    can: string; // canvasBg
     rpm: string; // renderparams
 };
 
@@ -38,7 +38,7 @@ export const defAppSettings: AppConfig = function () {
         let rpm = renderParams4Store(data.rpm);
         if (rpm) {
             let config: AppConfig = {
-                canvasBg: data.canvasBg,
+                canvasBg: data.can,
                 renderParams: rpm,
             };
             return config;
@@ -62,7 +62,7 @@ export const defAppSettings: AppConfig = function () {
 
 export const storeChangesDebounced = debounce((get: Getter) => {
     let data: PackedAppConfig = {
-        canvasBg: get(ColorCanvasRawAtom),
+        can: get(ColorCanvasRawAtom),
         rpm: renderParams2Store(get(RenderParamsAtom)),
     };
     localStorage.setItem(`${STORAGE_KEY}-params`, JSON.stringify(data));
