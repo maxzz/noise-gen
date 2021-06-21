@@ -26,11 +26,23 @@ type AppConfig = {
 //21.3,-36.51,13.87,0.73 good for default
 //{"canvasBg":"black","renderParams":{"seed":"43780585678984507","color":"rgba(212,133,30,1)","genParams":{"n1":31.95,"n2":-24.52,"distortion":106.94,"dotDiameter":0.5}}}
 
+type PackedAppConfig = {
+    canvasBg: string;
+    rpm: string; // renderparams
+};
+
 export const defAppSettings: AppConfig = function () {
     let raw = localStorage.getItem(`${STORAGE_KEY}-params`);
     try {
-        let config: AppConfig = raw && JSON.parse(raw);
-        return config;
+        let data: PackedAppConfig = raw && JSON.parse(raw);
+        let rpm = renderParams4Store(data.rpm);
+        if (rpm) {
+            let config: AppConfig = {
+                canvasBg: data.canvasBg,
+                renderParams: rpm,
+            };
+            return config;
+        }
     } catch (error) {
     }
     return {
@@ -49,9 +61,9 @@ export const defAppSettings: AppConfig = function () {
 }();
 
 export const storeChangesDebounced = debounce((get: Getter) => {
-    let data: AppConfig = {
+    let data: PackedAppConfig = {
         canvasBg: get(ColorCanvasRawAtom),
-        renderParams: get(RenderParamsAtom),
+        rpm: renderParams2Store(get(RenderParamsAtom)),
     };
     localStorage.setItem(`${STORAGE_KEY}-params`, JSON.stringify(data));
 }, 1000);
@@ -81,10 +93,10 @@ function renderParams4Store(packed: string): RenderParams | undefined {
     return v;
 }
 
-(function test() {
-    let packed = renderParams2Store(defAppSettings.renderParams);
-    let unpacked = renderParams4Store(packed);
+// (function test() {
+//     let packed = renderParams2Store(defAppSettings.renderParams);
+//     let unpacked = renderParams4Store(packed);
 
-    console.log('packed', packed);
-    console.log('unpacked', unpacked);    
-})();
+//     console.log('packed', packed);
+//     console.log('unpacked', unpacked);
+// })();
