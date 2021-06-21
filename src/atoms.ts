@@ -1,4 +1,4 @@
-import { atom } from 'jotai';
+import { atom, Getter } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { focusAtom } from 'jotai/optics';
 import { WorkerEx } from './hooks/useCanvasWorker';
@@ -57,8 +57,11 @@ class Storage {
     static read() {
 
     }
-    static write(params: any) {
-        console.log('store params', params);
+    static write(get: Getter) {
+        let data = {
+            renderParams: get(RenderParamsAtom)
+        };
+        console.log('store params', data);
     }
 }
 
@@ -96,17 +99,11 @@ export const GenParamsAtom = atom(
     (get) => get(GenParamsRawAtom),
     (get, set, params: GenParams) => {
         console.log('set GenParamsAtom');
-        
-        set(GenParamsRawAtom, { ...params });
-        Storage.write(get(RenderParamsAtom));
+
+        set(GenParamsRawAtom, params);
+        Storage.write(get);
     }
 );
-// export const GenParamsAtom = atom<GenParams>({
-//     n1: 6.3, // def 10
-//     n2: 6.3, // def 10
-//     distortion: 1, // def 2
-//     dotDiameter: .1, // def 1
-// });
 
 export const N1Atom = atom(
     (get) => get(GenParamsAtom).n1,
@@ -130,9 +127,31 @@ export const DotDiameterAtom = atom(
 
 // Current seed, color, and canvas color
 
-export const ColorAtom = atom<string>('#887ed6');
-export const ColorCanvasAtom = atom('transparent');
-export const SeedAtom = atom('13753932482421605');
+export const ColorRawAtom = atom('#887ed6');
+export const ColorCanvasRawAtom = atom('transparent');
+export const SeedRawAtom = atom('13753932482421605');
+
+export const ColorAtom = atom(
+    (get) => get(ColorRawAtom),
+    (get, set, update: string) => {
+        set(ColorRawAtom, update);
+        Storage.write(get);
+    }
+);
+export const ColorCanvasAtom = atom(
+    (get) => get(ColorCanvasRawAtom),
+    (get, set, update: string) => {
+        set(ColorCanvasRawAtom, update);
+        Storage.write(get);
+    }
+);
+export const SeedAtom = atom(
+    (get) => get(SeedRawAtom),
+    (get, set, update: string) => {
+        set(SeedRawAtom, update);
+        Storage.write(get);
+    }
+);
 
 export const RandomSeedAtom = atom(
     (get) => get(SeedAtom),
