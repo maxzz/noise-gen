@@ -1,6 +1,6 @@
 import { RenderParams } from './types';
 import { Getter } from 'jotai';
-import { ColorCanvasRawAtom, RenderParamsAtom } from '../atoms';
+import { ColorCanvasAtom, RenderParamsAtom } from '../atoms';
 import debounce from './debounce';
 
 export const STORAGE_KEY = 'noise-gen-xp10-525n';
@@ -62,7 +62,7 @@ export const defAppSettings: AppConfig = function () {
 
 export const storeChangesDebounced = debounce((get: Getter) => {
     let data: PackedAppConfig = {
-        can: get(ColorCanvasRawAtom),
+        can: get(ColorCanvasAtom),
         rpm: renderParams2Store(get(RenderParamsAtom)),
     };
     localStorage.setItem(`${STORAGE_KEY}-params`, JSON.stringify(data));
