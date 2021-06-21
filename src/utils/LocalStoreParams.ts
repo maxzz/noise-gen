@@ -71,4 +71,3 @@ export const storeChangesDebounced = debounce((get: Getter) => {
     };
     localStorage.setItem(`${STORAGE_KEY}-params`, JSON.stringify(data));
 }, 1000);
-

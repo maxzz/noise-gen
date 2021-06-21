@@ -48,9 +48,9 @@ export const DotDiameterAtom = atom(
 
 // Current seed, color, and canvas color
 
-export const ColorRawAtom = atom('#887ed6');
+export const ColorRawAtom = atom(defAppSettings.renderParams.color);
 export const ColorCanvasRawAtom = atom(defAppSettings.canvasBg);
-export const SeedRawAtom = atom('13753932482421605');
+export const SeedRawAtom = atom(defAppSettings.renderParams.seed);
 
 export const ColorAtom = atom(
     (get) => get(ColorRawAtom),
@@ -111,10 +111,6 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
         set(GenParamsAtom, renderParams.genParams);
     }
 );
-
-RenderParamsAtom.onMount = (setAtom) => {
-    setAtom(defAppSettings.renderParams);
-};
 
 //#endregion Generator current params
 
