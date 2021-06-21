@@ -49,35 +49,10 @@ export const DotDiameterAtom = atom(
 
 // Current seed, color, and canvas color
 
-//export const ColorRawAtom = atom(defAppSettings.renderParams.color);
 export const ColorAtom = atomWithCallback(defAppSettings.renderParams.color, (_, get) => storeChangesDebounced(get));
 export const ColorCanvasAtom = atomWithCallback(defAppSettings.canvasBg, (_, get) => storeChangesDebounced(get));
 export const SeedAtom = atomWithCallback(defAppSettings.renderParams.seed, (_, get) => storeChangesDebounced(get));
 
-// export const ColorAtom = atom(
-//     (get) => get(ColorRawAtom),
-//     (get, set, update: string) => {
-//         set(ColorRawAtom, update);
-//         storeChangesDebounced(get);
-//     }
-// );
-/*
-export const ColorCanvasAtom = atom(
-    (get) => get(ColorCanvasRawAtom),
-    (get, set, update: string) => {
-        set(ColorCanvasRawAtom, update);
-        storeChangesDebounced(get);
-    }
-);
-
-export const SeedAtom = atom(
-    (get) => get(SeedRawAtom),
-    (get, set, update: string) => {
-        set(SeedRawAtom, update);
-        storeChangesDebounced(get);
-    }
-);
-*/
 export const RandomSeedAtom = atom(
     (get) => get(SeedAtom),
     (_get, set) => set(SeedAtom, `${Math.random()}`.replace(/^0\./, '')));
