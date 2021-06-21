@@ -55,3 +55,10 @@ export const storeChangesDebounced = debounce((get: Getter) => {
     };
     localStorage.setItem(`${STORAGE_KEY}-params`, JSON.stringify(data));
 }, 1000);
+
+function renderParams2Store(v: RenderParams): string {
+    let arr = [v.color, v.seed, v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter];
+    return arr.join('|');
+}
+
+console.log('params', renderParams2Store(defAppSettings.renderParams));
