@@ -49,7 +49,7 @@ export const DotDiameterAtom = atom(
 // Current seed, color, and canvas color
 
 export const ColorRawAtom = atom('#887ed6');
-export const ColorCanvasRawAtom = atom('transparent');
+export const ColorCanvasRawAtom = atom(defAppSettings.canvasBg);
 export const SeedRawAtom = atom('13753932482421605');
 
 export const ColorAtom = atom(
@@ -67,10 +67,6 @@ export const ColorCanvasAtom = atom(
         storeChangesDebounced(get);
     }
 );
-
-ColorCanvasAtom.onMount = (setAtom) => {
-    setAtom(defAppSettings.canvasBg);
-};
 
 export const SeedAtom = atom(
     (get) => get(SeedRawAtom),
