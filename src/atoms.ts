@@ -1,10 +1,9 @@
-import { atom, Getter } from 'jotai';
+import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import { focusAtom } from 'jotai/optics';
+import { LocalStorage, STORAGE_KEY } from './components/LocalStore';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
-import debounce from './utils/debounce';
 
 //#region Offscreen canvas and Worker
 
@@ -30,66 +29,6 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 //40,40,17.45,0 good for default
 //21.3,-36.51,13.87,0.73 good for default
 //{"canvasBg":"black","renderParams":{"seed":"43780585678984507","color":"rgba(212,133,30,1)","genParams":{"n1":31.95,"n2":-24.52,"distortion":106.94,"dotDiameter":0.5}}}
-
-const STORAGE_KEY = 'noise-gen-xp10-525n';
-
-type AppConfig = {
-    canvasBg: string;
-    renderParams: RenderParams;
-};
-
-/*
-export const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`, {
-    canvasBg: 'transparent',
-    renderParams: {
-        seed: '13753932482421605',
-        color: '#887ed6',
-        genParams: {
-            n1: 6.3, // def 10
-            n2: 6.3, // def 10
-            distortion: 1, // def 2
-            dotDiameter: .1, // def 1
-        }
-    }
-});
-*/
-
-const storeChangesDebounced = debounce((get: Getter) => {
-    let data: AppConfig = {
-        canvasBg: get(ColorCanvasRawAtom),
-        renderParams: get(RenderParamsAtom),
-    };
-    console.log('debounced store params', { canvasBg: data.canvasBg, render: data.renderParams });
-}, 1000);
-
-class Storage {
-    static read(): AppConfig | undefined {
-
-        let raw = localStorage.getItem(`${STORAGE_KEY}-params`);
-        try {
-            let config: AppConfig = raw && JSON.parse(raw);
-            return config;
-        } catch (error) {
-        }
-        return {
-            canvasBg: 'transparent',
-            renderParams: {
-                seed: '13753932482421605',
-                color: '#887ed6',
-                genParams: {
-                    n1: 6.3, // def 10
-                    n2: 6.3, // def 10
-                    distortion: 1, // def 2
-                    dotDiameter: .1, // def 1
-                }
-            }
-        };
-    }
-    static write(get: Getter) {
-        console.log('---------- store params');
-        storeChangesDebounced(get);
-    }
-}
 
 //#region RenderParams, GenParams,  Current seed, color, and canvas color
 
@@ -131,7 +70,7 @@ export const GenParamsAtom = atom(
         console.log('set GenParamsAtom');
 
         set(GenParamsRawAtom, params);
-        Storage.write(get);
+        LocalStorage.write(get);
     }
 );
 
@@ -165,21 +104,21 @@ export const ColorAtom = atom(
     (get) => get(ColorRawAtom),
     (get, set, update: string) => {
         set(ColorRawAtom, update);
-        Storage.write(get);
+        LocalStorage.write(get);
     }
 );
 export const ColorCanvasAtom = atom(
     (get) => get(ColorCanvasRawAtom),
     (get, set, update: string) => {
         set(ColorCanvasRawAtom, update);
-        Storage.write(get);
+        LocalStorage.write(get);
     }
 );
 export const SeedAtom = atom(
     (get) => get(SeedRawAtom),
     (get, set, update: string) => {
         set(SeedRawAtom, update);
-        Storage.write(get);
+        LocalStorage.write(get);
     }
 );
 
