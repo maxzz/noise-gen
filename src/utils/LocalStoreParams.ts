@@ -56,14 +56,12 @@ export const storeChangesDebounced = debounce((get: Getter) => {
     localStorage.setItem(`${STORAGE_KEY}-params`, JSON.stringify(data));
 }, 1000);
 
+// packing / unpacking
+
 function renderParams2Store(v: RenderParams): string {
     let arr = [v.color, v.seed, v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter];
     return arr.join('|');
 }
-
-let packed = renderParams2Store(defAppSettings.renderParams);
-
-console.log('packed', packed);
 
 function renderParams4Store(packed: string): RenderParams | undefined {
     let arr = (packed || '').split('|');
@@ -83,6 +81,10 @@ function renderParams4Store(packed: string): RenderParams | undefined {
     return v;
 }
 
-let unpacked = renderParams4Store(packed);
+(function test() {
+    let packed = renderParams2Store(defAppSettings.renderParams);
+    let unpacked = renderParams4Store(packed);
 
-console.log('unpacked', unpacked);
+    console.log('packed', packed);
+    console.log('unpacked', unpacked);    
+})();
