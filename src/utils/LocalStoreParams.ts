@@ -1,9 +1,7 @@
-import { RenderParams } from './types';
+import { RenderParams, STORAGE_KEY } from './types';
 import { Getter } from 'jotai';
 import { ColorCanvasAtom, RenderParamsAtom } from '../atoms';
 import debounce from './debounce';
-
-export const STORAGE_KEY = 'noise-gen-xp10-525n';
 
 type AppConfig = {
     canvasBg: string;

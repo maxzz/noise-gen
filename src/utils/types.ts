@@ -44,6 +44,10 @@ export type PresetData = {
     renderParams: RenderParams;
 };
 
+export const STORAGE_KEY = 'noise-gen-xp10-525n';
+
+//#region Worker
+
 export namespace I2W { // To Worker
     export type Message = {
         data: Init | Run | GetPreview | GetImage;
@@ -90,3 +94,5 @@ export namespace I4W { // From Worker
         resolveId: string;
     };
 }
+
+//#endregion Worker

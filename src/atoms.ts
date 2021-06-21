@@ -1,10 +1,11 @@
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import { defAppSettings, STORAGE_KEY, storeChangesDebounced } from './utils/LocalStoreParams';
+import { defAppSettings, storeChangesDebounced } from './utils/LocalStoreParams';
 import { WorkerEx } from './hooks/useCanvasWorker';
-import { GENPARAMS, GenParams, I4W, PresetData, RenderParams } from './utils/types';
+import { GENPARAMS, GenParams, I4W, PresetData, RenderParams, STORAGE_KEY } from './utils/types';
 import uuid from './utils/uuid';
 import { atomWithCallback } from './hooks/atomsX';
+import { defPresets, storePresets } from './utils/LocalStorePresets';
 
 //#region Offscreen canvas and Worker
 
@@ -93,7 +94,8 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
 
 //#region Presets
 
-export const PresetsAtom = atomWithStorage<PresetData[]>(`${STORAGE_KEY}-presets`, []);
+//export const PresetsAtom = atomWithStorage<PresetData[]>(`${STORAGE_KEY}-presets`, []);
+export const PresetsAtom = atomWithCallback<PresetData[]>(defPresets(), (_, get) => storePresets(get));
 
 const AppendPresetAtom = atom(
     null,
