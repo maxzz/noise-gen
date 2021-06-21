@@ -63,11 +63,13 @@ function renderParams2Store(v: RenderParams): string {
 
 let packed = renderParams2Store(defAppSettings.renderParams);
 
-console.log('params', packed);
+console.log('packed', packed);
 
 function renderParams4Store(packed: string): RenderParams | undefined {
     let arr = (packed || '').split('|');
-    //[v.color, v.seed, v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter] = arr;
+    if (arr.length !== 6) {
+        return;
+    }
     let v: RenderParams = {
         color: arr[0],
         seed: arr[1],
@@ -77,6 +79,10 @@ function renderParams4Store(packed: string): RenderParams | undefined {
             distortion: +arr[4],
             dotDiameter: +arr[5],
         }
-    }
+    };
     return v;
 }
+
+let unpacked = renderParams4Store(packed);
+
+console.log('unpacked', unpacked);
