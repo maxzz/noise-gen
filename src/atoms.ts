@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import { LocalStorage, STORAGE_KEY } from './components/LocalStore';
+import { defConfig, STORAGE_KEY, storeChangesDebounced } from './components/LocalStore';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I4W, PresetData, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
@@ -53,6 +53,7 @@ export const RenderParamsAtom = atom<RenderParams, RenderParams>(
 
 RenderParamsAtom.onMount = (setAtom) => {
     console.log('RenderParamsAtom.onMount');
+    setAtom(defConfig.renderParams);
 };
 
 // GenParams
@@ -70,7 +71,7 @@ export const GenParamsAtom = atom(
         console.log('set GenParamsAtom');
 
         set(GenParamsRawAtom, params);
-        LocalStorage.write(get);
+        storeChangesDebounced(get);
     }
 );
 
@@ -104,21 +105,21 @@ export const ColorAtom = atom(
     (get) => get(ColorRawAtom),
     (get, set, update: string) => {
         set(ColorRawAtom, update);
-        LocalStorage.write(get);
+        storeChangesDebounced(get);
     }
 );
 export const ColorCanvasAtom = atom(
     (get) => get(ColorCanvasRawAtom),
     (get, set, update: string) => {
         set(ColorCanvasRawAtom, update);
-        LocalStorage.write(get);
+        storeChangesDebounced(get);
     }
 );
 export const SeedAtom = atom(
     (get) => get(SeedRawAtom),
     (get, set, update: string) => {
         set(SeedRawAtom, update);
-        LocalStorage.write(get);
+        storeChangesDebounced(get);
     }
 );
 

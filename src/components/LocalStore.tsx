@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Getter, useAtom } from 'jotai';
 import { ColorCanvasRawAtom, RenderParamsAtom } from '../atoms';
 import debounce from '../utils/debounce';
@@ -27,51 +27,39 @@ export const AppConfigAtom = atomWithStorage<AppConfig>(`${STORAGE_KEY}-params`,
 });
 */
 
-const storeChangesDebounced = debounce((get: Getter) => {
+export const defConfig: AppConfig = function () {
+    let raw = localStorage.getItem(`${STORAGE_KEY}-params`);
+    try {
+        let config: AppConfig = raw && JSON.parse(raw);
+        return config;
+    } catch (error) {
+    }
+    return {
+        canvasBg: 'transparent',
+        renderParams: {
+            seed: '13753932482421605',
+            color: '#887ed6',
+            genParams: {
+                n1: 6.3, // def 10
+                n2: 6.3, // def 10
+                distortion: 1, // def 2
+                dotDiameter: .1, // def 1
+            }
+        }
+    };
+}();
+
+export const storeChangesDebounced = debounce((get: Getter) => {
     let data: AppConfig = {
         canvasBg: get(ColorCanvasRawAtom),
         renderParams: get(RenderParamsAtom),
     };
+    localStorage.setItem(`${STORAGE_KEY}-params`, JSON.stringify(data));
     console.log('debounced store params', { canvasBg: data.canvasBg, render: data.renderParams });
 }, 1000);
 
-export class LocalStorage {
-    static read(): AppConfig | undefined {
-
-        let raw = localStorage.getItem(`${STORAGE_KEY}-params`);
-        try {
-            let config: AppConfig = raw && JSON.parse(raw);
-            return config;
-        } catch (error) {
-        }
-        return {
-            canvasBg: 'transparent',
-            renderParams: {
-                seed: '13753932482421605',
-                color: '#887ed6',
-                genParams: {
-                    n1: 6.3, // def 10
-                    n2: 6.3, // def 10
-                    distortion: 1, // def 2
-                    dotDiameter: .1, // def 1
-                }
-            }
-        };
-    }
-    static write(get: Getter) {
-        console.log('---------- store params');
-        storeChangesDebounced(get);
-    }
-}
-
-const LocalStore: React.FC = ({ children }): JSX.Element => {
-    // let defs = LocalStorage.read();
-    // if (defs) {
-    //     let [, setRenderParams] = useAtom(RenderParamsAtom);
-    //     setRenderParams(defs.renderParams);
-    // }
+const LocalStore: React.FC = ({ children }) => {
     console.log('------init------');
-
     return (
         <>
             {children}
@@ -79,5 +67,5 @@ const LocalStore: React.FC = ({ children }): JSX.Element => {
     );
 };
 
-export default LocalStore
+export default LocalStore;
 
