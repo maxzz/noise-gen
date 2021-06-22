@@ -129,13 +129,11 @@ export const UpdatePresetPreviewAtom = atom(
 
 export const InitPreviewsUpdateAtom = atom(
 	null,
-	(get, set) => {
+	(get) => {
 		const worker = get(RenderWorkerAtom);
 		const presets = get(PresetsAtom);
 		const canvasSize = get(ManualSizeAtom);
 		if (worker) {
-			console.log('preview worker init');
-	
 			presets.forEach((preset: PresetData) => {
 				if (!preset.preview) {
 					const msg: I2W.GetPreviewId = {
@@ -148,6 +146,7 @@ export const InitPreviewsUpdateAtom = atom(
 						id: preset.id,
 						renderParams: preset.renderParams,
 					};
+					
 					console.log('send request msg', worker, msg);
 	
 					worker?.postMessage(msg);

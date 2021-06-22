@@ -20,7 +20,6 @@ export default function Canvas() {
     const [, updatePresetPreview] = useAtom(UpdatePresetPreviewAtom);
     const initPreviewsUpdate = useUpdateAtom(InitPreviewsUpdateAtom);
    
-    // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
     const [manualSize, setManualSize] = useAtom(ManualSizeAtom);
     useEffect(() => {
         widthRaw && heightRaw && setManualSize({ w: widthRaw, h: heightRaw });
@@ -28,8 +27,6 @@ export default function Canvas() {
 
     useEffect(() => {
         if (worker) {
-            console.log('canvas worker init');
-            
             worker.onmessage = (event: I4W.Message) => {
                 switch (event.data.type) {
                     case 'preview-blob': {
@@ -42,7 +39,6 @@ export default function Canvas() {
                     }
                 }
             };
-
             initPreviewsUpdate();
         }
     }, [worker]);

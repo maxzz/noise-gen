@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAtom } from 'jotai';
-import { useUpdateAtom } from 'jotai/utils';
 import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, RenderWorkerAtom, PresetsAtom, RenderParamsAtom, RemovePresetAtom, AppBackgroundUrlAtom, InitPreviewsUpdateAtom } from '../atoms';
 import { GENPARAMS, I2W, PresetData, PRESET_H, PRESET_W } from '../utils/types';
 import Slider from './Slider';
@@ -11,9 +10,6 @@ function Sliders() {
     const [n2, setN2] = useAtom(N2Atom);
     const [distortion, setDistortion] = useAtom(DistortionAtom);
     const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
-    
-    //console.log('sliders', n1, n2, distortion, dotDiameter);
-    
     return (
         <>
             <Slider min={GENPARAMS.min.n1} max={GENPARAMS.max.n1} value={n1} onChange={setN1} label="Noise 1" />
@@ -60,7 +56,6 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
 function PreviewBoxes() {
     const [presets] = useAtom(PresetsAtom);
     const [worker] = useAtom(RenderWorkerAtom);
-    //const initPreviewsUpdate = useUpdateAtom(InitPreviewsUpdateAtom);
     const [, setRenderParams] = useAtom(RenderParamsAtom);
     const [, removePreset] = useAtom(RemovePresetAtom);
 
@@ -71,31 +66,6 @@ function PreviewBoxes() {
     function selectItem(item: PresetData) {
         setRenderParams(item.renderParams);
     }
-
-    // useEffect(() => {
-    //     if (worker) {
-    //         console.log('preview worker init');
-
-    //         presets.forEach((preset: PresetData) => {
-    //             if (!preset.preview) {
-    //                 const msg: I2W.GetPreviewId = {
-    //                     type: 'get-preview-id',
-    //                     smallWidth: PRESET_W,
-    //                     smallHeight: PRESET_H,
-    //                     id: preset.id,
-    //                     renderParams: preset.renderParams,
-    //                 };
-    //                 console.log('send request msg', worker, msg);
-
-    //                 worker?.postMessage(msg);
-    //             }
-    //         });
-    //     }
-    // }, [worker]);
-
-    // useEffect(() => {
-    //     initPreviewsUpdate();
-    // }, [worker]);
 
     return (
         <div className="px-1 flex flex-wrap">
