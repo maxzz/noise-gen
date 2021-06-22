@@ -85,6 +85,9 @@ function RunStuff() {
                 }
                 break;
             }
+            case 'get-preview-id': {
+                break;
+            }
             case 'get-image': {
                 const promiseId = event.data.promiseId;
                 canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {

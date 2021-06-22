@@ -50,7 +50,7 @@ export const STORAGE_KEY = 'noisegen-xp10525n';
 
 export namespace I2W { // To Worker
     export type Message = {
-        data: Init | Run | GetPreview | GetImage;
+        data: Init | Run | GetPreview | GetPreviewId | GetImage;
     };
 
     export type Init = {
@@ -65,14 +65,14 @@ export namespace I2W { // To Worker
         renderParams: RenderParams;
     };
 
-    export type GetPreview = { // Preview for newly created images
-        type: 'get-preview';
+    export type GetPreview = {      // Preview for newly created images
+        type: 'get-preview';        // the reply is 'preview-blob'
         smallWidth: number;
         smallHeight: number;
     };
 
-    export type GetPreviewId = { // Preview for loaded from storage presets
-        type: 'get-preview-id';
+    export type GetPreviewId = {    // Preview for loaded from storage presets
+        type: 'get-preview-id';     // the reply is 'preview-blob-id'
         smallWidth: number;
         smallHeight: number;
 
@@ -88,17 +88,17 @@ export namespace I2W { // To Worker
 
 export namespace I4W { // From Worker
     export type Message = {
-        data: Preview | Image;
+        data: Preview | PreviewId | Image;
     };
 
-    export type Preview = { // Preview for newly created images
-        type: 'preview-blob';
+    export type Preview = {         // Preview for newly created images
+        type: 'preview-blob';       // the reply to 'get-preview'
         blob: Blob;
         renderParams: RenderParams;
     };
 
-    export type PreviewId = { // Preview for loaded from storage presets
-        type: 'preview-blob-id';
+    export type PreviewId = {       // Preview for loaded from storage presets
+        type: 'preview-blob-id';    // the reply to 'get-preview-id'
         blob: Blob;
 
         id: string;
