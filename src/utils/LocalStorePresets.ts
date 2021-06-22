@@ -8,7 +8,7 @@ const PRESETS_KEY = `${STORAGE_KEY}-presets2`;
 type PresetsStoreItem = {
     id: string;
     rpm: RenderParams;
-}
+};
 
 type PresetsStoreCache = Record<string, string>; // Item ID -> data:string URL
 
@@ -16,11 +16,15 @@ export function defPresets(): PresetData[] {
     let setsRaw = localStorage.getItem(`${PRESETS_KEY}-sets`);
     let cacheRaw = localStorage.getItem(`${PRESETS_KEY}-cache`);
     try {
-        let data = setsRaw && JSON.parse(setsRaw) as PresetData[] || [];
+        let dataRaw = setsRaw && JSON.parse(setsRaw) as PresetsStoreItem[] || [];
         let cache = cacheRaw && JSON.parse(cacheRaw) as PresetsStoreCache || {};
 
-        data.forEach((preset: PresetData) => preset.preview = cache[preset.id]);
-
+        let data = dataRaw.map((preset: PresetsStoreItem): PresetData => ({
+            id: preset.id,
+            preview: cache[preset.id],
+            renderParams: preset.rpm,
+        }));
+        
         return data;
         //let rpm = renderParams4Store(data.rpm);
         // if (rpm) {
@@ -41,7 +45,7 @@ export const storePresets = debounce((get: Getter) => {
     let cache: PresetsStoreCache = {};
     let data = dataRaw.map((preset: PresetData): PresetsStoreItem => {
         preset.preview && (cache[preset.id] = preset.preview);
-        return {id: preset.id, rpm: preset.renderParams};
+        return { id: preset.id, rpm: preset.renderParams };
     });
 
     localStorage.setItem(`${PRESETS_KEY}-sets`, JSON.stringify(data));

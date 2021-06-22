@@ -44,7 +44,7 @@ export type PresetData = {
     renderParams: RenderParams;
 };
 
-export const STORAGE_KEY = 'noise-gen-xp10-525n';
+export const STORAGE_KEY = 'noisegen-xp10525n';
 
 //#region Worker
 
