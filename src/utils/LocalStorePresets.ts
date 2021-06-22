@@ -29,14 +29,6 @@ export function defPresets(): PresetData[] {
         }).filter(Boolean) as PresetData[];
 
         return data;
-        //let rpm = renderParams4Store(data.rpm);
-        // if (rpm) {
-        //     let config: AppConfig = {
-        //         canvasBg: data.can,
-        //         renderParams: rpm,
-        //     };
-        //     return config;
-        // }
     } catch (error) {
     }
     return [];

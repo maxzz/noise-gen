@@ -42,12 +42,12 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
         <div className="preset px-1 py-2 cursor-pointer select-none transform active:scale-[.97]" onClick={() => selectItem(item)}>
             <div className="relative border-4 border-gray-50" style={{ width: `${PRESET_W + 8}px`, height: `${PRESET_H + 8}px` }}>
                 {/* +8 for double border size */}
-                <img
+                {item.preview && <img
                     className="maybe-broken w-full h-full object-cover"
                     src={item.preview} alt="preset"
-                />
+                />}
 
-                <div
+                {item.preview && <div
                     className="absolute p-1 -top-2 -right-1.5
                         border rounded-full text-gray-500 border-gray-500 bg-gray-50
                         remove-preset"
@@ -57,7 +57,7 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
                     <svg className="h-3 w-3" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeWidth={4} d="M6 18L18 6M6 6l12 12" />
                     </svg>
-                </div>
+                </div>}
 
             </div>
         </div>
