@@ -3,9 +3,15 @@ import { I2W, I4W, RenderParams } from './types';
 
 const runtime: Worker = self as any;
 
-function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingContext2D, renderParams: RenderParams) {
+interface RenderProps {
+    gen: NoiseGenerator;
+    ctx: CanvasRenderingContext2D;
+    rpm: RenderParams;
+}
 
-    const simplex = noiseGenerator.get(renderParams.seed);
+function renderBody({ gen, ctx, rpm }: RenderProps) {
+
+    const simplex = gen.get(rpm.seed);
 
     function fn(x: number, y: number) {
         //return simplex.noise2D(x / 10, y / 10);
@@ -16,12 +22,12 @@ function renderBody(noiseGenerator: NoiseGenerator, ctx: CanvasRenderingContext2
     let renderContext: RenderContext = {
         ctx,
         noiseFn: fn,
-        params: renderParams.genParams,
+        params: rpm.genParams,
     };
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     let paths = gridNoise(renderContext);
-    ctx.fillStyle = renderParams.color;
+    ctx.fillStyle = rpm.color;
     ctx.fill(paths[0]);
 }
 
@@ -62,7 +68,7 @@ function RunStuff() {
         switch (event.data.type) {
             case 'run': {
                 renderParams = event.data.renderParams;
-                renderBody(noiseGenerator, ctx, renderParams);
+                renderBody({ gen: noiseGenerator, ctx, rpm: renderParams });
                 break;
             }
             case 'get-preview': {
