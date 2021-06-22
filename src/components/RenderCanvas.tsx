@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { useAtom } from 'jotai';
 import { ColorCanvasAtom, CreateAppendPresetAtom, InitPreviewsUpdateAtom, ManualSizeAtom, RenderParamsAtom, UpdatePresetPreviewAtom } from '../atoms';
@@ -8,9 +8,9 @@ import useCanvasWorker from '../hooks/useCanvasWorker';
 import { useUpdateAtom } from 'jotai/utils';
 
 export default function Canvas() {
-    const canvas = React.useRef<HTMLCanvasElement>(null);
+    const canvas = useRef<HTMLCanvasElement>(null);
     const worker = useCanvasWorker(canvas);
-    const containerRef = React.useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const isHovered = useHoverDirty(containerRef);
     const [dragging, setDragging] = useState(false);
     const [canvasSizeRef, { width: widthRaw, height: heightRaw }] = useMeasure<HTMLDivElement>();
