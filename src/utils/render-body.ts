@@ -3,7 +3,7 @@ import { GenParams } from './types';
 //import colors from 'simple-color-functions';
 
 export type RenderContext = {
-    ctx: CanvasRenderingContext2D;
+    ctx: CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D;
     noiseFn: (x: number, y: number) => number;
     progress?: (v: number) => boolean;    // v - progress [0..1]; running time in ms; returns boolean: continue or stop
     params: GenParams;

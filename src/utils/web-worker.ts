@@ -5,7 +5,7 @@ const runtime: Worker = self as any;
 
 interface RenderProps {
     gen: NoiseGenerator;
-    ctx: CanvasRenderingContext2D;
+    ctx: CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D;
     rpm: RenderParams;
 }
 
@@ -37,6 +37,7 @@ function RunStuff() {
     let canvasElm: OffscreenCanvas;
     let ctx: CanvasRenderingContext2D | null;
     let noiseGenerator = new NoiseGenerator();
+    let noiseGeneratorPreview = new NoiseGenerator();
     let renderParams: RenderParams = {} as RenderParams;
 
     runtime.onmessage = (event: I2W.Message) => {
@@ -82,26 +83,28 @@ function RunStuff() {
                     smallCtx.drawImage(canvasElm, 0, 0, min, min, 0, 0, w, h);
 
                     smallCanvas.convertToBlob().then(function _toBlob(blob) {
-                        runtime.postMessage({
-                            type: 'preview-blob',
-                            blob,
-                            renderParams
-                        } as I4W.Preview);
+                        runtime.postMessage({ type: 'preview-blob', blob, renderParams } as I4W.Preview);
                     });
                 }
                 break;
             }
             case 'get-preview-id': {
+                const ev: I2W.GetPreviewId = event.data;
+                const smallCanvas = new OffscreenCanvas(ev.smallWidth, ev.smallHeight);
+                const smallCtx = smallCanvas.getContext('2d');
+                if (smallCtx) {
+                    renderBody({ gen: noiseGeneratorPreview, ctx: smallCtx, rpm: renderParams });
+
+                    smallCanvas.convertToBlob().then(function _toBlob(blob) {
+                        runtime.postMessage({ type: 'preview-blob-id', blob, id: ev.id, renderParams: ev.renderParams } as I4W.PreviewId);
+                    });
+                }
                 break;
             }
             case 'get-image': {
                 const promiseId = event.data.promiseId;
                 canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {
-                    runtime.postMessage({
-                        type: 'got-image',
-                        blob,
-                        resolveId: promiseId,
-                    } as I4W.Image);
+                    runtime.postMessage({ type: 'got-image', blob, resolveId: promiseId } as I4W.Image);
                 });
                 break;
             }
