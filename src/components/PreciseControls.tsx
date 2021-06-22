@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, RenderWorkerAtom, PresetsAtom, RenderParamsAtom, RemovePresetAtom, AppBackgroundUrlAtom, InitPreviewsUpdateAtom } from '../atoms';
-import { GENPARAMS, I2W, PresetData } from '../utils/types';
+import { GENPARAMS, I2W, PresetData, PRESET_H, PRESET_W } from '../utils/types';
 import Slider from './Slider';
 import PresetSizeIcons from './PresetSizeIcons';
 
@@ -29,9 +29,6 @@ interface PreviewBoxProps {
     deleteItem: (id: string) => void;
     selectItem: (item: PresetData) => void;
 }
-
-const PRESET_W = 56;
-const PRESET_H = 56;
 
 function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     return (

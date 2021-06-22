@@ -53,6 +53,8 @@ export type PresetData = {
     renderParams: RenderParams;
 };
 
+export const PRESET_W = 56;
+export const PRESET_H = 56;
 export const STORAGE_KEY = 'noisegen-xp10525n';
 
 //#region Worker

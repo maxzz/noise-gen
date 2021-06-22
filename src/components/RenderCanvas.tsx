@@ -12,7 +12,7 @@ export default function Canvas() {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const isHovered = useHoverDirty(containerRef);
     const [dragging, setDragging] = useState(false);
-    const [canvasSizeRef, { width: widthRow, height: heightRow }] = useMeasure<HTMLDivElement>();
+    const [canvasSizeRef, { width: widthRaw, height: heightRaw }] = useMeasure<HTMLDivElement>();
     const [renderParams] = useAtom(RenderParamsAtom);
     const [colorCanvas] = useAtom(ColorCanvasAtom);
     const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
@@ -21,8 +21,8 @@ export default function Canvas() {
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
     const [manualSize, setManualSize] = useAtom(ManualSizeAtom);
     useEffect(() => {
-        widthRow && heightRow && setManualSize({ w: widthRow, h: heightRow });
-    }, [widthRow, heightRow]);
+        widthRaw && heightRaw && setManualSize({ w: widthRaw, h: heightRaw });
+    }, [widthRaw, heightRaw]);
 
     useEffect(() => {
         if (worker) {
@@ -46,11 +46,11 @@ export default function Canvas() {
     useDebounce(() => {
         worker?.postMessage({
             type: 'run',
-            canvasWidth: widthRow,
-            canvasHeight: heightRow,
+            canvasWidth: widthRaw,
+            canvasHeight: heightRaw,
             renderParams
         } as I2W.Run);
-    }, 100, [widthRow, heightRow, renderParams]);
+    }, 100, [widthRaw, heightRaw, renderParams]);
 
     return (
         <div className="w-full h-full flex items-center">
@@ -70,7 +70,7 @@ export default function Canvas() {
                         transform active:scale-0"
                     size={manualSize} setSize={setManualSize} onActivated={(active: boolean) => setDragging(active)}
                 />
-                {(dragging || isHovered) && <div className="absolute text-[.6rem] text-gray-700">{widthRow} x {heightRow}</div>}
+                {(dragging || isHovered) && <div className="absolute text-[.6rem] text-gray-700">{widthRaw} x {heightRaw}</div>}
             </div>
         </div>
     );

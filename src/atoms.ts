@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 import { defAppSettings, storeChangesDebounced } from './utils/LocalStoreParams';
 import { WorkerEx } from './hooks/useCanvasWorker';
-import { GENPARAMS, GenParams, I2W, I4W, PresetData, RenderParams, STORAGE_KEY } from './utils/types';
+import { GENPARAMS, GenParams, I2W, I4W, PresetData, PRESET_H, PRESET_W, RenderParams } from './utils/types';
 import uuid from './utils/uuid';
 import { atomWithCallback } from './hooks/atomsX';
 import { defPresets, storePresets } from './utils/LocalStorePresets';
@@ -139,8 +139,8 @@ export const InitPreviewsUpdateAtom = atom(
 				if (!preset.preview) {
 					const msg: I2W.GetPreviewId = {
 						type: 'get-preview-id',
-						smallWidth: 56, //PRESET_W,
-						smallHeight: 56, //PRESET_W,
+						smallWidth: PRESET_W,
+						smallHeight: PRESET_H,
 						id: preset.id,
 						renderParams: preset.renderParams,
 					};
