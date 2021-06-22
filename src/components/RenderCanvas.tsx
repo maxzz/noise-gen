@@ -26,8 +26,14 @@ export default function Canvas() {
     useEffect(() => {
         if (worker) {
             worker.onmessage = (event: I4W.Message) => {
-                if (event.data.type === 'preview-blob') {
-                    createAppendPreset(event.data);
+                switch (event.data.type) {
+                    case 'preview-blob': {
+                        createAppendPreset(event.data);
+                        break;
+                    }
+                    case 'preview-blob-id': {
+                        break;
+                    }
                 }
             };
         }
