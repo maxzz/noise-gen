@@ -28,6 +28,21 @@ function Slider({
     );
 }
 
+function Sliders() {
+    const [n1, setN1] = useAtom(N1Atom);
+    const [n2, setN2] = useAtom(N2Atom);
+    const [distortion, setDistortion] = useAtom(DistortionAtom);
+    const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
+    return (
+        <>
+            <Slider min={GENPARAMS.min.n1} max={GENPARAMS.max.n1} value={n1} onChange={setN1} label="Noise 1" />
+            <Slider min={GENPARAMS.min.n2} max={GENPARAMS.max.n2} value={n2} onChange={setN2} label="Noise 2" />
+            <Slider min={GENPARAMS.min.distortion} max={GENPARAMS.max.distortion} value={distortion} onChange={setDistortion} label="Distortion" />
+            <Slider min={GENPARAMS.min.dotDiameter} max={GENPARAMS.max.dotDiameter} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
+        </>
+    );
+}
+
 interface PreviewBoxProps {
     item: PresetData;
     deleteItem: (id: string) => void;
@@ -102,10 +117,6 @@ const saveBlobData = (function () {
 }());
 
 function PreciseControls() {
-    const [n1, setN1] = useAtom(N1Atom);
-    const [n2, setN2] = useAtom(N2Atom);
-    const [distortion, setDistortion] = useAtom(DistortionAtom);
-    const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
     const [worker] = useAtom(RenderWorkerAtom);
     const [, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
 
@@ -129,10 +140,7 @@ function PreciseControls() {
 
     return (
         <div className="py-2 bg-purple-100 border rounded border-gray-400">
-            <Slider min={GENPARAMS.min.n1} max={GENPARAMS.max.n1} value={n1} onChange={setN1} label="Noise 1" />
-            <Slider min={GENPARAMS.min.n2} max={GENPARAMS.max.n2} value={n2} onChange={setN2} label="Noise 2" />
-            <Slider min={GENPARAMS.min.distortion} max={GENPARAMS.max.distortion} value={distortion} onChange={setDistortion} label="Distortion" />
-            <Slider min={GENPARAMS.min.dotDiameter} max={GENPARAMS.max.dotDiameter} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
+            <Sliders />
 
             {/* Actions */}
             <div className="px-2 py-2 flex space-x-2">
