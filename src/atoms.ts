@@ -74,14 +74,18 @@ export const GeneratePresetAtom = atom(
 	}
 );
 
-export const RenderParamsAtom = atom<RenderParams, RenderParams>(
+export const RenderParamsAtom = atom<RenderParams>(
 	(get) => {
 		return {
 			seed: get(SeedAtom),
 			color: get(ColorAtom),
 			genParams: get(GenParamsAtom)
 		};
-	},
+	}
+);
+
+export const SetRenderParamsAtom = atom(
+	null,
 	(_get, set, renderParams: RenderParams) => {
 		set(ColorAtom, renderParams.color);
 		set(SeedAtom, renderParams.seed);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, RenderWorkerAtom, PresetsAtom, RenderParamsAtom, RemovePresetAtom, AppBackgroundUrlAtom, InitPreviewsUpdateAtom } from '../atoms';
+import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, RenderWorkerAtom, PresetsAtom, RemovePresetAtom, AppBackgroundUrlAtom, SetRenderParamsAtom } from '../atoms';
 import { GENPARAMS, I2W, PresetData, PRESET_H, PRESET_W } from '../utils/types';
 import Slider from './Slider';
 import PresetSizeIcons from './PresetSizeIcons';
@@ -56,7 +56,7 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
 function PreviewBoxes() {
     const [presets] = useAtom(PresetsAtom);
     const [worker] = useAtom(RenderWorkerAtom);
-    const [, setRenderParams] = useAtom(RenderParamsAtom);
+    const [, setRenderParams] = useAtom(SetRenderParamsAtom);
     const [, removePreset] = useAtom(RemovePresetAtom);
 
     function deleteItem(id: string) {
