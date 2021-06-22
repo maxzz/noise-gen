@@ -65,10 +65,19 @@ export namespace I2W { // To Worker
         renderParams: RenderParams;
     };
 
-    export type GetPreview = {
+    export type GetPreview = { // Preview for newly created images
         type: 'get-preview';
         smallWidth: number;
         smallHeight: number;
+    };
+
+    export type GetPreviewId = { // Preview for loaded from storage presets
+        type: 'get-preview-id';
+        smallWidth: number;
+        smallHeight: number;
+
+        id: string;
+        renderParams: RenderParams;
     };
 
     export type GetImage = {
@@ -82,9 +91,17 @@ export namespace I4W { // From Worker
         data: Preview | Image;
     };
 
-    export type Preview = {
+    export type Preview = { // Preview for newly created images
         type: 'preview-blob';
-        blob: Blob,
+        blob: Blob;
+        renderParams: RenderParams;
+    };
+
+    export type PreviewId = { // Preview for loaded from storage presets
+        type: 'preview-blob-id';
+        blob: Blob;
+
+        id: string;
         renderParams: RenderParams;
     };
 
@@ -98,6 +115,8 @@ export namespace I4W { // From Worker
 //#endregion Worker
 
 // packing / unpacking
+
+//#region RenderParams packing
 
 export function renderParams2Store(v: RenderParams): string {
     let arr = [v.color, v.seed, v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter];
@@ -121,3 +140,5 @@ export function renderParams4Store(packed: string): RenderParams | undefined {
     };
     return v;
 }
+
+//#endregion RenderParams packing

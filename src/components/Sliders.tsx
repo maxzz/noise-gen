@@ -172,9 +172,7 @@ function Sliders() {
 
             <div className="px-1 flex flex-wrap">
                 {/* Presets */}
-                {presets.map((item) => (
-                    <PreviewBox key={item.id} item={item} deleteItem={deleteItem} selectItem={selectItem} />
-                ))}
+                {presets.map((item) => <PreviewBox key={item.id} item={item} deleteItem={deleteItem} selectItem={selectItem} />)}
             </div>
         </div>
     );
