@@ -146,8 +146,8 @@ export const InitPreviewsUpdateAtom = atom(
 						id: preset.id,
 						renderParams: preset.renderParams,
 					};
-					
-					console.log('send request msg', worker, msg);
+
+					console.log('send request', msg);
 	
 					worker?.postMessage(msg);
 				}

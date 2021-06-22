@@ -89,13 +89,20 @@ function RunStuff() {
                 break;
             }
             case 'get-preview-id': {
-                console.log('recieved <get-preview-id>', event.data);
+                console.log('recieved', event.data);
 
                 const ev: I2W.GetPreviewId = event.data;
+                let min = Math.min(ev.largeWidth, ev.largeHeight);
+
+                const bigCanvas = new OffscreenCanvas(ev.largeWidth, ev.largeHeight);
+                const bigCtx = bigCanvas.getContext('2d');
+
                 const smallCanvas = new OffscreenCanvas(ev.smallWidth, ev.smallHeight);
                 const smallCtx = smallCanvas.getContext('2d');
-                if (smallCtx) {
-                    renderBody({ gen: noiseGeneratorPreview, ctx: smallCtx, rpm: ev.renderParams });
+
+                if (bigCtx && smallCtx) {
+                    renderBody({ gen: noiseGeneratorPreview, ctx: bigCtx, rpm: ev.renderParams });
+                    smallCtx.drawImage(bigCanvas, 0, 0, min, min, 0, 0, ev.smallWidth, ev.smallHeight);
 
                     smallCanvas.convertToBlob().then(function _toBlob(blob) {
                         runtime.postMessage({ type: 'preview-blob-id', blob, id: ev.id, renderParams: ev.renderParams } as I4W.PreviewId);
