@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Sliders.scss';
 import { useAtom } from 'jotai';
 import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, RenderWorkerAtom, PresetsAtom, RenderParamsAtom, RemovePresetAtom, AppBackgroundUrlAtom } from '../atoms';
@@ -64,6 +64,29 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     );
 }
 
+function PreviewBoxes() {
+    const [presets] = useAtom(PresetsAtom);
+    const [, setRenderParams] = useAtom(RenderParamsAtom);
+    const [, removePreset] = useAtom(RemovePresetAtom);
+
+    function deleteItem(id: string) {
+        removePreset(id);
+    }
+
+    function selectItem(item: PresetData) {
+        setRenderParams(item.renderParams);
+    }
+
+    useEffect(() => {
+    }, []);
+
+    return (
+        <div className="px-1 flex flex-wrap">
+            {presets.map((item) => <PreviewBox key={item.id} item={item} deleteItem={deleteItem} selectItem={selectItem} />)}
+        </div>
+    );
+}
+
 const saveBlobData = (function () {
     const a = document.createElement("a");
     document.body.appendChild(a);
@@ -84,9 +107,6 @@ function Sliders() {
     const [distortion, setDistortion] = useAtom(DistortionAtom);
     const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
     const [worker] = useAtom(RenderWorkerAtom);
-    const [presets] = useAtom(PresetsAtom);
-    const [, setRenderParams] = useAtom(RenderParamsAtom);
-    const [, removePreset] = useAtom(RemovePresetAtom);
     const [, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
 
     function appendNew() {
@@ -107,16 +127,6 @@ function Sliders() {
         }
     }
 
-    function deleteItem(id: string) {
-        removePreset(id);
-    }
-
-    function selectItem(item: PresetData) {
-        setRenderParams(item.renderParams);
-    }
-
-    //console.log('sliders');
-
     return (
         <div className="py-2 bg-purple-100 border rounded border-gray-400">
             <Slider min={GENPARAMS.min.n1} max={GENPARAMS.max.n1} value={n1} onChange={setN1} label="Noise 1" />
@@ -135,8 +145,7 @@ function Sliders() {
                 {/* Preset set as background */}
                 <div
                     className="border rounded border-gray-400 flex items-center justify-center text-gray-500
-                        transform active:scale-[.97] cursor-pointer
-                        "
+                        transform active:scale-[.97] cursor-pointer"
                     title="Set canvas image as application background"
                     onClick={setAsBackground}
                 >
@@ -170,10 +179,8 @@ function Sliders() {
                 </div>
             </div>
 
-            <div className="px-1 flex flex-wrap">
-                {/* Presets */}
-                {presets.map((item) => <PreviewBox key={item.id} item={item} deleteItem={deleteItem} selectItem={selectItem} />)}
-            </div>
+            {/* Presets */}
+            <PreviewBoxes />
         </div>
     );
 }
