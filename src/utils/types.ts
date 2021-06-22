@@ -13,11 +13,12 @@ export type NoiseParams = {
     w: number;      // scale w, def is 1 if unused.
 };
 
-//export type NoiseParams = [number, number, number, number?, number?];
+//export type NoiseParamsRaw = [number, number, number, number, number];
 
 export type RenderParams = {
     seed: string;
     color: string;
+    noise: NoiseParams;
     genParams: GenParams;
 };
 
@@ -48,33 +49,33 @@ export const GENPARAMS: GenParamsLimits = {
     },
 };
 
-type NoiseParamsSet = {
+export type NoiseParamsSet = {
     def: NoiseParams;
     min: NoiseParams;
     max: NoiseParams;
     gen: NoiseParams;
 };
 
-type NoiseParamsLimits = {
-    [2]: NoiseParamsSet;
-    [3]: NoiseParamsSet;
-    [4]: NoiseParamsSet;
+export type NoiseParamsLimits = {
+    d2: NoiseParamsSet;
+    d3: NoiseParamsSet;
+    d4: NoiseParamsSet;
 };
 
 export const NOISEPARAMS: NoiseParamsLimits = {
-    '2': {
+    d2: {
         def: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
         min: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
         max: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
         gen: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
     },
-    '3': {
+    d3: {
         def: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
         min: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
         max: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
         gen: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
     },
-    '4': {
+    d4: {
         def: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
         min: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
         max: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
@@ -163,6 +164,38 @@ export namespace I4W { // From Worker
 //#endregion Worker
 
 // packing / unpacking
+
+//#region Seed, Noise packing
+
+export function noiseParams2Store(seed: string, n?: NoiseParams): string {
+    return n ? ['v7', n.dim, n.x, n.y, n.z, n.w, seed ].join('|') : seed;
+}
+
+export function noiseParams4Store(seed: string = ''): {seed: string; noise: NoiseParams} {
+    const def = {
+        seed: seed,
+        noise: NOISEPARAMS.d3.def
+    }
+    let arr = seed.split('|');
+    if (!arr.length || arr.length < 5) {
+        return def;
+    }
+    let d = +arr[1];
+    let dim = (d !== 2 && d !== 3 && d !== 4 ? 3 : d) as 2 | 3 | 4;
+    def.noise = {
+        dim,
+        x: +arr[2],
+        y: +arr[3],
+        z: +arr[4],
+        w: +arr[5],
+    };
+    if (arr.length === 6) {
+        def.seed = arr[6];
+    }
+    return def;
+}
+
+//#endregion Seed, Noise packing
 
 //#region RenderParams packing
 

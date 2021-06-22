@@ -1,6 +1,6 @@
 import { Getter } from 'jotai';
 import { ColorCanvasAtom, RenderParamsAtom } from '../atoms';
-import { RenderParams, renderParams2Store, renderParams4Store, STORAGE_KEY } from './types';
+import { NOISEPARAMS, RenderParams, renderParams2Store, renderParams4Store, STORAGE_KEY } from './types';
 import debounce from './debounce';
 
 const PARAMS_KEY = `${STORAGE_KEY}-params`;
@@ -26,15 +26,15 @@ type AppConfig = {
 //21.3,-36.51,13.87,0.73 good for default
 //{"canvasBg":"black","renderParams":{"seed":"43780585678984507","color":"rgba(212,133,30,1)","genParams":{"n1":31.95,"n2":-24.52,"distortion":106.94,"dotDiameter":0.5}}}
 
-type PackedAppConfig = {
+type AppConfigRaw = {
     can: string; // canvasBg
     rpm: string; // renderparams
 };
 
-export const defAppSettings: AppConfig = function () {
+export const defAppSettings: AppConfig = function (): AppConfig {
     let raw = localStorage.getItem(PARAMS_KEY);
     try {
-        let data: PackedAppConfig = raw && JSON.parse(raw);
+        let data: AppConfigRaw = raw && JSON.parse(raw);
         let rpm = renderParams4Store(data.rpm);
         if (rpm) {
             let config: AppConfig = {
@@ -50,6 +50,7 @@ export const defAppSettings: AppConfig = function () {
         renderParams: {
             seed: '13753932482421605',
             color: '#887ed6',
+            noise: NOISEPARAMS.d3.def,
             genParams: {
                 n1: 6.3, // def 10
                 n2: 6.3, // def 10
@@ -61,7 +62,7 @@ export const defAppSettings: AppConfig = function () {
 }();
 
 export const storeAppParams = debounce((get: Getter) => {
-    let data: PackedAppConfig = {
+    let data: AppConfigRaw = {
         can: get(ColorCanvasAtom),
         rpm: renderParams2Store(get(RenderParamsAtom)),
     };
