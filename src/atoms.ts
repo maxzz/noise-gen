@@ -132,6 +132,7 @@ export const InitPreviewsUpdateAtom = atom(
 	(get, set) => {
 		const worker = get(RenderWorkerAtom);
 		const presets = get(PresetsAtom);
+		const canvasSize = get(ManualSizeAtom);
 		if (worker) {
 			console.log('preview worker init');
 	
@@ -141,6 +142,9 @@ export const InitPreviewsUpdateAtom = atom(
 						type: 'get-preview-id',
 						smallWidth: PRESET_W,
 						smallHeight: PRESET_H,
+						largeWidth: canvasSize.w,
+						largeHeight: canvasSize.h,
+				
 						id: preset.id,
 						renderParams: preset.renderParams,
 					};

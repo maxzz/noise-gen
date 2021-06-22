@@ -86,6 +86,8 @@ export namespace I2W { // To Worker
         type: 'get-preview-id';     // the reply is 'preview-blob-id'
         smallWidth: number;
         smallHeight: number;
+        largeWidth: number;
+        largeHeight: number;
 
         id: string;
         renderParams: RenderParams;
