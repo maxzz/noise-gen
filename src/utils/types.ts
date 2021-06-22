@@ -96,3 +96,28 @@ export namespace I4W { // From Worker
 }
 
 //#endregion Worker
+
+// packing / unpacking
+
+export function renderParams2Store(v: RenderParams): string {
+    let arr = [v.color, v.seed, v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter];
+    return `v7|${arr.join('|')}`;
+}
+
+export function renderParams4Store(packed: string): RenderParams | undefined {
+    let arr = (packed || '').split('|');
+    if (arr.length !== 7 || arr[0] !== 'v7') {
+        return;
+    }
+    let v: RenderParams = {
+        color: arr[1],
+        seed: arr[2],
+        genParams: {
+            n1: +arr[3],
+            n2: +arr[4],
+            distortion: +arr[5],
+            dotDiameter: +arr[6],
+        }
+    };
+    return v;
+}

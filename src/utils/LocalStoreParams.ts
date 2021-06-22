@@ -1,6 +1,6 @@
-import { RenderParams, STORAGE_KEY } from './types';
 import { Getter } from 'jotai';
 import { ColorCanvasAtom, RenderParamsAtom } from '../atoms';
+import { RenderParams, renderParams2Store, renderParams4Store, STORAGE_KEY } from './types';
 import debounce from './debounce';
 
 const PARAMS_KEY = `${STORAGE_KEY}-params`;
@@ -67,31 +67,6 @@ export const storeChangesDebounced = debounce((get: Getter) => {
     };
     localStorage.setItem(PARAMS_KEY, JSON.stringify(data));
 }, 1000);
-
-// packing / unpacking
-
-function renderParams2Store(v: RenderParams): string {
-    let arr = [v.color, v.seed, v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter];
-    return `v7|${arr.join('|')}`;
-}
-
-function renderParams4Store(packed: string): RenderParams | undefined {
-    let arr = (packed || '').split('|');
-    if (arr.length !== 7 || arr[0] !== 'v7') {
-        return;
-    }
-    let v: RenderParams = {
-        color: arr[1],
-        seed: arr[2],
-        genParams: {
-            n1: +arr[3],
-            n2: +arr[4],
-            distortion: +arr[5],
-            dotDiameter: +arr[6],
-        }
-    };
-    return v;
-}
 
 // (function test() {
 //     let packed = renderParams2Store(defAppSettings.renderParams);
