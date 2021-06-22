@@ -60,7 +60,7 @@ export const defAppSettings: AppConfig = function () {
     };
 }();
 
-export const storeChangesDebounced = debounce((get: Getter) => {
+export const storeAppParams = debounce((get: Getter) => {
     let data: PackedAppConfig = {
         can: get(ColorCanvasAtom),
         rpm: renderParams2Store(get(RenderParamsAtom)),

@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 import { atomWithCallback } from './hooks/atomsX';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I2W, I4W, PresetData, PRESET_H, PRESET_W, RenderParams } from './utils/types';
-import { defAppSettings, storeChangesDebounced } from './utils/LocalStoreParams';
+import { defAppSettings, storeAppParams } from './utils/LocalStoreParams';
 import { defPresets, storePresets } from './utils/LocalStorePresets';
 import uuid from './utils/uuid';
 
@@ -16,18 +16,8 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 //#region Generator current params
 
 // GenParams
-/*
-export const GenParamsRawAtom = atom<GenParams>(defAppSettings.renderParams.genParams);
 
-export const GenParamsAtom = atom(
-	(get) => get(GenParamsRawAtom),
-	(get, set, params: GenParams) => {
-		set(GenParamsRawAtom, params);
-		storeChangesDebounced(get);
-	}
-);
-*/
-export const GenParamsAtom = atomWithCallback<GenParams>(defAppSettings.renderParams.genParams, (_, get) => storeChangesDebounced(get));
+export const GenParamsAtom = atomWithCallback<GenParams>(defAppSettings.renderParams.genParams, (_, get) => storeAppParams(get));
 
 export const N1Atom = atom(
 	(get) => get(GenParamsAtom).n1,
@@ -51,9 +41,9 @@ export const DotDiameterAtom = atom(
 
 // Current seed, color, and canvas color
 
-export const ColorAtom = atomWithCallback(defAppSettings.renderParams.color, (_, get) => storeChangesDebounced(get));
-export const ColorCanvasAtom = atomWithCallback(defAppSettings.canvasBg, (_, get) => storeChangesDebounced(get));
-export const SeedAtom = atomWithCallback(defAppSettings.renderParams.seed, (_, get) => storeChangesDebounced(get));
+export const ColorAtom = atomWithCallback(defAppSettings.renderParams.color, (_, get) => storeAppParams(get));
+export const ColorCanvasAtom = atomWithCallback(defAppSettings.canvasBg, (_, get) => storeAppParams(get));
+export const SeedAtom = atomWithCallback(defAppSettings.renderParams.seed, (_, get) => storeAppParams(get));
 
 export const RandomSeedAtom = atom(
 	(get) => get(SeedAtom),
