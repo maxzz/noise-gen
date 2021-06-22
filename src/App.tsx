@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from './atoms';
 import Logo from './components/Logo';
 import Canvas from './components/RenderCanvas';
-import PreciseControls from './components/Sliders';
+import PreciseControls from './components/PreciseControls';
 import MainControls from './components/MainControls';
 
 function App() {
