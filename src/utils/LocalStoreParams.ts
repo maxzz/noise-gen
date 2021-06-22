@@ -3,6 +3,8 @@ import { Getter } from 'jotai';
 import { ColorCanvasAtom, RenderParamsAtom } from '../atoms';
 import debounce from './debounce';
 
+const PARAMS_KEY = `${STORAGE_KEY}-params`;
+
 type AppConfig = {
     canvasBg: string;
     renderParams: RenderParams;
@@ -30,7 +32,7 @@ type PackedAppConfig = {
 };
 
 export const defAppSettings: AppConfig = function () {
-    let raw = localStorage.getItem(`${STORAGE_KEY}-params`);
+    let raw = localStorage.getItem(PARAMS_KEY);
     try {
         let data: PackedAppConfig = raw && JSON.parse(raw);
         let rpm = renderParams4Store(data.rpm);
@@ -63,7 +65,7 @@ export const storeChangesDebounced = debounce((get: Getter) => {
         can: get(ColorCanvasAtom),
         rpm: renderParams2Store(get(RenderParamsAtom)),
     };
-    localStorage.setItem(`${STORAGE_KEY}-params`, JSON.stringify(data));
+    localStorage.setItem(PARAMS_KEY, JSON.stringify(data));
 }, 1000);
 
 // packing / unpacking

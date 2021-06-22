@@ -3,6 +3,8 @@ import { PresetsAtom } from '../atoms';
 import debounce from './debounce';
 import { PresetData, STORAGE_KEY } from './types';
 
+const PRESETS_KEY = `${STORAGE_KEY}-presets2`;
+
 type PresetsStoreItems = {
 
 }
@@ -12,7 +14,7 @@ type PresetsStoreCache = {
 }
 
 export function defPresets(): PresetData[] {
-    let raw = localStorage.getItem(`${STORAGE_KEY}-presets2`);
+    let raw = localStorage.getItem(`${PRESETS_KEY}`);
     try {
         let data = raw && JSON.parse(raw) as PresetData[];
         return data || [];
@@ -31,5 +33,5 @@ export function defPresets(): PresetData[] {
 
 export const storePresets = debounce((get: Getter) => {
     let data: PresetData[] = get(PresetsAtom);
-    localStorage.setItem(`${STORAGE_KEY}-presets2`, JSON.stringify(data));
+    localStorage.setItem(`${PRESETS_KEY}`, JSON.stringify(data));
 }, 1000);
