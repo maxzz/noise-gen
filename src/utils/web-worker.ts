@@ -89,8 +89,6 @@ function RunStuff() {
                 break;
             }
             case 'get-preview-id': {
-                console.log('recieved', event.data);
-
                 const ev: I2W.GetPreviewId = event.data;
                 let min = Math.min(ev.largeWidth, ev.largeHeight);
 

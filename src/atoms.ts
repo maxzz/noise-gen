@@ -142,13 +142,10 @@ export const InitPreviewsUpdateAtom = atom(
 						smallHeight: PRESET_H,
 						largeWidth: canvasSize.w,
 						largeHeight: canvasSize.h,
-				
+
 						id: preset.id,
 						renderParams: preset.renderParams,
 					};
-
-					console.log('send request', msg);
-	
 					worker?.postMessage(msg);
 				}
 			});
