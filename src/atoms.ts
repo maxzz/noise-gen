@@ -15,6 +15,10 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 
 //#region Generator current params
 
+// Canvas size
+
+export const ManualSizeAtom = atom({ w: 325, h: 300 });
+
 // GenParams
 
 export const GenParamsAtom = atomWithCallback<GenParams>(defAppSettings.renderParams.genParams, (_, get) => storeAppParams(get));
@@ -46,10 +50,10 @@ export const ColorCanvasAtom = atomWithCallback(defAppSettings.canvasBg, (_, get
 export const SeedAtom = atomWithCallback(defAppSettings.renderParams.seed, (_, get) => storeAppParams(get));
 
 export const RandomSeedAtom = atom(
-	(get) => get(SeedAtom),
+	null,
 	(_get, set) => set(SeedAtom, `${Math.random()}`.replace(/^0\./, '')));
 
-function Random(min: number, max: number): number {
+function random(min: number, max: number): number {
 	return Math.random() * (max - min) + min;
 }
 
@@ -57,10 +61,10 @@ export const GeneratePresetAtom = atom(
 	null,
 	(_get, set) => {
 		let newSet: GenParams = {
-			n1: Random(GENPARAMS.min.n1, GENPARAMS.gen.n1),
-			n2: Random(GENPARAMS.min.n2, GENPARAMS.gen.n2),
-			distortion: Random(GENPARAMS.min.distortion, GENPARAMS.gen.distortion),
-			dotDiameter: Random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter),
+			n1: random(GENPARAMS.min.n1, GENPARAMS.gen.n1),
+			n2: random(GENPARAMS.min.n2, GENPARAMS.gen.n2),
+			distortion: random(GENPARAMS.min.distortion, GENPARAMS.gen.distortion),
+			dotDiameter: random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter),
 		};
 		set(GenParamsAtom, newSet);
 	}
@@ -105,7 +109,7 @@ export const UpdatePresetPreviewAtom = atom(
 				let presets = get(PresetsAtom);
 				let presetIdx = presets.findIndex((preset: PresetData) => preset.id === preview.id);
 				if (presetIdx < 0) {
-					console.log('preset not found. removed', preview);
+					console.log('preset not found. likely removed', preview);
 					return;
 				}
 
@@ -121,7 +125,6 @@ export const UpdatePresetPreviewAtom = atom(
 		reader.readAsDataURL(preview.blob);
 	}
 );
-
 
 export const InitPreviewsUpdateAtom = atom(
 	null,
@@ -174,29 +177,25 @@ export const CreateAppendPresetAtom = atom(
 
 //#endregion Presets
 
-// Canvas size
-
-export const ManualSizeAtom = atom({ w: 325, h: 300 });
-
 //#region Application background
 
 // Set Application background
 
-const _AppBackgroundUrlAtom = atom('');
+const AppBackgroundUrlRawAtom = atom('');
 
 export const AppBackgroundUrlAtom = atom(
-	(get) => get(_AppBackgroundUrlAtom),
+	(get) => get(AppBackgroundUrlRawAtom),
 	(get, set, blob: Blob | null) => {
-		let current = get(_AppBackgroundUrlAtom);
+		let current = get(AppBackgroundUrlRawAtom);
 		if (current) {
 			window.URL.revokeObjectURL(current);
 		}
-		set(_AppBackgroundUrlAtom, blob ? window.URL.createObjectURL(blob) : '');
+		set(AppBackgroundUrlRawAtom, blob ? window.URL.createObjectURL(blob) : '');
 	}
 );
 
 export const AppBackgroundActiveAtom = atom(
-	(get) => !!get(_AppBackgroundUrlAtom)
+	(get) => !!get(AppBackgroundUrlRawAtom)
 );
 
 //#endregion Application background
