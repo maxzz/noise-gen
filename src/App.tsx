@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from './atoms';
 import Logo from './components/Logo';
 import Canvas from './components/RenderCanvas';
-import Sliders from './components/Sliders';
+import PreciseControls from './components/Sliders';
 import MainControls from './components/MainControls';
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
                 {/* Controls */}
                 <div className="w-full flex flex-col space-y-1">
                     <MainControls />
-                    <Sliders />
+                    <PreciseControls />
                 </div>
 
                 {/* Canvas */}
