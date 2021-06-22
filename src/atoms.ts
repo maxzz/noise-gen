@@ -1,5 +1,4 @@
 import { atom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 import { defAppSettings, storeChangesDebounced } from './utils/LocalStoreParams';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I4W, PresetData, RenderParams, STORAGE_KEY } from './utils/types';

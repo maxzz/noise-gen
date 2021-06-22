@@ -80,12 +80,12 @@ function PreviewBoxes() {
                     id: preset.id,
                     renderParams: preset.renderParams,
                 };
-                console.log('send request msg', msg);
+                console.log('send request msg', worker, msg);
                 
                 worker?.postMessage(msg);
             }
         });
-    }, []);
+    }, [worker]);
 
     return (
         <div className="px-1 flex flex-wrap">
