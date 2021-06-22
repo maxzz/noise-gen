@@ -60,7 +60,7 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
 function PreviewBoxes() {
     const [presets] = useAtom(PresetsAtom);
     const [worker] = useAtom(RenderWorkerAtom);
-    const initPreviewsUpdate = useUpdateAtom(InitPreviewsUpdateAtom);
+    //const initPreviewsUpdate = useUpdateAtom(InitPreviewsUpdateAtom);
     const [, setRenderParams] = useAtom(RenderParamsAtom);
     const [, removePreset] = useAtom(RemovePresetAtom);
 
@@ -93,9 +93,9 @@ function PreviewBoxes() {
     //     }
     // }, [worker]);
 
-    useEffect(() => {
-        initPreviewsUpdate();
-    }, [worker]);
+    // useEffect(() => {
+    //     initPreviewsUpdate();
+    // }, [worker]);
 
     return (
         <div className="px-1 flex flex-wrap">
