@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, RenderWorkerAtom, PresetsAtom, RenderParamsAtom, RemovePresetAtom, AppBackgroundUrlAtom } from '../atoms';
+import { useUpdateAtom } from 'jotai/utils';
+import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, RenderWorkerAtom, PresetsAtom, RenderParamsAtom, RemovePresetAtom, AppBackgroundUrlAtom, InitPreviewsUpdateAtom } from '../atoms';
 import { GENPARAMS, I2W, PresetData } from '../utils/types';
 import Slider from './Slider';
 import PresetSizeIcons from './PresetSizeIcons';
@@ -62,6 +63,7 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
 function PreviewBoxes() {
     const [presets] = useAtom(PresetsAtom);
     const [worker] = useAtom(RenderWorkerAtom);
+    const initPreviewsUpdate = useUpdateAtom(InitPreviewsUpdateAtom);
     const [, setRenderParams] = useAtom(RenderParamsAtom);
     const [, removePreset] = useAtom(RemovePresetAtom);
 
@@ -73,25 +75,29 @@ function PreviewBoxes() {
         setRenderParams(item.renderParams);
     }
 
+    // useEffect(() => {
+    //     if (worker) {
+    //         console.log('preview worker init');
+
+    //         presets.forEach((preset: PresetData) => {
+    //             if (!preset.preview) {
+    //                 const msg: I2W.GetPreviewId = {
+    //                     type: 'get-preview-id',
+    //                     smallWidth: PRESET_W,
+    //                     smallHeight: PRESET_H,
+    //                     id: preset.id,
+    //                     renderParams: preset.renderParams,
+    //                 };
+    //                 console.log('send request msg', worker, msg);
+
+    //                 worker?.postMessage(msg);
+    //             }
+    //         });
+    //     }
+    // }, [worker]);
+
     useEffect(() => {
-        if (worker) {
-            console.log('preview worker init');
-
-            presets.forEach((preset: PresetData) => {
-                if (!preset.preview) {
-                    const msg: I2W.GetPreviewId = {
-                        type: 'get-preview-id',
-                        smallWidth: PRESET_W,
-                        smallHeight: PRESET_H,
-                        id: preset.id,
-                        renderParams: preset.renderParams,
-                    };
-                    console.log('send request msg', worker, msg);
-
-                    worker?.postMessage(msg);
-                }
-            });
-        }
+        initPreviewsUpdate();
     }, [worker]);
 
     return (
