@@ -1,10 +1,10 @@
 import { atom } from 'jotai';
-import { defAppSettings, storeChangesDebounced } from './utils/LocalStoreParams';
+import { atomWithCallback } from './hooks/atomsX';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I2W, I4W, PresetData, PRESET_H, PRESET_W, RenderParams } from './utils/types';
-import uuid from './utils/uuid';
-import { atomWithCallback } from './hooks/atomsX';
+import { defAppSettings, storeChangesDebounced } from './utils/LocalStoreParams';
 import { defPresets, storePresets } from './utils/LocalStorePresets';
+import uuid from './utils/uuid';
 
 //#region Offscreen canvas and Worker
 
@@ -16,7 +16,7 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 //#region Generator current params
 
 // GenParams
-
+/*
 export const GenParamsRawAtom = atom<GenParams>(defAppSettings.renderParams.genParams);
 
 export const GenParamsAtom = atom(
@@ -26,6 +26,8 @@ export const GenParamsAtom = atom(
 		storeChangesDebounced(get);
 	}
 );
+*/
+export const GenParamsAtom = atomWithCallback<GenParams>(defAppSettings.renderParams.genParams, (_, get) => storeChangesDebounced(get));
 
 export const N1Atom = atom(
 	(get) => get(GenParamsAtom).n1,
