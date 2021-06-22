@@ -2,7 +2,7 @@
     "name": "noise-gen",
     "description": "The noise generator working out of the main thread",
     "license": "MIT",
-    "version": "0.0.1",
+    "version": "0.2.19",
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",

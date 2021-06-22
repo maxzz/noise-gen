@@ -30,6 +30,7 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
     [ ] Features
         [x] Add persistance of the current generated parameters.
         [x] Persist the user defined presets.
+            [x] Generate missing or predefined previews.
         [ ] Add predefined presets (that exist always).
         [ ] Drag and Drop canvas image to the existing preset slot.
         [ ] Progress bar on slow reders.
