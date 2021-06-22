@@ -5,14 +5,15 @@ export type GenParams = {
     dotDiameter: number;
 };
 
-export type NoiseParamsOld = {
-    type: 2 | 3 | 4;
-    scaleX: number;
-    scaleY: number;
-    scaleZ?: number;
+export type NoiseParams = {
+    dim: 2 | 3 | 4; // Noise dimension 2D, 3D, 4D.
+    x: number;      // scale x, def is 1 if unused.
+    y: number;      // scale y, def is 1 if unused.
+    z: number;      // scale z, def is 1 if unused.
+    w: number;      // scale w, def is 1 if unused.
 };
 
-export type NoiseParams = [number, number, number, number];
+//export type NoiseParams = [number, number, number, number?, number?];
 
 export type RenderParams = {
     seed: string;
@@ -45,6 +46,14 @@ export const GENPARAMS: GenParamsLimits = {
         distortion: 400,
         dotDiameter: 1,
     },
+};
+
+export const NOISEPARAMS: NoiseParams = {
+    dim: 2,
+    x: 1,
+    y: 1,
+    z: 1,
+    w: 1,
 };
 
 export type PresetData = {
