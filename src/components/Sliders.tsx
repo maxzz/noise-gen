@@ -81,6 +81,7 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
 
 function PreviewBoxes() {
     const [presets] = useAtom(PresetsAtom);
+    const [worker] = useAtom(RenderWorkerAtom);
     const [, setRenderParams] = useAtom(RenderParamsAtom);
     const [, removePreset] = useAtom(RemovePresetAtom);
 
@@ -93,6 +94,20 @@ function PreviewBoxes() {
     }
 
     useEffect(() => {
+        presets.forEach((preset: PresetData) => {
+            if (!preset.preview) {
+                const msg: I2W.GetPreviewId = {
+                    type: 'get-preview-id',
+                    smallWidth: PRESET_W,
+                    smallHeight: PRESET_H,
+                    id: preset.id,
+                    renderParams: preset.renderParams,
+                };
+                console.log('send request msg', msg);
+                
+                worker?.postMessage(msg);
+            }
+        });
     }, []);
 
     return (

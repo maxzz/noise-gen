@@ -89,6 +89,7 @@ function RunStuff() {
                 break;
             }
             case 'get-preview-id': {
+                console.log('recieved <get-preview-id>', event.data);
                 const ev: I2W.GetPreviewId = event.data;
                 const smallCanvas = new OffscreenCanvas(ev.smallWidth, ev.smallHeight);
                 const smallCtx = smallCanvas.getContext('2d');
