@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { useAtom } from 'jotai';
-import { ColorCanvasAtom, CreateAppendPresetAtom, ManualSizeAtom, RenderParamsAtom } from '../atoms';
+import { ColorCanvasAtom, CreateAppendPresetAtom, ManualSizeAtom, RenderParamsAtom, UpdatePresetPreviewAtom } from '../atoms';
 import DragZone from './DragZone';
 import { I2W, I4W } from '../utils/types';
 import useCanvasWorker from '../hooks/useCanvasWorker';
@@ -16,6 +16,7 @@ export default function Canvas() {
     const [renderParams] = useAtom(RenderParamsAtom);
     const [colorCanvas] = useAtom(ColorCanvasAtom);
     const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
+    const [, updatePresetPreview] = useAtom(UpdatePresetPreviewAtom);
    
     // const [manualSize, manualSizeSet] = useState<{ w: number; h: number; }>({ w: 350, h: 540 });
     const [manualSize, setManualSize] = useAtom(ManualSizeAtom);
@@ -32,6 +33,7 @@ export default function Canvas() {
                         break;
                     }
                     case 'preview-blob-id': {
+                        updatePresetPreview(event.data);
                         break;
                     }
                 }
