@@ -61,7 +61,7 @@ function RunStuff() {
             }
         }
 
-        if (!ctx.canvas.width || !ctx.canvas.height) {
+        if ((!ctx.canvas.width || !ctx.canvas.height) && event.data.type !== 'get-preview-id') {
             console.log('no canvas size yet');
             return;
         }
@@ -94,7 +94,7 @@ function RunStuff() {
                 const smallCanvas = new OffscreenCanvas(ev.smallWidth, ev.smallHeight);
                 const smallCtx = smallCanvas.getContext('2d');
                 if (smallCtx) {
-                    renderBody({ gen: noiseGeneratorPreview, ctx: smallCtx, rpm: renderParams });
+                    renderBody({ gen: noiseGeneratorPreview, ctx: smallCtx, rpm: ev.renderParams });
 
                     smallCanvas.convertToBlob().then(function _toBlob(blob) {
                         runtime.postMessage({ type: 'preview-blob-id', blob, id: ev.id, renderParams: ev.renderParams } as I4W.PreviewId);
