@@ -10,6 +10,9 @@ function Sliders() {
     const [n2, setN2] = useAtom(N2Atom);
     const [distortion, setDistortion] = useAtom(DistortionAtom);
     const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
+    
+    console.log('sliders', n1, n2, distortion, dotDiameter);
+    
     return (
         <>
             <Slider min={GENPARAMS.min.n1} max={GENPARAMS.max.n1} value={n1} onChange={setN1} label="Noise 1" />
@@ -71,20 +74,22 @@ function PreviewBoxes() {
     }
 
     useEffect(() => {
-        presets.forEach((preset: PresetData) => {
-            if (!preset.preview) {
-                const msg: I2W.GetPreviewId = {
-                    type: 'get-preview-id',
-                    smallWidth: PRESET_W,
-                    smallHeight: PRESET_H,
-                    id: preset.id,
-                    renderParams: preset.renderParams,
-                };
-                console.log('send request msg', worker, msg);
-                
-                worker?.postMessage(msg);
-            }
-        });
+        if (worker) {
+            presets.forEach((preset: PresetData) => {
+                if (!preset.preview) {
+                    const msg: I2W.GetPreviewId = {
+                        type: 'get-preview-id',
+                        smallWidth: PRESET_W,
+                        smallHeight: PRESET_H,
+                        id: preset.id,
+                        renderParams: preset.renderParams,
+                    };
+                    console.log('send request msg', worker, msg);
+
+                    worker?.postMessage(msg);
+                }
+            });
+        }
     }, [worker]);
 
     return (
