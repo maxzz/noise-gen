@@ -5,14 +5,14 @@ export type GenParams = {
     dotDiameter: number;
 };
 
-export type NoiseParams = {
+export type NoiseParamsOld = {
     type: 2 | 3 | 4;
     scaleX: number;
     scaleY: number;
     scaleZ?: number;
 };
 
-export type NoiseParams2 = [number, number, number, number];
+export type NoiseParams = [number, number, number, number];
 
 export type RenderParams = {
     seed: string;
