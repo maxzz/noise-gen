@@ -11,7 +11,7 @@ function Sliders() {
     const [distortion, setDistortion] = useAtom(DistortionAtom);
     const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
     
-    console.log('sliders', n1, n2, distortion, dotDiameter);
+    //console.log('sliders', n1, n2, distortion, dotDiameter);
     
     return (
         <>
@@ -94,7 +94,7 @@ function PreviewBoxes() {
 
     return (
         <div className="px-1 flex flex-wrap">
-            {presets.map((item) => <PreviewBox key={item.id} item={item} deleteItem={deleteItem} selectItem={selectItem} />)}
+            {presets.map((preset) => <PreviewBox key={preset.id} item={preset} deleteItem={deleteItem} selectItem={selectItem} />)}
         </div>
     );
 }

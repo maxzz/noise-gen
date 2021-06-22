@@ -119,7 +119,7 @@ export const UpdatePresetPreviewAtom = atom(
 					renderParams: preview.renderParams,
 				};
 				presets[presetIdx] = preset;
-				set(PresetsAtom, presets);
+				set(PresetsAtom, [...presets]);
 			}
 		};
 		reader.readAsDataURL(preview.blob);
