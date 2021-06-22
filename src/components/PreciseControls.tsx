@@ -1,32 +1,9 @@
 import React, { useEffect } from 'react';
-import './Sliders.scss';
 import { useAtom } from 'jotai';
 import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, RenderWorkerAtom, PresetsAtom, RenderParamsAtom, RemovePresetAtom, AppBackgroundUrlAtom } from '../atoms';
 import { GENPARAMS, I2W, PresetData } from '../utils/types';
+import Slider from './Slider';
 import PresetSizeIcons from './PresetSizeIcons';
-
-function Slider({
-    label,
-    min,
-    max,
-    step = .01,
-    value,
-    onChange
-}: { label: string, min: number, max: number, step?: number, value: number, onChange: (value: number) => void; }) {
-    return (
-        <div className="px-2 w-full h-5 flex items-center justify-center space-x-2 text-xs text-purple-900">
-            <div className="w-[4.5rem] flex-none">{label}</div>
-            <input
-                className="ui-slider" type="range"
-                value={value} onChange={(event) => onChange(+event.target.value)}
-                min={min} max={max} step={step}
-            />
-            <input className="w-8 bg-purple-100 text-[.6rem]"
-                value={value} onChange={(event) => onChange(+event.target.value)}
-            />
-        </div>
-    );
-}
 
 function Sliders() {
     const [n1, setN1] = useAtom(N1Atom);
