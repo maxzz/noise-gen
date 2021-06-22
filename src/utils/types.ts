@@ -48,12 +48,38 @@ export const GENPARAMS: GenParamsLimits = {
     },
 };
 
-export const NOISEPARAMS: NoiseParams = {
-    dim: 2,
-    x: 1,
-    y: 1,
-    z: 1,
-    w: 1,
+type NoiseParamsSet = {
+    def: NoiseParams;
+    min: NoiseParams;
+    max: NoiseParams;
+    gen: NoiseParams;
+};
+
+type NoiseParamsLimits = {
+    [2]: NoiseParamsSet;
+    [3]: NoiseParamsSet;
+    [4]: NoiseParamsSet;
+};
+
+export const NOISEPARAMS: NoiseParamsLimits = {
+    '2': {
+        def: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+        min: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+        max: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+        gen: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+    },
+    '3': {
+        def: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+        min: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+        max: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+        gen: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+    },
+    '4': {
+        def: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+        min: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+        max: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+        gen: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+    },
 };
 
 export type PresetData = {
