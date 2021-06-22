@@ -75,6 +75,8 @@ function PreviewBoxes() {
 
     useEffect(() => {
         if (worker) {
+            console.log('preview worker init');
+
             presets.forEach((preset: PresetData) => {
                 if (!preset.preview) {
                     const msg: I2W.GetPreviewId = {

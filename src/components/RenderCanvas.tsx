@@ -26,6 +26,8 @@ export default function Canvas() {
 
     useEffect(() => {
         if (worker) {
+            console.log('canvas worker init');
+            
             worker.onmessage = (event: I4W.Message) => {
                 switch (event.data.type) {
                     case 'preview-blob': {
