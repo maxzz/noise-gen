@@ -1,5 +1,5 @@
 import React from 'react';
-import { RadioGroup } from '@headlessui/react';
+//import { RadioGroup } from '@headlessui/react';
 import Slider from './Slider';
 import ChevronHorizontal from './ChevronHorizontal';
 
@@ -57,7 +57,7 @@ function NoiseEditor() {
                 </div>
 
                 {/* Noise type */}
-                <div className="flex items-center mt-2">
+                {/* <div className="flex items-center mt-2">
                     <div className="text-xs">Noise</div>
                     <RadioGroup value={selected} onChange={setNoise}>
                         <div className="px-2 flex place-content-evenly space-x-1">
@@ -79,7 +79,7 @@ function NoiseEditor() {
                             ))}
                         </div>
                     </RadioGroup>
-                </div>
+                </div> */}
                 {/* Noise params */}
                 <div className="pl-1 text-right">
                     <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="x" />
