@@ -4,6 +4,7 @@ import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, RenderWorkerAtom, Pres
 import { GENPARAMS, I2W, PresetData, PRESET_H, PRESET_W } from '../utils/types';
 import Slider from './Slider';
 import PresetSizeIcons from './PresetSizeIcons';
+import NoiseEditor from './NoiseEditor';
 
 function Sliders() {
     const [n1, setN1] = useAtom(N1Atom);
@@ -23,6 +24,7 @@ function Sliders() {
                 <Slider min={GENPARAMS.min.n2} max={GENPARAMS.max.n2} value={n2} onChange={setN2} label="Noise 2" />
                 <Slider min={GENPARAMS.min.distortion} max={GENPARAMS.max.distortion} value={distortion} onChange={setDistortion} label="Distortion" />
                 <Slider min={GENPARAMS.min.dotDiameter} max={GENPARAMS.max.dotDiameter} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
+                <NoiseEditor />
             </div>
         </div>
     );
