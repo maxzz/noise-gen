@@ -1,8 +1,7 @@
 import React from 'react';
 import { SliderProps } from './Slider';
+import './Sliders.scss';
 import ChevronHorizontal from './ChevronHorizontal';
-
-const noises = ['2D', '3D', '4D'];
 
 function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
@@ -16,7 +15,7 @@ function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boo
 
 function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onChange}: SliderProps) {
     return (
-        <div className="px-2 w-full h-4 flex items-center justify-center space-x-2 text-xs text-purple-900">
+        <div className="px-2 w-full h-4 flex items-center justify-center space-x-2 text-[.6rem] text-purple-900">
             <div className="flex-none" style={{ width: labelWidth }}>{label}</div>
             <input
                 className="ui-slider" type="range"
@@ -61,10 +60,10 @@ function NoiseEditor() {
 
                 {/* Noise params */}
                 <div className="pl-1 mt-1 text-right">
-                    <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="x" />
-                    <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="y" />
-                    <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="z" />
-                    <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="w" />
+                    <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="scale x" />
+                    <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="scale y" />
+                    <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="scale z" />
+                    <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="scale w" />
                 </div>
             </div>
         </div>

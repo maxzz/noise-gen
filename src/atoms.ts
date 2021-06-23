@@ -2,8 +2,8 @@ import { atom } from 'jotai';
 import { atomWithCallback } from './hooks/atomsX';
 import { WorkerEx } from './hooks/useCanvasWorker';
 import { GENPARAMS, GenParams, I2W, I4W, PresetData, PRESET_H, PRESET_W, RenderParams } from './utils/types';
-import { defAppSettings, storeAppParams } from './utils/LocalStoreParams';
-import { defPresets, storePresets } from './utils/LocalStorePresets';
+import { defAppSettings, storeAppParams } from './utils/storageAppConfig';
+import { defPresets, storePresets } from './utils/storagePresets';
 import uuid from './utils/uuid';
 
 //#region Offscreen canvas and Worker
