@@ -30,6 +30,7 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
 }
 
 function NoiseEditor() {
+    const [open, setOpen] = React.useState(false);
     const [selected, setSelected] = React.useState(0);
 
     function setNoise(value: number) {
@@ -41,13 +42,16 @@ function NoiseEditor() {
     }
 
     return (
-        <div className="w-36 -mt-2 pt-2 pl-1 relative text-purple-900 border-l border-purple-300 flex flex-col">
-            <div className="absolute top-1.5 right-1 p-1 cursor-pointer hover:ring-1 ring-gray-600 rounded-[4px] scale-[1]">
+        <div className="relative text-purple-900 border-l border-purple-300 flex flex-col">
+            <div
+                className={`absolute top-1.5 right-1 p-1 cursor-pointer hover:ring-1 ring-gray-600 rounded-[4px] ${open ? 'scale-[-1]' : ''}`}
+                onClick={() => setOpen((prev) => !prev)}
+            >
                 <ChevronHorizontal />
             </div>
 
             {/* Editor body */}
-            <div className="">
+            {open && <div className="w-36 -mt-2 pt-2 pl-1">
                 {/* Noise type */}
                 <div className="flex items-center text-xs select-none">
                     <div className="">Noise</div>
@@ -65,7 +69,7 @@ function NoiseEditor() {
                     <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="scale z" />
                     <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="scale w" />
                 </div>
-            </div>
+            </div>}
         </div>
     );
 }
