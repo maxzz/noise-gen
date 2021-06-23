@@ -168,7 +168,7 @@ export namespace I4W { // From Worker
 //#region Seed, Noise packing
 
 export function noiseParams2Store(seed: string, n?: NoiseParams): string {
-    return n ? ['v7', n.dim, n.x, n.y, n.z, n.w, seed].join('|') : seed;
+    return n ? ['v7', n.dim, n.x, n.y, n.z, n.w, seed].join('_') : seed; // TODO: compare to def, don't save def
 }
 
 export function noiseParams4Store(seed: string = ''): { seed: string; noise: NoiseParams; } {
@@ -177,7 +177,7 @@ export function noiseParams4Store(seed: string = ''): { seed: string; noise: Noi
         noise: NOISEPARAMS.d3.def
     };
     if (seed.match(/^v7/)) {
-        let arr = seed.split('|');
+        let arr = seed.split('_');
         if (arr.length >= 6) {
             let d = +arr[1];
             let dim = (d !== 2 && d !== 3 && d !== 4 ? 3 : d) as 2 | 3 | 4;
@@ -189,8 +189,8 @@ export function noiseParams4Store(seed: string = ''): { seed: string; noise: Noi
                 w: +arr[5],
             };
         }
-        if (arr.length === 7) {
-            def.seed = arr[6];
+        if (arr.length >= 7) {
+            def.seed = arr.slice(6).join('');
         }
     }
     return def;
