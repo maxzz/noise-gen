@@ -200,9 +200,28 @@ export function noiseParams4Store(seed: string = ''): { seed: string; noise: Noi
 
 //#region RenderParams packing
 
+export type AppConfig = {
+    canvasBg: string;
+    renderParams: RenderParams;
+};
+
+export const APPCONFIG: AppConfig = {
+    canvasBg: 'transparent',
+    renderParams: {
+        seed: '13753932482421605',
+        color: '#887ed6',
+        noise: NOISEPARAMS.d3.def,
+        genParams: {
+            n1: 6.3, // def 10
+            n2: 6.3, // def 10
+            distortion: 1, // def 2
+            dotDiameter: .1, // def 1
+        }
+    }
+};
+
 export function renderParams2Store(v: RenderParams): string {
-    let seed = noiseParams2Store(v.seed, v.noise);
-    let arr = [v.color, seed, v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter];
+    let arr = [v.color, noiseParams2Store(v.seed, v.noise), v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter];
     return `v7|${arr.join('|')}`;
 }
 
@@ -211,11 +230,9 @@ export function renderParams4Store(packed: string): RenderParams | undefined {
     if (arr.length !== 7 || arr[0] !== 'v7') {
         return;
     }
-    let {seed , noise} = noiseParams4Store(arr[2]);
     let v: RenderParams = {
         color: arr[1],
-        seed,
-        noise,
+        ...noiseParams4Store(arr[2]),
         genParams: {
             n1: +arr[3],
             n2: +arr[4],

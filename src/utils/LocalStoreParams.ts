@@ -1,14 +1,9 @@
 import { Getter } from 'jotai';
 import { ColorCanvasAtom, RenderParamsAtom } from '../atoms';
-import { NOISEPARAMS, RenderParams, renderParams2Store, renderParams4Store, STORAGE_KEY } from './types';
+import { AppConfig, APPCONFIG, renderParams2Store, renderParams4Store, STORAGE_KEY } from './types';
 import debounce from './debounce';
 
 const PARAMS_KEY = `${STORAGE_KEY}-params`;
-
-type AppConfig = {
-    canvasBg: string;
-    renderParams: RenderParams;
-};
 
 // pre-defined previews:
 //-17.4,6.3,34,2.24
@@ -45,20 +40,7 @@ export const defAppSettings: AppConfig = function (): AppConfig {
         }
     } catch (error) {
     }
-    return {
-        canvasBg: 'transparent',
-        renderParams: {
-            seed: '13753932482421605',
-            color: '#887ed6',
-            noise: NOISEPARAMS.d3.def,
-            genParams: {
-                n1: 6.3, // def 10
-                n2: 6.3, // def 10
-                distortion: 1, // def 2
-                dotDiameter: .1, // def 1
-            }
-        }
-    };
+    return APPCONFIG;
 }();
 
 export const storeAppParams = debounce((get: Getter) => {
