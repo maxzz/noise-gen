@@ -17,22 +17,28 @@ function NoiseEditor() {
     }
 
     return (
-        <div className="w-36 -mt-2 pt-2 pl-1 relative border-l border-purple-300 flex flex-col">
+        <div className="w-36 -mt-2 pt-2 pl-1 relative text-purple-900 border-l border-purple-300 flex flex-col">
             <div className="absolute top-1.5 right-1 p-1 cursor-pointer hover:ring-1 ring-gray-600 rounded-[4px] scale-[1]">
                 <ChevronHorizontal />
             </div>
 
             {/* Editor body */}
             <div className="">
-                <div className="flex items-center text-xs">
+                <div className="flex items-center text-xs select-none">
                     <div className="">Noise</div>
                     <div className="pl-2 flex items-center text-[.6rem] space-x-1">
                         <div className={`w-5 h-5 px-1 py-0.5 border border-purple-400 rounded flex items-center justify-center cursor-pointer
-                            ${selected === 0 ? 'bg-white': ''}`}>2D</div>
+                            ${selected === 0 ? 'bg-white ring-1 ring-offset-1 ring-offset-red-100 ring-purple-400': ''}`}
+                            onClick={() => setNoise(0)}
+                        >2D</div>
                         <div className={`w-5 h-5 px-1 py-0.5 border border-purple-400 rounded flex items-center justify-center cursor-pointer
-                            ${selected === 1 ? 'bg-white': ''}`}>3D</div>
+                            ${selected === 1 ? 'bg-white ring-1 ring-offset-1 ring-offset-red-100 ring-purple-400': ''}`}
+                            onClick={() => setNoise(1)}
+                        >3D</div>
                         <div className={`w-5 h-5 px-1 py-0.5 border border-purple-400 rounded flex items-center justify-center cursor-pointer
-                            ${selected === 2 ? 'bg-white': ''}`}>4D</div>
+                            ${selected === 2 ? 'bg-white ring-1 ring-offset-1 ring-offset-red-100 ring-purple-400': ''}`}
+                            onClick={() => setNoise(2)}
+                        >4D</div>
                     </div>
                 </div>
 
