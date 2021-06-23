@@ -221,8 +221,7 @@ export const APPCONFIG: AppConfig = {
 };
 
 export function renderParams2Store(v: RenderParams): string {
-    let arr = [v.color, noiseParams2Store(v.seed, v.noise), v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter];
-    return `v7|${arr.join('|')}`;
+    return ['v7', v.color, noiseParams2Store(v.seed, v.noise), v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter].join('|');
 }
 
 export function renderParams4Store(packed: string): RenderParams | undefined {
