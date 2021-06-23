@@ -1,6 +1,7 @@
 import React from 'react';
 import { RadioGroup } from '@headlessui/react';
 import Slider from './Slider';
+import ChevronHorizontal from './ChevronHorizontal';
 
 const noises = ['2D', '3D', '4D'];
 
@@ -40,7 +41,9 @@ function NoiseEditor() {
                         ))}
                     </div>
                 </RadioGroup>
-                <div className="absolute -top-0.5 right-1 text-sm rounded-[4px] border border-gray-600">&gt;&gt;</div>
+                <div className="absolute -top-0.5 right-1 text-sm rounded-[4px] border border-gray-600">
+                    <ChevronHorizontal />
+                </div>
             </div>
 
             {/* Noise params */}
