@@ -33,7 +33,7 @@ function SizeIcon({ select, step }: { select: () => void, step: number; }) {
     );
 }
 
-function PresetSizeIcons() {
+function SizeBoxes() {
     const [manualSize, setManualSize] = useAtom(ManualSizeAtom);
 
     function setSize(w: number, h: number) {
@@ -45,4 +45,4 @@ function PresetSizeIcons() {
     </>);
 }
 
-export default PresetSizeIcons;
+export default SizeBoxes;

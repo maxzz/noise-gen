@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, RenderWorkerAtom, PresetsAtom, RemovePresetAtom, AppBackgroundUrlAtom, SetRenderParamsAtom } from '../atoms';
 import { GENPARAMS, I2W, PresetData, PRESET_H, PRESET_W } from '../utils/types';
 import Slider from './Slider';
-import PresetSizeIcons from './PresetSizeIcons';
+import SizeBoxes from './SizeBoxes';
 import NoiseEditor from './NoiseEditor';
 
 function Sliders() {
@@ -124,7 +124,7 @@ function Actions() {
 
             {/* Canvas size buttons */}
             <div className="px-1 flex items-center justify-center space-x-1 border rounded border-gray-400">
-                <PresetSizeIcons />
+                <SizeBoxes />
             </div>
 
             {/* Preset set as background */}
