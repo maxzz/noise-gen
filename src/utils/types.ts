@@ -201,7 +201,8 @@ export function noiseParams4Store(seed: string = ''): { seed: string; noise: Noi
 //#region RenderParams packing
 
 export function renderParams2Store(v: RenderParams): string {
-    let arr = [v.color, v.seed, v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter];
+    let seed = noiseParams2Store(v.seed, v.noise);
+    let arr = [v.color, seed, v.genParams.n1, v.genParams.n2, v.genParams.distortion, v.genParams.dotDiameter];
     return `v7|${arr.join('|')}`;
 }
 
@@ -210,9 +211,11 @@ export function renderParams4Store(packed: string): RenderParams | undefined {
     if (arr.length !== 7 || arr[0] !== 'v7') {
         return;
     }
+    let {seed , noise} = noiseParams4Store(arr[2]);
     let v: RenderParams = {
         color: arr[1],
-        seed: arr[2],
+        seed,
+        noise,
         genParams: {
             n1: +arr[3],
             n2: +arr[4],
