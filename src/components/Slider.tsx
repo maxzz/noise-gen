@@ -7,6 +7,7 @@ export interface SliderProps {
     max: number;
     step?: number;
     value: number;
+    labelWidth?: string;
     onChange: (value: number) => void;
 }
 
@@ -15,12 +16,13 @@ function Slider({
     min,
     max,
     step = .01,
+    labelWidth = '4.5rem',
     value,
     onChange
 }: SliderProps) {
     return (
         <div className="px-2 w-full h-5 flex items-center justify-center space-x-2 text-xs text-purple-900">
-            <div className="w-[4.5rem] flex-none">{label}</div>
+            <div className="flex-none" style={{ width: labelWidth }}>{label}</div>
             <input
                 className="ui-slider" type="range"
                 value={value} onChange={(event) => onChange(+event.target.value)}
