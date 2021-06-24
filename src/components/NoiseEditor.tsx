@@ -32,8 +32,9 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
                 // step={0.01}
                 inputMode="decimal"
                 value={value} onChange={(event) => {
-                    console.log(beautifyFloat(event.target.value));
-                    onChange(+beautifyFloat(event.target.value));
+                    let n = beautifyFloat(event.target.value);
+                    console.log(n, +n);
+                    onChange(+n);
                     // onChange(parseFloat(event.target.value));
                 }}
             />
@@ -46,6 +47,13 @@ function NoiseEditor() {
     const [noise] = useAtom(NoiseAtom);
     const [, setNoiseType] = useAtom(SetNoiseTypeAtom);
     const [, setNoiseScale] = useAtom(SetNoiseScaleAtom);
+
+    const [local, setLocal] = React.useState({
+        x: noise.x,
+        y: noise.y,
+        z: noise.z,
+        w: noise.w,
+    });
 
     function setNoise(value: number) {
         setNoiseType(value);
@@ -71,11 +79,17 @@ function NoiseEditor() {
 
                 {/* Noise params */}
                 <div className="pl-1 mt-1 text-right">
+                    <Slider labelWidth="2rem" min={.01} max={10} value={local.x} onChange={(value) => setScale('x', value)} label="scale x" />
+                    <Slider labelWidth="2rem" min={.01} max={10} value={local.y} onChange={(value) => setScale('y', value)} label="scale y" />
+                    {noise.dim > 2 && <Slider labelWidth="2rem" min={.01} max={10} value={local.z} onChange={(value) => setScale('z', value)} label="scale z" />}
+                    {noise.dim > 3 && <Slider labelWidth="2rem" min={.01} max={10} value={local.w} onChange={(value) => setScale('w', value)} label="scale w" />}
+                </div>
+                {/* <div className="pl-1 mt-1 text-right">
                     <Slider labelWidth="2rem" min={.01} max={10} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />
                     <Slider labelWidth="2rem" min={.01} max={10} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />
                     {noise.dim > 2 && <Slider labelWidth="2rem" min={.01} max={10} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
                     {noise.dim > 3 && <Slider labelWidth="2rem" min={.01} max={10} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
-                </div>
+                </div> */}
             </div>}
         </div>
     );
