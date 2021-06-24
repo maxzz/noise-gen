@@ -45,7 +45,7 @@ function MainControls() {
             <div className="w-8 h-8 flex-none">
                 <ButtonShowNoise />
             </div>
-            <ButtonChooseColor className="w-8 h-8" />
+            <ButtonChooseColor className="w-8 h-8" style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }} />
             <div className="">
                 <ButtonChooseColorBg />
             </div>
