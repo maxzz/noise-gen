@@ -1,7 +1,6 @@
 import React from 'react';
 import { SliderProps } from './Slider';
 import './Sliders.scss';
-import ChevronHorizontal from './ChevronHorizontal';
 import { useAtom } from 'jotai';
 import { ShowNoiseEditorAtom } from '../atoms';
 
@@ -32,7 +31,6 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
 }
 
 function NoiseEditor() {
-    const [open, setOpen] = React.useState(false);
     const [selected, setSelected] = React.useState(0);
 
     const [showNoiseEditor] = useAtom(ShowNoiseEditorAtom);
@@ -47,13 +45,6 @@ function NoiseEditor() {
 
     return (
         <div className="relative text-purple-900 border-l border-purple-300 flex flex-col">
-            <div
-                className={`absolute top-1.5 right-1 p-1 cursor-pointer hover:ring-1 ring-gray-600 rounded-[4px] ${open ? 'scale-[-1]' : ''}`}
-                onClick={() => setOpen((prev) => !prev)}
-            >
-                <ChevronHorizontal />
-            </div>
-
             {/* Editor body */}
             {showNoiseEditor && <div className="w-36 -mt-2 pt-2 pl-1">
                 {/* Noise type */}
