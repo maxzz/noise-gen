@@ -19,7 +19,7 @@ export default function ButtonChooseColor(props: { className: string, style?: Re
     return (
         <div className="relative select-none" ref={ref} title="Canvas color selection">
             <div
-                className={`${className} p-1 border rounded dark-frame bg-purple-100 transform active:scale-95 cursor-pointer`}
+                className={`${className} p-1 dark-frame-rounded bg-purple-100 transform active:scale-95 cursor-pointer`}
                 style={{ ...style }}
                 onClick={() => isDownSet(v => !v)}
             >

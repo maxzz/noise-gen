@@ -6,4 +6,7 @@
     .dark-frame {
         @apply border-gray-500;
     }
+    .dark-frame-rounded {
+        @apply border rounded border-gray-500;
+    }
 }

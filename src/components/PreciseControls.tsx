@@ -168,7 +168,7 @@ function Actions() {
 
 function PreciseControls() {
     return (
-        <div className="py-2 bg-purple-100 border rounded border-gray-400">
+        <div className="py-2 bg-purple-100 border rounded border-gray-400 select-none">
             <Sliders />
             <Actions />
             <PreviewBoxes />
