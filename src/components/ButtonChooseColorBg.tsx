@@ -14,10 +14,10 @@ function ButtonChooseColorBg() {
     }
     return (
         <div
-            className="w-8 h-8 rounded border-gray-500 transform active:scale-[.97] relative"
-            onClick={changeBackground}
+            className="w-8 h-8 rounded border-gray-500 transform active:scale-[.97] relative cursor-pointer"
             style={{borderWidth: backgorund === 'transparent' ? 1 : 0}}
             title={bgTitle}
+            onClick={changeBackground}
         >
             <div className="absolute border border-gray-500 rounded-[0.15rem] inset-[2px]"></div>
 
