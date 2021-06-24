@@ -24,7 +24,13 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
                 min={min} max={max} step={step}
             />
             <input className="w-8 bg-purple-100 text-[.6rem]"
-                value={value} onChange={(event) => onChange(+event.target.value)}
+                // value={value} onChange={(event) => onChange(+event.target.value)}
+                // step={0.01}
+                inputMode="numeric"
+                value={value} onChange={(event) => {
+                    console.log(parseFloat(event.target.value));
+                    onChange(parseFloat(event.target.value));
+                }}
             />
         </div>
     );
@@ -62,8 +68,8 @@ function NoiseEditor() {
                 <div className="pl-1 mt-1 text-right">
                     <Slider labelWidth="2rem" min={.01} max={10} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />
                     <Slider labelWidth="2rem" min={.01} max={10} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />
-                    <Slider labelWidth="2rem" min={.01} max={10} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />
-                    <Slider labelWidth="2rem" min={.01} max={10} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />
+                    {noise.dim > 2 && <Slider labelWidth="2rem" min={.01} max={10} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
+                    {noise.dim > 3 && <Slider labelWidth="2rem" min={.01} max={10} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
                 </div>
             </div>}
         </div>
