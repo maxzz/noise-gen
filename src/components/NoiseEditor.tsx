@@ -18,7 +18,9 @@ function beautifyFloat(v: string) {
     return (v || '').trim().replace(/ /g, '').replace(/^\./, '0.').replace(/\.$/, '.0');
 }
 
-function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onChange}: SliderProps) {
+function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onChange }: SliderProps) {
+    const [local, setLocal] = React.useState('' + value); // TODO: that is not NaN
+
     return (
         <div className="px-2 w-full h-4 flex items-center justify-center space-x-2 text-[.6rem] text-purple-900">
             <div className="flex-none" style={{ width: labelWidth }}>{label}</div>
@@ -30,11 +32,14 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
             <input className="w-8 bg-purple-100 text-[.6rem]"
                 // value={value} onChange={(event) => onChange(+event.target.value)}
                 // step={0.01}
-                inputMode="decimal"
-                value={value} onChange={(event) => {
+                value={local}
+                onChange={(event) => {
                     let n = beautifyFloat(event.target.value);
+                    setLocal(event.target.value);
                     console.log(n, +n);
-                    onChange(+n);
+                    if (!isNaN(+n)) {
+                        onChange(+n);
+                    }
                     // onChange(parseFloat(event.target.value));
                 }}
             />
@@ -60,7 +65,7 @@ function NoiseEditor() {
     }
 
     function setScale(axis: string, value: number) {
-        setNoiseScale({axis, value});
+        setNoiseScale({ axis, value });
     }
 
     return (
@@ -78,18 +83,18 @@ function NoiseEditor() {
                 </div>
 
                 {/* Noise params */}
-                <div className="pl-1 mt-1 text-right">
+                {/* <div className="pl-1 mt-1 text-right">
                     <Slider labelWidth="2rem" min={.01} max={10} value={local.x} onChange={(value) => setScale('x', value)} label="scale x" />
                     <Slider labelWidth="2rem" min={.01} max={10} value={local.y} onChange={(value) => setScale('y', value)} label="scale y" />
                     {noise.dim > 2 && <Slider labelWidth="2rem" min={.01} max={10} value={local.z} onChange={(value) => setScale('z', value)} label="scale z" />}
                     {noise.dim > 3 && <Slider labelWidth="2rem" min={.01} max={10} value={local.w} onChange={(value) => setScale('w', value)} label="scale w" />}
-                </div>
-                {/* <div className="pl-1 mt-1 text-right">
+                </div> */}
+                <div className="pl-1 mt-1 text-right">
                     <Slider labelWidth="2rem" min={.01} max={10} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />
                     <Slider labelWidth="2rem" min={.01} max={10} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />
                     {noise.dim > 2 && <Slider labelWidth="2rem" min={.01} max={10} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
                     {noise.dim > 3 && <Slider labelWidth="2rem" min={.01} max={10} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
-                </div> */}
+                </div>
             </div>}
         </div>
     );
