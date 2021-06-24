@@ -26,7 +26,10 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
             <div className="flex-none" style={{ width: labelWidth }}>{label}</div>
             <input
                 className="ui-slider" type="range"
-                value={value} onChange={(event) => onChange(+event.target.value)}
+                value={value} onChange={(event) => {
+                    setLocal(event.target.value);
+                    onChange(+event.target.value);
+                }}
                 min={min} max={max} step={step}
             />
             <input className="w-8 bg-purple-100 text-[.6rem]"

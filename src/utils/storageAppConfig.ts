@@ -20,6 +20,8 @@ const PARAMS_KEY = `${STORAGE_KEY}-params`;
 //40,40,17.45,0 good for default
 //21.3,-36.51,13.87,0.73 good for default
 //{"canvasBg":"black","renderParams":{"seed":"43780585678984507","color":"rgba(212,133,30,1)","genParams":{"n1":31.95,"n2":-24.52,"distortion":106.94,"dotDiameter":0.5}}}
+//{"can":"transparent","rpm":"v7|#887ed6|v7_2_2.51_1.32_0.01_0.01_13753932482421605|6.3|6.3|1|0.1"} <- seamless on 283x350
+//{"can":"black","rpm":"v7|#887ed6|v7_2_0.01_0.01_0.1_1_13753932482421605|24.52|-34.36|109.62|0.1"}
 
 type AppConfigRaw = {
     can: string; // canvasBg
