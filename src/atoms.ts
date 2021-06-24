@@ -31,6 +31,20 @@ export const NoiseScalesAtom = atom({
     w: 1,
 });
 
+export const SetNoiseScaleAtom = atom(
+    null,
+    (get, set, { axis, value }: { axis: string, value: number; }) => {
+        set(NoiseScalesAtom, { ...get(NoiseScalesAtom), [axis]: value });
+    }
+);
+
+export const SetNoiseTypeAtom = atom(
+    null,
+    (get, set, value: number) => {
+        set(NoiseScalesAtom, { ...get(NoiseScalesAtom), type: value });
+    }
+);
+
 // GenParams
 
 export const GenParamsAtom = atomWithCallback<GenParams>(defAppSettings.renderParams.genParams, (_, get) => storeAppParams(get));
