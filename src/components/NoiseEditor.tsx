@@ -14,6 +14,10 @@ function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boo
     );
 }
 
+function beautifyFloat(v: string) {
+    return (v || '').trim().replace(/ /g, '').replace(/^\./, '0.').replace(/\.$/, '.0');
+}
+
 function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onChange}: SliderProps) {
     return (
         <div className="px-2 w-full h-4 flex items-center justify-center space-x-2 text-[.6rem] text-purple-900">
@@ -28,8 +32,9 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
                 // step={0.01}
                 inputMode="decimal"
                 value={value} onChange={(event) => {
-                    console.log(parseFloat(event.target.value));
-                    onChange(parseFloat(event.target.value));
+                    console.log(beautifyFloat(event.target.value));
+                    onChange(+beautifyFloat(event.target.value));
+                    // onChange(parseFloat(event.target.value));
                 }}
             />
         </div>
