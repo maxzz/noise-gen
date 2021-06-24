@@ -3,6 +3,7 @@ import { SliderProps } from './Slider';
 import './Sliders.scss';
 import { atom, useAtom } from 'jotai';
 import { NoiseAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '../atoms';
+import useFloatInput from '../hooks/useFloatInput';
 
 function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
@@ -12,29 +13,6 @@ function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boo
         >{text}</div>
 
     );
-}
-
-function beautifyFloat(v: string) {
-    return (v || '').trim().replace(/ /g, '').replace(/^\./, '0.').replace(/\.$/, '.0');
-}
-
-function useFloatInput(initialValue: number, onChange: (value: number) => void) {
-    const [local, setLocal] = React.useState('' + initialValue); // TODO: that is not NaN
-
-    const onSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLocal(event.target.value);
-        onChange(+event.target.value);
-    }
-
-    const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLocal(event.target.value);
-        let n = +beautifyFloat(event.target.value);
-        if (!isNaN(n)) {
-            onChange(n);
-        }
-    }    
-    
-    return [local, onSliderChange, onInputChange] as const;
 }
 
 function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onChange }: SliderProps) {
