@@ -25,25 +25,24 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
         <div className="px-2 w-full h-4 flex items-center justify-center space-x-2 text-[.6rem] text-purple-900">
             <div className="flex-none" style={{ width: labelWidth }}>{label}</div>
             <input
-                className="ui-slider" type="range"
-                value={value} onChange={(event) => {
+                className="ui-slider"
+                type="range"
+                min={min} max={max} step={step}
+                value={value}
+                onChange={(event) => {
                     setLocal(event.target.value);
                     onChange(+event.target.value);
                 }}
-                min={min} max={max} step={step}
             />
             <input className="w-8 bg-purple-100 text-[.6rem]"
-                // value={value} onChange={(event) => onChange(+event.target.value)}
-                // step={0.01}
+                step={step}
                 value={local}
                 onChange={(event) => {
-                    let n = beautifyFloat(event.target.value);
                     setLocal(event.target.value);
-                    console.log(n, +n);
-                    if (!isNaN(+n)) {
-                        onChange(+n);
+                    let n = +beautifyFloat(event.target.value);
+                    if (!isNaN(n)) {
+                        onChange(n);
                     }
-                    // onChange(parseFloat(event.target.value));
                 }}
             />
         </div>
