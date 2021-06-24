@@ -874,10 +874,10 @@ isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
-jotai@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.0.0.tgz#d5e7f7044d89e543a9c7429a9723e11528b2760e"
-  integrity sha512-6hZGy3hqIlBlLSKppTrxDc1Vb7mi3I8eEQOIu7Kj6ceX1PSzjxdsEVC9TjAqaio8gZJEz+2ufNUf4afvbs0RXg==
+jotai@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.0.1.tgz#c962a7d279ec81a3e78d45267d90434dd1aadd5f"
+  integrity sha512-FZEXZnBdbH+HErXQP2Efzue107OB3cMoSlyZ+FG3lXGwmhgQFOpad7lDihv7kHmKMZ7YIJ0NXRhQVCD7aB+OGA==
 
 js-cookie@^2.2.1:
   version "2.2.1"
