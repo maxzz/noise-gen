@@ -1,9 +1,9 @@
 import { useAtom } from 'jotai';
 import React from 'react';
 import { GeneratePresetAtom, RandomSeedAtom, SeedAtom } from '../atoms';
-import ButtinNoiseEdit from './ButtinNoiseEdit';
-import ColorBgPicker from './ColorBgPicker';
-import ColorPicker from './ColorPicker';
+import ButtonShowNoise from './ButtonShowNoise';
+import ButtonChooseColorBg from './ButtonChooseColorBg';
+import ButtonChooseColor from './ButtonChooseColor';
 
 function MainControls() {
     const [seed, setSeed] = useAtom(SeedAtom);
@@ -42,9 +42,9 @@ function MainControls() {
                 Preset
             </button>
 
-            <ColorPicker className="w-8 h-8" />
-            <ColorBgPicker />
-            <ButtinNoiseEdit />
+            <ButtonChooseColor className="w-8 h-8" />
+            <ButtonChooseColorBg />
+            <ButtonShowNoise />
         </div>
     );
 }

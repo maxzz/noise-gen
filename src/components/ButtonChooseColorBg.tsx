@@ -6,7 +6,7 @@ const bgColors = ['black', 'white', 'transparent'];
 const bgTitle = `Perview canvas background: white/black/transparent.
 The saved image will have a transparent background.`;
 
-function ColorBgPicker() {
+function ButtonChooseColorBg() {
     const [backgorund, setBackgorund] = useAtom(ColorCanvasAtom);
     function changeBackground() {
         let newColor = (bgColors.findIndex((item) => item === backgorund) + 1) % bgColors.length;
@@ -33,4 +33,4 @@ function ColorBgPicker() {
     );
 }
 
-export default ColorBgPicker;
+export default ButtonChooseColorBg;

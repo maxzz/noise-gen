@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
-import './ColorPicker.scss';
+import './ButtonChooseColor.scss';
 import { SketchPicker, ColorResult } from 'react-color';
 import { useClickAway } from 'react-use';
 import { useAtom } from 'jotai';
 import { ColorAtom } from '../atoms';
 
-export default function ColorPicker(props: { className: string, style?: React.CSSProperties; }) {
+export default function ButtonChooseColor(props: { className: string, style?: React.CSSProperties; }) {
     const {
         className,
         style = {}

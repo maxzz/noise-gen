@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ButtinNoiseEdit() {
+function ButtonShowNoise() {
     return (
         <div className="w-6 h-6 border border-gray-600 rounded">
             <svg className="" viewBox="0 0 101 101" fill="none" stroke="currentColor">
@@ -11,4 +11,4 @@ function ButtinNoiseEdit() {
     );
 }
 
-export default ButtinNoiseEdit;
+export default ButtonShowNoise;
