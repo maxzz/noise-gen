@@ -18,8 +18,29 @@ function beautifyFloat(v: string) {
     return (v || '').trim().replace(/ /g, '').replace(/^\./, '0.').replace(/\.$/, '.0');
 }
 
+function useFloatInput(initialValue: number, onChange: (value: number) => void) {
+    const [local, setLocal] = React.useState('' + initialValue); // TODO: that is not NaN
+
+    const onSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setLocal(event.target.value);
+        onChange(+event.target.value);
+    }
+
+    const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setLocal(event.target.value);
+        let n = +beautifyFloat(event.target.value);
+        if (!isNaN(n)) {
+            onChange(n);
+        }
+    }    
+    
+    return [local, onSliderChange, onInputChange] as const;
+}
+
 function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onChange }: SliderProps) {
-    const [local, setLocal] = React.useState('' + value); // TODO: that is not NaN
+    //const [local, setLocal] = React.useState('' + value); // TODO: that is not NaN
+
+    const [local, onSliderChange, onInputChange] = useFloatInput(value, onChange);
 
     return (
         <div className="px-2 w-full h-4 flex items-center justify-center space-x-2 text-[.6rem] text-purple-900">
@@ -29,21 +50,23 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
                 type="range"
                 min={min} max={max} step={step}
                 value={value}
-                onChange={(event) => {
-                    setLocal(event.target.value);
-                    onChange(+event.target.value);
-                }}
+                onChange={onSliderChange}
+                // onChange={(event) => {
+                //     setLocal(event.target.value);
+                //     onChange(+event.target.value);
+                // }}
             />
             <input className="w-8 bg-purple-100 text-[.6rem]"
                 step={step}
                 value={local}
-                onChange={(event) => {
-                    setLocal(event.target.value);
-                    let n = +beautifyFloat(event.target.value);
-                    if (!isNaN(n)) {
-                        onChange(n);
-                    }
-                }}
+                onChange={onInputChange}
+                // onChange={(event) => {
+                //     setLocal(event.target.value);
+                //     let n = +beautifyFloat(event.target.value);
+                //     if (!isNaN(n)) {
+                //         onChange(n);
+                //     }
+                // }}
             />
         </div>
     );
