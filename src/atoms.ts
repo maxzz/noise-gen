@@ -23,6 +23,14 @@ export const ManualSizeAtom = atom({ w: 325, h: 300 });
 
 export const ShowNoiseEditorAtom = atom(false);
 
+export const NoiseScalesAtom = atom({
+    type: 2,
+    x: 1,
+    y: 1,
+    z: 1,
+    w: 1,
+});
+
 // GenParams
 
 export const GenParamsAtom = atomWithCallback<GenParams>(defAppSettings.renderParams.genParams, (_, get) => storeAppParams(get));

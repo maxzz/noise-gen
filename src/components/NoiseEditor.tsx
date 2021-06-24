@@ -2,7 +2,7 @@ import React from 'react';
 import { SliderProps } from './Slider';
 import './Sliders.scss';
 import { atom, useAtom } from 'jotai';
-import { ShowNoiseEditorAtom } from '../atoms';
+import { NoiseScalesAtom, ShowNoiseEditorAtom } from '../atoms';
 
 function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
@@ -30,18 +30,10 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
     );
 }
 
-const NoiseScalesAtom = atom({
-    x: 1,
-    y: 1,
-    z: 1,
-    w: 1,
-})
-
 function NoiseEditor() {
     const [selected, setSelected] = React.useState(0);
     const [showNoiseEditor] = useAtom(ShowNoiseEditorAtom);
     const [noiseScales, setNoiseScales] = useAtom(NoiseScalesAtom);
-
 
     function setNoise(value: number) {
         setSelected(value);
