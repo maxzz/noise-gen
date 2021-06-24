@@ -26,7 +26,7 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
             <input className="w-8 bg-purple-100 text-[.6rem]"
                 // value={value} onChange={(event) => onChange(+event.target.value)}
                 // step={0.01}
-                inputMode="numeric"
+                inputMode="decimal"
                 value={value} onChange={(event) => {
                     console.log(parseFloat(event.target.value));
                     onChange(parseFloat(event.target.value));

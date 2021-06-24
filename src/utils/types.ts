@@ -64,22 +64,22 @@ export type NoiseParamsLimits = {
 
 export const NOISEPARAMS: NoiseParamsLimits = {
     d2: {
-        def: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
-        min: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
-        max: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
-        gen: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+        def: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+        min: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+        max: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+        gen: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
     },
     d3: {
-        def: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
-        min: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
-        max: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
-        gen: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+        def: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+        min: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+        max: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+        gen: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
     },
     d4: {
-        def: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
-        min: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
-        max: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
-        gen: { dim: 2, x: 1, y: 1, z: 1, w: 1, },
+        def: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+        min: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+        max: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+        gen: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
     },
 };
 

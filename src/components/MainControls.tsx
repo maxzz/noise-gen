@@ -42,12 +42,12 @@ function MainControls() {
                 Preset
             </button>
 
+            <div className="w-8 h-8 flex-none">
+                <ButtonShowNoise />
+            </div>
             <ButtonChooseColor className="w-8 h-8" />
             <div className="">
                 <ButtonChooseColorBg />
-            </div>
-            <div className="w-8 h-8 flex-none">
-                <ButtonShowNoise />
             </div>
         </div>
     );
