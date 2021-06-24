@@ -17,9 +17,9 @@ export default function ButtonChooseColor(props: { className: string, style?: Re
     useClickAway(ref, () => isDownSet(false));
 
     return (
-        <div className="relative select-none" ref={ref} title="Color choice">
+        <div className="relative select-none" ref={ref} title="Canvas color selection">
             <div
-                className={`${className} p-1 border rounded border-gray-400 bg-purple-100 transform active:scale-95 cursor-pointer`}
+                className={`${className} p-1 border rounded border-dark-frame bg-purple-100 transform active:scale-95 cursor-pointer`}
                 style={{ ...style }}
                 onClick={() => isDownSet(v => !v)}
             >

@@ -43,8 +43,10 @@ function MainControls() {
             </button>
 
             <ButtonChooseColor className="w-8 h-8" />
-            <ButtonChooseColorBg />
-            <div className="w-8 h-8">
+            <div className="">
+                <ButtonChooseColorBg />
+            </div>
+            <div className="w-8 h-8 flex-none">
                 <ButtonShowNoise />
             </div>
         </div>
