@@ -22,7 +22,7 @@ function MainControls() {
 
             <button
                 className="h-8 px-3 pb-0.5 text-sm
-                dark-frame-rounded bg-purple-400 text-gray-100
+                dark-frame-rounded text-gray-100 bg-purple-400 
                 uppercase transform active:scale-95"
                 style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
                 title="Generate random seed"
@@ -33,10 +33,10 @@ function MainControls() {
 
             <button
                 className="h-8 px-3 pb-0.5 text-sm
-                dark-frame-rounded bg-purple-400 text-gray-100
+                dark-frame-rounded text-gray-100 bg-purple-400 
                 uppercase transform active:scale-95"
                 style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
-                title="Generate random preset"
+                title="Generate a random preset"
                 onClick={generatePreset}
             >
                 Preset
