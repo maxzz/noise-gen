@@ -5,7 +5,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'dark-frame': 'rgb(75, 85, 99)', //border-gray-600
+                'darkframe': 'rgb(75, 85, 99)', //border-gray-600
             }
         },
     },
