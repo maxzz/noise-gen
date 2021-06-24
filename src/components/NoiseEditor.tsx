@@ -16,10 +16,7 @@ function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boo
 }
 
 function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onChange }: SliderProps) {
-    //const [local, setLocal] = React.useState('' + value); // TODO: that is not NaN
-
-    const [local, onSliderChange, onInputChange] = useFloatInput(value, onChange);
-
+    const [local, onSliderChange, onInputChange] = useFloatInput(value, onChange); // TODO: what to do with NaN?
     return (
         <div className="px-2 w-full h-4 flex items-center justify-center space-x-2 text-[.6rem] text-purple-900">
             <div className="flex-none" style={{ width: labelWidth }}>{label}</div>
@@ -29,22 +26,10 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
                 min={min} max={max} step={step}
                 value={value}
                 onChange={onSliderChange}
-                // onChange={(event) => {
-                //     setLocal(event.target.value);
-                //     onChange(+event.target.value);
-                // }}
             />
             <input className="w-8 bg-purple-100 text-[.6rem]"
-                step={step}
                 value={local}
                 onChange={onInputChange}
-                // onChange={(event) => {
-                //     setLocal(event.target.value);
-                //     let n = +beautifyFloat(event.target.value);
-                //     if (!isNaN(n)) {
-                //         onChange(n);
-                //     }
-                // }}
             />
         </div>
     );
