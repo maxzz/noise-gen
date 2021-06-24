@@ -44,7 +44,9 @@ function MainControls() {
 
             <ButtonChooseColor className="w-8 h-8" />
             <ButtonChooseColorBg />
-            <ButtonShowNoise />
+            <div className="w-8 h-8">
+                <ButtonShowNoise />
+            </div>
         </div>
     );
 }
