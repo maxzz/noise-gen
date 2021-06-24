@@ -19,32 +19,6 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 
 export const ManualSizeAtom = atom({ w: 325, h: 300 });
 
-// Noise Editor
-
-export const ShowNoiseEditorAtom = atom(false);
-
-export const NoiseScalesAtom = atom({
-    type: 2,
-    x: 1,
-    y: 1,
-    z: 1,
-    w: 1,
-});
-
-export const SetNoiseScaleAtom = atom(
-    null,
-    (get, set, { axis, value }: { axis: string, value: number; }) => {
-        set(NoiseScalesAtom, { ...get(NoiseScalesAtom), [axis]: value });
-    }
-);
-
-export const SetNoiseTypeAtom = atom(
-    null,
-    (get, set, value: number) => {
-        set(NoiseScalesAtom, { ...get(NoiseScalesAtom), type: value });
-    }
-);
-
 // GenParams
 
 export const GenParamsAtom = atomWithCallback<GenParams>(defAppSettings.renderParams.genParams, (_, get) => storeAppParams(get));
@@ -76,6 +50,27 @@ export const ColorCanvasAtom = atomWithCallback(defAppSettings.canvasBg, (_, get
 export const SeedAtom = atomWithCallback(defAppSettings.renderParams.seed, (_, get) => storeAppParams(get));
 export const NoiseAtom = atomWithCallback(defAppSettings.renderParams.noise, (_, get) => storeAppParams(get));
 
+export const RenderParamsAtom = atom<RenderParams>(
+    (get) => {
+        return {
+            seed: get(SeedAtom),
+            noise: get(NoiseAtom),
+            color: get(ColorAtom),
+            genParams: get(GenParamsAtom)
+        };
+    }
+);
+
+export const SetRenderParamsAtom = atom(
+    null,
+    (_get, set, renderParams: RenderParams) => {
+        set(ColorAtom, renderParams.color);
+        set(SeedAtom, renderParams.seed);
+        set(NoiseAtom, renderParams.noise);
+        set(GenParamsAtom, renderParams.genParams);
+    }
+);
+
 export const RandomSeedAtom = atom(
     null,
     (_get, set) => set(SeedAtom, `${Math.random()}`.replace(/^0\./, '')));
@@ -97,26 +92,23 @@ export const GeneratePresetAtom = atom(
     }
 );
 
-export const RenderParamsAtom = atom<RenderParams>(
-    (get) => {
-        return {
-            seed: get(SeedAtom),
-            noise: get(NoiseAtom),
-            color: get(ColorAtom),
-            genParams: get(GenParamsAtom)
-        };
+// Noise Editor
+
+export const SetNoiseScaleAtom = atom(
+    null,
+    (get, set, { axis, value }: { axis: string, value: number; }) => {
+        set(NoiseAtom, { ...get(NoiseAtom), [axis]: value });
     }
 );
 
-export const SetRenderParamsAtom = atom(
+export const SetNoiseTypeAtom = atom(
     null,
-    (_get, set, renderParams: RenderParams) => {
-        set(ColorAtom, renderParams.color);
-        set(SeedAtom, renderParams.seed);
-        set(NoiseAtom, renderParams.noise);
-        set(GenParamsAtom, renderParams.genParams);
+    (get, set, value: number) => {
+        set(NoiseAtom, { ...get(NoiseAtom), dim: value as 2 | 3 | 4 });
     }
 );
+
+export const ShowNoiseEditorAtom = atom(false);
 
 //#endregion Generator current params
 

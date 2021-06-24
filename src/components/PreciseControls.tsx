@@ -65,7 +65,6 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
 
 function PreviewBoxes() {
     const [presets] = useAtom(PresetsAtom);
-    const [worker] = useAtom(RenderWorkerAtom);
     const [, setRenderParams] = useAtom(SetRenderParamsAtom);
     const [, removePreset] = useAtom(RemovePresetAtom);
 
