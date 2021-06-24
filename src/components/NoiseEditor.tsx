@@ -1,9 +1,7 @@
 import React from 'react';
-import { SliderProps } from './Slider';
-import './Sliders.scss';
-import { atom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { NoiseAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '../atoms';
-import useFloatInput from '../hooks/useFloatInput';
+import { SmallSlider } from './Slider';
 
 function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
@@ -11,27 +9,6 @@ function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boo
             ${selected ? 'bg-white ring-1 ring-offset-1 ring-offset-red-100 ring-purple-400' : ''}`}
             onClick={onClick}
         >{text}</div>
-
-    );
-}
-
-function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onChange }: SliderProps) {
-    const [local, onSliderChange, onInputChange] = useFloatInput(value, onChange); // TODO: what to do with NaN?
-    return (
-        <div className="px-2 w-full h-4 flex items-center justify-center space-x-2 text-[.6rem] text-purple-900">
-            <div className="flex-none" style={{ width: labelWidth }}>{label}</div>
-            <input
-                className="ui-slider"
-                type="range"
-                min={min} max={max} step={step}
-                value={value}
-                onChange={onSliderChange}
-            />
-            <input className="w-8 bg-purple-100 text-[.6rem]"
-                value={local}
-                onChange={onInputChange}
-            />
-        </div>
     );
 }
 
@@ -78,10 +55,10 @@ function NoiseEditor() {
                     {noise.dim > 3 && <Slider labelWidth="2rem" min={.01} max={10} value={local.w} onChange={(value) => setScale('w', value)} label="scale w" />}
                 </div> */}
                 <div className="pl-1 mt-1 text-right">
-                    <Slider labelWidth="2rem" min={.01} max={10} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />
-                    <Slider labelWidth="2rem" min={.01} max={10} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />
-                    {noise.dim > 2 && <Slider labelWidth="2rem" min={.01} max={10} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
-                    {noise.dim > 3 && <Slider labelWidth="2rem" min={.01} max={10} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
+                    <SmallSlider labelWidth="2rem" min={.01} max={10} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />
+                    <SmallSlider labelWidth="2rem" min={.01} max={10} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />
+                    {noise.dim > 2 && <SmallSlider labelWidth="2rem" min={.01} max={10} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
+                    {noise.dim > 3 && <SmallSlider labelWidth="2rem" min={.01} max={10} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
                 </div>
             </div>}
         </div>
