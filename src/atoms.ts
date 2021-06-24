@@ -19,6 +19,10 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 
 export const ManualSizeAtom = atom({ w: 325, h: 300 });
 
+// Noise Editor
+
+export const ShowNoiseEditorAtom = atom(false);
+
 // GenParams
 
 export const GenParamsAtom = atomWithCallback<GenParams>(defAppSettings.renderParams.genParams, (_, get) => storeAppParams(get));

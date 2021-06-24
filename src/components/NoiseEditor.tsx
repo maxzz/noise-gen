@@ -2,6 +2,8 @@ import React from 'react';
 import { SliderProps } from './Slider';
 import './Sliders.scss';
 import ChevronHorizontal from './ChevronHorizontal';
+import { useAtom } from 'jotai';
+import { ShowNoiseEditorAtom } from '../atoms';
 
 function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
@@ -33,6 +35,8 @@ function NoiseEditor() {
     const [open, setOpen] = React.useState(false);
     const [selected, setSelected] = React.useState(0);
 
+    const [showNoiseEditor] = useAtom(ShowNoiseEditorAtom);
+
     function setNoise(value: number) {
         setSelected(value);
     }
@@ -51,7 +55,7 @@ function NoiseEditor() {
             </div>
 
             {/* Editor body */}
-            {open && <div className="w-36 -mt-2 pt-2 pl-1">
+            {showNoiseEditor && <div className="w-36 -mt-2 pt-2 pl-1">
                 {/* Noise type */}
                 <div className="flex items-center text-xs select-none">
                     <div className="">Noise</div>
