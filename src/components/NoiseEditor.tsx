@@ -1,7 +1,7 @@
 import React from 'react';
 import { SliderProps } from './Slider';
 import './Sliders.scss';
-import { useAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 import { ShowNoiseEditorAtom } from '../atoms';
 
 function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
@@ -30,17 +30,25 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
     );
 }
 
+const NoiseScalesAtom = atom({
+    x: 1,
+    y: 1,
+    z: 1,
+    w: 1,
+})
+
 function NoiseEditor() {
     const [selected, setSelected] = React.useState(0);
-
     const [showNoiseEditor] = useAtom(ShowNoiseEditorAtom);
+    const [noiseScales, setNoiseScales] = useAtom(NoiseScalesAtom);
+
 
     function setNoise(value: number) {
         setSelected(value);
     }
 
-    function setScale(value: number) {
-
+    function setScale(axis: string, value: number) {
+        setNoiseScales((prev) => ({...prev, [axis]: value}));
     }
 
     return (
@@ -59,10 +67,10 @@ function NoiseEditor() {
 
                 {/* Noise params */}
                 <div className="pl-1 mt-1 text-right">
-                    <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="scale x" />
-                    <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="scale y" />
-                    <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="scale z" />
-                    <Slider labelWidth="2rem" min={1} max={10} value={2} onChange={setScale} label="scale w" />
+                    <Slider labelWidth="2rem" min={.01} max={10} value={noiseScales.x} onChange={(value) => setScale('x', value)} label="scale x" />
+                    <Slider labelWidth="2rem" min={.01} max={10} value={noiseScales.y} onChange={(value) => setScale('y', value)} label="scale y" />
+                    <Slider labelWidth="2rem" min={.01} max={10} value={noiseScales.z} onChange={(value) => setScale('z', value)} label="scale z" />
+                    <Slider labelWidth="2rem" min={.01} max={10} value={noiseScales.w} onChange={(value) => setScale('w', value)} label="scale w" />
                 </div>
             </div>}
         </div>
