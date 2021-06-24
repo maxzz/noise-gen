@@ -2,7 +2,7 @@ import React from 'react';
 import { SliderProps } from './Slider';
 import './Sliders.scss';
 import { atom, useAtom } from 'jotai';
-import { NoiseScalesAtom, SetNoiseScaleAtom, ShowNoiseEditorAtom } from '../atoms';
+import { NoiseScalesAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '../atoms';
 
 function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
@@ -31,17 +31,17 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
 }
 
 function NoiseEditor() {
-    const [selected, setSelected] = React.useState(0);
     const [showNoiseEditor] = useAtom(ShowNoiseEditorAtom);
     const [noiseScales] = useAtom(NoiseScalesAtom);
-    const [, setNoisScale] = useAtom(SetNoiseScaleAtom);
+    const [, setNoiseType] = useAtom(SetNoiseTypeAtom);
+    const [, setNoiseScale] = useAtom(SetNoiseScaleAtom);
 
     function setNoise(value: number) {
-        setSelected(value);
+        setNoiseType(value);
     }
 
     function setScale(axis: string, value: number) {
-        setNoisScale({axis, value});
+        setNoiseScale({axis, value});
     }
 
     return (
@@ -52,9 +52,9 @@ function NoiseEditor() {
                 <div className="flex items-center text-xs select-none">
                     <div className="">Noise</div>
                     <div className="pl-2 flex items-center text-[.6rem] space-x-1">
-                        <NoiseTypeBox text="2D" selected={selected === 0} onClick={() => setNoise(0)} />
-                        <NoiseTypeBox text="3D" selected={selected === 1} onClick={() => setNoise(1)} />
-                        <NoiseTypeBox text="4D" selected={selected === 2} onClick={() => setNoise(2)} />
+                        <NoiseTypeBox text="2D" selected={noiseScales.type === 2} onClick={() => setNoise(2)} />
+                        <NoiseTypeBox text="3D" selected={noiseScales.type === 3} onClick={() => setNoise(3)} />
+                        <NoiseTypeBox text="4D" selected={noiseScales.type === 4} onClick={() => setNoise(4)} />
                     </div>
                 </div>
 
