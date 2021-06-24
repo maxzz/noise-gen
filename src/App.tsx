@@ -30,11 +30,11 @@ function App() {
                     {/* Clear background */}
                     {appBackgroundActive &&
                         <button
-                            className="ml-2 px-2 border rounded text-xs dark-frame bg-purple-100 uppercase"
+                            className="ml-2 px-2 pb-[1px] border rounded text-xs dark-frame bg-purple-100 uppercase"
                             title="Clear background image"
                             onClick={() => setAppBackgroundUrl(null)}
                         >
-                            <span className="inline-block align-top">Clear bkg</span>
+                            Clear bkg
                         </button>
                     }
                 </div>
