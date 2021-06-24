@@ -13,11 +13,19 @@ function renderBody({ gen, ctx, rpm }: RenderProps) {
 
     const simplex = gen.get(rpm.seed);
 
+    const noiseFn = (simplex as any)[`noise${rpm.noise.dim}D`].bind(simplex);
+
     function fn(x: number, y: number) {
         //return simplex.noise2D(x / 10, y / 10);
-        return simplex.noise3D(x / 10, y / 10, 1);
+        return noiseFn(x * rpm.noise.x, y * rpm.noise.y, rpm.noise.z, rpm.noise.w);
         //return simplex.noise4D(x / 20, y / 20, 1, 1);
     }
+
+    // function fn(x: number, y: number) {
+    //     //return simplex.noise2D(x / 10, y / 10);
+    //     return simplex.noise3D(x / 10, y / 10, 1);
+    //     //return simplex.noise4D(x / 20, y / 20, 1, 1);
+    // }
 
     let renderContext: RenderContext = {
         ctx,
