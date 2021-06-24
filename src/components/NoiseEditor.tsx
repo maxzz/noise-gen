@@ -18,13 +18,6 @@ function NoiseEditor() {
     const [, setNoiseType] = useAtom(SetNoiseTypeAtom);
     const [, setNoiseScale] = useAtom(SetNoiseScaleAtom);
 
-    const [local, setLocal] = React.useState({
-        x: noise.x,
-        y: noise.y,
-        z: noise.z,
-        w: noise.w,
-    });
-
     function setNoise(value: number) {
         setNoiseType(value);
     }
@@ -48,12 +41,6 @@ function NoiseEditor() {
                 </div>
 
                 {/* Noise params */}
-                {/* <div className="pl-1 mt-1 text-right">
-                    <Slider labelWidth="2rem" min={.01} max={10} value={local.x} onChange={(value) => setScale('x', value)} label="scale x" />
-                    <Slider labelWidth="2rem" min={.01} max={10} value={local.y} onChange={(value) => setScale('y', value)} label="scale y" />
-                    {noise.dim > 2 && <Slider labelWidth="2rem" min={.01} max={10} value={local.z} onChange={(value) => setScale('z', value)} label="scale z" />}
-                    {noise.dim > 3 && <Slider labelWidth="2rem" min={.01} max={10} value={local.w} onChange={(value) => setScale('w', value)} label="scale w" />}
-                </div> */}
                 <div className="pl-1 mt-1 text-right">
                     <SmallSlider labelWidth="2rem" min={.01} max={10} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />
                     <SmallSlider labelWidth="2rem" min={.01} max={10} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />
