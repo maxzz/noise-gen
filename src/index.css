@@ -12,4 +12,7 @@
     .no-active-ouline {
         @apply active:outline-none focus:outline-none;
     }
+    .active-scale {
+        @apply active:scale-[.97];
+    }
 }

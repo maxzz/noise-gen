@@ -9,7 +9,7 @@ function SizeIcon({ select, step }: { select: () => void, step: number; }) {
         <div
             className="flex items-center justify-center
                 text-gray-400 hover:text-purple-600
-                transform active:scale-[.97] cursor-pointer"
+                transform active-scale cursor-pointer"
             title={`Set canvas ${SIZES[step][0]} x ${SIZES[step][1]}`}
             onClick={select}
         >

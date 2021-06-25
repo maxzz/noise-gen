@@ -38,7 +38,7 @@ interface PreviewBoxProps {
 
 function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     return (
-        <div className="preset px-1 py-2 cursor-pointer select-none transform active:scale-[.97]" onClick={() => selectItem(item)}>
+        <div className="preset px-1 py-2 cursor-pointer select-none transform active-scale" onClick={() => selectItem(item)}>
             <div className="relative border-4 border-gray-50" style={{ width: `${PRESET_W + 8}px`, height: `${PRESET_H + 8}px` }}>
                 {/* +8 for double border size */}
                 {item.preview && <img
@@ -129,7 +129,7 @@ function Actions() {
             {/* Preset set as background */}
             <div
                 className="border rounded border-gray-400 flex items-center justify-center text-gray-500
-                transform active:scale-[.97] cursor-pointer"
+                transform active-scale cursor-pointer"
                 title="Set canvas image as application background"
                 onClick={setAsBackground}
             >
@@ -141,7 +141,7 @@ function Actions() {
             {/* Preset + */}
             <div
                 className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-500
-                transform active:scale-[.97] cursor-pointer"
+                transform active-scale cursor-pointer"
                 title="Save preset"
                 onClick={appendNew}
             >
@@ -153,7 +153,7 @@ function Actions() {
             {/* Preset save */}
             <div
                 className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-500
-                transform active:scale-[.97] cursor-pointer"
+                transform active-scale cursor-pointer"
                 title="Save image"
                 onClick={(event) => saveItemPng(event)}
             >
