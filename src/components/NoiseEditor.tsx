@@ -2,6 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { NoiseAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '../atoms';
 import { SmallSlider } from './Slider';
+import { NOISEPARAMS } from '../utils/types';
 
 function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
@@ -45,10 +46,10 @@ function NoiseEditor() {
 
                 {/* Noise params */}
                 <div className="pl-1 mt-1 text-right">
-                    <SmallSlider labelWidth="2rem" min={.01} max={10} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />
-                    <SmallSlider labelWidth="2rem" min={.01} max={10} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />
-                    {noise.dim > 2 && <SmallSlider labelWidth="2rem" min={.01} max={10} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
-                    {noise.dim > 3 && <SmallSlider labelWidth="2rem" min={.01} max={10} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
+                    <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.x} max={NOISEPARAMS.d3.max.x} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />
+                    <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.y} max={NOISEPARAMS.d3.max.y} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />
+                    {noise.dim > 2 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.z} max={NOISEPARAMS.d3.max.z} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
+                    {noise.dim > 3 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.w} max={NOISEPARAMS.d3.max.w} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
                 </div>
             </div>}
         </div>
