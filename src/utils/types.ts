@@ -57,30 +57,30 @@ export type NoiseParamsSet = {
 };
 
 export type NoiseParamsLimits = {
-    d2: NoiseParamsSet;
+    //d2: NoiseParamsSet;
     d3: NoiseParamsSet;
-    d4: NoiseParamsSet;
+    //d4: NoiseParamsSet;
 };
 
 export const NOISEPARAMS: NoiseParamsLimits = {
-    d2: {
-        def: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
-        min: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
-        max: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
-        gen: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
-    },
+    // d2: {
+    //     def: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+    //     min: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+    //     max: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+    //     gen: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+    // },
     d3: {
-        def: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
-        min: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
-        max: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
-        gen: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+        def: { dim: 3, x: 0.1, y: 0.1, z: 0.1, w: 0.1, },
+        min: { dim: 3, x: 0.1, y: 0.1, z: 0.1, w: 0.1, },
+        max: { dim: 3, x: 0.1, y: 0.1, z: 0.1, w: 0.1, },
+        gen: { dim: 3, x: 0.1, y: 0.1, z: 0.1, w: 0.1, },
     },
-    d4: {
-        def: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
-        min: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
-        max: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
-        gen: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
-    },
+    // d4: {
+    //     def: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+    //     min: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+    //     max: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+    //     gen: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
+    // },
 };
 
 export type PresetData = {
