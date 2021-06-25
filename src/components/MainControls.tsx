@@ -13,7 +13,7 @@ function MainControls() {
     //console.log('seed', seed);
 
     return (
-        <div className="flex space-x-1">
+        <div className="h-8 flex space-x-1">
             <input
                 className="flex-1 w-full px-2 py-1 text-sm text-purple-900 bg-purple-100 dark-frame-rounded"
                 placeholder="Type anything as a seed"
