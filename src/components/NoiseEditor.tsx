@@ -38,8 +38,8 @@ function NoiseEditor() {
     return (
         <div className="relative text-purple-900 border-l border-purple-300 flex flex-col">
             {/* Editor body */}
-            {showNoiseEditor &&
-                <a.div className="-mt-2 pt-2 pl-1" style={{ width: props.width }}>
+            {/* {showNoiseEditor && */}
+                <a.div className="-mt-2 pt-2 pl-1 overflow-hidden" style={{ width: props.width }}>
                     {/* <div className="w-36 -mt-2 pt-2 pl-1"> */}
                     {/* Noise type */}
                     <div className="flex items-center text-xs select-none">
@@ -59,7 +59,7 @@ function NoiseEditor() {
                         {noise.dim > 3 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.w} max={NOISEPARAMS.d3.max.w} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
                     </div>
                 </a.div>
-            }
+            {/* } */}
         </div>
     );
 }
