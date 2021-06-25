@@ -26,6 +26,7 @@ function NoiseEditor() {
     const props = useSpring({
         opacity: showNoiseEditor ? 1 : 0,
         width: showNoiseEditor ? 144 : 0,
+        transform: showNoiseEditor ? 'scale(1)' : 'scale(0)',
         config: {
             duration: 200,
         }
@@ -40,10 +41,10 @@ function NoiseEditor() {
     }
 
     return (
-        <div className="relative text-purple-900 border-l border-purple-300 flex flex-col">
+        <div className="relative text-purple-900 flex flex-col">
             {/* Editor body */}
             {/* {showNoiseEditor && */}
-                <a.div className="-mt-2 pt-2 pl-1 overflow-hidden" style={{ width: props.width, opacity: props.opacity }}>
+                <a.div className="-mt-2 pt-2 pl-1 overflow-hidden border-l border-purple-300" style={{ width: props.width, opacity: props.opacity, transform: props.transform }}>
                     {/* <div className="w-36 -mt-2 pt-2 pl-1"> */}
 
                     <div className="w-36">
