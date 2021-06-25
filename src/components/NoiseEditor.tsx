@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { NoiseAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '../atoms';
 import { SmallSlider } from './Slider';
 import { NOISEPARAMS } from '../utils/types';
-import { useSpring, a } from 'react-spring';
+import { useSpring, a } from '@react-spring/web';
 
 function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
