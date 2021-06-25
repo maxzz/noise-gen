@@ -26,6 +26,9 @@ function NoiseEditor() {
     const props = useSpring({
         opacity: showNoiseEditor ? 1 : 0,
         width: showNoiseEditor ? 144 : 0,
+        config: {
+            duration: 200,
+        }
     });
 
     function setNoise(value: number) {
