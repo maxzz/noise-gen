@@ -19,7 +19,7 @@ export default function ButtonChooseColor(props: ButtonChooseColorProps) {
 
     return (
         <button
-            className="relative select-none"
+            className="relative no-active-ouline"
             ref={ref}
             title="Change canvas color"
         >

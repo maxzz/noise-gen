@@ -9,4 +9,7 @@
     .dark-frame-rounded {
         @apply border rounded border-gray-500;
     }
+    .no-active-ouline {
+        @apply active:outline-none focus:outline-none;
+    }
 }
