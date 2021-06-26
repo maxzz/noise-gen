@@ -27,7 +27,7 @@ function PreciseControlsSliders() {
             <div className="flex-1">
                 <Sliders />
             </div>
-            {showNoiseEditor && <div className="w-[1px] max-w-[1px] bg-red-500"></div>}
+            {showNoiseEditor && <div className="w-[1px] max-w-[1px] bg-purple-300"></div>}
             <div>
                 <NoiseEditor />
             </div>

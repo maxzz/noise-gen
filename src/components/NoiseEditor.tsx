@@ -49,7 +49,7 @@ function NoiseEditor() {
                 className="-mt-2 pt-2 overflow-hidden"
                 style={{ width: props.width, opacity: props.opacity, transform: props.transform }}
             >
-                <div className="w-36 pl-1 border-l border-purple-300">
+                <div className="w-36 pl-1">
 
                     {/* Noise type */}
                     <div className="flex items-center text-xs select-none">
