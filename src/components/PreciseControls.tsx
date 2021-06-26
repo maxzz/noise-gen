@@ -1,31 +1,9 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, RenderWorkerAtom, PresetsAtom, RemovePresetAtom, AppBackgroundUrlAtom, SetRenderParamsAtom } from '../atoms';
-import { GENPARAMS, I2W, PresetData, PRESET_H, PRESET_W } from '../utils/types';
-import Slider from './Slider';
+import { RenderWorkerAtom, PresetsAtom, RemovePresetAtom, AppBackgroundUrlAtom, SetRenderParamsAtom } from '../atoms';
+import { I2W, PresetData, PRESET_H, PRESET_W } from '../utils/types';
+import PreciseControlsSliders from './PreciseControlsSliders';
 import SizeBoxes from './SizeBoxes';
-import NoiseEditor from './NoiseEditor';
-
-function Sliders() {
-    const [n1, setN1] = useAtom(N1Atom);
-    const [n2, setN2] = useAtom(N2Atom);
-    const [distortion, setDistortion] = useAtom(DistortionAtom);
-    const [dotDiameter, setDotDiameter] = useAtom(DotDiameterAtom);
-    return (
-        <div className="flex">
-            <div className="flex-1">
-                <Slider min={GENPARAMS.min.n1} max={GENPARAMS.max.n1} value={n1} onChange={setN1} label="Noise 1" />
-                <Slider min={GENPARAMS.min.n2} max={GENPARAMS.max.n2} value={n2} onChange={setN2} label="Noise 2" />
-                <Slider min={GENPARAMS.min.distortion} max={GENPARAMS.max.distortion} value={distortion} onChange={setDistortion} label="Distortion" />
-                <Slider min={GENPARAMS.min.dotDiameter} max={GENPARAMS.max.dotDiameter} value={dotDiameter} onChange={setDotDiameter} label="Dot diameter" />
-            </div>
-            <div className="w-[1px] max-w-[1px] bg-red-500"></div>
-            <div>
-                <NoiseEditor />
-            </div>
-        </div>
-    );
-}
 
 interface PreviewBoxProps {
     item: PresetData;
@@ -165,7 +143,7 @@ function Actions() {
 function PreciseControls() {
     return (
         <div className="py-2 bg-purple-100 border rounded border-gray-400 select-none">
-            <Sliders />
+            <PreciseControlsSliders />
             <Actions />
             <PreviewBoxes />
         </div>
