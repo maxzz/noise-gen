@@ -5,7 +5,7 @@ import { SmallSlider } from './Slider';
 import { NOISEPARAMS } from '../utils/types';
 import { useSpring, a, config } from '@react-spring/web';
 
-function NoiseTypeBox({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
+function NoiseTypeButton({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
         <div
             className={
@@ -32,8 +32,6 @@ function NoiseEditor() {
         }
     });
 
-    console.log('props', props);
-
     function setNoise(value: number) {
         setNoiseType(value);
     }
@@ -51,13 +49,13 @@ function NoiseEditor() {
             >
                 <div className="w-36 pl-1">
 
-                    {/* Noise type */}
+                    {/* Noise type buttons */}
                     <div className="flex items-center text-xs select-none">
                         <div className="">Noise</div>
                         <div className="pl-2 flex items-center text-[.6rem] space-x-1">
-                            <NoiseTypeBox text="2D" selected={noise.dim === 2} onClick={() => setNoise(2)} />
-                            <NoiseTypeBox text="3D" selected={noise.dim === 3} onClick={() => setNoise(3)} />
-                            <NoiseTypeBox text="4D" selected={noise.dim === 4} onClick={() => setNoise(4)} />
+                            <NoiseTypeButton text="2D" selected={noise.dim === 2} onClick={() => setNoise(2)} />
+                            <NoiseTypeButton text="3D" selected={noise.dim === 3} onClick={() => setNoise(3)} />
+                            <NoiseTypeButton text="4D" selected={noise.dim === 4} onClick={() => setNoise(4)} />
                         </div>
                     </div>
 
