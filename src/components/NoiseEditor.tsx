@@ -29,15 +29,10 @@ function NoiseEditor() {
         transform: showNoiseEditor ? 'scale(1)' : 'scale(0)',
         config: {
             duration: 200,
-        },
-        // config: {
-        //     mass: 1,
-        //     tension: 170,
-        //     friction: 28,
-        //     velocity: 0,
-        // },
-        //config: config.gentle,
+        }
     });
+
+    console.log('props', props);
 
     function setNoise(value: number) {
         setNoiseType(value);
