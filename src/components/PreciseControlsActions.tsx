@@ -10,6 +10,11 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
     const [width, setWidth] = React.useState('' + exportImageSize.w);
     const [height, setHeight] = React.useState('' + exportImageSize.h);
     const [valid, setValid] = React.useState(true);
+    const firstInput = React.useRef<HTMLInputElement>(null);
+
+    React.useEffect(() => {
+        firstInput.current?.focus();
+    }, []);
 
     React.useEffect(() => {
         function validInt(v: string): number {
@@ -39,13 +44,27 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
             {/* controls */}
             <div className="mt-4">Image size</div>
             <div className="mt-1 flex items-center space-x-1">
-                <input className="px-2 py-0.5 w-16 rounded" value={width} onChange={(e) => setWidth(e.target.value)} />
+                <input
+                    className="px-2 py-0.5 w-16 rounded"
+                    value={width}
+                    onChange={(e) => setWidth(e.target.value)}
+                    ref={firstInput}
+                    onKeyDown={((event) => {
+                        if (event.key === 'Enter') {
+                            onSave(true);
+                        }
+                    })}
+                />
                 <div className="">
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </div>
-                <input className="px-2 py-0.5 w-16 rounded" value={height} onChange={(e) => setHeight(e.target.value)} />
+                <input
+                    className="px-2 py-0.5 w-16 rounded"
+                    value={height}
+                    onChange={(e) => setHeight(e.target.value)}
+                />
             </div>
 
             {/* Save button */}
