@@ -26,7 +26,7 @@ function DimentionsPopup({ onSave }: { onSave: (size?: WH) => void; }) {
         }
         let w = validInt(width);
         let h = validInt(height);
-        let isValid = !!w && !!h && w * h <= 4000 * 3000;
+        let isValid = !!w && !!h && w * h <= 2000 * 2000;
         setValid(isValid);
         isValid && setExportImageSize({ w, h });
     }, [width, height]);
@@ -56,12 +56,12 @@ function DimentionsPopup({ onSave }: { onSave: (size?: WH) => void; }) {
             <div className="mt-4">Image size</div>
             <div className="mt-1 flex items-center space-x-1">
                 <input
+                    ref={firstInputRef}
                     className="px-2 py-1 w-16 rounded"
                     value={width}
                     onChange={(e) => setWidth(e.target.value)}
-                    ref={firstInputRef}
                     onKeyDown={((event) => {
-                        if (event.key === 'Enter') {
+                        if (valid && event.key === 'Enter') {
                             onSave(exportImageSize);
                         }
                     })}
@@ -75,6 +75,11 @@ function DimentionsPopup({ onSave }: { onSave: (size?: WH) => void; }) {
                     className="px-2 py-1 w-16 rounded"
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
+                    onKeyDown={((event) => {
+                        if (valid && event.key === 'Enter') {
+                            onSave(exportImageSize);
+                        }
+                    })}
                 />
             </div>
 
@@ -84,13 +89,19 @@ function DimentionsPopup({ onSave }: { onSave: (size?: WH) => void; }) {
                     `self-end mt-3 mb-2 px-3 py-1 h-8 rounded border active-scale 
                     ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'}`
                 }
-                onClick={() => onSave(exportImageSize)}
+                onClick={() => valid && onSave(exportImageSize)}
             >
                 <div className="pb-0.5">{valid ? 'Save' : 'Invalid size'}</div>
             </button>
         </div>
     );
 }
+
+// TODO: more then 2000 x 2000 is too much for Chrome
+// TODO: show max valid size
+// TODO: save user defined size to config
+// TODO: show save indicator
+// TODO: add animation on popup
 
 function PreciseControlsActions() {
     const [worker] = useAtom(RenderWorkerAtom);
