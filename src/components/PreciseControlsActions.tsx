@@ -86,9 +86,15 @@ function PreciseControlsActions() {
 
     const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
-    async function saveItemPng() {
-        console.log('save');
+    async function saveItemPng(save: boolean) {
         setShowSelectFileSize(false);
+        if (save) {
+            console.log('save');
+            if (worker) {
+                let blob = await worker.getImage();
+                saveBlobData(blob, 'noise-gen.png');
+            }
+        }
     }
 
     return (
@@ -141,7 +147,7 @@ function PreciseControlsActions() {
 
                 {/* Popup */}
                 {showSelectFileSize &&
-                    <div className="absolute mt-1 top-full right-0">
+                    <div className="absolute mt-1 -top-1 right-0">
                         <DimentionsPopup onSave={saveItemPng} />
                     </div>
                 }
