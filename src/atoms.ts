@@ -18,6 +18,7 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 // Canvas size
 
 export const ManualSizeAtom = atom({ w: 325, h: 300 });
+export const ExportImageSizeAtom = atom({w: 325, h: 300});
 
 // GenParams
 
