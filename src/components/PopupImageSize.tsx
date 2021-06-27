@@ -31,8 +31,11 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
     React.useEffect(() => {
         let w = validInt(width);
         let h = validInt(height);
-        let isTooBig = w * h > 2000 * 2000;
-        let isValid = !!w && !!h && !isTooBig;
+        
+        let isValid = !!w && !!h;
+        let isTooBig = isValid && w * h > 2000 * 2000;
+        isValid = isValid && !isTooBig;
+
         setValid(isValid);
         setTooBig(isTooBig);
         isValid && setExportImageSize({ w, h });
