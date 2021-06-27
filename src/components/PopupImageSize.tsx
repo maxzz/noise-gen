@@ -26,7 +26,7 @@ function sizeInMB(size: WH): string {
 
 function sizeTooBigMessage(size: WH) {
     return `Sizes over 2000 x 2000 are already a bit too much for Chrome.
-The current image size ${size.w} x ${size.h} = ${sizeInMB(size)}`;
+The current image size ${size.w} x ${size.h} = ${sizeInMB(size)} (uncompressed in pixels).`;
 }
 
 function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
@@ -74,11 +74,11 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
             </div>
 
             {/* Controls */}
-            <div className="mt-4">Image size</div>
+            <div className="mt-4">Image size in pixels</div>
             <div className="mt-1 flex items-center space-x-1">
                 <input
                     ref={firstInputRef}
-                    className="px-2 py-1 w-16 rounded"
+                    className="px-2 py-1 w-16 rounded border border-gray-500"
                     value={width}
                     onChange={(e) => setWidth(e.target.value)}
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
@@ -89,7 +89,7 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
                     </svg>
                 </div>
                 <input
-                    className="px-2 py-1 w-16 rounded"
+                    className="px-2 py-1 w-16 rounded border border-gray-500"
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
@@ -109,7 +109,7 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
                         : 'The numbers are not valid.'}`}
                 onClick={() => valid && onSave(exportImageSize)}
             >
-                <div className="pb-0.5">{valid ? 'Save' : tooBig ? 'Max is 2000 x 2000 pixels' : 'Invalid size'}</div>
+                <div className="pb-0.5">{valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size'}</div>
             </button>
         </div>
     );
