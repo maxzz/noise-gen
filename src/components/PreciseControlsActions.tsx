@@ -12,49 +12,28 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
     const [height, setHeight] = React.useState('' + exportImageSize.h);
     const [valid, setValid] = React.useState(true);
 
-    // function setNewWidth(value: string) {
-    //     let n: number = +value;
-    //     let isValid = !isNaN(n) && !!n;
-    //     setWidth(value);
-    //     setValid(isValid);
-    //     if (isValid) {
-    //         setExportImageSize((prev) => ({ ...prev, w: n }));
-    //     }
-    // }
-
     React.useEffect(() => {
-        console.log('popup', width, height);
-
         function validInt(v: string): number {
-            let n = +(+v).toFixed(0);
+            const n = +(+v).toFixed(0);
             return !isNaN(n) && n > 0 ? n : 0;
         }
-
-        let w: number = validInt(width);
-        let h: number = validInt(height);
+        let w = validInt(width);
+        let h = validInt(height);
         let isValid = !!w && !!h;
         setValid(isValid);
-        if (isValid) {
-            setExportImageSize({ w, h });
-        }
-
+        isValid && setExportImageSize({ w, h });
     }, [width, height]);
-
-    function setNewHeight(value: string) {
-    }
 
     return (
         <div className="px-2 pt-1 rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900">
             <div className="">Image size</div>
             <div className="mt-1 flex items-center space-x-1">
-                {/* <input className="px-2 py-0.5 w-16 rounded" value={width} onChange={(e) => setNewWidth(e.target.value)} /> */}
                 <input className="px-2 py-0.5 w-16 rounded" value={width} onChange={(e) => setWidth(e.target.value)} />
                 <div className="">
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </div>
-                {/* <input className="px-2 py-0.5 w-16 rounded" value={exportImageSize.h} onChange={(e) => setNewHeight(e.target.value)} /> */}
                 <input className="px-2 py-0.5 w-16 rounded" value={height} onChange={(e) => setHeight(e.target.value)} />
             </div>
             <button
@@ -62,6 +41,7 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
                     `self-end my-2 px-2 py-1 rounded border active-scale 
                     ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-500 border-none'}`
                 }
+                onClick={onSave}
             >
                 <div className="pb-0.5">{valid ? 'Save' : 'Invalid size'}</div>
             </button>
@@ -91,10 +71,11 @@ function PreciseControlsActions() {
     //     }
     // }
 
-    const showSelectFileSize = React.useState(true);
+    const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
     async function saveItemPng() {
-
+        console.log('save');
+        setShowSelectFileSize(false);
     }
 
     return (
@@ -138,6 +119,7 @@ function PreciseControlsActions() {
                     active-scale cursor-pointer"
                     title="Save image"
                 // onClick={(event) => saveItemPng(event)}
+                onClick={() => setShowSelectFileSize((prev) => !prev)}
                 >
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.8} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
