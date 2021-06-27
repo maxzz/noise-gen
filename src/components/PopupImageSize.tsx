@@ -10,8 +10,9 @@ function validInt(v: string): number {
 }
 
 function sizeTooBigMessage(size: WH) {
+    var sizeInMB = (size.w * size.h / (1024*1024)).toFixed(2);
     return `Sizes over 2000 x 2000 are already a bit too much for Chrome.
-Current size ${size.w} x ${size.h} = ${size.w * size.h / 1024}K`;
+Current size ${size.w} x ${size.h} = ${sizeInMB} MB`;
 }
 
 function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
