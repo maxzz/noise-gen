@@ -81,7 +81,11 @@ function PreciseControlsActions() {
                         <div className="">Image size</div>
                         <div className="flex items-center space-x-1">
                             <input className="px-2 py-0.5 w-16 rounded" />
-                            <div className="">X</div>
+                            <div className="">
+                                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </div>
                             <input className="px-2 py-0.5 w-16 rounded" />
                         </div>
                         <button className="self-end px-2 py-1 rounded border border-gray-400">
