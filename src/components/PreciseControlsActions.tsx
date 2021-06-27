@@ -3,20 +3,7 @@ import { useAtom } from 'jotai';
 import { AppBackgroundUrlAtom, RenderWorkerAtom } from '../atoms';
 import { I2W, PRESET_H, PRESET_W } from '../utils/types';
 import SizeBoxes from './SizeBoxes';
-
-const saveBlobData = (function () {
-    const a = document.createElement("a");
-    document.body.appendChild(a);
-    a.style.display = 'none';
-    a.id = 'noise-gen-image';
-    return function (blob: Blob, fileName: string) {
-        let url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = fileName;
-        a.click();
-        window.URL.revokeObjectURL(url);
-    };
-}());
+import saveBlobData from '../utils/saveImage';
 
 function PreciseControlsActions() {
     const [worker] = useAtom(RenderWorkerAtom);
@@ -40,7 +27,7 @@ function PreciseControlsActions() {
         }
     }
     return (
-        <div className="px-2 py-2 flex space-x-2">
+        <div className="px-2 py-2 flex space-x-2 ">
 
             {/* Canvas size buttons */}
             <div className="px-1 flex items-center justify-center space-x-1 border rounded border-gray-400">
