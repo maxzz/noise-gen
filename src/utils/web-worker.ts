@@ -117,7 +117,18 @@ function RunStuff() {
                 break;
             }
             case 'get-image': {
-                const promiseId = event.data.promiseId;
+                const ev: I2W.GetImage = event.data;
+                const promiseId = ev.promiseId;
+                if (ev.size) {
+                    const bigCanvas = new OffscreenCanvas(ev.size.w, ev.size.h);
+                    const bigCtx = bigCanvas.getContext('2d');
+                    if (bigCtx) {
+                        renderBody({ gen: noiseGeneratorPreview, ctx: bigCtx, rpm: renderParams });
+                        bigCanvas.convertToBlob({ quality: 1 }).then(function (blob) {
+                            runtime.postMessage({ type: 'got-image', blob, resolveId: promiseId } as I4W.Image);
+                        });
+                    }
+                }
                 canvasElm.convertToBlob({ quality: 1 }).then(function (blob) {
                     runtime.postMessage({ type: 'got-image', blob, resolveId: promiseId } as I4W.Image);
                 });
