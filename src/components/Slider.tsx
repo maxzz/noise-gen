@@ -15,7 +15,7 @@ export interface SliderProps {
 function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onChange}: SliderProps) {
     const [local, onSliderChange, onInputChange] = useFloatInput(value, onChange); // TODO: what to do with NaN?
     return (
-        <div className="px-2 w-full h-5 flex items-center justify-center space-x-2 text-xs text-purple-900">
+        <div className="px-2 w-full h-5 flex-centered space-x-2 text-xs text-purple-900">
             <div className="flex-none" style={{ width: labelWidth }}>{label}</div>
             <input
                 className="ui-slider"
@@ -36,7 +36,7 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
 export function SmallSlider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onChange }: SliderProps) {
     const [local, onSliderChange, onInputChange] = useFloatInput(value, onChange); // TODO: what to do with NaN?
     return (
-        <div className="px-2 w-full h-4 flex items-center justify-center space-x-2 text-[.6rem] text-purple-900">
+        <div className="px-2 w-full h-4 flex-centered space-x-2 text-[.6rem] text-purple-900">
             <div className="flex-none" style={{ width: labelWidth }}>{label}</div>
             <input
                 className="ui-slider"

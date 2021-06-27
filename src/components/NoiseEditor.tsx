@@ -9,7 +9,7 @@ function NoiseTypeButton({ text, selected, onClick }: { text: string; selected: 
     return (
         <div
             className={
-                `w-5 h-5 px-1 py-0.5 border border-purple-400 rounded flex items-center justify-center cursor-pointer
+                `w-5 h-5 px-1 py-0.5 border border-purple-400 rounded flex-centered cursor-pointer
                 ${selected ? 'bg-white ring-1 ring-offset-1 ring-offset-red-100 ring-purple-400' : ''}`
             }
             onClick={onClick}

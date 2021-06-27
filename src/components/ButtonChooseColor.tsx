@@ -25,7 +25,7 @@ export default function ButtonChooseColor(props: ButtonChooseColorProps) {
         >
             {/* Button outer */}
             <div
-                className={`${className} dark-frame-rounded bg-purple-100 transform active-scale cursor-pointer flex items-center justify-center`}
+                className={`${className} dark-frame-rounded bg-purple-100 transform active-scale cursor-pointer flex-centered`}
                 style={{ ...style }}
                 onClick={() => setIsDown(v => !v)}
             >

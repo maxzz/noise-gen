@@ -24,7 +24,7 @@ function App() {
         >
             {/* Header */}
             <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 shadow-sm select-none">
-                <div className="mx-4 flex-none flex items-center justify-center">
+                <div className="mx-4 flex-none flex-centered">
                     <Logo />
 
                     {/* Clear background */}

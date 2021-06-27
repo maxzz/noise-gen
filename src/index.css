@@ -15,4 +15,7 @@
     .active-scale {
         @apply active:scale-[.97];
     }
+    .flex-centered {
+        @apply flex items-center justify-center;
+    }
 }

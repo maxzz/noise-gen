@@ -30,13 +30,13 @@ function PreciseControlsActions() {
         <div className="p-2 flex space-x-1">
 
             {/* Canvas size buttons */}
-            <div className="px-1 flex items-center justify-center space-x-1 border rounded border-gray-400">
+            <div className="px-1 flex-centered space-x-1 border rounded border-gray-400">
                 <SizeBoxes />
             </div>
 
             {/* Preset set as background */}
             <div
-                className="border rounded border-gray-400 flex items-center justify-center text-gray-500
+                className="border rounded border-gray-400 flex-centered text-gray-500
                 transform active-scale cursor-pointer"
                 title="Set canvas image as application background"
                 onClick={setAsBackground}
@@ -48,7 +48,7 @@ function PreciseControlsActions() {
 
             {/* Preset + */}
             <div
-                className="flex-1 w-8 h-8 border rounded border-gray-400 flex items-center justify-center text-gray-500
+                className="flex-1 w-8 h-8 border rounded border-gray-400 flex-centered text-gray-500
                 transform active-scale cursor-pointer"
                 title="Save preset"
                 onClick={appendNew}
@@ -60,7 +60,7 @@ function PreciseControlsActions() {
 
             {/* Preset save */}
             <div
-                className="flex-1 w-8 h-8 border rounded border-gray-400 flex items-center justify-center text-gray-500
+                className="flex-1 w-8 h-8 border rounded border-gray-400 flex-centered text-gray-500
                 transform active-scale cursor-pointer"
                 title="Save image"
                 onClick={(event) => saveItemPng(event)}
