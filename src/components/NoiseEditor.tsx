@@ -27,8 +27,6 @@ function NoiseEditor() {
         opacity: showNoiseEditor ? 1 : 0,
         width: showNoiseEditor ? 144 : 0,
         transform: showNoiseEditor ? 'scale(1)' : 'scale(0)',
-        //display: showNoiseEditor ? 'block' : 'none',
-        //visibility: showNoiseEditor ? 'visible' : 'hidden',
         config: {
             duration: 200,
         }
@@ -49,7 +47,7 @@ function NoiseEditor() {
                 className="-mt-2 pt-2 overflow-hidden"
                 style={{ width: props.width, opacity: props.opacity, transform: props.transform }}
             >
-                <div className="w-36 pl-1">
+                {showNoiseEditor && <div className="w-36 pl-1">
 
                     {/* Noise type buttons */}
                     <div className="flex items-center text-xs select-none">
@@ -68,7 +66,7 @@ function NoiseEditor() {
                         {noise.dim > 2 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.z} max={NOISEPARAMS.d3.max.z} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
                         {noise.dim > 3 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.w} max={NOISEPARAMS.d3.max.w} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
                     </div>
-                </div>
+                </div>}
             </a.div>
         </div>
     );
