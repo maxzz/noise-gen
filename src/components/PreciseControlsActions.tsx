@@ -11,11 +11,11 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
     const [width, setWidth] = React.useState(0);
     const [height, setHeight] = React.useState(0);
 
-    function setNewWidth() {
+    function setNewWidth(value: string) {
 
     }
 
-    function setNewHeight() {
+    function setNewHeight(value: string) {
 
     }
 
@@ -23,13 +23,13 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
         <div className="px-2 py-1 rounded border text-sm border-gray-400 bg-purple-300 flex flex-col shadow">
             <div className="">Image size</div>
             <div className="mt-1 flex items-center space-x-1">
-                <input className="px-2 py-0.5 w-16 rounded" value={exportImageSize.w} />
+                <input className="px-2 py-0.5 w-16 rounded" value={exportImageSize.w} onChange={(e) => setNewWidth(e.target.value)} />
                 <div className="">
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </div>
-                <input className="px-2 py-0.5 w-16 rounded" value={exportImageSize.h} />
+                <input className="px-2 py-0.5 w-16 rounded" value={exportImageSize.h} onChange={(e) => setNewHeight(e.target.value)} />
             </div>
             <button className="self-end mt-2 px-2 py-1 rounded border border-gray-200 text-gray-200 active-scale">
                 Save
