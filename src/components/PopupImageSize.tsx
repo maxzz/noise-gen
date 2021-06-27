@@ -4,6 +4,16 @@ import { useClickAway } from 'react-use';
 import { ExportImageSizeAtom } from '../atoms';
 import { WH } from '../utils/types';
 
+function validInt(v: string): number {
+    const n = +(+v).toFixed(0);
+    return !isNaN(n) && n > 0 ? n : 0;
+}
+
+function sizeTooBigMessage(size: WH) {
+    return `Sizes over 2000 x 2000 are already a bit too much for Chrome.
+Current size ${size.w} x ${size.h} = ${size.w * size.h / 1024}K`;
+}
+
 function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
     const [width, setWidth] = React.useState('' + exportImageSize.w);
@@ -19,10 +29,6 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
     }, []);
 
     React.useEffect(() => {
-        function validInt(v: string): number {
-            const n = +(+v).toFixed(0);
-            return !isNaN(n) && n > 0 ? n : 0;
-        }
         let w = validInt(width);
         let h = validInt(height);
         let isTooBig = w * h > 2000 * 2000;
@@ -90,6 +96,7 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
                     `self-end mt-2 mb-2 px-3 py-1 h-8 rounded border active-scale 
                     ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'}`
                 }
+                title={`${tooBig ? sizeTooBigMessage(exportImageSize) : ''}`}
                 onClick={() => valid && onSave(exportImageSize)}
             >
                 <div className="pb-0.5">{valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size'}</div>
