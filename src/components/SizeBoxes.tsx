@@ -7,9 +7,10 @@ const SIZES = [[300, 300], [500, 500], [700, 700], [900, 900]];
 function SizeIcon({ select, step }: { select: () => void, step: number; }) {
     return (
         <div
-            className="flex-centered
+            className="
+                flex-centered active:scale-95 cursor-pointer 
                 text-gray-400 hover:text-purple-600
-                transform active-scale cursor-pointer"
+                ring-purple-400 ring-opacity-50 hover:ring-2 active:ring-2 active:ring-opacity-100"
             title={`Set canvas ${SIZES[step][0]} x ${SIZES[step][1]}`}
             onClick={select}
         >
