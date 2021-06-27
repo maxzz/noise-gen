@@ -208,11 +208,13 @@ export function noiseParams4Store(seed: string = ''): { seed: string; noise: Noi
 
 export type AppConfig = {
     canvasBg: string;
+    expSize: WH;
     renderParams: RenderParams;
 };
 
 export const APPCONFIG: AppConfig = {
     canvasBg: 'transparent',
+    expSize: { w: 325, h: 300 },
     renderParams: {
         seed: '13753932482421605',
         color: '#887ed6',

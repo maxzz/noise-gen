@@ -18,7 +18,6 @@ export const RenderWorkerAtom = atom<WorkerEx | null>(null);
 // Canvas size
 
 export const ManualSizeAtom = atom({ w: 325, h: 300 });
-export const ExportImageSizeAtom = atom({w: 325, h: 300});
 
 // GenParams
 
@@ -46,8 +45,10 @@ export const DotDiameterAtom = atom(
 
 // Current seed, color, and canvas color
 
-export const ColorAtom = atomWithCallback(defAppSettings.renderParams.color, (_, get) => storeAppParams(get));
 export const ColorCanvasAtom = atomWithCallback(defAppSettings.canvasBg, (_, get) => storeAppParams(get));
+export const ExportImageSizeAtom = atomWithCallback(defAppSettings.expSize, (_, get) => storeAppParams(get));
+
+export const ColorAtom = atomWithCallback(defAppSettings.renderParams.color, (_, get) => storeAppParams(get));
 export const SeedAtom = atomWithCallback(defAppSettings.renderParams.seed, (_, get) => storeAppParams(get));
 export const NoiseAtom = atomWithCallback(defAppSettings.renderParams.noise, (_, get) => storeAppParams(get));
 

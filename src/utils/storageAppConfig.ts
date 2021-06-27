@@ -1,5 +1,5 @@
 import { Getter } from 'jotai';
-import { ColorCanvasAtom, RenderParamsAtom } from '../atoms';
+import { ColorCanvasAtom, ExportImageSizeAtom, RenderParamsAtom } from '../atoms';
 import { AppConfig, APPCONFIG, renderParams2Store, renderParams4Store, STORAGE_KEY } from './types';
 import debounce from './debounce';
 
@@ -24,8 +24,9 @@ const PARAMS_KEY = `${STORAGE_KEY}-params`;
 //{"can":"black","rpm":"v7|#887ed6|v7_2_0.01_0.01_0.1_1_13753932482421605|24.52|-34.36|109.62|0.1"}
 
 type AppConfigRaw = {
-    can: string; // canvasBg
-    rpm: string; // renderparams
+    can: string;                    // canvas background
+    exp: { w: number, h: number; }, // Size of exported image
+    rpm: string;                    // render params
 };
 
 export const defAppSettings: AppConfig = function (): AppConfig {
@@ -35,8 +36,9 @@ export const defAppSettings: AppConfig = function (): AppConfig {
         let rpm = renderParams4Store(data.rpm);
         if (rpm) {
             let config: AppConfig = {
-                canvasBg: data.can,
-                renderParams: rpm,
+                canvasBg: data.can || APPCONFIG.canvasBg,
+                expSize: data.exp || APPCONFIG.expSize,
+                renderParams: rpm || APPCONFIG.renderParams,
             };
             return config;
         }
@@ -48,6 +50,7 @@ export const defAppSettings: AppConfig = function (): AppConfig {
 export const storeAppParams = debounce((get: Getter) => {
     let data: AppConfigRaw = {
         can: get(ColorCanvasAtom),
+        exp: get(ExportImageSizeAtom),
         rpm: renderParams2Store(get(RenderParamsAtom)),
     };
     localStorage.setItem(PARAMS_KEY, JSON.stringify(data));
