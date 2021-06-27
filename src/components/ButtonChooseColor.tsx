@@ -42,11 +42,11 @@ export default function ButtonChooseColor(props: ButtonChooseColorProps) {
             </div>
 
             {/* Color picker */}
-            <a.div className={`absolute right-0 top-full z-10 ${isDown ? '' : 'hidden'}`} style={{ opacity: anim.opacity }}>
-                <SketchPicker
+            <a.div className={`absolute right-0 top-full z-10`} style={{ opacity: anim.opacity }}> {/* ${isDown ? '' : 'hidden'} */}
+                {isDown && <SketchPicker
                     color={color}
                     onChange={(color: ColorResult) => setColor(color.hex)}
-                />
+                />}
             </a.div>
         </button>
     );
