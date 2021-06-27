@@ -27,7 +27,7 @@ function PreciseControlsActions() {
         }
     }
     return (
-        <div className="px-2 py-2 flex space-x-2 ">
+        <div className="p-2 flex space-x-1">
 
             {/* Canvas size buttons */}
             <div className="px-1 flex items-center justify-center space-x-1 border rounded border-gray-400">
@@ -48,7 +48,7 @@ function PreciseControlsActions() {
 
             {/* Preset + */}
             <div
-                className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-500
+                className="flex-1 w-8 h-8 border rounded border-gray-400 flex items-center justify-center text-gray-500
                 transform active-scale cursor-pointer"
                 title="Save preset"
                 onClick={appendNew}
@@ -60,7 +60,7 @@ function PreciseControlsActions() {
 
             {/* Preset save */}
             <div
-                className="w-full h-8 border rounded border-gray-400 flex items-center justify-center text-gray-500
+                className="flex-1 w-8 h-8 border rounded border-gray-400 flex items-center justify-center text-gray-500
                 transform active-scale cursor-pointer"
                 title="Save image"
                 onClick={(event) => saveItemPng(event)}
