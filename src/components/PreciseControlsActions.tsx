@@ -77,15 +77,16 @@ function PreciseControlsActions() {
                 </svg>
 
                 {showSelectFileSize &&
-                    <div className="absolute mt-1 px-2 top-full right-0 rounded border border-gray-400 bg-purple-300 flex-col shadow">
-                        <div className="">Size</div>
+                    <div className="absolute mt-1 px-2 py-1 top-full right-0 rounded border text-sm border-gray-400 bg-purple-300 flex flex-col shadow space-y-1">
+                        <div className="">Image size</div>
                         <div className="flex items-center space-x-1">
-                            
                             <input className="px-2 py-0.5 w-16 rounded" />
-                            <div className="">x</div>
+                            <div className="">X</div>
                             <input className="px-2 py-0.5 w-16 rounded" />
                         </div>
-                        <button className="">Save</button>
+                        <button className="self-end px-2 py-1 rounded border border-gray-400">
+                            Save
+                        </button>
                     </div>
                 }
             </div>
