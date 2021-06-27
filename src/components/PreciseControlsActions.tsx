@@ -7,7 +7,6 @@ import saveBlobData from '../utils/saveImage';
 
 function DimentionsPopup({ onSave }: { onSave: () => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
-
     const [width, setWidth] = React.useState('' + exportImageSize.w);
     const [height, setHeight] = React.useState('' + exportImageSize.h);
     const [valid, setValid] = React.useState(true);
@@ -25,8 +24,13 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
     }, [width, height]);
 
     return (
-        <div className="px-2 pt-1 rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900">
-            <div className="">Image size</div>
+        <div className="px-2 pt-1 relative rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900">
+            <div className="absolute top-[2px] right-[2px] p-1.5 rounded activ:bg-red-100 hover:bg-red-400 hover:text-white">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+            <div className="mt-4">Image size</div>
             <div className="mt-1 flex items-center space-x-1">
                 <input className="px-2 py-0.5 w-16 rounded" value={width} onChange={(e) => setWidth(e.target.value)} />
                 <div className="">
@@ -118,8 +122,8 @@ function PreciseControlsActions() {
                     className="flex-1 w-8 h-8 border rounded border-gray-400 flex-centered text-gray-500
                     active-scale cursor-pointer"
                     title="Save image"
-                // onClick={(event) => saveItemPng(event)}
-                onClick={() => setShowSelectFileSize((prev) => !prev)}
+                    // onClick={(event) => saveItemPng(event)}
+                    onClick={() => setShowSelectFileSize((prev) => !prev)}
                 >
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.8} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
