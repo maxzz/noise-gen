@@ -6,7 +6,7 @@ import SizeBoxes from './SizeBoxes';
 import saveBlobData from '../utils/saveImage';
 import { useClickAway } from 'react-use';
 
-function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
+function DimentionsPopup({ onSave }: { onSave: (size?: { w: number, h: number; }) => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
     const [width, setWidth] = React.useState('' + exportImageSize.w);
     const [height, setHeight] = React.useState('' + exportImageSize.h);
@@ -14,7 +14,7 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const firstInput = React.useRef<HTMLInputElement>(null);
     useClickAway(containerRef, () => {
-        onSave(false);
+        onSave();
     });
 
     React.useEffect(() => {
@@ -38,7 +38,7 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
             className="px-2 pt-1 relative rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900"
             onKeyDown={((event) => {
                 if (event.key === 'Escape') {
-                    onSave(false);
+                    onSave();
                 }
             })}
             ref={containerRef}
@@ -47,7 +47,7 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
             {/* Close button */}
             <div
                 className="absolute top-[2px] right-[2px] p-1.5 rounded activ:bg-red-100 hover:bg-red-400 hover:text-white"
-                onClick={() => onSave(false)}
+                onClick={() => onSave()}
             >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -64,7 +64,7 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
                     ref={firstInput}
                     onKeyDown={((event) => {
                         if (event.key === 'Enter') {
-                            onSave(true);
+                            onSave(exportImageSize);
                         }
                     })}
                 />
@@ -86,7 +86,7 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
                     `self-end mt-3 mb-2 px-3 py-1 h-8 rounded border active-scale 
                     ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'}`
                 }
-                onClick={() => onSave(true)}
+                onClick={() => onSave(exportImageSize)}
             >
                 <div className="pb-0.5">{valid ? 'Save' : 'Invalid size'}</div>
             </button>
@@ -118,9 +118,9 @@ function PreciseControlsActions() {
 
     const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
-    async function saveItemPng(save: boolean) {
+    async function saveItemPng(size?: { w: number, h: number; }) {
         setShowSelectFileSize(false);
-        if (save) {
+        if (size) {
             console.log('save');
             if (worker) {
                 let blob = await worker.getImage();
