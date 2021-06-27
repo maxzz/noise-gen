@@ -25,11 +25,15 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
 
     return (
         <div className="px-2 pt-1 relative rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900">
+            
+            {/* Close button */}
             <div className="absolute top-[2px] right-[2px] p-1.5 rounded activ:bg-red-100 hover:bg-red-400 hover:text-white">
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </div>
+
+            {/* controls */}
             <div className="mt-4">Image size</div>
             <div className="mt-1 flex items-center space-x-1">
                 <input className="px-2 py-0.5 w-16 rounded" value={width} onChange={(e) => setWidth(e.target.value)} />
@@ -40,10 +44,12 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
                 </div>
                 <input className="px-2 py-0.5 w-16 rounded" value={height} onChange={(e) => setHeight(e.target.value)} />
             </div>
+
+            {/* Save button */}
             <button
                 className={
-                    `self-end my-2 px-2 py-1 rounded border active-scale 
-                    ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-500 border-none'}`
+                    `self-end mt-3 mb-2 px-2 py-1 h-8 rounded border active-scale 
+                    ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'}`
                 }
                 onClick={onSave}
             >
