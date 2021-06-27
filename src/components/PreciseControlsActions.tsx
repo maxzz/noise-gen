@@ -15,7 +15,7 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
     const firstInput = React.useRef<HTMLInputElement>(null);
     useClickAway(containerRef, () => {
         onSave(false);
-     });
+    });
 
     React.useEffect(() => {
         firstInput.current?.focus();
@@ -36,6 +36,11 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
     return (
         <div
             className="px-2 pt-1 relative rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900"
+            onKeyDown={((event) => {
+                if (event.key === 'Escape') {
+                    onSave(false);
+                }
+            })}
             ref={containerRef}
         >
 
