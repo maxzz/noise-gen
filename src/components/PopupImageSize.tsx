@@ -9,6 +9,7 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
     const [width, setWidth] = React.useState('' + exportImageSize.w);
     const [height, setHeight] = React.useState('' + exportImageSize.h);
     const [valid, setValid] = React.useState(true);
+    const [tooBig, setTooBig] = React.useState(false);
     const containerRef = React.useRef<HTMLDivElement>(null);
     const firstInputRef = React.useRef<HTMLInputElement>(null);
     useClickAway(containerRef, () => onSave());
@@ -24,12 +25,15 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
         }
         let w = validInt(width);
         let h = validInt(height);
-        let isValid = !!w && !!h && w * h <= 2000 * 2000;
+        let isTooBig = w * h > 2000 * 2000;
+        let isValid = !!w && !!h && !isTooBig;
         setValid(isValid);
+        setTooBig(isTooBig);
         isValid && setExportImageSize({ w, h });
     }, [width, height]);
 
     return (
+        // Popup frame
         <div
             className="px-2 pt-1 relative rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900"
             onKeyDown={((event) => {
@@ -39,7 +43,6 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
             })}
             ref={containerRef}
         >
-
             {/* Close button */}
             <div
                 className="absolute top-[2px] right-[2px] p-1.5 rounded activ:bg-red-100 hover:bg-red-400 hover:text-white"
@@ -51,7 +54,7 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
             </div>
 
             {/* Controls */}
-            <div className="mt-1">Image size</div>
+            <div className="mt-4">Image size</div>
             <div className="mt-1 flex items-center space-x-1">
                 <input
                     ref={firstInputRef}
@@ -89,7 +92,7 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
                 }
                 onClick={() => valid && onSave(exportImageSize)}
             >
-                <div className="pb-0.5">{valid ? 'Save' : 'Invalid size'}</div>
+                <div className="pb-0.5">{valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size'}</div>
             </button>
         </div>
     );
