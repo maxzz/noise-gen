@@ -31,7 +31,7 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
     React.useEffect(() => {
         let w = validInt(width);
         let h = validInt(height);
-        
+
         let isValid = !!w && !!h;
         let isTooBig = isValid && w * h > 2000 * 2000;
         isValid = isValid && !isTooBig;
@@ -99,7 +99,7 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
                     `self-end mt-2 mb-2 px-3 py-1 h-8 rounded border active-scale 
                     ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'}`
                 }
-                title={`${tooBig ? sizeTooBigMessage(exportImageSize) : ''}`}
+                title={`${tooBig ? sizeTooBigMessage({w: +width, h: +height}) : ''}`}
                 onClick={() => valid && onSave(exportImageSize)}
             >
                 <div className="pb-0.5">{valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size'}</div>
