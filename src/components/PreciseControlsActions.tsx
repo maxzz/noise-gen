@@ -12,11 +12,9 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
     const [height, setHeight] = React.useState(0);
 
     function setNewWidth(value: string) {
-
     }
 
     function setNewHeight(value: string) {
-
     }
 
     return (
