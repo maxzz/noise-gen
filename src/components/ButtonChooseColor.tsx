@@ -15,8 +15,8 @@ export default function ButtonChooseColor(props: ButtonChooseColorProps) {
     const { className, style = {} } = props;
     const [color, setColor] = useAtom(ColorAtom);
     const [isDown, setIsDown] = useState<boolean>(false);
-    const ref = useRef<HTMLButtonElement>(null);
-    useClickAway(ref, () => setIsDown(false));
+    const containerRef = useRef<HTMLButtonElement>(null);
+    useClickAway(containerRef, () => setIsDown(false));
 
     const anim = useSpring({
         opacity: isDown ? 1 : 0,
@@ -28,8 +28,13 @@ export default function ButtonChooseColor(props: ButtonChooseColorProps) {
     return (
         <button
             className="relative no-active-ouline"
-            ref={ref}
+            ref={containerRef}
             title="Change canvas color"
+            onKeyDown={((event) => {
+                if (event.key === 'Escape') {
+                    setIsDown(false);
+                }
+            })}
         >
             {/* Button outer */}
             <div
@@ -42,7 +47,7 @@ export default function ButtonChooseColor(props: ButtonChooseColorProps) {
             </div>
 
             {/* Color picker */}
-            <a.div className={`absolute right-0 top-full z-10`} style={{ opacity: anim.opacity }}> {/* ${isDown ? '' : 'hidden'} */}
+            <a.div className={`absolute right-0 top-full z-20`} style={{ opacity: anim.opacity }}> {/* ${isDown ? '' : 'hidden'} */}
                 {isDown && <SketchPicker
                     color={color}
                     onChange={(color: ColorResult) => setColor(color.hex)}

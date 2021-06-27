@@ -12,13 +12,11 @@ function DimentionsPopup({ onSave }: { onSave: (size?: WH) => void; }) {
     const [height, setHeight] = React.useState('' + exportImageSize.h);
     const [valid, setValid] = React.useState(true);
     const containerRef = React.useRef<HTMLDivElement>(null);
-    const firstInput = React.useRef<HTMLInputElement>(null);
-    useClickAway(containerRef, () => {
-        onSave();
-    });
+    const firstInputRef = React.useRef<HTMLInputElement>(null);
+    useClickAway(containerRef, () => onSave());
 
     React.useEffect(() => {
-        firstInput.current?.focus();
+        firstInputRef.current?.focus();
     }, []);
 
     React.useEffect(() => {
@@ -61,7 +59,7 @@ function DimentionsPopup({ onSave }: { onSave: (size?: WH) => void; }) {
                     className="px-2 py-1 w-16 rounded"
                     value={width}
                     onChange={(e) => setWidth(e.target.value)}
-                    ref={firstInput}
+                    ref={firstInputRef}
                     onKeyDown={((event) => {
                         if (event.key === 'Enter') {
                             onSave(exportImageSize);
