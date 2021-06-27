@@ -68,7 +68,7 @@ function PreciseControlsActions() {
             {/* Preset save */}
             <div
                 className="relative flex-1 w-8 h-8 border rounded border-gray-400 flex-centered text-gray-500
-                transform active-scale cursor-pointer z-10"
+                active-scale cursor-pointer z-10"
                 title="Save image"
                 onClick={(event) => saveItemPng(event)}
             >
@@ -77,9 +77,9 @@ function PreciseControlsActions() {
                 </svg>
 
                 {showSelectFileSize &&
-                    <div className="absolute mt-1 px-2 py-1 top-full right-0 rounded border text-sm border-gray-400 bg-purple-300 flex flex-col shadow space-y-1">
+                    <div className="absolute mt-1 px-2 py-1 top-full right-0 rounded border text-sm border-gray-400 bg-purple-300 flex flex-col shadow">
                         <div className="">Image size</div>
-                        <div className="flex items-center space-x-1">
+                        <div className="mt-1 flex items-center space-x-1">
                             <input className="px-2 py-0.5 w-16 rounded" />
                             <div className="">
                                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -88,7 +88,7 @@ function PreciseControlsActions() {
                             </div>
                             <input className="px-2 py-0.5 w-16 rounded" />
                         </div>
-                        <button className="self-end px-2 py-1 rounded border border-gray-400">
+                        <button className="self-end mt-2 px-2 py-1 rounded border border-gray-200 text-gray-200 active-scale">
                             Save
                         </button>
                     </div>
