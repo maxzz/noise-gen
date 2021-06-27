@@ -8,32 +8,40 @@ import saveBlobData from '../utils/saveImage';
 function DimentionsPopup({ onSave }: { onSave: () => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
 
-    const [width, setWidth] = React.useState(0);
-    const [height, setHeight] = React.useState(0);
+    const [width, setWidth] = React.useState('');
+    const [height, setHeight] = React.useState('');
+    const [valid, setValid] = React.useState(true);
 
     function setNewWidth(value: string) {
+        let n: number = +value;
+        let isValid = !isNaN(n) && !!n;
+        setWidth(value);
+        setValid(isValid);
+        if (isValid) {
+            setExportImageSize((prev) => ({ ...prev, w: n}))
     }
+}
 
-    function setNewHeight(value: string) {
-    }
+function setNewHeight(value: string) {
+}
 
-    return (
-        <div className="px-2 py-1 rounded border text-sm border-gray-400 bg-purple-300 flex flex-col shadow">
-            <div className="">Image size</div>
-            <div className="mt-1 flex items-center space-x-1">
-                <input className="px-2 py-0.5 w-16 rounded" value={exportImageSize.w} onChange={(e) => setNewWidth(e.target.value)} />
-                <div className="">
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </div>
-                <input className="px-2 py-0.5 w-16 rounded" value={exportImageSize.h} onChange={(e) => setNewHeight(e.target.value)} />
+return (
+    <div className="px-2 py-1 rounded border text-sm border-gray-400 bg-purple-300 flex flex-col shadow">
+        <div className="">Image size</div>
+        <div className="mt-1 flex items-center space-x-1">
+            <input className="px-2 py-0.5 w-16 rounded" value={width} onChange={(e) => setNewWidth(e.target.value)} />
+            <div className="">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
             </div>
-            <button className="self-end mt-2 px-2 py-1 rounded border border-gray-200 text-gray-200 active-scale">
-                Save
-            </button>
+            <input className="px-2 py-0.5 w-16 rounded" value={exportImageSize.h} onChange={(e) => setNewHeight(e.target.value)} />
         </div>
-    );
+        <button className={`self-end mt-2 px-2 py-1 rounded border border-gray-200 text-gray-200 active-scale ${valid ? '' : 'bg-red-300'}`}>
+            Save
+        </button>
+    </div>
+);
 }
 
 function PreciseControlsActions() {
@@ -101,7 +109,7 @@ function PreciseControlsActions() {
                 className="relative flex-1 w-8 h-8 border rounded border-gray-400 flex-centered text-gray-500
                 active-scale cursor-pointer z-10"
                 title="Save image"
-                // onClick={(event) => saveItemPng(event)}
+            // onClick={(event) => saveItemPng(event)}
             >
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.8} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
