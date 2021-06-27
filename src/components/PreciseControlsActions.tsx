@@ -24,13 +24,13 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
 
     React.useEffect(() => {
         console.log('popup', width, height);
-        
+
         let w: number = +(+width).toFixed(0);
         let h: number = +(+height).toFixed(0);
         let isValid = !isNaN(w) && !!w && !isNaN(h) && !!h;
         setValid(isValid);
         if (isValid) {
-            setExportImageSize((prev) => ({ w, h }));
+            setExportImageSize({ w, h });
         }
 
     }, [width, height]);
@@ -120,16 +120,21 @@ function PreciseControlsActions() {
             </div>
 
             {/* Preset save */}
-            <div
-                className="relative flex-1 w-8 h-8 border rounded border-gray-400 flex-centered text-gray-500
-                active-scale cursor-pointer z-10"
-                title="Save image"
-            // onClick={(event) => saveItemPng(event)}
-            >
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.8} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
-                </svg>
+            <div className="relative z-10">
 
+                {/* Save button */}
+                <div
+                    className="flex-1 w-8 h-8 border rounded border-gray-400 flex-centered text-gray-500
+                    active-scale cursor-pointer"
+                    title="Save image"
+                // onClick={(event) => saveItemPng(event)}
+                >
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.8} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                    </svg>
+                </div>
+
+                {/* Popup */}
                 {showSelectFileSize &&
                     <div className="absolute mt-1 top-full right-0">
                         <DimentionsPopup onSave={saveItemPng} />
