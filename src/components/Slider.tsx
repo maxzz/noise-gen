@@ -22,6 +22,7 @@ function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onC
                 type="range"
                 min={min} max={max} step={step}
                 value={value}
+                tabIndex={-1}
                 onChange={onSliderChange}
             />
             <input className="w-8 bg-purple-100 text-[.6rem]"
@@ -42,6 +43,7 @@ export function SmallSlider({ label, min, max, step = .01, labelWidth = '4.5rem'
                 type="range"
                 min={min} max={max} step={step}
                 value={value}
+                tabIndex={-1}
                 onChange={onSliderChange}
             />
             <input className="w-8 bg-purple-100 text-[.6rem]"
