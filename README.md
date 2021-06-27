@@ -25,7 +25,13 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
         [x] Add current preset to presets.
         [x] Download image as PNG.
         [ ] Allow the user to customize the predefined image sizes.
-        [ ] Let the user choose the size of the generated texture to save.
+        [x] Let the user choose the size of the generated texture to save.
+            [x] Popup with the size of the exported image.
+                [x] Handle the case when the image size is over 2000 x 2000, which is too much for Chrome.
+                [x] Show the maximum allowed image size.
+            [ ] Save the user-defined size of the exported image to the config.
+            [ ] Show the save progress indicator.
+            [ ] Add show/hide animation to popup.
     [x] App controls
         [x] Set the currnent canvas image as the page background.
         [x] Allow to clear the page background from the canvas image.
