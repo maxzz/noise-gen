@@ -2,7 +2,7 @@ import React, { RefObject, useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { OffscreenCanvasAtom, RenderWorkerAtom } from '../atoms';
 import webWorker from '../utils/web-worker?worker';
-import { I2W, I4W } from '../utils/types';
+import { I2W, I4W, WH } from '../utils/types';
 import uuid from '../utils/uuid';
 
 type PromissedQuery = {
@@ -11,7 +11,7 @@ type PromissedQuery = {
 
 export interface WorkerEx extends Worker {
     queries: Map<string, PromissedQuery>;
-    getImage(): Promise<any>;
+    getImage(size?: {w: number, h: number}): Promise<any>;
 };
 
 export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): WorkerEx | null {
@@ -46,12 +46,13 @@ export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): W
         // };
 
         newWorker.queries = new Map();
-        newWorker.getImage = () => {
+        newWorker.getImage = (size?: WH) => {
             return new Promise((resolve) => {
                 let id = uuid();
                 newWorker.queries.set(id, { resolve });
                 newWorker.postMessage({
                     type: 'get-image',
+                    size,
                     promiseId: id,
                 } as I2W.GetImage);
             });

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { AppBackgroundUrlAtom, ExportImageSizeAtom, RenderWorkerAtom } from '../atoms';
-import { I2W, PRESET_H, PRESET_W } from '../utils/types';
+import { I2W, PRESET_H, PRESET_W, WH } from '../utils/types';
 import SizeBoxes from './SizeBoxes';
 import saveBlobData from '../utils/saveImage';
 import { useClickAway } from 'react-use';
 
-function DimentionsPopup({ onSave }: { onSave: (size?: { w: number, h: number; }) => void; }) {
+function DimentionsPopup({ onSave }: { onSave: (size?: WH) => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
     const [width, setWidth] = React.useState('' + exportImageSize.w);
     const [height, setHeight] = React.useState('' + exportImageSize.h);
@@ -118,12 +118,12 @@ function PreciseControlsActions() {
 
     const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
-    async function saveItemPng(size?: { w: number, h: number; }) {
+    async function saveItemPng(size?: WH) {
         setShowSelectFileSize(false);
         if (size) {
             console.log('save');
             if (worker) {
-                let blob = await worker.getImage();
+                let blob = await worker.getImage(size);
                 saveBlobData(blob, 'noise-gen.png');
             }
         }

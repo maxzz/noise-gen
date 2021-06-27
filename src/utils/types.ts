@@ -1,3 +1,8 @@
+export type WH = {
+    w: number;
+    h: number;
+};
+
 export type GenParams = {
     n1: number;
     n2: number;
@@ -131,6 +136,7 @@ export namespace I2W { // To Worker
 
     export type GetImage = {
         type: 'get-image';
+        size?: WH;
         promiseId: string;
     };
 }
