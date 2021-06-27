@@ -27,6 +27,8 @@ function NoiseEditor() {
         opacity: showNoiseEditor ? 1 : 0,
         width: showNoiseEditor ? 144 : 0,
         transform: showNoiseEditor ? 'scale(1)' : 'scale(0)',
+        //display: showNoiseEditor ? 'block' : 'none',
+        //visibility: showNoiseEditor ? 'visible' : 'hidden',
         config: {
             duration: 200,
         }
