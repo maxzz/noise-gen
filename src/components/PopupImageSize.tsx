@@ -1,5 +1,5 @@
-import { useAtom } from 'jotai';
 import React from 'react';
+import { useAtom } from 'jotai';
 import { useClickAway } from 'react-use';
 import { ExportImageSizeAtom } from '../atoms';
 import { WH } from '../utils/types';
@@ -10,9 +10,9 @@ function validInt(v: string): number {
 }
 
 function sizeTooBigMessage(size: WH) {
-    var sizeInMB = (size.w * size.h / (1024*1024)).toFixed(2);
+    var sizeInMB = (size.w * size.h / (1024 * 1024)).toFixed(2);
     return `Sizes over 2000 x 2000 are already a bit too much for Chrome.
-Current size ${size.w} x ${size.h} = ${sizeInMB} MB`;
+The current image size ${size.w} x ${size.h} = ${sizeInMB} MB`;
 }
 
 function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
@@ -46,11 +46,7 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
         // Popup frame
         <div
             className="px-2 pt-1 relative rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900"
-            onKeyDown={((event) => {
-                if (event.key === 'Escape') {
-                    onSave();
-                }
-            })}
+            onKeyDown={((event) => event.key === 'Escape' && onSave())}
             ref={containerRef}
         >
             {/* Close button */}
@@ -71,11 +67,7 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
                     className="px-2 py-1 w-16 rounded"
                     value={width}
                     onChange={(e) => setWidth(e.target.value)}
-                    onKeyDown={((event) => {
-                        if (valid && event.key === 'Enter') {
-                            onSave(exportImageSize);
-                        }
-                    })}
+                    onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
                 />
                 <div className="">
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -86,11 +78,7 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
                     className="px-2 py-1 w-16 rounded"
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
-                    onKeyDown={((event) => {
-                        if (valid && event.key === 'Enter') {
-                            onSave(exportImageSize);
-                        }
-                    })}
+                    onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
                 />
             </div>
 
@@ -100,7 +88,7 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
                     `self-end mt-2 mb-2 px-3 py-1 h-8 rounded border active-scale 
                     ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'}`
                 }
-                title={`${tooBig ? sizeTooBigMessage({w: +width, h: +height}) : ''}`}
+                title={`${tooBig ? sizeTooBigMessage({ w: +width, h: +height }) : ''}`}
                 onClick={() => valid && onSave(exportImageSize)}
             >
                 <div className="pb-0.5">{valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size'}</div>
@@ -110,9 +98,3 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
 }
 
 export default PopupImageSize;
-
-// TODO: more then 2000 x 2000 is too much for Chrome
-// TODO: show max valid size
-// TODO: save user defined size to config
-// TODO: show save indicator
-// TODO: add animation on popup
