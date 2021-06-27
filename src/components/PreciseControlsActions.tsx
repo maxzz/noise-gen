@@ -25,9 +25,14 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
     React.useEffect(() => {
         console.log('popup', width, height);
 
-        let w: number = +(+width).toFixed(0);
-        let h: number = +(+height).toFixed(0);
-        let isValid = !isNaN(w) && !!w && !isNaN(h) && !!h;
+        function validInt(v: string): number {
+            let n = +(+v).toFixed(0);
+            return !isNaN(n) && n > 0 ? n : 0;
+        }
+
+        let w: number = validInt(width);
+        let h: number = validInt(height);
+        let isValid = !!w && !!h;
         setValid(isValid);
         if (isValid) {
             setExportImageSize({ w, h });
@@ -39,21 +44,26 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
     }
 
     return (
-        <div className="px-2 py-1 rounded border text-sm border-gray-400 bg-purple-300 flex flex-col shadow">
+        <div className="px-2 pt-1 rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900">
             <div className="">Image size</div>
             <div className="mt-1 flex items-center space-x-1">
                 {/* <input className="px-2 py-0.5 w-16 rounded" value={width} onChange={(e) => setNewWidth(e.target.value)} /> */}
                 <input className="px-2 py-0.5 w-16 rounded" value={width} onChange={(e) => setWidth(e.target.value)} />
                 <div className="">
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </div>
                 {/* <input className="px-2 py-0.5 w-16 rounded" value={exportImageSize.h} onChange={(e) => setNewHeight(e.target.value)} /> */}
                 <input className="px-2 py-0.5 w-16 rounded" value={height} onChange={(e) => setHeight(e.target.value)} />
             </div>
-            <button className={`self-end mt-2 px-2 py-1 rounded border border-gray-200 text-gray-200 active-scale ${valid ? '' : 'bg-red-500'}`}>
-                Save
+            <button
+                className={
+                    `self-end my-2 px-2 py-1 rounded border active-scale 
+                    ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-500 border-none'}`
+                }
+            >
+                <div className="pb-0.5">{valid ? 'Save' : 'Invalid size'}</div>
             </button>
         </div>
     );
