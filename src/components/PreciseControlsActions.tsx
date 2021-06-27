@@ -4,13 +4,18 @@ import { AppBackgroundUrlAtom, ExportImageSizeAtom, RenderWorkerAtom } from '../
 import { I2W, PRESET_H, PRESET_W } from '../utils/types';
 import SizeBoxes from './SizeBoxes';
 import saveBlobData from '../utils/saveImage';
+import { useClickAway } from 'react-use';
 
 function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
     const [width, setWidth] = React.useState('' + exportImageSize.w);
     const [height, setHeight] = React.useState('' + exportImageSize.h);
     const [valid, setValid] = React.useState(true);
+    const containerRef = React.useRef<HTMLDivElement>(null);
     const firstInput = React.useRef<HTMLInputElement>(null);
+    useClickAway(containerRef, () => {
+        onSave(false);
+     });
 
     React.useEffect(() => {
         firstInput.current?.focus();
@@ -29,7 +34,10 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
     }, [width, height]);
 
     return (
-        <div className="px-2 pt-1 relative rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900">
+        <div
+            className="px-2 pt-1 relative rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900"
+            ref={containerRef}
+        >
 
             {/* Close button */}
             <div
@@ -41,11 +49,11 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
                 </svg>
             </div>
 
-            {/* controls */}
+            {/* Controls */}
             <div className="mt-4">Image size</div>
             <div className="mt-1 flex items-center space-x-1">
                 <input
-                    className="px-2 py-0.5 w-16 rounded"
+                    className="px-2 py-1 w-16 rounded"
                     value={width}
                     onChange={(e) => setWidth(e.target.value)}
                     ref={firstInput}
@@ -61,7 +69,7 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
                     </svg>
                 </div>
                 <input
-                    className="px-2 py-0.5 w-16 rounded"
+                    className="px-2 py-1 w-16 rounded"
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
                 />
@@ -70,7 +78,7 @@ function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
             {/* Save button */}
             <button
                 className={
-                    `self-end mt-3 mb-2 px-2 py-1 h-8 rounded border active-scale 
+                    `self-end mt-3 mb-2 px-3 py-1 h-8 rounded border active-scale 
                     ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'}`
                 }
                 onClick={() => onSave(true)}
