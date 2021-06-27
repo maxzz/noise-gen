@@ -9,10 +9,13 @@ function validInt(v: string): number {
     return !isNaN(n) && n > 0 ? n : 0;
 }
 
+function sizeInMB(size: WH) {
+    return (size.w * size.h / (1024 * 1024)).toFixed(2);
+}
+
 function sizeTooBigMessage(size: WH) {
-    var sizeInMB = (size.w * size.h / (1024 * 1024)).toFixed(2);
     return `Sizes over 2000 x 2000 are already a bit too much for Chrome.
-The current image size ${size.w} x ${size.h} = ${sizeInMB} MB`;
+The current image size ${size.w} x ${size.h} = ${sizeInMB(size)} MB`;
 }
 
 function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
@@ -88,7 +91,11 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
                     `self-end mt-2 mb-2 px-3 py-1 h-8 rounded border active-scale 
                     ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'}`
                 }
-                title={`${tooBig ? sizeTooBigMessage({ w: +width, h: +height }) : ''}`}
+                title={`${tooBig
+                    ? sizeTooBigMessage({ w: +width, h: +height })
+                    : valid
+                        ? `Current ${sizeInMB({ w: +width, h: +height })} MB.`
+                        : 'The numbers are not valid.'}`}
                 onClick={() => valid && onSave(exportImageSize)}
             >
                 <div className="pb-0.5">{valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size'}</div>
