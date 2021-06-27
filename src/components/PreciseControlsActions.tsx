@@ -5,7 +5,7 @@ import { I2W, PRESET_H, PRESET_W } from '../utils/types';
 import SizeBoxes from './SizeBoxes';
 import saveBlobData from '../utils/saveImage';
 
-function DimentionsPopup({ onSave }: { onSave: () => void; }) {
+function DimentionsPopup({ onSave }: { onSave: (save: boolean) => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
     const [width, setWidth] = React.useState('' + exportImageSize.w);
     const [height, setHeight] = React.useState('' + exportImageSize.h);
@@ -18,16 +18,19 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
         }
         let w = validInt(width);
         let h = validInt(height);
-        let isValid = !!w && !!h;
+        let isValid = !!w && !!h && w * h <= 4000 * 3000;
         setValid(isValid);
         isValid && setExportImageSize({ w, h });
     }, [width, height]);
 
     return (
         <div className="px-2 pt-1 relative rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900">
-            
+
             {/* Close button */}
-            <div className="absolute top-[2px] right-[2px] p-1.5 rounded activ:bg-red-100 hover:bg-red-400 hover:text-white">
+            <div
+                className="absolute top-[2px] right-[2px] p-1.5 rounded activ:bg-red-100 hover:bg-red-400 hover:text-white"
+                onClick={() => onSave(false)}
+            >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -51,7 +54,7 @@ function DimentionsPopup({ onSave }: { onSave: () => void; }) {
                     `self-end mt-3 mb-2 px-2 py-1 h-8 rounded border active-scale 
                     ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'}`
                 }
-                onClick={onSave}
+                onClick={() => onSave(true)}
             >
                 <div className="pb-0.5">{valid ? 'Save' : 'Invalid size'}</div>
             </button>
