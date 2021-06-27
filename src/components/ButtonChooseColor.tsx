@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import './ButtonChooseColor.scss';
 import { SketchPicker, ColorResult } from 'react-color';
-import { useClickAway } from 'react-use';
+import { useClickAway, useMeasure } from 'react-use';
 import { useAtom } from 'jotai';
 import { ColorAtom } from '../atoms';
+import { useSpring, a } from '@react-spring/web';
 
 type ButtonChooseColorProps = {
     className: string;
@@ -16,6 +17,14 @@ export default function ButtonChooseColor(props: ButtonChooseColorProps) {
     const [isDown, setIsDown] = useState<boolean>(false);
     const ref = useRef<HTMLButtonElement>(null);
     useClickAway(ref, () => setIsDown(false));
+
+    const [pickerRef, { height: pickerHeight }] = useMeasure<HTMLDivElement>();
+
+    const anim = useSpring({
+        height: isDown ? pickerHeight : 0
+    });
+
+    console.log('pickerHeight', pickerHeight);
 
     return (
         <button
@@ -34,12 +43,12 @@ export default function ButtonChooseColor(props: ButtonChooseColorProps) {
             </div>
 
             {/* Color picker */}
-            <div className={`absolute right-0 top-full z-10 ${isDown ? '' : 'hidden'}`}>
+            <a.div ref={pickerRef} className={`absolute right-0 top-full z-10 ${isDown ? '' : 'hidden'}`} style={{height: anim.height}}>
                 <SketchPicker
                     color={color}
                     onChange={(color: ColorResult) => setColor(color.hex)}
                 />
-            </div>
+            </a.div>
         </button>
     );
 }
