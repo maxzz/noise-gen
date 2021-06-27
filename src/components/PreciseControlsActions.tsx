@@ -8,40 +8,55 @@ import saveBlobData from '../utils/saveImage';
 function DimentionsPopup({ onSave }: { onSave: () => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
 
-    const [width, setWidth] = React.useState('');
-    const [height, setHeight] = React.useState('');
+    const [width, setWidth] = React.useState('' + exportImageSize.w);
+    const [height, setHeight] = React.useState('' + exportImageSize.h);
     const [valid, setValid] = React.useState(true);
 
-    function setNewWidth(value: string) {
-        let n: number = +value;
-        let isValid = !isNaN(n) && !!n;
-        setWidth(value);
+    // function setNewWidth(value: string) {
+    //     let n: number = +value;
+    //     let isValid = !isNaN(n) && !!n;
+    //     setWidth(value);
+    //     setValid(isValid);
+    //     if (isValid) {
+    //         setExportImageSize((prev) => ({ ...prev, w: n }));
+    //     }
+    // }
+
+    React.useEffect(() => {
+        console.log('popup', width, height);
+        
+        let w: number = +(+width).toFixed(0);
+        let h: number = +(+height).toFixed(0);
+        let isValid = !isNaN(w) && !!w && !isNaN(h) && !!h;
         setValid(isValid);
         if (isValid) {
-            setExportImageSize((prev) => ({ ...prev, w: n}))
+            setExportImageSize((prev) => ({ w, h }));
+        }
+
+    }, [width, height]);
+
+    function setNewHeight(value: string) {
     }
-}
 
-function setNewHeight(value: string) {
-}
-
-return (
-    <div className="px-2 py-1 rounded border text-sm border-gray-400 bg-purple-300 flex flex-col shadow">
-        <div className="">Image size</div>
-        <div className="mt-1 flex items-center space-x-1">
-            <input className="px-2 py-0.5 w-16 rounded" value={width} onChange={(e) => setNewWidth(e.target.value)} />
-            <div className="">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+    return (
+        <div className="px-2 py-1 rounded border text-sm border-gray-400 bg-purple-300 flex flex-col shadow">
+            <div className="">Image size</div>
+            <div className="mt-1 flex items-center space-x-1">
+                {/* <input className="px-2 py-0.5 w-16 rounded" value={width} onChange={(e) => setNewWidth(e.target.value)} /> */}
+                <input className="px-2 py-0.5 w-16 rounded" value={width} onChange={(e) => setWidth(e.target.value)} />
+                <div className="">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+                {/* <input className="px-2 py-0.5 w-16 rounded" value={exportImageSize.h} onChange={(e) => setNewHeight(e.target.value)} /> */}
+                <input className="px-2 py-0.5 w-16 rounded" value={height} onChange={(e) => setHeight(e.target.value)} />
             </div>
-            <input className="px-2 py-0.5 w-16 rounded" value={exportImageSize.h} onChange={(e) => setNewHeight(e.target.value)} />
+            <button className={`self-end mt-2 px-2 py-1 rounded border border-gray-200 text-gray-200 active-scale ${valid ? '' : 'bg-red-500'}`}>
+                Save
+            </button>
         </div>
-        <button className={`self-end mt-2 px-2 py-1 rounded border border-gray-200 text-gray-200 active-scale ${valid ? '' : 'bg-red-300'}`}>
-            Save
-        </button>
-    </div>
-);
+    );
 }
 
 function PreciseControlsActions() {
