@@ -14,9 +14,10 @@ function PreciseControlsActions() {
     const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
     const transition = useTransition(showSelectFileSize, {
-        from: { x: -100, opacity: 0 },
-        enter: { x: 0, opacity: 1 },
-        leave: {x: -100, opacity: 0},
+        unique: true,
+        from: { transform: 'scale(0.7)', opacity: 0, config: { duration: 2000 } },
+        enter: { transform: 'scale(1)', opacity: 1 },
+        leave: { transform: 'scale(0.7)', opacity: 0 },
     });
 
     function appendNew() {
