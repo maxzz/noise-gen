@@ -31,7 +31,7 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
                 [x] Show the maximum allowed image size.
             [x] Save the user-defined size of the exported image to the config.
             [ ] Show the save progress indicator.
-            [ ] Add show/hide animation to popup.
+            [x] Add show/hide animation to popup.
     [x] App controls
         [x] Set the currnent canvas image as the page background.
         [x] Allow to clear the page background from the canvas image.
