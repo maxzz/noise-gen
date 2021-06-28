@@ -15,18 +15,10 @@ function PreciseControlsActions() {
 
     const styles = useSpring({
         opacity: showSelectFileSize ? 1 : 0,
-        //transform: showSelectFileSize ? 'scale(1)' : 'scale(0.9)',
         config: {
             duration: 100
         }
     });
-
-    // const transition = useTransition(showSelectFileSize, {
-    //     unique: true,
-    //     from: { transform: 'scale(0.7)', opacity: 0, config: { duration: 2000 } },
-    //     enter: { transform: 'scale(1)', opacity: 1 },
-    //     leave: { transform: 'scale(0.7)', opacity: 0 },
-    // });
 
     function appendNew() {
         worker?.postMessage({ type: 'get-preview', smallWidth: PRESET_W, smallHeight: PRESET_H } as I2W.GetPreview);
@@ -90,7 +82,6 @@ function PreciseControlsActions() {
                     className="flex-1 w-8 h-8 border rounded border-gray-400 flex-centered text-gray-500
                     active-scale cursor-pointer"
                     title="Save image"
-                    // onClick={(event) => saveItemPng(event)}
                     onClick={() => setShowSelectFileSize((prev) => !prev)}
                 >
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -104,18 +95,6 @@ function PreciseControlsActions() {
                         <PopupImageSize onSave={saveItemPng} />
                     </a.div>
                 }
-
-                {/* {showSelectFileSize &&
-                    <div className="absolute mt-1 -top-1 right-0">
-                        <PopupImageSize onSave={saveItemPng} />
-                    </div>
-                } */}
-
-                {/* <div className="absolute mt-1 -top-1 right-0">
-                    {transition((style, item) => item && <a.div style={style}>
-                        <PopupImageSize onSave={saveItemPng} />
-                    </a.div>)}
-                </div> */}
             </div>
         </div>
     );
