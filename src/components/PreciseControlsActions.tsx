@@ -5,7 +5,7 @@ import { I2W, PRESET_H, PRESET_W, WH } from '../utils/types';
 import SizeBoxes from './SizeBoxes';
 import saveBlobData from '../utils/saveImage';
 import PopupImageSize from './PopupImageSize';
-import { useTransition, a } from '@react-spring/web';
+import { useSpring, a } from '@react-spring/web';
 
 function PreciseControlsActions() {
     const [worker] = useAtom(RenderWorkerAtom);
@@ -13,12 +13,20 @@ function PreciseControlsActions() {
 
     const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
-    const transition = useTransition(showSelectFileSize, {
-        unique: true,
-        from: { transform: 'scale(0.7)', opacity: 0, config: { duration: 2000 } },
-        enter: { transform: 'scale(1)', opacity: 1 },
-        leave: { transform: 'scale(0.7)', opacity: 0 },
+    const styles = useSpring({
+        opacity: showSelectFileSize ? 1 : 0,
+        //transform: showSelectFileSize ? 'scale(1)' : 'scale(0.9)',
+        config: {
+            duration: 100
+        }
     });
+
+    // const transition = useTransition(showSelectFileSize, {
+    //     unique: true,
+    //     from: { transform: 'scale(0.7)', opacity: 0, config: { duration: 2000 } },
+    //     enter: { transform: 'scale(1)', opacity: 1 },
+    //     leave: { transform: 'scale(0.7)', opacity: 0 },
+    // });
 
     function appendNew() {
         worker?.postMessage({ type: 'get-preview', smallWidth: PRESET_W, smallHeight: PRESET_H } as I2W.GetPreview);
@@ -91,17 +99,23 @@ function PreciseControlsActions() {
                 </div>
 
                 {/* Popup */}
+                {showSelectFileSize &&
+                    <a.div style={styles} className="absolute mt-1 -top-1 right-0">
+                        <PopupImageSize onSave={saveItemPng} />
+                    </a.div>
+                }
+
                 {/* {showSelectFileSize &&
                     <div className="absolute mt-1 -top-1 right-0">
                         <PopupImageSize onSave={saveItemPng} />
                     </div>
                 } */}
 
-                <div className="absolute mt-1 -top-1 right-0">
+                {/* <div className="absolute mt-1 -top-1 right-0">
                     {transition((style, item) => item && <a.div style={style}>
                         <PopupImageSize onSave={saveItemPng} />
                     </a.div>)}
-                </div>
+                </div> */}
             </div>
         </div>
     );
