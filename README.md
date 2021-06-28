@@ -34,6 +34,7 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
             [x] Add show/hide animation to popup.
     [x] App controls
         [x] Set the currnent canvas image as the page background.
+            [ ] Add a keyboard shortcut for preview or a toggle button.
         [x] Allow to clear the page background from the canvas image.
     [ ] Features
         [x] Add persistance of the current generated parameters.
@@ -43,7 +44,7 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
         [ ] Drag and Drop canvas image to the existing preset slot.
         [ ] Progress bar on slow reders.
         [ ] Smooth UI state changes to show what has changed.
-        [-] Create seamless textures using 4x4 algorithm. Out of scope. Not for now.
+        [-] Create seamless textures using 4x4 algorithm. Out of scope. Not for now. It's already kind of seamless with low Distortion (~20) and High Dot Diameter (~1).
         [ ] Support Firefox rendering.
 
 #### Credits, References, Links
