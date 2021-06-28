@@ -5,10 +5,19 @@ import { I2W, PRESET_H, PRESET_W, WH } from '../utils/types';
 import SizeBoxes from './SizeBoxes';
 import saveBlobData from '../utils/saveImage';
 import PopupImageSize from './PopupImageSize';
+import { useTransition, a } from '@react-spring/web';
 
 function PreciseControlsActions() {
     const [worker] = useAtom(RenderWorkerAtom);
     const [, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
+
+    const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
+
+    const transition = useTransition(showSelectFileSize, {
+        from: { x: -100, opacity: 0 },
+        enter: { x: 0, opacity: 1 },
+        leave: {x: -100, opacity: 0},
+    });
 
     function appendNew() {
         worker?.postMessage({ type: 'get-preview', smallWidth: PRESET_W, smallHeight: PRESET_H } as I2W.GetPreview);
@@ -20,15 +29,6 @@ function PreciseControlsActions() {
             setAppBackgroundUrl(blob);
         }
     }
-
-    // async function saveItemPng(event: React.MouseEvent) {
-    //     if (worker) {
-    //         let blob = await worker.getImage();
-    //         saveBlobData(blob, 'noise-gen.png');
-    //     }
-    // }
-
-    const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
     async function saveItemPng(size?: WH) {
         setShowSelectFileSize(false);
@@ -90,11 +90,17 @@ function PreciseControlsActions() {
                 </div>
 
                 {/* Popup */}
-                {showSelectFileSize &&
+                {/* {showSelectFileSize &&
                     <div className="absolute mt-1 -top-1 right-0">
                         <PopupImageSize onSave={saveItemPng} />
                     </div>
-                }
+                } */}
+
+                <div className="absolute mt-1 -top-1 right-0">
+                    {transition((style, item) => item && <a.div style={style}>
+                        <PopupImageSize onSave={saveItemPng} />
+                    </a.div>)}
+                </div>
             </div>
         </div>
     );
