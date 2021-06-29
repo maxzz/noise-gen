@@ -58,7 +58,7 @@ function PreciseControlsActions() {
             <div
                 className="border rounded border-gray-400 flex-centered text-gray-500
                 transform active-scale cursor-pointer"
-                title="Set canvas image as application background"
+                title="Set canvas image as application background (F2)"
                 onClick={setAsBackground}
             >
                 <svg className="h-6 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
