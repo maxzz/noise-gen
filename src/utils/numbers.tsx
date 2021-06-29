@@ -65,7 +65,10 @@ function getHorizontalStepKeys(ev: React.KeyboardEvent | KeyboardEvent): StepKey
     };
 }
 
-export function getShift(baseStep: number, ev: React.KeyboardEvent | KeyboardEvent): number {
-    let shift = getStepForKey(baseStep, ev, getHorizontalStepKeys(ev)) + getStepForKey(baseStep, ev, getVerticalStepKeys(ev));
-    return shift;
+export function getShift4Input(baseStep: number, ev: React.KeyboardEvent | KeyboardEvent): number {
+    return getStepForKey(baseStep, ev, getVerticalStepKeys(ev));
+}
+
+export function getShift4Slider(baseStep: number, ev: React.KeyboardEvent | KeyboardEvent): number {
+    return getStepForKey(baseStep, ev, getHorizontalStepKeys(ev)) + getStepForKey(baseStep, ev, getVerticalStepKeys(ev));
 }
