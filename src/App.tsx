@@ -42,11 +42,10 @@ function App() {
 
                 <div className="px-4 py-2 text-xl uppercase flex items-center">
                     <GithubLogoInline href="https://github.com/maxzz/noise-gen" />
-                    <div className="pl-1 pb-0.5">Noise generator: xp10-525N</div>
+                    <div className="pl-1 pb-0.5">
+                        Noise generator: xp10-525N
+                    </div>
                 </div>
-
-
-                {/* <GithubLogoButtomRight href="https://github.com/maxzz/noise-gen" /> */}
             </div>
 
             <div className="relative max-w-md w-full flex-1 flex flex-col items-center">
