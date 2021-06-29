@@ -2,11 +2,11 @@ import React from 'react';
 import './App.scss';
 import { useAtom } from 'jotai';
 import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from './atoms';
-import Logo from './components/Logo';
+import AppLogo from './components/XtraAppLogo';
 import Canvas from './components/RenderCanvas';
 import PreciseControls from './components/PreciseControls';
 import MainControls from './components/MainControls';
-import GithubLogoButtomRight, { GithubLogoInline } from './components/XtraGithubLogo';
+import { GithubLogoInline } from './components/XtraGithubLogo';
 
 function App() {
     const [appBackgroundUrl, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
@@ -29,7 +29,7 @@ function App() {
             {/* Header */}
             <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 select-none" style={{boxShadow: '#00000033 0 1px 2px'}}>
                 <div className="mx-4 flex-none flex-centered">
-                    <Logo />
+                    <AppLogo />
 
                     {/* Clear background */}
                     {appBackgroundActive &&

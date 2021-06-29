@@ -18,7 +18,7 @@ function Cube() {
     );
 }
 
-function Logo() {
+function AppLogo() {
     return (
         <div className="relative h-8 w-16 active:animate-bounce">
             <div className="absolute left-0 -top-1 w-10 h-10 transform rotate-45 scale-75 translate-x-6">
@@ -31,4 +31,4 @@ function Logo() {
     );
 }
 
-export default Logo;
+export default AppLogo;
