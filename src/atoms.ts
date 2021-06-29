@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 import { atomWithCallback } from './hooks/atomsX';
 import { WorkerEx } from './hooks/useCanvasWorker';
-import { GENPARAMS, GenParams, I2W, I4W, PresetData, PRESET_H, PRESET_W, RenderParams } from './utils/types';
+import { GENPARAMS, GenParams, I2W, I4W, NOISEPARAMS, PresetData, PRESET_H, PRESET_W, RenderParams } from './utils/types';
 import { defAppSettings, storeAppParams } from './utils/storageAppConfig';
 import { defPresets, storePresets } from './utils/storagePresets';
 import uuid from './utils/uuid';
@@ -107,6 +107,13 @@ export const SetNoiseTypeAtom = atom(
     null,
     (get, set, value: number) => {
         set(NoiseAtom, { ...get(NoiseAtom), dim: value as 2 | 3 | 4 });
+    }
+);
+
+export const ResetNoiseToDefaultAtom = atom(
+    null,
+    (get, set, value: number) => {
+        set(NoiseAtom, NOISEPARAMS.d3.def);
     }
 );
 
