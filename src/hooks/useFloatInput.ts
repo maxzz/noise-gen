@@ -7,6 +7,10 @@ function beautifyFloat(v: string) {
 export default function useFloatInput(initialValue: number, onChange: (value: number) => void) {
     const [local, setLocal] = React.useState('' + initialValue); // TODO: that is not NaN
 
+    React.useEffect(() => {
+        setLocal('' + initialValue);
+    }, [initialValue])
+
     const onSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLocal(event.target.value);
         onChange(+event.target.value);
