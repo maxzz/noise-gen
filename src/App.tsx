@@ -35,7 +35,7 @@ function App() {
                     {appBackgroundActive &&
                         <button
                             className="ml-2 px-2 pb-[1px] text-xs dark-frame-rounded bg-purple-100 uppercase"
-                            title="Clear background image"
+                            title="Clear background image (Alt+F2)"
                             onClick={() => setAppBackgroundUrl(null)}
                         >
                             Clear bkg
