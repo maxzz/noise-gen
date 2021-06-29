@@ -16,7 +16,7 @@ export function GithubLogoInline({ href }: { href: string; }) {
                 href={href} target="_blank"
                 title="Open source code on GitHub"
             >
-                <div className="w-4 h-4 p-[1px] border rounded text-purple-500 border-purple-500">
+                <div className="w-4 h-4 p-[1px] border rounded text-purple-500 border-purple-400">
                     <GitHubSvg />
                 </div>
             </a>
