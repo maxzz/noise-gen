@@ -13,14 +13,21 @@ function App() {
     const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
     return (
         <div
-            className="App h-screen flex flex-col items-center space-y-4 bg-purple-200"
+            className="App h-screen flex flex-col items-center space-y-4 bg-purple-200 shadow-lg"
             // style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}
             // style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}}
             style={
                 appBackgroundActive ?
-                    { backgroundImage: `url(${appBackgroundUrl}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge' }
+                    {
+                        backgroundImage: `url(${appBackgroundUrl}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`,
+                        backgroundBlendMode: 'multiply, screen, color-dodge',
+                        //boxShadow: 'rgb(0 0 0 / 20%) 2px 2px 2px',
+                    }
                     :
-                    { backgroundImage: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)` }
+                    {
+                        backgroundImage: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`,
+                        //boxShadow: 'rgb(0 0 0 / 20%) 2px 2px 2px',
+                    }
             }
         >
             {/* Header */}
