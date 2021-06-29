@@ -12,7 +12,7 @@ function PreciseControlsActions() {
     const [worker] = useAtom(RenderWorkerAtom);
     const latestWorker = React.useRef(worker);
     latestWorker.current = worker;
-    
+
     const [, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
     const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
@@ -23,8 +23,12 @@ function PreciseControlsActions() {
         }
     });
 
-    useKey('F2', () => {
-        setAsBackground();
+    useKey('F2', (event) => {
+        if (event.altKey) {
+            setAppBackgroundUrl(null);
+        } else {
+            setAsBackground();
+        }
     });
 
     function appendNew() {
@@ -41,7 +45,6 @@ function PreciseControlsActions() {
     async function saveItemPng(size?: WH) {
         setShowSelectFileSize(false);
         if (size) {
-            //console.log('save');
             if (worker) {
                 let blob = await worker.getImage(size);
                 saveBlobData(blob, 'noise-gen.png');
