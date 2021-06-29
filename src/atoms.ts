@@ -82,10 +82,10 @@ export const GeneratePresetAtom = atom(
     null,
     (_get, set) => {
         let newSet: GenParams = {
-            n1: +withDigits(random(GENPARAMS.min.n1, GENPARAMS.gen.n1)),
-            n2: +withDigits(random(GENPARAMS.min.n2, GENPARAMS.gen.n2)),
-            distortion: +withDigits(random(GENPARAMS.min.distortion, GENPARAMS.gen.distortion)),
-            dotDiameter: +withDigits(random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter)),
+            n1: +withDigits(random(GENPARAMS.min.n1, GENPARAMS.gen.n1), 2),
+            n2: +withDigits(random(GENPARAMS.min.n2, GENPARAMS.gen.n2), 2),
+            distortion: +withDigits(random(GENPARAMS.min.distortion, GENPARAMS.gen.distortion), 2),
+            dotDiameter: +withDigits(random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter), 2),
         };
         set(GenParamsAtom, newSet);
     }
