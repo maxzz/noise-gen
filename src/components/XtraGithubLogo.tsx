@@ -14,7 +14,7 @@ export function GithubLogoInline({ href }: { href: string; }) {
             <a
                 className=""
                 href={href} target="_blank"
-                title="Open source code on GitHub"
+                title="Open the source on GitHub"
             >
                 <div className="w-4 h-4 p-[1px] border rounded text-purple-500 border-purple-400">
                     <GitHubSvg />
@@ -30,7 +30,7 @@ function GithubLogoButtomRight({ href }: { href: string; }) {
             <a
                 className="p-1 pt-2 pb-0 border rounded-full text-gray-500 border-gray-500"
                 href={href} target="_blank"
-                title="Open source code on GitHub"
+                title="Open the source on GitHub"
             >
                 <div className="w-5 h-5">
                     <GitHubSvg />

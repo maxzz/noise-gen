@@ -6,11 +6,11 @@ import SizeBoxes from './SizeBoxes';
 import saveBlobData from '../utils/saveImage';
 import PopupImageSize from './PopupImageSize';
 import { useSpring, a } from '@react-spring/web';
+import { useKey } from 'react-use';
 
 function PreciseControlsActions() {
     const [worker] = useAtom(RenderWorkerAtom);
     const [, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
-
     const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
     const styles = useSpring({
@@ -20,11 +20,15 @@ function PreciseControlsActions() {
         }
     });
 
+    useKey('F2', () => {
+        setAsBackground();
+    })
+
     function appendNew() {
         worker?.postMessage({ type: 'get-preview', smallWidth: PRESET_W, smallHeight: PRESET_H } as I2W.GetPreview);
     }
 
-    async function setAsBackground(event: React.MouseEvent) {
+    async function setAsBackground() {
         if (worker) {
             let blob = await worker.getImage();
             setAppBackgroundUrl(blob);
