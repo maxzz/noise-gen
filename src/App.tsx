@@ -13,25 +13,21 @@ function App() {
     const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
     return (
         <div
-            className="App h-screen flex flex-col items-center space-y-4 bg-purple-200 shadow-lg"
+            className="App h-screen flex flex-col items-center space-y-4 bg-purple-200"
             // style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}
             // style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}}
             style={
-                appBackgroundActive ?
-                    {
+                appBackgroundActive ? {
                         backgroundImage: `url(${appBackgroundUrl}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`,
                         backgroundBlendMode: 'multiply, screen, color-dodge',
-                        //boxShadow: 'rgb(0 0 0 / 20%) 2px 2px 2px',
                     }
-                    :
-                    {
+                    : {
                         backgroundImage: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`,
-                        //boxShadow: 'rgb(0 0 0 / 20%) 2px 2px 2px',
                     }
             }
         >
             {/* Header */}
-            <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 shadow-sm select-none">
+            <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 select-none" style={{boxShadow: 'rgb(0 0 0 / 20%) 2px 2px 2px'}}>
                 <div className="mx-4 flex-none flex-centered">
                     <Logo />
 
