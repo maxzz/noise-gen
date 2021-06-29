@@ -10,6 +10,9 @@ import { useKey } from 'react-use';
 
 function PreciseControlsActions() {
     const [worker] = useAtom(RenderWorkerAtom);
+    const latestWorker = React.useRef(worker);
+    latestWorker.current = worker;
+    
     const [, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
     const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
@@ -21,8 +24,6 @@ function PreciseControlsActions() {
     });
 
     useKey('F2', () => {
-        console.log('key', worker);
-
         setAsBackground();
     });
 
@@ -31,9 +32,8 @@ function PreciseControlsActions() {
     }
 
     async function setAsBackground() {
-        console.log('worker', worker);
-        if (worker) {
-            let blob = await worker.getImage();
+        if (latestWorker.current) {
+            let blob = await latestWorker.current.getImage();
             setAppBackgroundUrl(blob);
         }
     }
