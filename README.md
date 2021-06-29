@@ -26,6 +26,7 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
         [ ] Add up/down arrow handlers to numeric input controls.
         [x] Download image as PNG.
         [ ] Allow the user to customize the predefined image sizes.
+        [ ] Add more contrast to the current canvas size indicator.
         [x] Let the user choose the size of the generated texture to save.
             [x] Popup with the size of the exported image.
                 [x] Handle the case when the image size is over 2000 x 2000, which is too much for Chrome.
