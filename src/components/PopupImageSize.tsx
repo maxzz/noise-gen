@@ -3,21 +3,11 @@ import { useAtom } from 'jotai';
 import { useClickAway } from 'react-use';
 import { ExportImageSizeAtom } from '../atoms';
 import { WH } from '../utils/types';
+import { bytesToSize } from '../utils/numbers';
 
 function validInt(v: string): number {
     const n = +(+v).toFixed(0);
     return !isNaN(n) && n > 0 ? n : 0;
-}
-
-function bytesToSize(bytes: number, precision: number): string {
-    bytes = isNaN(bytes) ? 0 : bytes;
-    let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-    let posttxt = 0;
-    while (bytes >= 1024) {
-        posttxt++;
-        bytes = bytes / 1024;
-    }
-    return `${bytes.toFixed(precision)} ${sizes[posttxt]}`;
 }
 
 function sizeInMB(size: WH): string {

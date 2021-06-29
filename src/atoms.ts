@@ -5,6 +5,7 @@ import { GENPARAMS, GenParams, I2W, I4W, NOISEPARAMS, PresetData, PRESET_H, PRES
 import { defAppSettings, storeAppParams } from './utils/storageAppConfig';
 import { defPresets, storePresets } from './utils/storagePresets';
 import uuid from './utils/uuid';
+import { random } from './utils/numbers';
 
 //#region Offscreen canvas and Worker
 
@@ -76,10 +77,6 @@ export const SetRenderParamsAtom = atom(
 export const RandomSeedAtom = atom(
     null,
     (_get, set) => set(SeedAtom, `${Math.random()}`.replace(/^0\./, '')));
-
-function random(min: number, max: number): number {
-    return Math.random() * (max - min) + min;
-}
 
 export const GeneratePresetAtom = atom(
     null,
