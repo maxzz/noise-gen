@@ -27,7 +27,7 @@ function App() {
             }
         >
             {/* Header */}
-            <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 select-none" style={{boxShadow: 'rgb(0 0 0 / 20%) 2px 2px 2px'}}>
+            <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 select-none" style={{boxShadow: '#00000033 0 1px 2px'}}>
                 <div className="mx-4 flex-none flex-centered">
                     <Logo />
 
@@ -45,7 +45,7 @@ function App() {
 
                 <div className="px-4 py-2 text-xl uppercase flex items-center">
                     <GithubLogoInline href="https://github.com/maxzz/noise-gen" />
-                    <div className="pl-1 pb-0.5">
+                    <div className="pl-1 pb-0.5" style={{textShadow: '#a88cff70 3px 2px'}}>
                         Noise generator: xp10-525N
                     </div>
                 </div>
