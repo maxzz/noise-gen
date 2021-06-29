@@ -41,7 +41,7 @@ export function constrainRange(value: number, min: number, max: number): number 
 
 // Keyboard events support
 
-export interface StepKeys {
+interface StepKeys {
     ctrlKey: boolean;
     altKey: boolean;
     shiftKey: boolean;
@@ -49,27 +49,32 @@ export interface StepKeys {
     upKey: boolean;
 }
 
-export function getStepForKey(baseStep: number, keys: StepKeys): number {
+function getStepForKey(baseStep: number, keys: StepKeys): number {
     const step: number = baseStep * (keys.altKey || keys.ctrlKey ? 0.1 : 1) * (keys.shiftKey ? 10 : 1);
     return keys.upKey ? +step : keys.downKey ? -step : 0;
 }
 
-export function getVerticalStepKeys(ev: KeyboardEvent): StepKeys {
+function getVerticalStepKeys(ev: React.KeyboardEvent | KeyboardEvent): StepKeys {
     return {
         altKey: ev.altKey,
         ctrlKey: ev.ctrlKey,
         shiftKey: ev.shiftKey,
+        upKey: ev.key === 'ArrowUp',
         downKey: ev.key === 'ArrowDown',
-        upKey: ev.key === 'ArrowUp'
     };
 }
 
-export function getHorizontalStepKeys(ev: KeyboardEvent): StepKeys {
+function getHorizontalStepKeys(ev: React.KeyboardEvent | KeyboardEvent): StepKeys {
     return {
         altKey: ev.altKey,
         ctrlKey: ev.ctrlKey,
         shiftKey: ev.shiftKey,
+        upKey: ev.key === 'ArrowRight',
         downKey: ev.key === 'ArrowLeft',
-        upKey: ev.key === 'ArrowRight'
     };
+}
+
+export function getShift(baseStep: number, ev: React.KeyboardEvent | KeyboardEvent): number {
+    let shift = getStepForKey(baseStep, getHorizontalStepKeys(ev)) + getStepForKey(baseStep, getVerticalStepKeys(ev));
+    return shift;
 }
