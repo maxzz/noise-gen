@@ -42,23 +42,17 @@ export function constrainRange(value: number, min: number, max: number): number 
 // Keyboard events support
 
 interface StepKeys {
-    ctrlKey: boolean;
-    altKey: boolean;
-    shiftKey: boolean;
-    downKey: boolean;
     upKey: boolean;
+    downKey: boolean;
 }
 
-function getStepForKey(baseStep: number, keys: StepKeys): number {
-    const step: number = baseStep * (keys.altKey || keys.ctrlKey ? 0.1 : 1) * (keys.shiftKey ? 10 : 1);
-    return keys.upKey ? +step : keys.downKey ? -step : 0;
+function getStepForKey(baseStep: number, ev: React.KeyboardEvent | KeyboardEvent, keys: StepKeys): number {
+    const realStep: number = baseStep * (ev.altKey || ev.ctrlKey ? 0.1 : 1) * (ev.shiftKey ? 10 : 1);
+    return keys.upKey ? +realStep : keys.downKey ? -realStep : 0;
 }
 
 function getVerticalStepKeys(ev: React.KeyboardEvent | KeyboardEvent): StepKeys {
     return {
-        altKey: ev.altKey,
-        ctrlKey: ev.ctrlKey,
-        shiftKey: ev.shiftKey,
         upKey: ev.key === 'ArrowUp',
         downKey: ev.key === 'ArrowDown',
     };
@@ -66,15 +60,12 @@ function getVerticalStepKeys(ev: React.KeyboardEvent | KeyboardEvent): StepKeys 
 
 function getHorizontalStepKeys(ev: React.KeyboardEvent | KeyboardEvent): StepKeys {
     return {
-        altKey: ev.altKey,
-        ctrlKey: ev.ctrlKey,
-        shiftKey: ev.shiftKey,
         upKey: ev.key === 'ArrowRight',
         downKey: ev.key === 'ArrowLeft',
     };
 }
 
 export function getShift(baseStep: number, ev: React.KeyboardEvent | KeyboardEvent): number {
-    let shift = getStepForKey(baseStep, getHorizontalStepKeys(ev)) + getStepForKey(baseStep, getVerticalStepKeys(ev));
+    let shift = getStepForKey(baseStep, ev, getHorizontalStepKeys(ev)) + getStepForKey(baseStep, ev, getVerticalStepKeys(ev));
     return shift;
 }
