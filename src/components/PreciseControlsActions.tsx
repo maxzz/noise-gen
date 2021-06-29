@@ -21,14 +21,17 @@ function PreciseControlsActions() {
     });
 
     useKey('F2', () => {
+        console.log('key', worker);
+
         setAsBackground();
-    })
+    });
 
     function appendNew() {
         worker?.postMessage({ type: 'get-preview', smallWidth: PRESET_W, smallHeight: PRESET_H } as I2W.GetPreview);
     }
 
     async function setAsBackground() {
+        console.log('worker', worker);
         if (worker) {
             let blob = await worker.getImage();
             setAppBackgroundUrl(blob);
@@ -38,7 +41,7 @@ function PreciseControlsActions() {
     async function saveItemPng(size?: WH) {
         setShowSelectFileSize(false);
         if (size) {
-            console.log('save');
+            //console.log('save');
             if (worker) {
                 let blob = await worker.getImage(size);
                 saveBlobData(blob, 'noise-gen.png');
