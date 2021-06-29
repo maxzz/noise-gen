@@ -5,7 +5,7 @@ import { GENPARAMS, GenParams, I2W, I4W, NOISEPARAMS, PresetData, PRESET_H, PRES
 import { defAppSettings, storeAppParams } from './utils/storageAppConfig';
 import { defPresets, storePresets } from './utils/storagePresets';
 import uuid from './utils/uuid';
-import { random } from './utils/numbers';
+import { random, withDigits } from './utils/numbers';
 
 //#region Offscreen canvas and Worker
 
@@ -82,10 +82,10 @@ export const GeneratePresetAtom = atom(
     null,
     (_get, set) => {
         let newSet: GenParams = {
-            n1: random(GENPARAMS.min.n1, GENPARAMS.gen.n1),
-            n2: random(GENPARAMS.min.n2, GENPARAMS.gen.n2),
-            distortion: random(GENPARAMS.min.distortion, GENPARAMS.gen.distortion),
-            dotDiameter: random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter),
+            n1: +withDigits(random(GENPARAMS.min.n1, GENPARAMS.gen.n1)),
+            n2: +withDigits(random(GENPARAMS.min.n2, GENPARAMS.gen.n2)),
+            distortion: +withDigits(random(GENPARAMS.min.distortion, GENPARAMS.gen.distortion)),
+            dotDiameter: +withDigits(random(GENPARAMS.min.dotDiameter, GENPARAMS.gen.dotDiameter)),
         };
         set(GenParamsAtom, newSet);
     }
