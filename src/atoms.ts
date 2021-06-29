@@ -112,8 +112,13 @@ export const SetNoiseTypeAtom = atom(
 
 export const ResetNoiseToDefaultAtom = atom(
     null,
-    (get, set, value: number) => {
+    (get, set) => {
         set(NoiseAtom, NOISEPARAMS.d3.def);
+        // set(SetNoiseTypeAtom, NOISEPARAMS.d3.def.dim);
+        // set(SetNoiseScaleAtom, {axis: 'x', value: NOISEPARAMS.d3.def.x});
+        // set(SetNoiseScaleAtom, {axis: 'y', value: NOISEPARAMS.d3.def.y});
+        // set(SetNoiseScaleAtom, {axis: 'z', value: NOISEPARAMS.d3.def.z});
+        // set(SetNoiseScaleAtom, {axis: 'w', value: NOISEPARAMS.d3.def.w});
     }
 );
 

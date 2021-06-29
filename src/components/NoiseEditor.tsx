@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { NoiseAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '../atoms';
+import { NoiseAtom, ResetNoiseToDefaultAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '../atoms';
 import { SmallSlider } from './Slider';
 import { NOISEPARAMS } from '../utils/types';
 import { useSpring, a, config } from '@react-spring/web';
@@ -22,6 +22,9 @@ function NoiseEditor() {
     const [noise] = useAtom(NoiseAtom);
     const [, setNoiseType] = useAtom(SetNoiseTypeAtom);
     const [, setNoiseScale] = useAtom(SetNoiseScaleAtom);
+    const [, resetNoiseToDefault] = useAtom(ResetNoiseToDefaultAtom);
+
+    const [showResetNoise, setShowResetNoise] = React.useState(true);
 
     const props = useSpring({
         opacity: showNoiseEditor ? 1 : 0,
@@ -40,6 +43,11 @@ function NoiseEditor() {
         setNoiseScale({ axis, value });
     }
 
+    function resetNoise() {
+        resetNoiseToDefault();
+        setShowResetNoise(false);
+    }
+
     return (
         <div className="relative text-purple-900 flex flex-col">
             {/* Editor body */}
@@ -53,19 +61,22 @@ function NoiseEditor() {
                     <div className="flex items-center text-xs select-none">
                         {/* Label Noise and Reset noise button */}
                         <div className="relative">
-                            Noise
-                            <div className="
-                                absolute ml-1 p-1 left-full top-1/2 -translate-y-1/2 
+                            <div className="cursor-pointer hover:text-purple-500" onClick={() => setShowResetNoise((prev) => !prev)}>
+                                Noise
+                            </div>
+                            {showResetNoise && <div className="
+                                absolute ml-1.5 px-2 py-1 left-full top-1/2 -translate-y-1/2 
                                 bg-red-100
                                 border rounded border-red-500
                                 flex items-center whitespace-nowrap"
+                                onClick={resetNoise}
                             >
                                 {/* X mark */}
                                 Reset noise
-                                <svg className="ml-2 w-3 h-3" viewBox="0 0 24 24" stroke="currentColor">
+                                {/* <svg className="ml-2 w-3 h-3" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeWidth={4} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </div>
+                                </svg> */}
+                            </div>}
                         </div>
                         {/* Noise type buttons */}
                         <div className="pl-2 flex items-center text-[.6rem] space-x-1">
