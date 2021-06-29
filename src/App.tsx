@@ -6,7 +6,7 @@ import Logo from './components/Logo';
 import Canvas from './components/RenderCanvas';
 import PreciseControls from './components/PreciseControls';
 import MainControls from './components/MainControls';
-import GithubLogoButtomRight from './components/XtraGithubLogo';
+import GithubLogoButtomRight, { GithubLogoInline } from './components/XtraGithubLogo';
 
 function App() {
     const [appBackgroundUrl, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
@@ -40,11 +40,13 @@ function App() {
                     }
                 </div>
 
-                <div className="px-4 py-2 text-xl uppercase">
-                    <span>Noise generator: xp10-525N</span>
+                <div className="px-4 py-2 text-xl uppercase flex items-center">
+                    <GithubLogoInline href="https://github.com/maxzz/noise-gen" />
+                    <div className="pl-1 pb-0.5">Noise generator: xp10-525N</div>
                 </div>
 
-                <GithubLogoButtomRight href="https://github.com/maxzz/noise-gen" />
+
+                {/* <GithubLogoButtomRight href="https://github.com/maxzz/noise-gen" /> */}
             </div>
 
             <div className="relative max-w-md w-full flex-1 flex flex-col items-center">

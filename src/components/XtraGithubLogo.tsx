@@ -8,6 +8,22 @@ export function GitHubSvg() {
     );
 }
 
+export function GithubLogoInline({ href }: { href: string; }) {
+    return (
+        <div className="">
+            <a
+                className=""
+                href={href} target="_blank"
+                title="Open source code on GitHub"
+            >
+                <div className="w-4 h-4 p-[1px] border rounded text-purple-500 border-purple-500">
+                    <GitHubSvg />
+                </div>
+            </a>
+        </div>
+    );
+}
+
 function GithubLogoButtomRight({ href }: { href: string; }) {
     return (
         <div className="fixed flex-none flex right-2 bottom-3">
