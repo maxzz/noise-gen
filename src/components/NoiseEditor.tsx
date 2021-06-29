@@ -4,7 +4,6 @@ import { NoiseAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } f
 import { SmallSlider } from './Slider';
 import { NOISEPARAMS } from '../utils/types';
 import { useSpring, a, config } from '@react-spring/web';
-import { useHoverDirty } from 'react-use';
 
 function NoiseTypeButton({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
@@ -33,9 +32,6 @@ function NoiseEditor() {
         }
     });
 
-    const resetNoiseRef = React.useRef(null)
-    const isHovering = useHoverDirty(resetNoiseRef);
-
     function setNoise(value: number) {
         setNoiseType(value);
     }
@@ -56,9 +52,9 @@ function NoiseEditor() {
                     {/* Noise type buttons */}
                     <div className="flex items-center text-xs select-none">
                         {/* Label Noise and Reset noise button */}
-                        <div className="relative" ref={resetNoiseRef}>
+                        <div className="relative">
                             Noise
-                            {isHovering && <div className="
+                            <div className="
                                 absolute ml-1 p-1 left-full top-1/2 -translate-y-1/2 
                                 bg-red-100
                                 border rounded border-red-500
@@ -69,7 +65,7 @@ function NoiseEditor() {
                                 <svg className="ml-2 w-3 h-3" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeWidth={4} d="M6 18L18 6M6 6l12 12" />
                                 </svg>
-                            </div>}
+                            </div>
                         </div>
                         {/* Noise type buttons */}
                         <div className="pl-2 flex items-center text-[.6rem] space-x-1">
