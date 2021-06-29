@@ -23,6 +23,7 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
         [x] Allow choose noise: noise2D, noise3D, noise4D.
         [x] Let the user change noise type and scale.
         [x] Add current preset to presets.
+        [ ] Add up/down arrow handlers to numeric input controls.
         [x] Download image as PNG.
         [ ] Allow the user to customize the predefined image sizes.
         [x] Let the user choose the size of the generated texture to save.
