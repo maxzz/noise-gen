@@ -38,8 +38,13 @@ export default function useFloatInput(value: number, range: InputRange, onChange
         let n = +local;
         if (!isNaN(n)) {
             let shift = getShift4Input(range.step, event);
-            console.log('step', range.step, 'fraction', fractionLength(range.step), 'shift', shift, 'value str', local, 'value num', n);
-            shift && setLocal('' + withDigits(constrainRange(n + shift, range.min, range.max), fractionLength(range.step)+1));
+            let stepfraction = fractionLength(range.step);
+            let shiftfraction = fractionLength(shift);
+            let cut = Math.max(stepfraction, shiftfraction);
+
+            console.log('step', range.step, 'shift', shift, 'shiftFraction', shiftfraction, 'value str', local, 'value num', n);
+
+            shift && setLocal('' + withDigits(constrainRange(n + shift, range.min, range.max), cut));
         }
     }
 
