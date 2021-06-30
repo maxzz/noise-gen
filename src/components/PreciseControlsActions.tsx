@@ -44,11 +44,9 @@ function PreciseControlsActions() {
 
     async function saveItemPng(size?: WH) {
         setShowSelectFileSize(false);
-        if (size) {
-            if (worker) {
-                let blob = await worker.getImage(size);
-                saveBlobData(blob, 'noise-gen.png');
-            }
+        if (size && worker) {
+            let blob = await worker.getImage(size);
+            saveBlobData(blob, 'noise-gen.png');
         }
     }
 
@@ -56,13 +54,16 @@ function PreciseControlsActions() {
         <div className="p-2 flex space-x-1">
 
             {/* Canvas size buttons */}
-            <div className="px-1 flex-centered space-x-1 border rounded border-gray-400">
+            <div className="px-1 flex-centered space-x-1 
+                border rounded border-gray-400 bg-gray-50 shadow-sm hover:bg-white">
                 <SizeBoxes />
             </div>
 
             {/* Preset set as background */}
             <div
-                className="border rounded border-gray-400 flex-centered text-gray-500
+                className="flex-centered 
+                text-gray-500
+                border rounded border-gray-400 bg-gray-50 shadow-sm hover:bg-white
                 transform active-scale cursor-pointer"
                 title="Set canvas image as application background (F2)"
                 onClick={setAsBackground}
@@ -72,9 +73,11 @@ function PreciseControlsActions() {
                 </svg>
             </div>
 
-            {/* Preset + */}
+            {/* Preset add */}
             <div
-                className="flex-1 w-8 h-8 border rounded border-gray-400 flex-centered text-gray-500
+                className="flex-1 w-8 h-8 flex-centered 
+                text-gray-500
+                border rounded border-gray-400 bg-gray-50 shadow-sm hover:bg-white
                 transform active-scale cursor-pointer"
                 title="Save preset"
                 onClick={appendNew}
@@ -84,12 +87,13 @@ function PreciseControlsActions() {
                 </svg>
             </div>
 
-            {/* Preset save */}
+            {/* Image save */}
             <div className="relative z-10">
-
                 {/* Save button */}
                 <div
-                    className="flex-1 w-8 h-8 border rounded border-gray-400 flex-centered text-gray-500
+                    className="flex-1 w-8 h-8 flex-centered 
+                    text-gray-500
+                    border rounded border-gray-400 bg-gray-50 shadow-sm hover:bg-white
                     active-scale cursor-pointer"
                     title="Save image"
                     onClick={() => setShowSelectFileSize((prev) => !prev)}
@@ -98,7 +102,6 @@ function PreciseControlsActions() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={.8} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                     </svg>
                 </div>
-
                 {/* Popup */}
                 {showSelectFileSize &&
                     <a.div style={styles} className="absolute mt-1 -top-1 right-0">
