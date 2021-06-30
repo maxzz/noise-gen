@@ -13,8 +13,12 @@ export function bytesToSize(bytes: number, precision: number): string {
     return `${bytes.toFixed(precision)} ${sizes[posttxt]}`;
 }
 
-export function withDigits(value: number, digits: number = 4): string {
+export function withDigits(value: number, digits: number = 2): string {
     return value.toFixed(Math.max(Math.min(digits, 20), 0));
+}
+
+export function fractionLength(n: number) {
+    return (('' + n).split(".")[1] || '').length;
 }
 
 export function lerp(a: number, b: number, t: number): number {

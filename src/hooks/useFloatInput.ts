@@ -1,20 +1,27 @@
 import React from 'react';
+import { constrainRange, fractionLength, getShift4Input, withDigits } from '../utils/numbers';
 
 function beautifyFloat(v: string) {
     return (v || '').trim().replace(/ /g, '').replace(/^\./, '0.').replace(/\.$/, '.0');
 }
 
-export default function useFloatInput(value: number, onChange: (newValue: number) => void) {
+export type InputRange = {
+    min: number;
+    max: number;
+    step: number;
+};
+
+export default function useFloatInput(value: number, range: InputRange, onChange: (newValue: number) => void) {
     const [local, setLocal] = React.useState('' + value); // TODO: that is not NaN
 
     React.useEffect(() => {
         setLocal('' + value);
-    }, [value])
+    }, [value]);
 
     const onSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLocal(event.target.value);
         onChange(+event.target.value);
-    }
+    };
 
     const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLocal(event.target.value);
@@ -22,7 +29,19 @@ export default function useFloatInput(value: number, onChange: (newValue: number
         if (!isNaN(n)) {
             onChange(n);
         }
-    }    
-    
-    return [local, onSliderChange, onInputChange] as const;
+    };
+
+    const onSliderKey = (event: React.KeyboardEvent) => {
+    }
+
+    const onInputKey = (event: React.KeyboardEvent) => {
+        let n = +local;
+        if (!isNaN(n)) {
+            let shift = getShift4Input(range.step, event);
+            console.log('step', range.step, 'fraction', fractionLength(range.step), 'shift', shift, 'value str', local, 'value num', n);
+            shift && setLocal('' + withDigits(constrainRange(n + shift, range.min, range.max), fractionLength(range.step)));
+        }
+    }
+
+    return [local, onSliderChange, onSliderKey, onInputChange, onInputKey] as const;
 }
