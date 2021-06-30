@@ -46,10 +46,7 @@ export default function useFloatInput(value: number, range: InputRange, onChange
         if (!isNaN(n)) {
             let shift = getShift4Input(range.step, event);
             if (shift) {
-                let newN = (n * 10000 + shift * 10000) / 10000;
-
-                let stepfraction = fractionLength(range.step);
-                let shiftfraction = fractionLength(newN);
+                let newN = +(n + shift).toFixed(4);
 
                 console.log('local', local, 'n', n, 'newN', newN, 'shift', shift, 'step', range.step);
 
