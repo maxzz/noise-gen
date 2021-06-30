@@ -15,7 +15,8 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
         [x] Noise generator sliders.
         [x] Allow to generate ramdom preset (except the color). (button animation?)
         [ ] Generated presets history.
-        [ ] Round values to two decimal places.
+        [x] Round values to two decimal places.
+        [ ] Precise control over the input values: 0.01; 0.1; 1
     [ ] Additional controls
         [x] Allow the user to select the color of pixels on the canvas.
         [x] Allow to change the background of the rendering canvas: bkack, white, and transparent.
