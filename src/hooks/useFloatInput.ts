@@ -4,12 +4,12 @@ function beautifyFloat(v: string) {
     return (v || '').trim().replace(/ /g, '').replace(/^\./, '0.').replace(/\.$/, '.0');
 }
 
-export default function useFloatInput(initialValue: number, onChange: (value: number) => void) {
-    const [local, setLocal] = React.useState('' + initialValue); // TODO: that is not NaN
+export default function useFloatInput(value: number, onChange: (newValue: number) => void) {
+    const [local, setLocal] = React.useState('' + value); // TODO: that is not NaN
 
     React.useEffect(() => {
-        setLocal('' + initialValue);
-    }, [initialValue])
+        setLocal('' + value);
+    }, [value])
 
     const onSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLocal(event.target.value);
