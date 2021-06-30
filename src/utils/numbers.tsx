@@ -51,7 +51,7 @@ interface StepKeys {
 }
 
 function getStepForKey(baseStep: number, ev: React.KeyboardEvent | KeyboardEvent, keys: StepKeys): number {
-    const realStep: number = baseStep * (ev.altKey || ev.ctrlKey ? 0.1 : 1) * (ev.shiftKey ? 10 : 1);
+    const realStep: number = baseStep * (ev.altKey ? 100 : 1) * (ev.shiftKey ? 10 : 1) * (ev.ctrlKey ? 0.1 : 1); // AI logic: shift: v+step*10; ctrl: v+step*0.1; alt: n/a
     return keys.upKey ? +realStep : keys.downKey ? -realStep : 0;
 }
 
