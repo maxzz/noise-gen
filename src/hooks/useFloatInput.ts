@@ -32,21 +32,30 @@ export default function useFloatInput(value: number, range: InputRange, onChange
     };
 
     const onSliderKey = (event: React.KeyboardEvent) => {
-    }
+    };
 
     const onInputKey = (event: React.KeyboardEvent) => {
         let n = +local;
         if (!isNaN(n)) {
             let shift = getShift4Input(range.step, event);
-            let stepfraction = fractionLength(range.step);
-            let shiftfraction = fractionLength(shift);
-            let cut = Math.max(stepfraction, shiftfraction);
+            if (shift) {
+                let newN = n + shift;
 
-            console.log('step', range.step, 'shift', shift, 'shiftFraction', shiftfraction, 'value str', local, 'value num', n);
+                let stepfraction = fractionLength(range.step);
+                let shiftfraction = fractionLength(newN);
+                let cut = Math.max(stepfraction, shiftfraction);
 
-            shift && setLocal('' + withDigits(constrainRange(n + shift, range.min, range.max), cut));
+                console.log('step', range.step, 'shift', shift, 'shiftFraction', shiftfraction, 'value str', local, 'value num', n);
+
+                if (shiftfraction > stepfraction) {
+                    newN = +local.replace(/0$/, '');
+                    console.log('set n', newN);
+                }
+    
+                setLocal('' + withDigits(constrainRange(newN, range.min, range.max), cut));
+            }
         }
-    }
+    };
 
     return [local, onSliderChange, onSliderKey, onInputChange, onInputKey] as const;
 }
