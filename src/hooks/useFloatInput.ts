@@ -40,19 +40,20 @@ export default function useFloatInput(value: number, range: InputRange, onChange
             let shift = getShift4Input(range.step, event);
             if (shift) {
                 let newN = n + shift;
+                console.log('step', range.step, 'shift', shift, 'value str', local, 'value num', n);
 
-                let stepfraction = fractionLength(range.step);
-                let shiftfraction = fractionLength(newN);
-                let cut = Math.max(stepfraction, shiftfraction);
+                // let stepfraction = fractionLength(range.step);
+                // let shiftfraction = fractionLength(newN);
+                // let cut = Math.max(stepfraction, shiftfraction);
 
-                console.log('step', range.step, 'shift', shift, 'shiftFraction', shiftfraction, 'value str', local, 'value num', n);
+                // console.log('step', range.step, 'shift', shift, 'shiftFraction', shiftfraction, 'value str', local, 'value num', n);
 
-                if (shiftfraction > stepfraction) {
-                    newN = +local.replace(/0$/, '');
-                    console.log('set n', newN);
-                }
+                // if (shiftfraction > stepfraction) {
+                //     newN = +local.replace(/0$/, '');
+                //     console.log('set n', newN);
+                // }
     
-                setLocal('' + withDigits(constrainRange(newN, range.min, range.max), cut));
+                setLocal('' + constrainRange(newN, range.min, range.max));
             }
         }
     };
