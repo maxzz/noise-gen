@@ -6,18 +6,23 @@ import swap from 'lodash-move';
 
 import styles from './SortedList.module.scss';
 
+const enum LOCAL {
+    ROWHEIGHT = 50,
+    FULLHIGHT = ROWHEIGHT * 2,
+}
+
 const fn = (order: number[], active = false, originalIndex = 0, curIndex = 0, y = 0) =>
     (index: number) =>
         active && index === originalIndex
             ? {
-                y: curIndex * 50 + y,
+                y: curIndex * LOCAL.ROWHEIGHT + y,
                 scale: 1.1,
                 zIndex: 1,
                 shadow: 15,
                 immediate: (key: string) => key === 'y' || key === 'zIndex',
             }
             : {
-                y: order.indexOf(index) * 50,
+                y: order.indexOf(index) * LOCAL.ROWHEIGHT,
                 scale: 1,
                 zIndex: 0,
                 shadow: 1,
@@ -31,7 +36,7 @@ function DraggableList({ items }: { items: string[]; }) {
     const bind = useDrag(
         ({ args: [originalIndex], active, movement: [, y] }) => {
             const curIndex = order.current.indexOf(originalIndex);
-            const curRow = clamp(Math.round((curIndex * 100 + y) / 100), 0, items.length - 1);
+            const curRow = clamp(Math.round((curIndex * LOCAL.FULLHIGHT + y) / LOCAL.FULLHIGHT), 0, items.length - 1);
             const newOrder = swap(order.current, curIndex, curRow);
 
             api.start(fn(newOrder, active, originalIndex, curIndex, y)); // Feed springs new style data, they'll animate the view without causing a single render
@@ -54,7 +59,8 @@ function DraggableList({ items }: { items: string[]; }) {
                         y,
                         scale,
                     }}
-                    children={<div data-max={i}>{items[i]}</div>}
+                    data-max={i}
+                    children={items[i]}
                 />
             ))}
         </div>
