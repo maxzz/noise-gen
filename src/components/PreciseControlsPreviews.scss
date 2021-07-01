@@ -1,0 +1,25 @@
+.maybe-broken {
+    overflow: hidden;
+}
+
+.maybe-broken:before {
+    content: "";
+    display: block;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #ede9fe; //bg-purple-100
+    border-radius: 0.25rem;
+}
+
+.preset .remove-preset {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.preset:hover .remove-preset {
+    opacity: 1;
+}
