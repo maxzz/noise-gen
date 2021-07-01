@@ -3,7 +3,7 @@ import { PresetsAtom } from '../atoms';
 import debounce from './debounce';
 import { PresetData, renderParams2Store, renderParams4Store, STORAGE_KEY } from './types';
 
-const PRESETS_KEY = `${STORAGE_KEY}-presets2`;
+const PRESETS_KEY = `${STORAGE_KEY}-presets3`;
 
 type PresetsStoreItem = {
     id: string;
@@ -12,26 +12,37 @@ type PresetsStoreItem = {
 
 type PresetsStoreCache = Record<string, string>; // Item ID -> data:string URL
 
+const DEFAULT_PrESETS: PresetsStoreItem[] = [
+    { "id": "kq7tqydg", "rpm": "v7|#887ed6|v7_3_0.1_0.1_0.1_0.1_13753932482421605|-24.88|26.85|22.82|0.1" },
+    { "id": "kq7tsptb", "rpm": "v7|#887ed6|v7_3_0.1_0.1_0.1_0.1_13753932482421605|-24.88|26.85|211.63|0.1" },
+    { "id": "kqfzxd6t", "rpm": "v7|#818181|v7_3_3.811_0.451_0.1_0.1_13753932482421605|-24.88|-4.92|16.11|0.1" },
+];
+
+function RawToLocal(dataRaw: PresetsStoreItem[], cache: PresetsStoreCache = {}): PresetData[] {
+    let data = dataRaw.map((preset: PresetsStoreItem): PresetData | undefined => {
+        let renderParams = renderParams4Store(preset.rpm);
+        return !renderParams || !preset.id ? undefined : {
+            id: preset.id,
+            preview: cache[preset.id],
+            renderParams: renderParams,
+        };
+    }).filter(Boolean) as PresetData[];
+    return data;
+}
+
 export function defPresets(): PresetData[] {
     let setsRaw = localStorage.getItem(`${PRESETS_KEY}-sets`);
     let cacheRaw = localStorage.getItem(`${PRESETS_KEY}-cache`);
-    try {
-        let dataRaw = setsRaw && JSON.parse(setsRaw) as PresetsStoreItem[] || [];
-        let cache = cacheRaw && JSON.parse(cacheRaw) as PresetsStoreCache || {};
-
-        let data = dataRaw.map((preset: PresetsStoreItem): PresetData | undefined => {
-            let renderParams = renderParams4Store(preset.rpm);
-            return !renderParams || !preset.id ? undefined : {
-                id: preset.id,
-                preview: cache[preset.id],
-                renderParams: renderParams,
-            };
-        }).filter(Boolean) as PresetData[];
-
-        return data;
-    } catch (error) {
+    if (setsRaw !== null) {
+        try {
+            let dataRaw = setsRaw && JSON.parse(setsRaw) as PresetsStoreItem[] || [];
+            let cache = cacheRaw && JSON.parse(cacheRaw) as PresetsStoreCache || {};
+            let data: PresetData[] = RawToLocal(dataRaw, cache);
+            return data;
+        } catch (error) {
+        }
     }
-    return [];
+    return RawToLocal(DEFAULT_PrESETS, {});
 };
 
 export const storePresets = debounce((get: Getter) => {
