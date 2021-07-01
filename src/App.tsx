@@ -18,12 +18,13 @@ function App() {
             // style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}
             // style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}}
             style={
-                appBackgroundActive ? {
-                    backgroundImage: `url(${appBackgroundUrl}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`,
-                    backgroundBlendMode: 'multiply, screen, color-dodge',
-                } : {
-                    backgroundImage: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`,
-                }
+                appBackgroundActive
+                    ? {
+                        backgroundImage: `url(${appBackgroundUrl}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`,
+                        backgroundBlendMode: 'multiply, screen, color-dodge',
+                    } : {
+                        backgroundImage: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`,
+                    }
             }
         >
             {/* Header */}
