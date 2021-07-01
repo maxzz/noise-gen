@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { PresetsAtom, RemovePresetAtom, SetRenderParamsAtom } from '../atoms';
 import { PresetData, PRESET_H, PRESET_W } from '../utils/types';
-import './PreciseControlsPreviews.scss';
+//import './PreciseControlsPreviews.scss';
 
 interface PreviewBoxProps {
     item: PresetData;
@@ -21,7 +21,7 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
                 />}
 
                 {item.preview && <div
-                    className="absolute p-1 -top-2 -right-1.5
+                    className="absolute p-1 -top-2.5 -right-3
                         border rounded-full text-gray-500 border-gray-500 bg-gray-50
                         remove-preset"
                     onClick={(event) => { event.stopPropagation(); deleteItem(item.id); }}
