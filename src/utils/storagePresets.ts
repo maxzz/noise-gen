@@ -13,9 +13,9 @@ type PresetsStoreItem = {
 type PresetsStoreCache = Record<string, string>; // Item ID -> data:string URL
 
 const DEFAULT_PrESETS: PresetsStoreItem[] = [
-    { "id": "kq7tqydg", "rpm": "v7|#887ed6|v7_3_0.1_0.1_0.1_0.1_13753932482421605|-24.88|26.85|22.82|0.1" },
-    { "id": "kq7tsptb", "rpm": "v7|#887ed6|v7_3_0.1_0.1_0.1_0.1_13753932482421605|-24.88|26.85|211.63|0.1" },
-    { "id": "kqfzxd6t", "rpm": "v7|#818181|v7_3_3.811_0.451_0.1_0.1_13753932482421605|-24.88|-4.92|16.11|0.1" },
+    { "id": "kqliu57s", "rpm": "v7|#f58e48|v7_3_0.1_0.1_0.1_0.1_13753932482421605|-24.88|26.85|22.82|0.1" },
+    { "id": "kqliu7vi", "rpm": "v7|#887ed6|v7_3_0.1_0.1_0.1_0.1_13753932482421605|-24.88|26.85|211.63|0.1" },
+    { "id": "kqliwa8r", "rpm": "v7|#4bce4b|v7_3_0.611_0.101_0.1_0.1_13753932482421605|-24.88|-4.92|16.11|0.1" },
 ];
 
 function RawToLocal(dataRaw: PresetsStoreItem[], cache: PresetsStoreCache = {}): PresetData[] {
