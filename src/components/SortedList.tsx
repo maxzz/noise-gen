@@ -4,7 +4,7 @@ import { useDrag } from 'react-use-gesture';
 import clamp from 'lodash.clamp';
 import swap from 'lodash-move';
 
-import styles from './SortedList.scss';
+import styles from './SortedList.module.scss';
 
 const fn = (order: number[], active = false, originalIndex = 0, curIndex = 0, y = 0) => (index: number) =>
     active && index === originalIndex
