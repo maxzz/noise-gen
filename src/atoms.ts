@@ -159,8 +159,9 @@ export const InitPreviewsUpdateAtom = atom(
         const worker = get(RenderWorkerAtom);
         const presets = get(PresetsAtom);
         const canvasSize = get(ManualSizeAtom);
+        let index = 0;
         if (worker) {
-            presets.forEach((preset: PresetData, index: number) => {
+            presets.forEach((preset: PresetData) => {
                 if (!preset.preview) {
                     setTimeout(() => {
                         const msg: I2W.GetPreviewId = {
@@ -174,7 +175,7 @@ export const InitPreviewsUpdateAtom = atom(
                             renderParams: preset.renderParams,
                         };
                         worker?.postMessage(msg);
-                    }, 400 * index);
+                    }, 400 * index++);
                 }
             });
         }
