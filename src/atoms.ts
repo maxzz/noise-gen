@@ -160,19 +160,21 @@ export const InitPreviewsUpdateAtom = atom(
         const presets = get(PresetsAtom);
         const canvasSize = get(ManualSizeAtom);
         if (worker) {
-            presets.forEach((preset: PresetData) => {
+            presets.forEach((preset: PresetData, index: number) => {
                 if (!preset.preview) {
-                    const msg: I2W.GetPreviewId = {
-                        type: 'get-preview-id',
-                        smallWidth: PRESET_W,
-                        smallHeight: PRESET_H,
-                        largeWidth: canvasSize.w,
-                        largeHeight: canvasSize.h,
-
-                        id: preset.id,
-                        renderParams: preset.renderParams,
-                    };
-                    worker?.postMessage(msg);
+                    setTimeout(() => {
+                        const msg: I2W.GetPreviewId = {
+                            type: 'get-preview-id',
+                            smallWidth: PRESET_W,
+                            smallHeight: PRESET_H,
+                            largeWidth: canvasSize.w,
+                            largeHeight: canvasSize.h,
+    
+                            id: preset.id,
+                            renderParams: preset.renderParams,
+                        };
+                        worker?.postMessage(msg);
+                    }, 400 * index);
                 }
             });
         }
