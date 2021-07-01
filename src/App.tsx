@@ -7,6 +7,7 @@ import Canvas from './components/RenderCanvas';
 import PreciseControls from './components/PreciseControls';
 import MainControls from './components/MainControls';
 import { GithubLogoInline } from './components/XtraGithubLogo';
+import SortedList from './components/SortedList';
 
 function App() {
     const [appBackgroundUrl, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
@@ -18,16 +19,15 @@ function App() {
             // style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}}
             style={
                 appBackgroundActive ? {
-                        backgroundImage: `url(${appBackgroundUrl}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`,
-                        backgroundBlendMode: 'multiply, screen, color-dodge',
-                    }
-                    : {
-                        backgroundImage: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`,
-                    }
+                    backgroundImage: `url(${appBackgroundUrl}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`,
+                    backgroundBlendMode: 'multiply, screen, color-dodge',
+                } : {
+                    backgroundImage: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`,
+                }
             }
         >
             {/* Header */}
-            <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 select-none" style={{boxShadow: '#00000033 0 1px 2px'}}>
+            <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 select-none" style={{ boxShadow: '#00000033 0 1px 2px' }}>
                 <div className="mx-4 flex-none flex-centered">
                     <AppLogo />
 
@@ -45,13 +45,15 @@ function App() {
 
                 <div className="px-4 py-2 text-xl uppercase flex items-center">
                     <GithubLogoInline href="https://github.com/maxzz/noise-gen" />
-                    <div className="pl-1 pb-0.5" style={{textShadow: '#a88cff70 3px 2px'}}>
+                    <div className="pl-1 pb-0.5" style={{ textShadow: '#a88cff70 3px 2px' }}>
                         Noise generator: xp10-525N
                     </div>
                 </div>
             </div>
 
             <div className="relative max-w-md w-full flex-1 flex flex-col items-center">
+                <SortedList />
+
                 {/* Controls */}
                 <div className="w-full flex flex-col space-y-1">
                     <MainControls />

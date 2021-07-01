@@ -4,7 +4,7 @@ import { useDrag } from 'react-use-gesture';
 import clamp from 'lodash.clamp';
 import swap from 'lodash-move';
 
-import styles from './styles.module.scss';
+import styles from './SortedList.scss';
 
 const fn = (order: number[], active = false, originalIndex = 0, curIndex = 0, y = 0) => (index: number) =>
     active && index === originalIndex
@@ -52,7 +52,7 @@ function DraggableList({ items }: { items: string[]; }) {
     );
 }
 
-export default function Test() {
+export default function SortedList() {
     return (
         <div className={styles.container}>
             <DraggableList items={'Lorem ipsum dolor sit'.split(' ')} />
