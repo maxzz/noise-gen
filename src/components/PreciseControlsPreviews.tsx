@@ -21,9 +21,8 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
                 />}
 
                 {item.preview && <div
-                    className="absolute p-1 -top-3 -right-3
-                        border rounded-full text-gray-500 border-gray-500 bg-gray-50
-                        remove-preset"
+                    className="remove-preset absolute p-1 -top-3 -right-3
+                        border rounded-full text-gray-500 border-gray-500 bg-gray-50"
                     title="Remove preset"
                     onClick={(event) => { event.stopPropagation(); deleteItem(item.id); }}
                 >
