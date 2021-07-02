@@ -1,8 +1,8 @@
-.maybe-broken {
+.maybeBroken {
     overflow: hidden;
 }
 
-.maybe-broken:before {
+.maybeBroken:before {
     content: "";
     display: block;
 
@@ -15,11 +15,11 @@
     border-radius: 0.25rem;
 }
 
-.preset .remove-preset {
+.preset .removePreset {
     opacity: 0;
     transition: opacity .5s;
 }
 
-.preset:hover .remove-preset {
+.preset:hover .removePreset {
     opacity: 1;
 }

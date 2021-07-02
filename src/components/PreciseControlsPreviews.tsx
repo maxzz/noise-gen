@@ -16,12 +16,12 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
             <div className="relative border-4 border-gray-50" style={{ width: `${PRESET_W + 8}px`, height: `${PRESET_H + 8}px` }}>
                 {/* +8 for double border size */}
                 {item.preview && <img
-                    className={`${styles['maybe-broken']} w-full h-full object-cover`}
+                    className={`${styles.maybeBroken} w-full h-full object-cover`}
                     src={item.preview} alt="preset"
                 />}
 
                 {item.preview && <div
-                    className={`${styles['remove-preset']} absolute p-1 -top-3 -right-3 
+                    className={`${styles.removePreset} absolute p-1 -top-3 -right-3 
                         border rounded-full text-gray-500 border-gray-500 bg-gray-50`}
                     title="Remove preset"
                     onClick={(event) => { event.stopPropagation(); deleteItem(item.id); }}
