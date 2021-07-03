@@ -54,9 +54,6 @@ function PreciseControlsPreviews() {
         setRenderParams(item.renderParams);
     }
 
-    console.log('styles', styles);
-    
-
     return (
         <div className="px-1 flex flex-wrap">
             {presets.map((preset) => <PreviewBox key={preset.id} item={preset} deleteItem={deleteItem} selectItem={selectItem} />)}

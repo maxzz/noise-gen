@@ -3,7 +3,7 @@ import { PresetsAtom } from '../atoms';
 import debounce from './debounce';
 import { PresetData, renderParams2Store, renderParams4Store, STORAGE_KEY } from './types';
 
-const PRESETS_KEY = `${STORAGE_KEY}-presets2`;
+const PRESETS_KEY = `${STORAGE_KEY}-presets4`;
 
 type PresetsStoreItem = {
     id: string;

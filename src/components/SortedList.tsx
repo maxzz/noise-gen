@@ -11,9 +11,11 @@ const enum LOCAL {
     FULLHIGHT = ROWHEIGHT * 2,
 }
 
-const fn = (order: number[], active = false, originalIndex = 0, curIndex = 0, y = 0) =>
-    (index: number) =>
-        active && index === originalIndex
+const fn = (order: number[], active = false, originalIndex = 0, curIndex = 0, y = 0) => {
+    return (index: number) => {
+        console.log('fn', index, 'active', active, 'originalIndex', originalIndex, 'curIndex', curIndex, 'y', y, 'order', order);
+        
+        return active && index === originalIndex
             ? {
                 y: curIndex * LOCAL.ROWHEIGHT + y,
                 scale: 1.1,
@@ -28,6 +30,8 @@ const fn = (order: number[], active = false, originalIndex = 0, curIndex = 0, y 
                 shadow: 1,
                 immediate: false,
             };
+    };
+};
 
 function DraggableList({ items }: { items: string[]; }) {
     const order = React.useRef(items.map((_, index) => index)); // Store indicies as a local ref, this represents the item order
