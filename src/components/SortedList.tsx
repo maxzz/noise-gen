@@ -7,8 +7,8 @@ import swap from 'lodash-move';
 import styles from './SortedList.module.scss';
 
 const enum LOCAL {
-    ROWHEIGHT = 50,
-    FULLHIGHT = ROWHEIGHT * 2,
+    ROW_HEIGHT_HALF = 50,
+    ROW_HIGHT = ROW_HEIGHT_HALF * 2,
 }
 
 const fn = (order: number[], active = false, originalIndex = 0, curIndex = 0, y = 0) => {
@@ -17,14 +17,14 @@ const fn = (order: number[], active = false, originalIndex = 0, curIndex = 0, y 
         
         return active && index === originalIndex
             ? {
-                y: curIndex * LOCAL.ROWHEIGHT + y,
+                y: curIndex * LOCAL.ROW_HEIGHT_HALF + y,
                 scale: 1.1,
                 zIndex: 1,
                 shadow: 15,
                 immediate: (key: string) => key === 'y' || key === 'zIndex',
             }
             : {
-                y: order.indexOf(index) * LOCAL.ROWHEIGHT,
+                y: order.indexOf(index) * LOCAL.ROW_HEIGHT_HALF,
                 scale: 1,
                 zIndex: 0,
                 shadow: 1,
@@ -38,9 +38,10 @@ function DraggableList({ items }: { items: string[]; }) {
     const [springs, api] = useSprings(items.length, fn(order.current)); // Create springs, each corresponds to an item, controlling its transform, scale, etc.
 
     const bind = useDrag(
-        ({ args: [originalIndex], active, movement: [, y] }) => {
+        (props) => {
+            let { args: [originalIndex], active, movement: [, y] } = props;
             const curIndex = order.current.indexOf(originalIndex);
-            const curRow = clamp(Math.round((curIndex * LOCAL.FULLHIGHT + y) / LOCAL.FULLHIGHT), 0, items.length - 1);
+            const curRow = clamp(Math.round((curIndex * LOCAL.ROW_HIGHT + y) / LOCAL.ROW_HIGHT), 0, items.length - 1);
             const newOrder = swap(order.current, curIndex, curRow);
 
             api.start(fn(newOrder, active, originalIndex, curIndex, y)); // Feed springs new style data, they'll animate the view without causing a single render
@@ -64,7 +65,7 @@ function DraggableList({ items }: { items: string[]; }) {
                         scale,
                     }}
                     data-max={i}
-                    children={items[i]}
+                    children={`${items[i]} ${i}`}
                 />
             ))}
         </div>
