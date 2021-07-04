@@ -13,8 +13,8 @@ const enum LOCAL {
 
 const fn = (order: number[], active = false, originalIndex = 0, curIndex = 0, y = 0) => {
     return (index: number) => {
-        console.log('fn', index, 'active', active, 'originalIndex', originalIndex, 'curIndex', curIndex, 'y', y, 'order', order);
-        
+        console.log('fn', 'active', active, 'index', index, 'originalIndex', originalIndex, 'curIndex', curIndex, 'y', y, 'order', order);
+
         return active && index === originalIndex
             ? {
                 y: curIndex * LOCAL.ROW_HEIGHT_HALF + y,
@@ -54,20 +54,25 @@ function DraggableList({ items }: { items: string[]; }) {
 
     return (
         <div className={styles.content} style={{ height: items.length * 50 }}>
-            {springs.map(({ zIndex, shadow, y, scale }, i) => (
-                <animated.div
-                    {...bind(i)}
-                    key={i}
-                    style={{
-                        zIndex,
-                        boxShadow: shadow.to(s => `rgba(0, 0, 0, 0.15) 0px ${s}px ${2 * s}px 0px`),
-                        y,
-                        scale,
-                    }}
-                    data-max={i}
-                    children={`${items[i]} ${i}`}
-                />
-            ))}
+            {springs.map(({ y, scale, zIndex, shadow }, i) => {
+                console.log('bind', bind);
+                return (
+                    <animated.div
+                        {...bind(i)}
+                        key={i}
+                        style={{
+                            y,
+                            scale,
+                            zIndex,
+                            boxShadow: shadow.to(s => `rgba(255, 0, 0, 1) 0px ${s}px ${2 * s}px 0px`),
+                            // boxShadow: shadow.to(s => `rgba(0, 0, 0, 0.15) 0px ${s}px ${2 * s}px 0px`),
+                        }}
+                        data-max={i}
+                        children={`${items[i]} ${i}`}
+                    />
+                );
+            })
+            }
         </div>
     );
 }

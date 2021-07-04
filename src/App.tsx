@@ -53,7 +53,9 @@ function App() {
             </div>
 
             <div className="relative max-w-md w-full flex-1 flex flex-col items-center">
-                <SortedList />
+                <div className="">
+                    <SortedList />
+                </div>
 
                 {/* Controls */}
                 <div className="w-full flex flex-col space-y-1">
