@@ -39,7 +39,7 @@ export function mapRange(fromValue: number, fromStart: number, fromEnd: number, 
     return toStart + p * (toEnd - toStart);
 }
 
-export function constrainRange(value: number, min: number, max: number): number {
+export function clamp(value: number, min: number, max: number): number {
     return Math.min(Math.max(value, min), max);
 }
 

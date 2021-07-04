@@ -1,5 +1,5 @@
 import React from 'react';
-import { constrainRange, getShift4Input } from '../utils/numbers';
+import { clamp, getShift4Input } from '../utils/numbers';
 
 function beautifyFloat(v: string) {
     return (v || '').trim().replace(/ /g, '').replace(/^\./, '0.').replace(/\.$/, '.0');
@@ -39,7 +39,7 @@ export default function useFloatInput(value: number, range: InputRange, onChange
         let n = +local;
         if (!isNaN(n)) {
             let shift = getShift4Input(range.step, event);
-            shift && setLocalValue('' + constrainRange(+(n + shift).toFixed(4), range.min, range.max));
+            shift && setLocalValue('' + clamp(+(n + shift).toFixed(4), range.min, range.max));
         }
     };
 

@@ -8,8 +8,8 @@ import useCanvasWorker from '../hooks/useCanvasWorker';
 import { useUpdateAtom } from 'jotai/utils';
 
 export default function Canvas() {
-    const canvas = useRef<HTMLCanvasElement>(null);
-    const worker = useCanvasWorker(canvas);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const worker = useCanvasWorker(canvasRef);
     const containerRef = useRef<HTMLDivElement>(null);
     const isHovered = useHoverDirty(containerRef);
     const [dragging, setDragging] = useState(false);
@@ -61,7 +61,7 @@ export default function Canvas() {
                     style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
                     ref={canvasSizeRef}
                 >
-                    <canvas ref={canvas} className="w-full h-full" style={{backgroundColor: colorCanvas}}></canvas>
+                    <canvas ref={canvasRef} className="w-full h-full" style={{backgroundColor: colorCanvas}}></canvas>
                 </div>
 
                 <DragZone
