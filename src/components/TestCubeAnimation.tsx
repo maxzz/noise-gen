@@ -37,9 +37,9 @@ function Face({ digit }: { digit: number; }) {
 
     return (
         <a.div style={styles} className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2 rounded-lg border-2 bg-purple-400"
-        onClick={() => {
-            api.start({rotate: 320})
-        }}
+            onClick={() => {
+                api.start({ rotate: styles.rotate.get() === 360 ? 0 : 360 });
+            }}
         >
             {items.map((item: React.ReactNode, idx: number) => item)}
         </a.div>
