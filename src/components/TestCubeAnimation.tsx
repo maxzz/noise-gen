@@ -16,7 +16,7 @@ function Dot({ on }: { on: boolean; }) {
     );
 }
 
-function Face({digit}: {digit: number}) {
+function Face({ digit }: { digit: number; }) {
     const items = React.useMemo(() => {
         let items = [];
         let faces = FACES[digit - 1];
@@ -30,25 +30,26 @@ function Face({digit}: {digit: number}) {
         return items;
     }, [digit]);
 
-    const styles = useSpring({
+    const [styles, api] = useSpring(() => ({
         rotate: 45,
-    });
+        scale: .5,
+    }));
 
     return (
-        <div className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2 rounded-lg border-2 bg-purple-400 scale-50">
-            {items.map((item: React.ReactNode, idx: number) => (
-                <a.div style={styles} key={idx}>
-                    {item}
-                </a.div>
-            ))}
-        </div>
+        <a.div style={styles} className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2 rounded-lg border-2 bg-purple-400"
+        onClick={() => {
+            api.start({rotate: 320})
+        }}
+        >
+            {items.map((item: React.ReactNode, idx: number) => item)}
+        </a.div>
     );
 }
 
 function TestCubeAnimation() {
     return (
         <div className="mb-4">
-            <Face digit={5}/>
+            <Face digit={5} />
         </div>
     );
 }
