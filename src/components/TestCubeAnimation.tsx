@@ -1,3 +1,4 @@
+import { a, useSpring } from '@react-spring/web';
 import React from 'react';
 
 const FACES = [
@@ -11,13 +12,11 @@ const FACES = [
 
 function Dot({ on }: { on: boolean; }) {
     return (
-        <div className={`w-full h-full rounded-full ${on ? 'bg-gray-700' : 'bg-transparent'}`}></div>
+        <div className={`w-full h-full rounded-full ${on ? 'bg-purple-900' : 'bg-transparent'}`}></div>
     );
 }
 
-function CubeFace() {
-    const [digit, setDigit] = React.useState(5);
-
+function Face({digit}: {digit: number}) {
     const items = React.useMemo(() => {
         let items = [];
         let faces = FACES[digit - 1];
@@ -31,10 +30,17 @@ function CubeFace() {
         return items;
     }, [digit]);
 
+    const styles = useSpring({
+        rotate: 45,
+    });
 
     return (
-        <div className="p-4 bg-red-400 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2">
-            {items.map((item: React.ReactNode) => item)}
+        <div className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2 rounded-lg border-2 bg-purple-400 scale-50">
+            {items.map((item: React.ReactNode, idx: number) => (
+                <a.div style={styles} key={idx}>
+                    {item}
+                </a.div>
+            ))}
         </div>
     );
 }
@@ -42,7 +48,7 @@ function CubeFace() {
 function TestCubeAnimation() {
     return (
         <div className="mb-4">
-            <CubeFace />
+            <Face digit={5}/>
         </div>
     );
 }
