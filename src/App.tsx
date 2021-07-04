@@ -7,7 +7,8 @@ import Canvas from './components/RenderCanvas';
 import PreciseControls from './components/PreciseControls';
 import MainControls from './components/MainControls';
 import { GithubLogoInline } from './components/XtraGithubLogo';
-import SortedList from './components/SortedList';
+import SortedList from './components/TestSortedList';
+import TestCubeAnimation from './components/TestCubeAnimation';
 
 function App() {
     const [appBackgroundUrl, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
@@ -54,8 +55,11 @@ function App() {
 
             <div className="relative max-w-md w-full flex-1 flex flex-col items-center">
                 <div className="">
-                    <SortedList />
+                    <TestCubeAnimation />
                 </div>
+                {/* <div className="">
+                    <SortedList />
+                </div> */}
 
                 {/* Controls */}
                 <div className="w-full flex flex-col space-y-1">

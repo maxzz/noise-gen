@@ -4,7 +4,7 @@ import { useDrag } from 'react-use-gesture';
 import clamp from 'lodash.clamp';
 import swap from 'lodash-move';
 
-import styles from './SortedList.module.scss';
+import styles from './TestSortedList.module.scss';
 
 const enum LOCAL {
     ROW_HEIGHT_HALF = 50,
