@@ -40,7 +40,11 @@ function Face({ digit }: { digit: number; }) {
             onClick={() => {
                 api.start({
                     rotate: styles.rotate.get() === 360 ? 0 : 360,
-                    scale: styles.scale.get() === 1 ? 0.5 : 1,
+                    scale: styles.scale.get() === .7 ? .5 : .7,
+                    onRest: () => {
+                        console.log('done');
+                        styles.scale.set(1.1);
+                    }
                 });
             }}
         >
