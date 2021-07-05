@@ -36,8 +36,9 @@ function Face({ digit }: { digit: number; }) {
                 api.start({
                     to: async (next, cancel) => {
                         await next({ rotate: styles.rotate.get() === 360 ? 0 : 360, backgroundColor: 'rgb(76, 29, 149)' });
-                        await next({ scale: styles.scale.get() === .7 ? .5 : .7 });
-                        await next({ scale: 1.1, backgroundColor: 'rgb(167, 139, 250)' });
+                        await next({ scale: styles.scale.get() === .7 ? .5 : .7, config: { duration: 400} });
+                        await next({ scale: 1.1, backgroundColor: 'rgb(167, 139, 250)', config: { duration: 100} });
+                        await next({ scale: .5, config: { duration: 100} });
                     },
                     config: {
                         duration: 200,
