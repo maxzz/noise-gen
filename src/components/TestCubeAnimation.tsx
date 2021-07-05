@@ -62,11 +62,36 @@ function Face({ digit, onNextDigit }: { digit: number; onNextDigit: () => void; 
 
 function TestCubeAnimation() {
     const [digit, setDigit] = React.useState(5);
+
+    let dieSize = 10;
+
+    let f1Style = {
+        transform: `rotateX(180deg) translateZ(${dieSize / 2}px)`,
+    };
+    let f2Style = {
+        transform: `rotateY(-90deg) translateZ(${dieSize / 2}px)`,
+    };
+    let f3Style = {
+        transform: `rotateX(90deg) translateZ(${dieSize / 2}px)`,
+    };
+    let f4Style = {
+        transform: `rotateX(-90deg) translateZ(${dieSize / 2}px)`,
+    };
+    let f5Style = {
+        transform: `rotateY(90deg) translateZ(${dieSize / 2}px)`,
+    };
+    let f6Style = {
+        transform: `rotateY(0deg) translateZ(${dieSize / 2}px)`,
+    };
+
     return (
-        <div className="mb-4">
-            <Face digit={digit} onNextDigit={() => {
-                setDigit(randomIntInclusive(1, 6));
-            }} />
+        <div className="mb-4" style={{transformStyle: 'preserve-3d'}}>
+            <div style={{...f1Style}} className="w-32 h-32"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+            <div style={{...f2Style}} className="w-32 h-32"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+            <div style={{...f3Style}} className="w-32 h-32"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+            <div style={{...f4Style}} className="w-32 h-32"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+            <div style={{...f5Style}} className="w-32 h-32"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+            <div style={{...f6Style}} className="w-32 h-32"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
         </div>
     );
 }
