@@ -92,7 +92,11 @@ function TestCubeAnimation() {
         <div
             className=""
             onClick={() => {
-                api.start({ to: {rotate: styles.rotate.get() === 0 ? 360 : 0} });
+                api.start({
+                    to: async (next, cancel) => {
+                        await next({ rotate: styles.rotate.get() === 0 ? 360 : 0 });
+                    }
+                });
             }}
         >
             <a.div
