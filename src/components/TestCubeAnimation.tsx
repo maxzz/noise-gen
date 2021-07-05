@@ -10,12 +10,6 @@ const FACES = [
     [0, 2, 3, 5, 6, 8],
 ];
 
-function Dot({ on }: { on: boolean; }) {
-    return (
-        <div className={`w-full h-full rounded-full ${on ? 'bg-purple-900' : 'bg-transparent'}`}></div>
-    );
-}
-
 function Face({ digit }: { digit: number; }) {
     const items = React.useMemo(() => {
         let items = [];
@@ -49,16 +43,10 @@ function Face({ digit }: { digit: number; }) {
             }}
         >
             <a.div className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2">
-                {items.map((item: number, i: number) => (
-                    <Dot on={!!item} key={i} />
+                {items.map((on: number, i: number) => (
+                    <div className={`w-full h-full rounded-full ${on ? 'bg-purple-900' : 'bg-transparent'}`} key={i} />
                 ))}
             </a.div>
-
-            {/* {[..."123"].map}
-
-            <a.div className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2">
-                {items.map((item: React.ReactNode) => item)}
-            </a.div> */}
         </a.div>
     );
 }
