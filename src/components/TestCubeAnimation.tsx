@@ -1,5 +1,6 @@
 import { a, useSpring } from '@react-spring/web';
 import React from 'react';
+import { random } from '../utils/numbers';
 
 const FACES = [
     [4],
@@ -10,7 +11,7 @@ const FACES = [
     [0, 2, 3, 5, 6, 8],
 ];
 
-function Face({ digit }: { digit: number; }) {
+function Face({ digit, onNextDigit }: { digit: number; onNextDigit: () => void; }) {
     const items = React.useMemo(() => {
         let items = [];
         let faces = FACES[digit - 1];
@@ -27,18 +28,19 @@ function Face({ digit }: { digit: number; }) {
     const [styles, api] = useSpring(() => ({
         rotate: 0,
         scale: .5,
-        backgroundColor: 'rgb(167, 139, 250)', 
+        backgroundColor: 'rgb(167, 139, 250)',
     }));
 
     return (
         <a.div style={styles} className="rounded-lg border-2 bg-purple-400"
             onClick={() => {
+                onNextDigit();
                 api.start({
                     to: async (next, cancel) => {
                         await next({ rotate: styles.rotate.get() === 360 ? 0 : 360, backgroundColor: 'rgb(76, 29, 149)' });
-                        await next({ scale: styles.scale.get() === .7 ? .5 : .7, config: { duration: 400} });
-                        await next({ scale: 1.1, backgroundColor: 'rgb(167, 139, 250)', config: { duration: 100} });
-                        await next({ scale: .5, config: { duration: 100} });
+                        await next({ scale: styles.scale.get() === .7 ? .5 : .7, config: { duration: 400 } });
+                        await next({ scale: 1.1, backgroundColor: 'rgb(167, 139, 250)', config: { duration: 100 } });
+                        await next({ scale: .5, config: { duration: 100 } });
                     },
                     config: {
                         duration: 200,
@@ -59,9 +61,12 @@ function Face({ digit }: { digit: number; }) {
 }
 
 function TestCubeAnimation() {
+    const [digit, setDigit] = React.useState(5);
     return (
         <div className="mb-4">
-            <Face digit={5} />
+            <Face digit={digit} onNextDigit={() => {
+                setDigit(Math.trunc(random(1, 7)));
+            }} />
         </div>
     );
 }
