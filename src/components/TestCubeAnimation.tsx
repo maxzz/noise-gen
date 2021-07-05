@@ -85,7 +85,9 @@ function TestCubeAnimation() {
     };
 
     const [styles, api] = useSpring(() => ({
-        rotate: 0
+        num: 0,
+        transform: 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)',
+        backgroundColor: 'rgb(167, 139, 250)',
     }));
 
     return (
@@ -94,7 +96,22 @@ function TestCubeAnimation() {
             onClick={() => {
                 api.start({
                     to: async (next, cancel) => {
-                        await next({ rotate: styles.rotate.get() === 0 ? 360 : 0 });
+                        styles.num.set(styles.num.get() === 1 ? 0 : 1);
+
+                        await next({ backgroundColor: 'rgb(76, 29, 149)' });
+                        await next({
+                            //rotate: styles.rotate.get() === 0 ? 360 : 0,
+                            
+                            //num: styles.num.get() === 1 ? 0 : 1,
+
+                            transform: styles.num.get() === 1 ? 'rotateX(720deg) rotateY(720deg) rotateZ(720deg)' : 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)'
+                        });
+                        await next({ backgroundColor: 'rgb(167, 139, 250)', config: { duration: 100 } });
+
+                        setDigit(randomIntInclusive(1, 6));
+                    },
+                    onRest: () => {
+                        //setDigit(randomIntInclusive(1, 6));
                     }
                 });
             }}
@@ -103,8 +120,7 @@ function TestCubeAnimation() {
                 className="mb-4 w-32 h-32 relative"
                 style={{
                     transformStyle: 'preserve-3d',
-                    //transform: 'rotate3d(-.5,.5,0, 45deg)',
-                    transform: 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)',
+                    //transform: 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)',
                     transformOrigin: 'center center',
                     perspectiveOrigin: '50% 50%',
                     //perspective: '300px',
