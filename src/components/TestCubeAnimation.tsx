@@ -87,7 +87,7 @@ function TestCubeAnimation() {
     const [styles, api] = useSpring(() => ({
         num: 0,
         transform: 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)',
-        backgroundColor: 'rgb(167, 139, 250)',
+        backgroundColor: '',
     }));
 
     return (
@@ -98,17 +98,21 @@ function TestCubeAnimation() {
                     to: async (next, cancel) => {
                         const newNum = styles.num.get() === 1 ? 0 : 1;
                         styles.num.set(newNum);
+                        const angle = 360 * 1;
 
-                        await next({ backgroundColor: 'rgb(76, 29, 149)' });
+                        //await next({ backgroundColor: 'rgb(76, 29, 149)' });
                         await next({
-                            transform: newNum ? 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)' : 'rotateX(720deg) rotateY(720deg) rotateZ(720deg)'
+                            transform: `rotateX(${angle}deg) rotateY(${angle}deg) rotateZ(${angle}deg)`, config: {duration: 1000}
+                            // transform: `rotateX(720deg) rotateY(720deg) rotateZ(720deg)`
                         });
-                        await next({
-                            transform: newNum ? 'rotateX(720deg) rotateY(720deg) rotateZ(720deg)' : 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)'
-                        });
-                        await next({ backgroundColor: 'rgb(167, 139, 250)', config: { duration: 100 } });
-
                         setDigit(randomIntInclusive(1, 6));
+                        await next({
+                            //transform: 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)'
+                            transform: 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)'
+                        });
+                        //await next({ backgroundColor: 'rgb(167, 139, 250)', config: { duration: 100 } });
+
+                        
                     },
                     onRest: () => {
                         //setDigit(randomIntInclusive(1, 6));
