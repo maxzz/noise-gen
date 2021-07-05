@@ -31,12 +31,12 @@ function Face({ digit }: { digit: number; }) {
     }, [digit]);
 
     const [styles, api] = useSpring(() => ({
-        rotate: 45,
+        rotate: 0,
         scale: .5,
     }));
 
     return (
-        <a.div style={styles} className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2 rounded-lg border-2 bg-purple-400"
+        <a.div style={styles} className="rounded-lg border-2 bg-purple-400"
             onClick={() => {
                 api.start({
                     rotate: styles.rotate.get() === 360 ? 0 : 360,
@@ -48,7 +48,9 @@ function Face({ digit }: { digit: number; }) {
                 });
             }}
         >
-            {items.map((item: React.ReactNode, idx: number) => item)}
+            <a.div className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2">
+                {items.map((item: React.ReactNode) => item)}
+            </a.div>
         </a.div>
     );
 }
