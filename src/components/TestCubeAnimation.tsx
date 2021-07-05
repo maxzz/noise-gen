@@ -65,6 +65,10 @@ function TestCubeAnimation() {
 
     let dieSize = 64;
 
+    const ANGLES_AXIS = ['X','Y','X','X','Y','Y'];
+    const ANGLES = [180, -90, 90, -90, 90, 0]; // k:back l:left t:top b:bottom r:right f:front
+    const faceStyle = (idx: number, move: number): string => `rotate${ANGLES_AXIS[idx]}(${ANGLES[idx]}deg) translateZ(${move}px)`;
+
     let f1k = {
         transform: `rotateX(180deg) translateZ(${dieSize / 2}px)`,
     };
@@ -137,6 +141,13 @@ function TestCubeAnimation() {
                 <div style={{ ...f4b }} className="w-32 h-32 absolute"> <Face digit={(digit + 3) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
                 <div style={{ ...f5r }} className="w-32 h-32 absolute"> <Face digit={(digit + 4) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
                 <div style={{ ...f6f }} className="w-32 h-32 absolute"> <Face digit={(digit + 5) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+
+                {/* <div style={{ ...f1k }} className="w-32 h-32 absolute"> <Face digit={(digit + 0) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f2l }} className="w-32 h-32 absolute"> <Face digit={(digit + 1) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f3t }} className="w-32 h-32 absolute"> <Face digit={(digit + 2) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f4b }} className="w-32 h-32 absolute"> <Face digit={(digit + 3) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f5r }} className="w-32 h-32 absolute"> <Face digit={(digit + 4) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f6f }} className="w-32 h-32 absolute"> <Face digit={(digit + 5) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div> */}
             </a.div>
         </div>
     );
