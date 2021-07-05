@@ -61,7 +61,7 @@ function Face({ digit, onNextDigit }: { digit: number; onNextDigit: () => void; 
 }
 
 function TestCubeAnimation() {
-    const [digit, setDigit] = React.useState(5);
+    const [digit, setDigit] = React.useState(0);
 
     let dieSize = 64;
 
@@ -99,20 +99,20 @@ function TestCubeAnimation() {
                 className="mb-4 w-32 h-32 relative"
                 style={{
                     transformStyle: 'preserve-3d',
-                    transform: 'rotate3d(1,1,1, 90deg)',
-                    // transform: 'rotateX(45deg) rotateY(45deg) rotateZ(45deg)',
+                    //transform: 'rotate3d(-.5,.5,0, 45deg)',
+                    transform: 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)',
                     transformOrigin: 'center center',
                     perspectiveOrigin: '50% 50%',
-                    perspective: '300px',
+                    //perspective: '300px',
                     ...styles
                 }}
             >
-                <div style={{ ...f1k }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
-                <div style={{ ...f2l }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
-                <div style={{ ...f3t }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
-                <div style={{ ...f4b }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
-                <div style={{ ...f5r }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
-                <div style={{ ...f6f }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f1k }} className="w-32 h-32 absolute"> <Face digit={(digit + 0) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f2l }} className="w-32 h-32 absolute"> <Face digit={(digit + 1) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f3t }} className="w-32 h-32 absolute"> <Face digit={(digit + 2) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f4b }} className="w-32 h-32 absolute"> <Face digit={(digit + 3) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f5r }} className="w-32 h-32 absolute"> <Face digit={(digit + 4) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f6f }} className="w-32 h-32 absolute"> <Face digit={(digit + 5) % 6 + 1} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
             </a.div>
         </div>
     );
