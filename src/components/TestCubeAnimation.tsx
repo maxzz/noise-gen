@@ -33,23 +33,23 @@ function Face({ digit, onNextDigit }: { digit: number; onNextDigit: () => void; 
 
     return (
         <a.div style={styles} className="rounded-lg ring-2 ring-gray-300 bg-purple-400"
-            onClick={() => {
-                onNextDigit();
-                api.start({
-                    to: async (next, cancel) => {
-                        await next({ rotate: styles.rotate.get() === 360 ? 0 : 360, backgroundColor: 'rgb(76, 29, 149)' });
-                        await next({ scale: styles.scale.get() === .7 ? .5 : .7, config: { duration: 400 } });
-                        await next({ scale: 1.1, backgroundColor: 'rgb(167, 139, 250)', config: { duration: 100 } });
-                        await next({ scale: .5, config: { duration: 100 } });
-                    },
-                    config: {
-                        duration: 200,
-                    },
-                    onRest: () => {
-                        //styles.backgroundColor.set('rgb(167, 139, 250)');
-                    }
-                });
-            }}
+        // onClick={() => {
+        //     onNextDigit();
+        //     api.start({
+        //         to: async (next, cancel) => {
+        //             await next({ rotate: styles.rotate.get() === 360 ? 0 : 360, backgroundColor: 'rgb(76, 29, 149)' });
+        //             await next({ scale: styles.scale.get() === .7 ? .5 : .7, config: { duration: 400 } });
+        //             await next({ scale: 1.1, backgroundColor: 'rgb(167, 139, 250)', config: { duration: 100 } });
+        //             await next({ scale: .5, config: { duration: 100 } });
+        //         },
+        //         config: {
+        //             duration: 200,
+        //         },
+        //         onRest: () => {
+        //             //styles.backgroundColor.set('rgb(167, 139, 250)');
+        //         }
+        //     });
+        // }}
         >
             <a.div className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2">
                 {items.map((on: number, i: number) => (
@@ -84,22 +84,36 @@ function TestCubeAnimation() {
         transform: `rotateY(0deg) translateZ(${dieSize / 2}px)`,
     };
 
+    const [styles, api] = useSpring(() => ({
+        rotate: 0
+    }));
+
     return (
         <div
-            className="mb-4 w-64 h-64 relative bg-red-300"
-            style={{
-                transformStyle: 'preserve-3d',
-                //transform: 'rotateX(-45deg)',
-                // transform: 'rotateX(45deg) rotateY(45deg) rotateZ(45deg)',
-                transformOrigin: 'center center',
+            className=""
+            onClick={() => {
+                api.start({ to: {rotate: styles.rotate.get() === 0 ? 360 : 0} });
             }}
         >
-            <div style={{ ...f1k }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
-            <div style={{ ...f2l }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
-            <div style={{ ...f3t }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
-            <div style={{ ...f4b }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
-            <div style={{ ...f5r }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
-            <div style={{ ...f6f }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+            <a.div
+                className="mb-4 w-32 h-32 relative"
+                style={{
+                    transformStyle: 'preserve-3d',
+                    transform: 'rotate3d(1,1,1, 90deg)',
+                    // transform: 'rotateX(45deg) rotateY(45deg) rotateZ(45deg)',
+                    transformOrigin: 'center center',
+                    perspectiveOrigin: '50% 50%',
+                    perspective: '300px',
+                    ...styles
+                }}
+            >
+                <div style={{ ...f1k }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f2l }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f3t }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f4b }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f5r }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+                <div style={{ ...f6f }} className="w-32 h-32 absolute"> <Face digit={digit} onNextDigit={() => setDigit(randomIntInclusive(1, 6))} /> </div>
+            </a.div>
         </div>
     );
 }
