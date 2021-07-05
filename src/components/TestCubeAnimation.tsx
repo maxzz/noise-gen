@@ -37,10 +37,13 @@ function Face({ digit }: { digit: number; }) {
                     to: async (next, cancel) => {
                         await next({ rotate: styles.rotate.get() === 360 ? 0 : 360, backgroundColor: 'rgb(76, 29, 149)' });
                         await next({ scale: styles.scale.get() === .7 ? .5 : .7 });
-                        await next({ scale: 1.1 });
+                        await next({ scale: 1.1, backgroundColor: 'rgb(167, 139, 250)' });
+                    },
+                    config: {
+                        duration: 200,
                     },
                     onRest: () => {
-                        styles.backgroundColor.set('rgb(167, 139, 250)');
+                        //styles.backgroundColor.set('rgb(167, 139, 250)');
                     }
                 });
             }}
