@@ -96,15 +96,15 @@ function TestCubeAnimation() {
             onClick={() => {
                 api.start({
                     to: async (next, cancel) => {
-                        styles.num.set(styles.num.get() === 1 ? 0 : 1);
+                        const newNum = styles.num.get() === 1 ? 0 : 1;
+                        styles.num.set(newNum);
 
                         await next({ backgroundColor: 'rgb(76, 29, 149)' });
                         await next({
-                            //rotate: styles.rotate.get() === 0 ? 360 : 0,
-                            
-                            //num: styles.num.get() === 1 ? 0 : 1,
-
-                            transform: styles.num.get() === 1 ? 'rotateX(720deg) rotateY(720deg) rotateZ(720deg)' : 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)'
+                            transform: newNum ? 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)' : 'rotateX(720deg) rotateY(720deg) rotateZ(720deg)'
+                        });
+                        await next({
+                            transform: newNum ? 'rotateX(720deg) rotateY(720deg) rotateZ(720deg)' : 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)'
                         });
                         await next({ backgroundColor: 'rgb(167, 139, 250)', config: { duration: 100 } });
 
