@@ -1,6 +1,6 @@
 import { a, useSpring } from '@react-spring/web';
 import React from 'react';
-import { random } from '../utils/numbers';
+import { randomIntInclusive } from '../utils/numbers';
 
 const FACES = [
     [4],
@@ -65,7 +65,7 @@ function TestCubeAnimation() {
     return (
         <div className="mb-4">
             <Face digit={digit} onNextDigit={() => {
-                setDigit(Math.trunc(random(1, 7)));
+                setDigit(randomIntInclusive(1, 6));
             }} />
         </div>
     );
