@@ -23,7 +23,8 @@ function Face({ digit }: { digit: number; }) {
 
         if (faces) {
             for (let i = 0; i < 9; i++) {
-                items.push(<Dot on={faces.includes(i)} key={i} />);
+                //items.push(<Dot on={faces.includes(i)} key={i} />);
+                items.push(faces.includes(i) ? 1 : 0);
             }
         }
 
@@ -42,15 +43,22 @@ function Face({ digit }: { digit: number; }) {
                     rotate: styles.rotate.get() === 360 ? 0 : 360,
                     scale: styles.scale.get() === .7 ? .5 : .7,
                     onRest: () => {
-                        console.log('done');
                         styles.scale.set(1.1);
                     }
                 });
             }}
         >
             <a.div className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2">
-                {items.map((item: React.ReactNode) => item)}
+                {items.map((item: number, i: number) => (
+                    <Dot on={!!item} key={i} />
+                ))}
             </a.div>
+
+            {/* {[..."123"].map}
+
+            <a.div className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2">
+                {items.map((item: React.ReactNode) => item)}
+            </a.div> */}
         </a.div>
     );
 }
