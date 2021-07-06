@@ -27,15 +27,17 @@ function Face({ digit, size, style = {} }: { digit: number; size: number; style:
         <div
             className="absolute
                 w-full h-full
-                rounded-lg ring-2 ring-gray-300 bg-purple-400
+                rounded-lg ring-gray-300 bg-purple-400
                 grid grid-cols-3 grid-rows-3"
+                //ring-2
             style={{
                 gap: '5%',
-                padding: '10%',
+                padding: '14%',
                 '--ww': `${border}px`,
-                '--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(var(--ww) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+                //'--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(var(--ww) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
                 //'--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(calc(5px) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
-                border: '2px solid rgb(76, 29, 149)',
+                border: `${border}px solid rgb(209, 213, 219)`,
+                //border: `${border}px solid rgb(76, 29, 149)`,
                 ...style
             }}
         >
@@ -55,7 +57,7 @@ const ANGLE_ZERO = 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)';
 function TestCubeAnimation({ initialIso = false }: { initialIso?: boolean; }) {
     const [digit, setDigit] = React.useState(0);
 
-    let dieSize = 128;
+    let dieSize = 24;
 
     const [styles, api] = useSpring(() => ({
         transform: initialIso ? ANGLE_ISO : ANGLE_ZERO,
