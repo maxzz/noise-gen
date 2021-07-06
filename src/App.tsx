@@ -54,7 +54,7 @@ function App() {
             </div>
 
             <div className="relative max-w-md w-full flex-1 flex flex-col items-center">
-                <div className="">
+                <div className="mb-4">
                     <TestCubeAnimation />
                 </div>
                 {/* <div className="">

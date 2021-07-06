@@ -24,8 +24,10 @@ function Face({ digit }: { digit: number; }) {
     }, [digit]);
     return (
         <div className="
+            p-4 w-full h-full
+            grid grid-cols-3 grid-rows-3 gap-2
             rounded-lg ring-2 ring-gray-300 bg-purple-400
-            p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2"
+            "
         >
             {items.map((on: number, i: number) => (
                 <div className={`w-full h-full rounded-full ${on ? 'bg-purple-900' : 'bg-transparent'}`} key={i} />
@@ -43,7 +45,7 @@ const ANGLE_ZERO = 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)';
 function TestCubeAnimation({ initialIso = false }: { initialIso?: boolean; }) {
     const [digit, setDigit] = React.useState(0);
 
-    let dieSize = 64;
+    let dieSize = 128;
 
     const [styles, api] = useSpring(() => ({
         transform: initialIso ? ANGLE_ISO : ANGLE_ZERO,
@@ -63,17 +65,19 @@ function TestCubeAnimation({ initialIso = false }: { initialIso?: boolean; }) {
         <div className="" onClick={spin}>
             {/* scale-50 */}
             <a.div
-                className="mb-4 w-32 h-32 relative"
+                className="relative"
                 style={{
                     transformStyle: 'preserve-3d',
                     transformOrigin: 'center center',
                     perspectiveOrigin: '50% 50%',
+                    width: `${dieSize}px`,
+                    height: `${dieSize}px`,
                     //perspective: '300px',
                     ...styles
                 }}
             >
                 {ANGLES.map((_angle: number, idx: number) => (
-                    <div style={{ transform: faceStyle(idx, dieSize) }} className="w-32 h-32 absolute" key={idx}>
+                    <div style={{ transform: faceStyle(idx, dieSize / 2) }} className="w-full h-full absolute" key={idx}>
                         <Face digit={(digit + idx) % 6 + 1} />
                     </div>
                 ))}
