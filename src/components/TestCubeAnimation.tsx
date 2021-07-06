@@ -36,8 +36,8 @@ function Face({ digit, size, style = {} }: { digit: number; size: number; style:
                 '--ww': `${border}px`,
                 //'--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(var(--ww) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
                 //'--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(calc(5px) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
-                border: `${border}px solid rgb(209, 213, 219)`,
-                //border: `${border}px solid rgb(76, 29, 149)`,
+                //border: `${border}px solid rgb(209, 213, 219)`,
+                border: `${border}px solid rgb(76, 29, 149)`,
                 ...style
             }}
         >
