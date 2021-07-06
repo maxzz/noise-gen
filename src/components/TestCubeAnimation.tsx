@@ -22,24 +22,23 @@ function Face({ digit, size, style = {} }: { digit: number; size: number; style:
         }
         return items;
     }, [digit]);
-    const border = size * 3 / 100;
+    const border = size * 4 / 100;
     return (
         <div
-            className="absolute
-                w-full h-full
-                rounded-lg ring-gray-300 bg-purple-400
-                grid grid-cols-3 grid-rows-3"
-                //ring-2
+            className="absolute w-full h-full rounded-sm bg-purple-400 grid grid-cols-3 grid-rows-3 ring-2 ring-purple-600"
             style={{
                 gap: '5%',
                 padding: '14%',
                 '--ww': `${border}px`,
-                //'--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(var(--ww) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+                '--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(var(--ww) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
                 //'--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(calc(5px) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+
                 //border: `${border}px solid rgb(209, 213, 219)`,
-                border: `${border}px solid rgb(76, 29, 149)`,
+                //border: `${border}px solid rgb(76, 29, 149)`,
+                border: `${border}px solid rgb(155, 108, 230)`,
+                borderRadius: `${border * 4}px`,
                 ...style
-            }}
+            } as React.CSSProperties}
         >
             {items.map((on: number, i: number) => (
                 <div className={`w-full h-full rounded-full ${on ? 'bg-purple-900' : 'bg-transparent'}`} key={i} />
