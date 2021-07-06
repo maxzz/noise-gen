@@ -24,10 +24,10 @@ function Face({ digit, size, style = {}, cubeProps }: { digit: number; size: num
     }, [digit]);
     const {
         colorBorder = 'rgb(155, 108, 230)', // rgb(155, 108, 230) rgb(209, 213, 219) rgb(76, 29, 149)
-        colorBg = 'rgb(167, 139, 250)',
-        colorFace = 'rgb(124, 58, 237)',
-        colorDots = 'rgb(76, 29, 149)',
-    } = cubeProps; // ; bg-purple-400; ring-2 ring-purple-600
+        colorBg = 'rgb(167, 139, 250)',     // bg-purple-400
+        colorFace = 'rgb(124, 58, 237)',    // ring-2 ring-purple-600
+        colorDots = 'rgb(76, 29, 149)',     // bg-purple-900
+    } = cubeProps;
     const border = size * 4 / 100;
     return (
         <div
