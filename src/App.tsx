@@ -31,7 +31,12 @@ function App() {
             {/* Header */}
             <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 select-none" style={{ boxShadow: '#00000033 0 1px 2px' }}>
                 <div className="mx-4 flex-none flex-centered">
-                    <AppLogo />
+                    <div className="flex items-center">
+                        <AppLogo />
+                        <div className="-ml-1">
+                            <TestCubeAnimation initialIso={true} colorFace="var(--purple-900)" colorBorder="var(--purple-200)" colorBg="var(--purple-300)" colorDots="var(--purple-900)" />
+                        </div>
+                    </div>
 
                     {/* Clear background */}
                     {appBackgroundActive &&
@@ -54,9 +59,6 @@ function App() {
             </div>
 
             <div className="relative max-w-md w-full flex-1 flex flex-col items-center">
-                <div className="mb-4">
-                    <TestCubeAnimation colorFace="var(--purple-900)" colorBorder="var(--purple-200)" colorBg="var(--purple-300)" colorDots="var(--purple-900)" />
-                </div>
                 {/* <div className="">
                     <SortedList />
                 </div> */}

@@ -68,7 +68,7 @@ type CubeProps = {
 function TestCubeAnimation(cubeProps: Partial<CubeProps> = {}) {
     const [digit, setDigit] = React.useState(0);
 
-    let dieSize = 24;
+    let dieSize = 20;
 
     const [styles, api] = useSpring(() => ({
         transform: cubeProps.initialIso ? ANGLE_ISO : ANGLE_ZERO,
