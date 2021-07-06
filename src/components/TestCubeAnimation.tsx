@@ -11,7 +11,7 @@ const FACES = [
     [0, 2, 3, 5, 6, 8],
 ];
 
-function Face({ digit, style = {} }: { digit: number; style: React.CSSProperties; }) {
+function Face({ digit, size, style = {} }: { digit: number; size: number; style: React.CSSProperties; }) {
     const items = React.useMemo(() => {
         let items = [];
         let faces = FACES[digit - 1];
@@ -22,6 +22,7 @@ function Face({ digit, style = {} }: { digit: number; style: React.CSSProperties
         }
         return items;
     }, [digit]);
+    const border = size * 3 / 100;
     return (
         <div
             className="absolute
@@ -31,7 +32,7 @@ function Face({ digit, style = {} }: { digit: number; style: React.CSSProperties
             style={{
                 gap: '5%',
                 padding: '10%',
-                '--ww': 'calc(5px)',
+                '--ww': `${border}px`,
                 '--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(var(--ww) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
                 //'--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(calc(5px) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
                 border: '2px solid rgb(76, 29, 149)',
@@ -85,7 +86,7 @@ function TestCubeAnimation({ initialIso = false }: { initialIso?: boolean; }) {
             onClick={spin}
         >
             {ANGLES.map((_angle: number, idx: number) => (
-                <Face digit={(digit + idx) % 6 + 1} style={{ transform: faceStyle(idx, dieSize / 2) }} key={idx} />
+                <Face digit={(digit + idx) % 6 + 1} size={dieSize} style={{ transform: faceStyle(idx, dieSize / 2) }} key={idx} />
             ))}
         </a.div>
     );
