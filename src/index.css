@@ -18,4 +18,7 @@
     .flex-centered {
         @apply flex items-center justify-center;
     }
+    .var-color-bg {
+        --ww: gray-500;
+    }
 }
