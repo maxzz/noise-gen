@@ -22,13 +22,14 @@ function Face({ digit, style = {} }: { digit: number; style: React.CSSProperties
         }
         return items;
     }, [digit]);
+    const gap = 100 /10;
     return (
-        <div className="absolute
-            p-4
-            w-full h-full
-            rounded-lg ring-2 ring-gray-300 bg-purple-400
-            grid grid-cols-3 grid-rows-3 gap-2"
-            style={style}
+        <div
+            className="absolute
+                w-full h-full
+                rounded-lg ring-2 ring-gray-300 bg-purple-400
+                grid grid-cols-3 grid-rows-3"
+            style={{gap: '5%', padding: '10%', ...style}}
         >
             {items.map((on: number, i: number) => (
                 <div className={`w-full h-full rounded-full ${on ? 'bg-purple-900' : 'bg-transparent'}`} key={i} />
