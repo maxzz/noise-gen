@@ -15,22 +15,16 @@ function Face({ digit }: { digit: number; }) {
     const items = React.useMemo(() => {
         let items = [];
         let faces = FACES[digit - 1];
-
         if (faces) {
             for (let i = 0; i < 9; i++) {
                 items.push(faces.includes(i) ? 1 : 0);
             }
         }
-
         return items;
     }, [digit]);
 
-    // const [styles, api] = useSpring(() => ({
-    //     //scale: .5,
-    // }));
-
     return (
-        <a.div style={styles} className="rounded-lg ring-2 ring-gray-300 bg-purple-400 scale-50">
+        <a.div className="rounded-lg ring-2 ring-gray-300 bg-purple-400">
             <a.div className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2">
                 {items.map((on: number, i: number) => (
                     <div className={`w-full h-full rounded-full ${on ? 'bg-purple-900' : 'bg-transparent'}`} key={i} />
@@ -40,14 +34,14 @@ function Face({ digit }: { digit: number; }) {
     );
 }
 
+const ANGLES_AXIS = ['X', 'Y', 'X', 'X', 'Y', 'Y'];
+const ANGLES = [180, -90, 90, -90, 90, 0]; // k:back l:left t:top b:bottom r:right f:front
+const faceStyle = (idx: number, move: number): string => `rotate${ANGLES_AXIS[idx]}(${ANGLES[idx]}deg) translateZ(${move}px)`;
+
 function TestCubeAnimation() {
     const [digit, setDigit] = React.useState(0);
 
     let dieSize = 64;
-
-    const ANGLES_AXIS = ['X', 'Y', 'X', 'X', 'Y', 'Y'];
-    const ANGLES = [180, -90, 90, -90, 90, 0]; // k:back l:left t:top b:bottom r:right f:front
-    const faceStyle = (idx: number, move: number): string => `rotate${ANGLES_AXIS[idx]}(${ANGLES[idx]}deg) translateZ(${move}px)`;
 
     const [styles, api] = useSpring(() => ({
         num: 0,
@@ -78,7 +72,8 @@ function TestCubeAnimation() {
     }
 
     return (
-        <div className="scale-50" onClick={spin}>
+        <div className="" onClick={spin}>
+            {/* scale-50 */}
             <a.div
                 className="mb-4 w-32 h-32 relative"
                 style={{
@@ -90,7 +85,7 @@ function TestCubeAnimation() {
                 }}
             >
                 {ANGLES.map((_angle: number, idx: number) => (
-                    <div style={{ transform: faceStyle(idx, dieSize / 2) }} className="w-32 h-32 absolute" key={idx}>
+                    <div style={{ transform: faceStyle(idx, dieSize) }} className="w-32 h-32 absolute" key={idx}>
                         <Face digit={(digit + idx) % 6 + 1} />
                     </div>
                 ))}
