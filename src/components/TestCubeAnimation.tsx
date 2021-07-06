@@ -22,7 +22,6 @@ function Face({ digit }: { digit: number; }) {
         }
         return items;
     }, [digit]);
-
     return (
         <a.div className="rounded-lg ring-2 ring-gray-300 bg-purple-400">
             <a.div className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2">
@@ -40,22 +39,18 @@ const faceStyle = (idx: number, move: number): string => `rotate${ANGLES_AXIS[id
 const ANGLE_ISO = 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)';
 const ANGLE_ZERO = 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)';
 
-function TestCubeAnimation() {
+function TestCubeAnimation({initialIso = false}: {initialIso?: boolean}) {
     const [digit, setDigit] = React.useState(0);
 
     let dieSize = 64;
 
     const [styles, api] = useSpring(() => ({
-        num: 0,
-        transform: ANGLE_ISO,
+        transform: initialIso ? ANGLE_ISO : ANGLE_ZERO,
     }));
 
     function spin() {
         api.start({
             to: async (next, cancel) => {
-                const newNum = styles.num.get() === 1 ? 0 : 1;
-                styles.num.set(newNum);
-
                 await next({ transform: `rotateX(360deg) rotateY(360deg) rotateZ(360deg)`, config: { duration: 1000 } });
                 setDigit(randomIntInclusive(1, 6));
                 await next({ transform: ANGLE_ZERO });
