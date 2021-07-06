@@ -45,7 +45,7 @@ function Face({ digit, size, style = {}, cubeProps }: { digit: number; size: num
             } as React.CSSProperties}
         >
             {items.map((on: number, i: number) => (
-                <div className={`w-full h-full rounded-full ${on ? '' : 'bg-transparent'}`} key={i} style={{backgroundColor: colorDots}} />
+                <div className="w-full h-full rounded-full" key={i} style={{backgroundColor: on ? colorDots : 'bg-transparent'}} />
             ))}
         </div>
     );
