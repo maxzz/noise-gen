@@ -11,7 +11,7 @@ const FACES = [
     [0, 2, 3, 5, 6, 8],
 ];
 
-function Face({ digit, size, style = {} }: { digit: number; size: number; style: React.CSSProperties; }) {
+function Face({ digit, size, style = {}, cubeProps }: { digit: number; size: number; cubeProps: Partial<CubeProps>; style: React.CSSProperties; }) {
     const items = React.useMemo(() => {
         let items = [];
         let faces = FACES[digit - 1];
@@ -22,20 +22,23 @@ function Face({ digit, size, style = {} }: { digit: number; size: number; style:
         }
         return items;
     }, [digit]);
+    const {
+        colorBorder = 'rgb(155, 108, 230)', // rgb(155, 108, 230) rgb(209, 213, 219) rgb(76, 29, 149)
+        colorBg = 'rgb(167, 139, 250)',
+        colorFace = 'rgb(124, 58, 237)'
+    } = cubeProps; // ; bg-purple-400; ring-2 ring-purple-600
     const border = size * 4 / 100;
     return (
         <div
-            className="absolute w-full h-full rounded-sm bg-purple-400 grid grid-cols-3 grid-rows-3 ring-2 ring-purple-600"
+            className="absolute w-full h-full rounded-sm grid grid-cols-3 grid-rows-3 ring-2"
             style={{
                 gap: '5%',
                 padding: '14%',
+                backgroundColor: colorBg,
+                '--tw-ring-color': colorFace,
                 '--ww': `${border}px`,
                 '--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(var(--ww) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
-                //'--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(calc(5px) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
-
-                //border: `${border}px solid rgb(209, 213, 219)`,
-                //border: `${border}px solid rgb(76, 29, 149)`,
-                border: `${border}px solid rgb(155, 108, 230)`,
+                border: `${border}px solid ${colorBorder}`,
                 borderRadius: `${border * 4}px`,
                 ...style
             } as React.CSSProperties}
@@ -53,13 +56,20 @@ const faceStyle = (idx: number, move: number): string => `rotate${ANGLES_AXIS[id
 const ANGLE_ISO = 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)';
 const ANGLE_ZERO = 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)';
 
-function TestCubeAnimation({ initialIso = false }: { initialIso?: boolean; }) {
+type CubeProps = {
+    colorBorder: string;
+    colorBg: string;
+    colorFace: string;
+    initialIso: boolean;
+};
+
+function TestCubeAnimation(cubeProps: Partial<CubeProps> = {}) {
     const [digit, setDigit] = React.useState(0);
 
     let dieSize = 24;
 
     const [styles, api] = useSpring(() => ({
-        transform: initialIso ? ANGLE_ISO : ANGLE_ZERO,
+        transform: cubeProps.initialIso ? ANGLE_ISO : ANGLE_ZERO,
     }));
 
     function spin() {
@@ -87,7 +97,7 @@ function TestCubeAnimation({ initialIso = false }: { initialIso?: boolean; }) {
             onClick={spin}
         >
             {ANGLES.map((_angle: number, idx: number) => (
-                <Face digit={(digit + idx) % 6 + 1} size={dieSize} style={{ transform: faceStyle(idx, dieSize / 2) }} key={idx} />
+                <Face digit={(digit + idx) % 6 + 1} size={dieSize} style={{ transform: faceStyle(idx, dieSize / 2) }} key={idx} cubeProps={cubeProps} />
             ))}
         </a.div>
     );
