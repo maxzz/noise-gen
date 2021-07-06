@@ -23,10 +23,13 @@ function Face({ digit, style = {} }: { digit: number; style: React.CSSProperties
         return items;
     }, [digit]);
     return (
-        <div className="absolute
-            p-4 w-full h-full
+        <div className={
+            `absolute
+            p-4
+            w-full h-full
             rounded-lg ring-2 ring-gray-300 bg-purple-400
-            grid grid-cols-3 grid-rows-3 gap-2"
+            grid grid-cols-3 grid-rows-3 ${digit === 6 ? 'gap-2' : ''}`
+        }
             style={style}
         >
             {items.map((on: number, i: number) => (
