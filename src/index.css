@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
+@layer components {
     .dark-frame {
         @apply border-gray-500;
     }
