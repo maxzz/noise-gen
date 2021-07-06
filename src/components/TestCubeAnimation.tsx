@@ -23,13 +23,14 @@ function Face({ digit }: { digit: number; }) {
         return items;
     }, [digit]);
     return (
-        <a.div className="rounded-lg ring-2 ring-gray-300 bg-purple-400">
-            <a.div className="p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2">
-                {items.map((on: number, i: number) => (
-                    <div className={`w-full h-full rounded-full ${on ? 'bg-purple-900' : 'bg-transparent'}`} key={i} />
-                ))}
-            </a.div>
-        </a.div>
+        <div className="
+            rounded-lg ring-2 ring-gray-300 bg-purple-400
+            p-4 w-32 h-32 grid grid-cols-3 grid-rows-3 gap-2"
+        >
+            {items.map((on: number, i: number) => (
+                <div className={`w-full h-full rounded-full ${on ? 'bg-purple-900' : 'bg-transparent'}`} key={i} />
+            ))}
+        </div>
     );
 }
 
@@ -39,7 +40,7 @@ const faceStyle = (idx: number, move: number): string => `rotate${ANGLES_AXIS[id
 const ANGLE_ISO = 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)';
 const ANGLE_ZERO = 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)';
 
-function TestCubeAnimation({initialIso = false}: {initialIso?: boolean}) {
+function TestCubeAnimation({ initialIso = false }: { initialIso?: boolean; }) {
     const [digit, setDigit] = React.useState(0);
 
     let dieSize = 64;
