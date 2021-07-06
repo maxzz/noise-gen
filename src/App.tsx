@@ -15,7 +15,7 @@ function App() {
     const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
     return (
         <div
-            className="App h-screen flex flex-col items-center space-y-4 bg-purple-200"
+            className="App h-screen flex flex-col items-center space-y-4 bg-purple-200 color-vars"
             // style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}
             // style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}}
             style={
@@ -55,7 +55,7 @@ function App() {
 
             <div className="relative max-w-md w-full flex-1 flex flex-col items-center">
                 <div className="mb-4">
-                    <TestCubeAnimation colorFace="red" colorBorder="green" colorBg="#0000ff" colorDots="white" />
+                    <TestCubeAnimation colorFace="var(--purple-900)" colorBorder="var(--purple-200)" colorBg="var(--purple-300)" colorDots="var(--purple-900)" />
                 </div>
                 {/* <div className="">
                     <SortedList />

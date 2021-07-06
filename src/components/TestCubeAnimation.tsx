@@ -86,7 +86,7 @@ function TestCubeAnimation(cubeProps: Partial<CubeProps> = {}) {
 
     return (
         <a.div
-            className="relative var-color-bg"
+            className="relative"
             style={{
                 transformStyle: 'preserve-3d',
                 transformOrigin: 'center center',
