@@ -37,6 +37,8 @@ function Face({ digit }: { digit: number; }) {
 const ANGLES_AXIS = ['X', 'Y', 'X', 'X', 'Y', 'Y'];
 const ANGLES = [180, -90, 90, -90, 90, 0]; // k:back l:left t:top b:bottom r:right f:front
 const faceStyle = (idx: number, move: number): string => `rotate${ANGLES_AXIS[idx]}(${ANGLES[idx]}deg) translateZ(${move}px)`;
+const ANGLE_ISO = 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)';
+const ANGLE_ZERO = 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)';
 
 function TestCubeAnimation() {
     const [digit, setDigit] = React.useState(0);
@@ -45,8 +47,7 @@ function TestCubeAnimation() {
 
     const [styles, api] = useSpring(() => ({
         num: 0,
-        transform: 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)',
-        backgroundColor: '',
+        transform: ANGLE_ISO,
     }));
 
     function spin() {
@@ -54,19 +55,10 @@ function TestCubeAnimation() {
             to: async (next, cancel) => {
                 const newNum = styles.num.get() === 1 ? 0 : 1;
                 styles.num.set(newNum);
-                const angle = 360 * 1;
 
-                //await next({ backgroundColor: 'rgb(76, 29, 149)' });
-                await next({
-                    transform: `rotateX(${angle}deg) rotateY(${angle}deg) rotateZ(${angle}deg)`, config: { duration: 1000 }
-                    // transform: `rotateX(720deg) rotateY(720deg) rotateZ(720deg)`, config: { duration: 1000 }
-                });
+                await next({ transform: `rotateX(360deg) rotateY(360deg) rotateZ(360deg)`, config: { duration: 1000 } });
                 setDigit(randomIntInclusive(1, 6));
-                await next({
-                    //transform: 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)'
-                    transform: 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)'
-                });
-                //await next({ backgroundColor: 'rgb(167, 139, 250)', config: { duration: 100 } });
+                await next({ transform: ANGLE_ZERO });
             }
         });
     }
