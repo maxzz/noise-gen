@@ -20,8 +20,6 @@ function Face({ digit, size, style = {}, cubeProps }: { digit: number; size: num
                 items.push(faces.includes(i) ? 1 : 0);
             }
         }
-        console.log('dots', digit, items);
-        
         return items;
     }, [digit]);
     const {
@@ -46,11 +44,8 @@ function Face({ digit, size, style = {}, cubeProps }: { digit: number; size: num
                 ...style
             } as React.CSSProperties}
         >
-            <div className="absolute text-red-500">{digit} {JSON.stringify(items)}</div>
-
             {items.map((on: number, i: number) => (
-                // <div className={`w-full h-full rounded-full ${on ? 'bg-purple-900' : 'bg-transparent'}`} key={i} />
-                <div className="w-full h-full rounded-full" style={{backgroundColor: (on ? colorDots : 'transparent')}} key={i} />
+                <div className="w-full h-full rounded-full" style={{backgroundColor: on ? colorDots : 'transparent'}} key={i} />
             ))}
         </div>
     );

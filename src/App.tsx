@@ -55,7 +55,7 @@ function App() {
 
             <div className="relative max-w-md w-full flex-1 flex flex-col items-center">
                 <div className="mb-4">
-                    <TestCubeAnimation />
+                    <TestCubeAnimation colorFace="red" colorBorder="green" colorBg="blue" colorDots="white" />
                 </div>
                 {/* <div className="">
                     <SortedList />
