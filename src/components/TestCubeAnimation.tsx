@@ -22,14 +22,20 @@ function Face({ digit, style = {} }: { digit: number; style: React.CSSProperties
         }
         return items;
     }, [digit]);
-    const gap = 100 /10;
     return (
         <div
             className="absolute
                 w-full h-full
                 rounded-lg ring-2 ring-gray-300 bg-purple-400
                 grid grid-cols-3 grid-rows-3"
-            style={{gap: '5%', padding: '10%', '--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(calc(5px) + var(--tw-ring-offset-width)) var(--tw-ring-color)', ...style}}
+            style={{
+                gap: '5%',
+                padding: '10%',
+                '--ww': 'calc(10%)',
+                '--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(var(--ww) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+                //'--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(calc(5px) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+                ...style
+            }}
         >
             {items.map((on: number, i: number) => (
                 <div className={`w-full h-full rounded-full ${on ? 'bg-purple-900' : 'bg-transparent'}`} key={i} />
