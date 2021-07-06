@@ -31,9 +31,10 @@ function Face({ digit, style = {} }: { digit: number; style: React.CSSProperties
             style={{
                 gap: '5%',
                 padding: '10%',
-                '--ww': 'calc(10%)',
+                '--ww': 'calc(5px)',
                 '--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(var(--ww) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
                 //'--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(calc(5px) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+                border: '2px solid rgb(76, 29, 149)',
                 ...style
             }}
         >
