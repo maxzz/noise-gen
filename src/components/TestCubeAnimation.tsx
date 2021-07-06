@@ -11,7 +11,7 @@ const FACES = [
     [0, 2, 3, 5, 6, 8],
 ];
 
-function Face({ digit }: { digit: number; }) {
+function Face({ digit, style = {} }: { digit: number; style: React.CSSProperties; }) {
     const items = React.useMemo(() => {
         let items = [];
         let faces = FACES[digit - 1];
@@ -23,11 +23,11 @@ function Face({ digit }: { digit: number; }) {
         return items;
     }, [digit]);
     return (
-        <div className="
+        <div className="absolute
             p-4 w-full h-full
-            grid grid-cols-3 grid-rows-3 gap-2
             rounded-lg ring-2 ring-gray-300 bg-purple-400
-            "
+            grid grid-cols-3 grid-rows-3 gap-2"
+            style={style}
         >
             {items.map((on: number, i: number) => (
                 <div className={`w-full h-full rounded-full ${on ? 'bg-purple-900' : 'bg-transparent'}`} key={i} />
@@ -62,27 +62,23 @@ function TestCubeAnimation({ initialIso = false }: { initialIso?: boolean; }) {
     }
 
     return (
-        <div className="" onClick={spin}>
-            {/* scale-50 */}
-            <a.div
-                className="relative"
-                style={{
-                    transformStyle: 'preserve-3d',
-                    transformOrigin: 'center center',
-                    perspectiveOrigin: '50% 50%',
-                    width: `${dieSize}px`,
-                    height: `${dieSize}px`,
-                    //perspective: '300px',
-                    ...styles
-                }}
-            >
-                {ANGLES.map((_angle: number, idx: number) => (
-                    <div style={{ transform: faceStyle(idx, dieSize / 2) }} className="w-full h-full absolute" key={idx}>
-                        <Face digit={(digit + idx) % 6 + 1} />
-                    </div>
-                ))}
-            </a.div>
-        </div>
+        <a.div
+            className="relative"
+            style={{
+                transformStyle: 'preserve-3d',
+                transformOrigin: 'center center',
+                perspectiveOrigin: '50% 50%',
+                width: `${dieSize}px`,
+                height: `${dieSize}px`,
+                //perspective: '300px',
+                ...styles
+            }}
+            onClick={spin}
+        >
+            {ANGLES.map((_angle: number, idx: number) => (
+                <Face digit={(digit + idx) % 6 + 1} style={{ transform: faceStyle(idx, dieSize / 2) }} key={idx} />
+            ))}
+        </a.div>
     );
 }
 
