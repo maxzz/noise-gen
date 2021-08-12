@@ -22,7 +22,7 @@ export const ManualSizeAtom = atom({ w: 325, h: 300 });
 
 // GenParams
 
-export const GenParamsAtom = atomWithCallback<GenParams>(defAppSettings.renderParams.genParams, (_, get) => storeAppParams(get));
+export const GenParamsAtom = atomWithCallback<GenParams>(defAppSettings.renderParams.genParams, (get, _) => storeAppParams(get));
 
 export const N1Atom = atom(
     (get) => get(GenParamsAtom).n1,
@@ -46,12 +46,12 @@ export const DotDiameterAtom = atom(
 
 // Current seed, color, and canvas color
 
-export const ColorCanvasAtom = atomWithCallback(defAppSettings.canvasBg, (_, get) => storeAppParams(get));
-export const ExportImageSizeAtom = atomWithCallback(defAppSettings.expSize, (_, get) => storeAppParams(get));
+export const ColorCanvasAtom = atomWithCallback(defAppSettings.canvasBg, (get, _) => storeAppParams(get));
+export const ExportImageSizeAtom = atomWithCallback(defAppSettings.expSize, (get, _) => storeAppParams(get));
 
-export const ColorAtom = atomWithCallback(defAppSettings.renderParams.color, (_, get) => storeAppParams(get));
-export const SeedAtom = atomWithCallback(defAppSettings.renderParams.seed, (_, get) => storeAppParams(get));
-export const NoiseAtom = atomWithCallback(defAppSettings.renderParams.noise, (_, get) => storeAppParams(get));
+export const ColorAtom = atomWithCallback(defAppSettings.renderParams.color, (get, _) => storeAppParams(get));
+export const SeedAtom = atomWithCallback(defAppSettings.renderParams.seed, (get, _) => storeAppParams(get));
+export const NoiseAtom = atomWithCallback(defAppSettings.renderParams.noise, (get, _) => storeAppParams(get));
 
 export const RenderParamsAtom = atom<RenderParams>(
     (get) => {
@@ -120,7 +120,7 @@ export const ShowNoiseEditorAtom = atom(false);
 
 //#region Presets
 
-export const PresetsAtom = atomWithCallback<PresetData[]>(defPresets(), (_, get) => storePresets(get));
+export const PresetsAtom = atomWithCallback<PresetData[]>(defPresets(), (get, _) => storePresets(get));
 
 export const RemovePresetAtom = atom(
     null,
