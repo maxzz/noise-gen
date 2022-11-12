@@ -1,5 +1,5 @@
 import { Getter } from 'jotai';
-import { PresetsAtom } from '../atoms';
+import { PresetsAtom } from '../store/atoms';
 import debounce from './debounce';
 import { PresetData, renderParams2Store, renderParams4Store, STORAGE_KEY } from './types';
 

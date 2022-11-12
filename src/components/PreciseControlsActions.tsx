@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { AppBackgroundUrlAtom, RenderWorkerAtom } from '../atoms';
+import { AppBackgroundUrlAtom, RenderWorkerAtom } from '../store/atoms';
 import { I2W, PRESET_H, PRESET_W, WH } from '../utils/types';
 import SizeBoxes from './SizeBoxes';
 import saveBlobData from '../utils/saveImage';

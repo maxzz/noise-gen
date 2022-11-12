@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import React from 'react';
-import { ManualSizeAtom } from '../atoms';
+import { ManualSizeAtom } from '../store/atoms';
 
 const SIZES = [[300, 300], [500, 500], [700, 700], [900, 900]];
 
