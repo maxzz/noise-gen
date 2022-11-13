@@ -4,17 +4,13 @@ export {
     ManualSizeAtom,
 } from './canvas';
 
-// GenParams
-
 export {
     GenParamsAtom,
     N1Atom,
     N2Atom,
     DistortionAtom,
     DotDiameterAtom
-} from './params-gen';
-
-// Current seed, color, and canvas color
+} from './params-gen'; // GenParams
 
 export {
     ColorCanvasAtom,
@@ -28,18 +24,14 @@ export {
     SetRenderParamsAtom,
     RandomSeedAtom,
     GeneratePresetAtom,
-} from './params-editor';
-
-// Noise Editor
+} from './params-editor'; // Current seed, color, and canvas color
 
 export {
     SetNoiseScaleAtom,
     SetNoiseTypeAtom,
     ResetNoiseToDefaultAtom,
     ShowNoiseEditorAtom,
-} from './params-noise';
-
-// Presets
+} from './params-noise'; // Noise Editor
 
 export {
     PresetsAtom,
@@ -47,11 +39,9 @@ export {
     UpdatePresetPreviewAtom,
     InitPreviewsUpdateAtom,
     CreateAppendPresetAtom,
-} from './presets';
-
-// Application background
+} from './presets'; // Presets
 
 export {
     AppBackgroundUrlAtom,
     AppBackgroundActiveAtom,
-} from './main-background';
+} from './main-background'; // Application background
