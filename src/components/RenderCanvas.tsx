@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { useAtom } from 'jotai';
-import { ColorCanvasAtom, CreateAppendPresetAtom, InitPreviewsUpdateAtom, ManualSizeAtom, RenderParamsAtom, UpdatePresetPreviewAtom } from '../store/atoms';
+import { ColorCanvasAtom, CreateAppendPresetAtom, InitPreviewsUpdateAtom, ManualSizeAtom, RenderParamsAtom, UpdatePresetPreviewAtom } from '../store';
 import DragZone from './DragZone';
 import { I2W, I4W } from '../utils/types';
 import useCanvasWorker from '../hooks/useCanvasWorker';

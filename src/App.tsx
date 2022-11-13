@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { useAtom } from 'jotai';
-import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from './store/atoms';
+import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from './store';
 import AppLogo from './components/XtraAppLogo';
 import Canvas from './components/RenderCanvas';
 import PreciseControls from './components/PreciseControls';

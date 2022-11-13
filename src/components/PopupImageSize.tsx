@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { useClickAway } from 'react-use';
-import { ExportImageSizeAtom } from '../store/atoms';
+import { ExportImageSizeAtom } from '../store';
 import { WH } from '../utils/types';
 import { bytesToSize } from '../utils/numbers';
 

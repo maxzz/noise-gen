@@ -1,5 +1,5 @@
 import { Getter } from 'jotai';
-import { ColorCanvasAtom, ExportImageSizeAtom, RenderParamsAtom } from '../store/atoms';
+import { ColorCanvasAtom, ExportImageSizeAtom, RenderParamsAtom } from '../store';
 import { AppConfig, APPCONFIG, renderParams2Store, renderParams4Store, STORAGE_KEY } from './types';
 import debounce from './debounce';
 

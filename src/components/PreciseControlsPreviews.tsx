@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { PresetsAtom, RemovePresetAtom, SetRenderParamsAtom } from '../store/atoms';
+import { PresetsAtom, RemovePresetAtom, SetRenderParamsAtom } from '../store';
 import { PresetData, PRESET_H, PRESET_W } from '../utils/types';
 import styles from './PreciseControlsPreviews.module.scss';
 
