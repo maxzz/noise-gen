@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from '../../store';
-import TestCubeAnimation from '../TestCubeAnimation';
-import AppLogo from '../XtraAppLogo';
+import { TestCubeAnimation } from '../TestCubeAnimation';
+import { AppLogo } from '../XtraAppLogo';
 import { GithubLogoInline } from '../XtraGithubLogo';
 
 export function Section1_Header() {
