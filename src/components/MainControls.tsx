@@ -5,7 +5,7 @@ import { ButtonShowNoise } from './UI/ButtonShowNoise';
 import { ButtonChooseColorBg } from './UI/ButtonChooseColorBg';
 import { ButtonChooseColor } from './UI/ButtonChooseColor';
 
-function MainControls() {
+export function MainControls() {
     const [seed, setSeed] = useAtom(SeedAtom);
     const [, setRansomSeed] = useAtom(RandomSeedAtom);
     const [, generatePreset] = useAtom(GeneratePresetAtom);
@@ -52,5 +52,3 @@ function MainControls() {
         </div>
     );
 }
-
-export default MainControls;

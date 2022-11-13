@@ -7,7 +7,7 @@ import { I2W, I4W } from '../utils/types';
 import useCanvasWorker from '../hooks/useCanvasWorker';
 import { useUpdateAtom } from 'jotai/utils';
 
-export default function Canvas() {
+export function Canvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const worker = useCanvasWorker(canvasRef);
     const containerRef = useRef<HTMLDivElement>(null);
