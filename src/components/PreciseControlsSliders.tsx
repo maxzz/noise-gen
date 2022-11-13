@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAtom } from 'jotai';
-import Slider from './Slider';
-import NoiseEditor from './NoiseEditor';
+import { useAtom, useAtomValue } from 'jotai';
+import { NoiseEditor } from './NoiseEditor';
 import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, ShowNoiseEditorAtom } from '../store';
 import { GENPARAMS } from '../utils/types';
+import Slider from './Slider';
 
 function Sliders() {
     const [n1, setN1] = useAtom(N1Atom);
@@ -20,8 +20,8 @@ function Sliders() {
     );
 }
 
-function PreciseControlsSliders() {
-    const [showNoiseEditor] = useAtom(ShowNoiseEditorAtom);
+export function PreciseControlsSliders() {
+    const showNoiseEditor = useAtomValue(ShowNoiseEditorAtom);
     return (
         <div className="flex">
             <div className="flex-1">
@@ -34,5 +34,3 @@ function PreciseControlsSliders() {
         </div>
     );
 }
-
-export default PreciseControlsSliders;

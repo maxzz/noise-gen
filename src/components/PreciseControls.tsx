@@ -1,7 +1,7 @@
 import React from 'react';
-import PreciseControlsSliders from './PreciseControlsSliders';
-import PreciseControlsActions from './PreciseControlsActions';
-import PreciseControlsPreviews from './PreciseControlsPreviews';
+import { PreciseControlsSliders } from './PreciseControlsSliders';
+import { PreciseControlsActions } from './PreciseControlsActions';
+import { PreciseControlsPreviews } from './PreciseControlsPreviews';
 
 export function PreciseControls() {
     return (
