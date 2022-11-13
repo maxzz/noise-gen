@@ -1,9 +1,9 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from '../../store';
-import { TestCubeAnimation } from '../TestCubeAnimation';
-import { AppLogo } from '../XtraAppLogo';
-import { GithubLogoInline } from '../XtraGithubLogo';
+import { TestCubeAnimation } from '../UI/Icons/TestCubeAnimation';
+import { AppLogo } from '../UI/Icons/XtraAppLogo';
+import { GithubLogoInline } from '../UI/Icons/XtraGithubLogo';
 
 export function Section1_Header() {
     const [appBackgroundUrl, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
@@ -36,4 +36,3 @@ export function Section1_Header() {
         </div>
     </div>;
 }
-
