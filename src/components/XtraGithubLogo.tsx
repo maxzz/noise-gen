@@ -24,7 +24,7 @@ export function GithubLogoInline({ href }: { href: string; }) {
     );
 }
 
-function GithubLogoButtomRight({ href }: { href: string; }) {
+export function GithubLogoButtomRight({ href }: { href: string; }) {
     return (
         <div className="fixed flex-none flex right-2 bottom-3">
             <a
@@ -39,5 +39,3 @@ function GithubLogoButtomRight({ href }: { href: string; }) {
         </div>
     );
 }
-
-export default GithubLogoButtomRight;

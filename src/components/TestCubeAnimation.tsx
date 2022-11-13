@@ -1,5 +1,5 @@
-import { a, useSpring } from '@react-spring/web';
 import React from 'react';
+import { a, useSpring } from '@react-spring/web';
 import { randomIntInclusive } from '../utils/numbers';
 
 const FACES = [
@@ -65,7 +65,7 @@ type CubeProps = {
     initialIso: boolean;
 };
 
-function TestCubeAnimation(cubeProps: Partial<CubeProps> = {}) {
+export function TestCubeAnimation(cubeProps: Partial<CubeProps> = {}) {
     const [digit, setDigit] = React.useState(0);
 
     let dieSize = 20;
@@ -104,5 +104,3 @@ function TestCubeAnimation(cubeProps: Partial<CubeProps> = {}) {
         </a.div>
     );
 }
-
-export default TestCubeAnimation;
