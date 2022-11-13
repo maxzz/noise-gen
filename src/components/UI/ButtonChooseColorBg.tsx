@@ -4,10 +4,9 @@ import { ColorCanvasAtom } from '../../store';
 
 const BGCOLORS = ['black', 'white', 'transparent'];
 
-const hint = `Perview canvas background: white/black/transparent.
-The saved image will have a transparent background.`;
+const hint = `Perview canvas background: white/black/transparent.\nThe saved image will have a transparent background.`;
 
-function ButtonChooseColorBg() {
+export function ButtonChooseColorBg() {
     const [backgorund, setBackgorund] = useAtom(ColorCanvasAtom);
 
     function changeBkg() {
@@ -31,5 +30,3 @@ function ButtonChooseColorBg() {
         </button>
     );
 }
-
-export default ButtonChooseColorBg;

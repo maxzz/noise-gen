@@ -1,9 +1,9 @@
-import { useAtom } from 'jotai';
 import React from 'react';
+import { useAtom } from 'jotai';
 import { GeneratePresetAtom, RandomSeedAtom, SeedAtom } from '../store';
-import ButtonShowNoise from './UI/ButtonShowNoise';
-import ButtonChooseColorBg from './UI/ButtonChooseColorBg';
-import ButtonChooseColor from './UI/ButtonChooseColor';
+import { ButtonShowNoise } from './UI/ButtonShowNoise';
+import { ButtonChooseColorBg } from './UI/ButtonChooseColorBg';
+import { ButtonChooseColor } from './UI/ButtonChooseColor';
 
 function MainControls() {
     const [seed, setSeed] = useAtom(SeedAtom);

@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { ShowNoiseEditorAtom } from '../../store';
 
-function ButtonShowNoise() {
-    const [, setShowNoiseEditor] = useAtom(ShowNoiseEditorAtom);
+export function ButtonShowNoise() {
+    const setShowNoiseEditor = useSetAtom(ShowNoiseEditorAtom);
     return (
         <div
             className="dark-frame-rounded cursor-pointer text-gray-100 active-scale"
@@ -18,5 +18,3 @@ function ButtonShowNoise() {
         </div>
     );
 }
-
-export default ButtonShowNoise;

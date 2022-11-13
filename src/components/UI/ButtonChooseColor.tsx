@@ -11,7 +11,7 @@ type ButtonChooseColorProps = {
     style?: React.CSSProperties;
 };
 
-export default function ButtonChooseColor(props: ButtonChooseColorProps) {
+export function ButtonChooseColor(props: ButtonChooseColorProps) {
     const { className, style = {} } = props;
     const [color, setColor] = useAtom(ColorAtom);
     const [isDown, setIsDown] = useState<boolean>(false);
