@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { useAtom } from 'jotai';
 import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from './store';
 import Canvas from './components/RenderCanvas';
@@ -8,7 +8,7 @@ import MainControls from './components/MainControls';
 import './App.scss';
 import { Section1_Header } from './components/Section1_Header';
 
-export function App() {
+function AppBackground({ children }: HTMLAttributes<HTMLDivElement>) {
     const [appBackgroundUrl, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
     const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
     return (
@@ -26,6 +26,14 @@ export function App() {
                     }
             }
         >
+            {children}
+        </div>
+    );
+}
+
+export function App() {
+    return (
+        <AppBackground>
             {/* Header */}
             {Section1_Header()}
 
@@ -45,6 +53,6 @@ export function App() {
                     <Canvas />
                 </div>
             </div>
-        </div>
+        </AppBackground>
     );
 }
