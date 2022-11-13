@@ -1,7 +1,7 @@
 import React from 'react';
-import { useAtom } from 'jotai';
-import { PresetsAtom, RemovePresetAtom, SetRenderParamsAtom } from '../store';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { PresetData, PRESET_H, PRESET_W } from '../utils/types';
+import { PresetsAtom, RemovePresetAtom, SetRenderParamsAtom } from '../store';
 import styles from './PreciseControlsPreviews.module.scss';
 
 interface PreviewBoxProps {
@@ -41,10 +41,10 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
     );
 }
 
-function PreciseControlsPreviews() {
-    const [presets] = useAtom(PresetsAtom);
-    const [, setRenderParams] = useAtom(SetRenderParamsAtom);
-    const [, removePreset] = useAtom(RemovePresetAtom);
+export function PreciseControlsPreviews() {
+    const presets = useAtomValue(PresetsAtom);
+    const setRenderParams = useSetAtom(SetRenderParamsAtom);
+    const removePreset = useSetAtom(RemovePresetAtom);
 
     function deleteItem(id: string) {
         removePreset(id);
@@ -60,5 +60,3 @@ function PreciseControlsPreviews() {
         </div>
     );
 }
-
-export default PreciseControlsPreviews;

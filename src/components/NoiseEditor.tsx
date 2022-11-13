@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAtom } from 'jotai';
-import { NoiseAtom, ResetNoiseToDefaultAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '../store';
-import { SmallSlider } from './Slider';
-import { NOISEPARAMS } from '../utils/types';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useSpring, a } from '@react-spring/web';
+import { SmallSlider } from './Slider';
+import { NoiseAtom, ResetNoiseToDefaultAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '../store';
+import { NOISEPARAMS } from '../utils/types';
 
 function NoiseTypeButton({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
@@ -17,12 +17,12 @@ function NoiseTypeButton({ text, selected, onClick }: { text: string; selected: 
     );
 }
 
-function NoiseEditor() {
-    const [showNoiseEditor] = useAtom(ShowNoiseEditorAtom);
-    const [noise] = useAtom(NoiseAtom);
-    const [, setNoiseType] = useAtom(SetNoiseTypeAtom);
-    const [, setNoiseScale] = useAtom(SetNoiseScaleAtom);
-    const [, resetNoiseToDefault] = useAtom(ResetNoiseToDefaultAtom);
+export function NoiseEditor() {
+    const showNoiseEditor = useAtomValue(ShowNoiseEditorAtom);
+    const noise = useAtomValue(NoiseAtom);
+    const setNoiseType = useSetAtom(SetNoiseTypeAtom);
+    const setNoiseScale = useSetAtom(SetNoiseScaleAtom);
+    const resetNoiseToDefault = useSetAtom(ResetNoiseToDefaultAtom);
 
     const [showResetNoise, setShowResetNoise] = React.useState(false);
 
@@ -68,14 +68,15 @@ function NoiseEditor() {
                             >
                                 Noise
                             </div>
-                            {showResetNoise && <div className="
-                                absolute ml-1.5 px-2 py-1 left-full top-1/2 -translate-y-1/2 
-                                active-scale whitespace-nowrap
-                                text-white bg-red-600 border rounded border-red-900"
-                                onClick={resetNoise}
-                            >
-                                Reset noise
-                            </div>}
+                            {showResetNoise &&
+                                <div className="
+                                    absolute ml-1.5 px-2 py-1 left-full top-1/2 -translate-y-1/2 
+                                    active-scale whitespace-nowrap
+                                    text-white bg-red-600 border rounded border-red-900"
+                                    onClick={resetNoise}
+                                >
+                                    Reset noise
+                                </div>}
                         </div>
                         {/* Noise type buttons */}
                         <div className="pl-2 flex items-center text-[.6rem] space-x-1">
@@ -97,5 +98,3 @@ function NoiseEditor() {
         </div>
     );
 }
-
-export default NoiseEditor;

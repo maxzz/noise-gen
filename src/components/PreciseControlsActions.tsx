@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { AppBackgroundUrlAtom, RenderWorkerAtom } from '../store';
 import { I2W, PRESET_H, PRESET_W, WH } from '../utils/types';
 import SizeBoxes from './SizeBoxes';
@@ -8,12 +8,12 @@ import PopupImageSize from './PopupImageSize';
 import { useSpring, a } from '@react-spring/web';
 import { useKey } from 'react-use';
 
-function PreciseControlsActions() {
-    const [worker] = useAtom(RenderWorkerAtom);
+export function PreciseControlsActions() {
+    const worker = useAtomValue(RenderWorkerAtom);
     const latestWorker = React.useRef(worker);
     latestWorker.current = worker;
 
-    const [, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
+    const setAppBackgroundUrl = useSetAtom(AppBackgroundUrlAtom);
     const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
     const styles = useSpring({
@@ -118,5 +118,3 @@ function PreciseControlsActions() {
         </div>
     );
 }
-
-export default PreciseControlsActions;

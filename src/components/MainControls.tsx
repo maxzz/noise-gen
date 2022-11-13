@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { GeneratePresetAtom, RandomSeedAtom, SeedAtom } from '../store';
 import { ButtonShowNoise } from './UI/ButtonShowNoise';
 import { ButtonChooseColorBg } from './UI/ButtonChooseColorBg';
@@ -7,8 +7,8 @@ import { ButtonChooseColor } from './UI/ButtonChooseColor';
 
 export function MainControls() {
     const [seed, setSeed] = useAtom(SeedAtom);
-    const [, setRansomSeed] = useAtom(RandomSeedAtom);
-    const [, generatePreset] = useAtom(GeneratePresetAtom);
+    const setRansomSeed = useSetAtom(RandomSeedAtom);
+    const generatePreset = useSetAtom(GeneratePresetAtom);
 
     return (
         <div className="h-8 flex space-x-1">
