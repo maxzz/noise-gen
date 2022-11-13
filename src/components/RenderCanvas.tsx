@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { ColorCanvasAtom, CreateAppendPresetAtom, InitPreviewsUpdateAtom, ManualSizeAtom, RenderParamsAtom, UpdatePresetPreviewAtom } from '../store';
 import DragZone from './UI/DragZone';
 import { I2W, I4W } from '../utils/types';
@@ -14,10 +14,10 @@ export function Canvas() {
     const isHovered = useHoverDirty(containerRef);
     const [dragging, setDragging] = useState(false);
     const [canvasSizeRef, { width: widthRaw, height: heightRaw }] = useMeasure<HTMLDivElement>();
-    const [renderParams] = useAtom(RenderParamsAtom);
-    const [colorCanvas] = useAtom(ColorCanvasAtom);
-    const [, createAppendPreset] = useAtom(CreateAppendPresetAtom);
-    const [, updatePresetPreview] = useAtom(UpdatePresetPreviewAtom);
+    const renderParams = useAtomValue(RenderParamsAtom);
+    const colorCanvas = useAtomValue(ColorCanvasAtom);
+    const createAppendPreset = useSetAtom(CreateAppendPresetAtom);
+    const updatePresetPreview = useSetAtom(UpdatePresetPreviewAtom);
     const initPreviewsUpdate = useUpdateAtom(InitPreviewsUpdateAtom);
    
     const [manualSize, setManualSize] = useAtom(ManualSizeAtom);
