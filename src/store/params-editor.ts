@@ -3,7 +3,7 @@ import { atomWithCallback } from "../hooks/atomsX";
 import { random, withDigits } from "../utils/numbers";
 import { defAppSettings, storeAppParams } from "../utils/storageAppConfig";
 import { GenParams, GENPARAMS, RenderParams } from "../utils/types";
-import { GenParamsAtom } from "./gen-params";
+import { GenParamsAtom } from "./params-gen";
 
 // Current seed, color, and canvas color
 

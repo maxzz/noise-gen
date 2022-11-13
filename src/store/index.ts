@@ -12,7 +12,7 @@ export {
     N2Atom,
     DistortionAtom,
     DotDiameterAtom
-} from './gen-params';
+} from './params-gen';
 
 // Current seed, color, and canvas color
 
@@ -28,7 +28,7 @@ export {
     SetRenderParamsAtom,
     RandomSeedAtom,
     GeneratePresetAtom,
-} from './editor-params';
+} from './params-editor';
 
 // Noise Editor
 
@@ -37,7 +37,7 @@ export {
     SetNoiseTypeAtom,
     ResetNoiseToDefaultAtom,
     ShowNoiseEditorAtom,
-} from './noise-editor';
+} from './params-noise';
 
 // Presets
 
@@ -54,4 +54,4 @@ export {
 export {
     AppBackgroundUrlAtom,
     AppBackgroundActiveAtom,
-} from './background';
+} from './main-background';
