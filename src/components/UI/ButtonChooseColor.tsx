@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
-import './ButtonChooseColor.scss';
+import { useAtom } from 'jotai';
+import { useSpring, a } from '@react-spring/web';
 import { SketchPicker, ColorResult } from 'react-color';
 import { useClickAway } from 'react-use';
-import { useAtom } from 'jotai';
-import { ColorAtom } from '../store';
-import { useSpring, a } from '@react-spring/web';
+import { ColorAtom } from '../../store';
+import './ButtonChooseColor.scss';
 
 type ButtonChooseColorProps = {
     className: string;

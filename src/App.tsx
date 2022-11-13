@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.scss';
 import { useAtom } from 'jotai';
 import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from './store';
 import AppLogo from './components/XtraAppLogo';
@@ -7,10 +6,11 @@ import Canvas from './components/RenderCanvas';
 import PreciseControls from './components/PreciseControls';
 import MainControls from './components/MainControls';
 import { GithubLogoInline } from './components/XtraGithubLogo';
-import SortedList from './components/TestSortedList';
+//import SortedList from './components/UI/DraggableList/TestSortedList';
 import TestCubeAnimation from './components/TestCubeAnimation';
+import './App.scss';
 
-function App() {
+export function App() {
     const [appBackgroundUrl, setAppBackgroundUrl] = useAtom(AppBackgroundUrlAtom);
     const [appBackgroundActive] = useAtom(AppBackgroundActiveAtom);
     return (
@@ -77,5 +77,3 @@ function App() {
         </div>
     );
 }
-
-export default App;
