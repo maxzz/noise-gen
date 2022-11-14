@@ -1,7 +1,7 @@
 import React, { RefObject, useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { OffscreenCanvasAtom, RenderWorkerAtom } from '../store';
-import webWorker from '../utils/render-worker?worker';
+import webWorker from '../utils/render/render-worker?worker';
 import { I2W, I4W, WH } from '../store/app-types';
 import uuid from '../utils/uuid';
 

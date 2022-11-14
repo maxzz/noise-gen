@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { ColorCanvasAtom, CreateAppendPresetAtom, InitPreviewsUpdateAtom, ManualSizeAtom, RenderParamsAtom, UpdatePresetPreviewAtom } from '../store';
 import DragZone from './UI/DragZone';
 import { I2W, I4W } from '../store/app-types';
 import useCanvasWorker from '../hooks/useCanvasWorker';
-import { useUpdateAtom } from 'jotai/utils';
 
 export function Canvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -18,7 +17,7 @@ export function Canvas() {
     const colorCanvas = useAtomValue(ColorCanvasAtom);
     const createAppendPreset = useSetAtom(CreateAppendPresetAtom);
     const updatePresetPreview = useSetAtom(UpdatePresetPreviewAtom);
-    const initPreviewsUpdate = useUpdateAtom(InitPreviewsUpdateAtom);
+    const initPreviewsUpdate = useSetAtom(InitPreviewsUpdateAtom);
    
     const [manualSize, setManualSize] = useAtom(ManualSizeAtom);
     useEffect(() => {
