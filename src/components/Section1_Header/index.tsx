@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from '../../store';
-import { Cube } from '../UI/Icons/TestCubeAnimation';
-import { AppLogo } from '../UI/Icons/XtraAppLogo';
+import { Cube } from '../UI/Icons/Cube';
+import { TwoCubes } from '../UI/Icons/TwoCubes';
 import { GithubLogoInline } from '../UI/Icons/XtraGithubLogo';
 
 function ButtonClearAppBg() {
@@ -26,7 +26,7 @@ export function Section1_Header() {
         <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 select-none" style={{ boxShadow: '#00000033 0 1px 2px' }}>
             <div className="mx-4 flex-none flex-centered">
                 <div className="flex items-center space-x-1">
-                    <AppLogo />
+                    <TwoCubes />
 
                     <div className="-ml-1">
                         <Cube

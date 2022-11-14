@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Cube() {
+function StaticCube() {
     return (
         <svg viewBox="0 0 128 172.4" className="w-full h-full" fill="currentColor">
             <g>
@@ -18,14 +18,14 @@ function Cube() {
     );
 }
 
-export function AppLogo() {
+export function TwoCubes() {
     return (
         <div className="relative h-8 w-16 active:animate-bounce">
             <div className="absolute left-0 -top-1 w-10 h-10 transform rotate-45 scale-75 translate-x-6">
-                <Cube />
+                <StaticCube />
             </div>
             <div className="absolute left-0 -top-1 w-10 h-10 transform rotate-12 scale-75">
-                <Cube />
+                <StaticCube />
             </div>
         </div>
     );
