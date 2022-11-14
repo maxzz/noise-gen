@@ -1,18 +1,18 @@
 import { atom } from "jotai";
 import { atomWithCallback } from "../hooks/atomsX";
 import { random, withDigits } from "../utils/numbers";
-import { defAppSettings, storeAppParams } from "../utils/storageAppConfig";
+import { defAppSettings, storeAppParams } from "./storageAppConfig";
 import { GenParams, GENPARAMS, RenderParams } from "../utils/types";
 import { GenParamsAtom } from "./params-gen";
 
 // Current seed, color, and canvas color
 
-export const ColorCanvasAtom = atomWithCallback(defAppSettings.canvasBg, (get, _) => storeAppParams(get));
-export const ExportImageSizeAtom = atomWithCallback(defAppSettings.expSize, (get, _) => storeAppParams(get));
+export const ColorCanvasAtom = atomWithCallback(defAppSettings.canvasBg, ({get}) => storeAppParams(get));
+export const ExportImageSizeAtom = atomWithCallback(defAppSettings.expSize, ({get}) => storeAppParams(get));
 
-export const ColorAtom = atomWithCallback(defAppSettings.renderParams.color, (get, _) => storeAppParams(get));
-export const SeedAtom = atomWithCallback(defAppSettings.renderParams.seed, (get, _) => storeAppParams(get));
-export const NoiseAtom = atomWithCallback(defAppSettings.renderParams.noise, (get, _) => storeAppParams(get));
+export const ColorAtom = atomWithCallback(defAppSettings.renderParams.color, ({get}) => storeAppParams(get));
+export const SeedAtom = atomWithCallback(defAppSettings.renderParams.seed, ({get}) => storeAppParams(get));
+export const NoiseAtom = atomWithCallback(defAppSettings.renderParams.noise, ({get}) => storeAppParams(get));
 
 export const RenderParamsAtom = atom<RenderParams>(
     (get) => {

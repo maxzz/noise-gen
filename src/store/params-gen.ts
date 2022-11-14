@@ -1,11 +1,11 @@
 import { atom } from "jotai";
 import { atomWithCallback } from "../hooks/atomsX";
-import { defAppSettings, storeAppParams } from "../utils/storageAppConfig";
+import { defAppSettings, storeAppParams } from "./storageAppConfig";
 import { GenParams } from "../utils/types";
 
 // GenParams
 
-export const GenParamsAtom = atomWithCallback<GenParams>(defAppSettings.renderParams.genParams, (get, _) => storeAppParams(get));
+export const GenParamsAtom = atomWithCallback<GenParams>(defAppSettings.renderParams.genParams, ({get}) => storeAppParams(get));
 
 export const N1Atom = atom(
     (get) => get(GenParamsAtom).n1,
