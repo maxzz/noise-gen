@@ -6,25 +6,28 @@ import { AppLogo } from '../UI/Icons/XtraAppLogo';
 import { GithubLogoInline } from '../UI/Icons/XtraGithubLogo';
 
 function ButtonClearAppBg() {
+    const appBackgroundActive = useAtomValue(AppBackgroundActiveAtom);
     const setAppBackgroundUrl = useSetAtom(AppBackgroundUrlAtom);
-    return (
-        <button
-            className="ml-2 px-2 pb-[1px] text-xs dark-frame-rounded bg-purple-100 uppercase"
-            title="Clear background image (Alt+F2)"
-            onClick={() => setAppBackgroundUrl(null)}
-        >
-            Clear bkg
-        </button>
-    );
+    return (<>
+        {appBackgroundActive &&
+            <button
+                className="ml-2 px-2 pb-[1px] text-xs dark-frame-rounded bg-purple-100 uppercase"
+                title="Clear background image (Alt+F2)"
+                onClick={() => setAppBackgroundUrl(null)}
+            >
+                Clear bkg
+            </button>
+        }
+    </>);
 }
 
 export function Section1_Header() {
-    const appBackgroundActive = useAtomValue(AppBackgroundActiveAtom);
     return (
         <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 select-none" style={{ boxShadow: '#00000033 0 1px 2px' }}>
             <div className="mx-4 flex-none flex-centered">
                 <div className="flex items-center space-x-1">
                     <AppLogo />
+
                     <div className="-ml-1">
                         <TestCubeAnimation
                             initialIso={true}
@@ -36,8 +39,7 @@ export function Section1_Header() {
                     </div>
                 </div>
 
-                {/* Clear background */}
-                {appBackgroundActive && <ButtonClearAppBg />}
+                <ButtonClearAppBg />
             </div>
 
             <div className="px-4 py-2 text-xl uppercase flex items-center">
