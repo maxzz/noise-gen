@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from '../../store';
-import { TestCubeAnimation } from '../UI/Icons/TestCubeAnimation';
+import { Cube } from '../UI/Icons/TestCubeAnimation';
 import { AppLogo } from '../UI/Icons/XtraAppLogo';
 import { GithubLogoInline } from '../UI/Icons/XtraGithubLogo';
 
@@ -29,7 +29,7 @@ export function Section1_Header() {
                     <AppLogo />
 
                     <div className="-ml-1">
-                        <TestCubeAnimation
+                        <Cube
                             initialIso={true}
                             colorFace="var(--purple-900)"
                             colorBorder="var(--purple-200)"

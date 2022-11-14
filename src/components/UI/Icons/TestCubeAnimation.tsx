@@ -45,7 +45,7 @@ function Face({ digit, size, style = {}, cubeProps }: { digit: number; size: num
             } as React.CSSProperties}
         >
             {items.map((on: number, i: number) => (
-                <div className="w-full h-full rounded-full" style={{backgroundColor: on ? colorDots : 'transparent'}} key={i} />
+                <div className="w-full h-full rounded-full" style={{ backgroundColor: on ? colorDots : 'transparent' }} key={i} />
             ))}
         </div>
     );
@@ -65,7 +65,7 @@ type CubeProps = {
     initialIso: boolean;
 };
 
-export function TestCubeAnimation(cubeProps: Partial<CubeProps> = {}) {
+export function Cube(cubeProps: Partial<CubeProps> = {}) {
     const [digit, setDigit] = React.useState(0);
 
     let dieSize = 20;
@@ -74,7 +74,7 @@ export function TestCubeAnimation(cubeProps: Partial<CubeProps> = {}) {
         transform: cubeProps.initialIso ? ANGLE_ISO : ANGLE_ZERO,
     }));
 
-    function spin() {
+    function startSpin() {
         api.start({
             to: async (next, cancel) => {
                 await next({ transform: `rotateX(360deg) rotateY(360deg) rotateZ(360deg)`, config: { duration: 1000 } });
@@ -96,10 +96,16 @@ export function TestCubeAnimation(cubeProps: Partial<CubeProps> = {}) {
                 //perspective: '300px',
                 ...styles
             }}
-            onClick={spin}
+            onClick={startSpin}
         >
             {ANGLES.map((_angle: number, idx: number) => (
-                <Face digit={(digit + idx) % 6 + 1} size={dieSize} style={{ transform: faceStyle(idx, dieSize / 2) }} key={idx} cubeProps={cubeProps} />
+                <Face
+                    digit={(digit + idx) % 6 + 1}
+                    size={dieSize}
+                    style={{ transform: faceStyle(idx, dieSize / 2) }}
+                    cubeProps={cubeProps}
+                    key={idx}
+                />
             ))}
         </a.div>
     );
