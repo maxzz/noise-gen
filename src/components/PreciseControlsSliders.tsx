@@ -3,7 +3,7 @@ import { useAtom, useAtomValue } from 'jotai';
 import { NoiseEditor } from './NoiseEditor';
 import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, ShowNoiseEditorAtom } from '../store';
 import { GENPARAMS } from '../utils/types';
-import Slider from './Slider';
+import Slider from './UI/Slider';
 
 function Sliders() {
     const [n1, setN1] = useAtom(N1Atom);

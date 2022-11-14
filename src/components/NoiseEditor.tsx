@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useSpring, a } from '@react-spring/web';
-import { SmallSlider } from './Slider';
+import { SmallSlider } from './UI/Slider';
 import { NoiseAtom, ResetNoiseToDefaultAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '../store';
 import { NOISEPARAMS } from '../utils/types';
 
