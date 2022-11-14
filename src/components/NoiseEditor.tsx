@@ -3,7 +3,7 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useSpring, a } from '@react-spring/web';
 import { SmallSlider } from './UI/Slider';
 import { NoiseAtom, ResetNoiseToDefaultAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '../store';
-import { NOISEPARAMS } from '../utils/types';
+import { NOISEPARAMS } from '../store/app-types';
 
 function NoiseTypeButton({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (

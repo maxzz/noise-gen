@@ -1,5 +1,5 @@
 import { gridNoise, NoiseGenerator, RenderContext } from './render-body';
-import { I2W, I4W, RenderParams } from './types';
+import { I2W, I4W, RenderParams } from '../store/app-types';
 
 const runtime: Worker = self as any;
 

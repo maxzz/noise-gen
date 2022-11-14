@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { AppBackgroundUrlAtom, RenderWorkerAtom } from '../store';
-import { I2W, PRESET_H, PRESET_W, WH } from '../utils/types';
+import { I2W, PRESET_H, PRESET_W, WH } from '../store/app-types';
 import SizeBoxes from './SizeBoxes';
 import saveBlobData from '../utils/saveImage';
 import PopupImageSize from './PopupImageSize';

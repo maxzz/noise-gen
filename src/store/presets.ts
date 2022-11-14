@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { atomWithCallback } from "../hooks/atomsX";
 import { defPresets, storePresets } from "./storagePresets";
-import { I2W, I4W, PresetData, PRESET_H, PRESET_W } from "../utils/types";
+import { I2W, I4W, PresetData, PRESET_H, PRESET_W } from "./app-types";
 import uuid from "../utils/uuid";
 import { ManualSizeAtom, RenderWorkerAtom } from "./canvas";
 

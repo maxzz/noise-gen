@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { atomWithCallback } from "../hooks/atomsX";
 import { defAppSettings, storeAppParams } from "./storageAppConfig";
-import { GenParams } from "../utils/types";
+import { GenParams } from "./app-types";
 
 // GenParams
 
