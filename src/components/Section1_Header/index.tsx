@@ -25,7 +25,7 @@ export function Section1_Header() {
     return (
         <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-purple-300 select-none" style={{ boxShadow: '#00000033 0 1px 2px' }}>
             <div className="mx-4 flex-none flex-centered">
-                <div className="flex items-center space-x-1">
+                <div className="flex items-center space-x-2">
                     <TwoCubes />
 
                     <div className="-ml-1">
