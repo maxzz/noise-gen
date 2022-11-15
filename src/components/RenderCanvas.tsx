@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { ColorCanvasAtom, CreateAppendPresetAtom, InitPreviewsUpdateAtom, ManualSizeAtom, RenderParamsAtom, UpdatePresetPreviewAtom } from '../store';
-import DragZone from './UI/DragZone';
+import { DragZone } from './UI/DragZone';
 import { I2W, I4W } from '../store/app-types';
-import useCanvasWorker from '../hooks/useCanvasWorker';
+import { useCanvasWorker } from '../hooks/useCanvasWorker';
 
 export function Canvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -18,7 +18,7 @@ export function Canvas() {
     const createAppendPreset = useSetAtom(CreateAppendPresetAtom);
     const updatePresetPreview = useSetAtom(UpdatePresetPreviewAtom);
     const initPreviewsUpdate = useSetAtom(InitPreviewsUpdateAtom);
-   
+
     const [manualSize, setManualSize] = useAtom(ManualSizeAtom);
     useEffect(() => {
         widthRaw && heightRaw && setManualSize({ w: widthRaw, h: heightRaw });
@@ -60,7 +60,7 @@ export function Canvas() {
                     style={{ resize: 'both', width: `${manualSize.w}px`, height: `${manualSize.h}px` }}
                     ref={canvasSizeRef}
                 >
-                    <canvas ref={canvasRef} className="w-full h-full" style={{backgroundColor: colorCanvas}}></canvas>
+                    <canvas ref={canvasRef} className="w-full h-full" style={{ backgroundColor: colorCanvas }}></canvas>
                 </div>
 
                 <DragZone

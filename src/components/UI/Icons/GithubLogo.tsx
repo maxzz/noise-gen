@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import { classNames } from '../../../utils/classnames';
+import { classNames } from '../../../utils';
 
 export function GitHubSvg() {
     return (

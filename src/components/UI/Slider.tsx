@@ -1,5 +1,5 @@
 import React from 'react';
-import useFloatInput from '../../hooks/useFloatInput';
+import { useFloatInput } from '../../hooks/useFloatInput';
 import './Sliders.scss';
 
 export interface SliderProps {

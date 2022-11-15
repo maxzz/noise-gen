@@ -9,7 +9,7 @@ export type DragZoneProps = {
     onActivated?: (v: boolean) => void;
 } & React.HTMLAttributes<Element>;
 
-function DragZone({ size, setSize, onActivated = () => { }, ...rest }: DragZoneProps) {
+export function DragZone({ size, setSize, onActivated = () => { }, ...rest }: DragZoneProps) {
     const downPt = useRef<{ x: number; y: number; }>();
     const downSz = useRef<{ w: number; h: number; }>();
 
@@ -42,5 +42,3 @@ function DragZone({ size, setSize, onActivated = () => { }, ...rest }: DragZoneP
         </div>
     );
 }
-
-export default DragZone;

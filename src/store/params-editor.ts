@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { atomWithCallback } from "../hooks/atomsX";
-import { random, withDigits } from "../utils/numbers";
+import { random, withDigits } from "../utils";
 import { defAppSettings, storeAppParams } from "./storageAppConfig";
 import { GenParams, GENPARAMS, RenderParams } from "./app-types";
 import { GenParamsAtom } from "./params-gen";

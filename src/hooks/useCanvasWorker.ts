@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { OffscreenCanvasAtom, RenderWorkerAtom } from '../store';
 import webWorker from '../utils/render/render-worker?worker';
 import { I2W, I4W, WH } from '../store/app-types';
-import uuid from '../utils/uuid';
+import { uuid } from '../utils';
 
 type PromissedQuery = {
     resolve: (value: any) => void;
@@ -11,10 +11,10 @@ type PromissedQuery = {
 
 export interface WorkerEx extends Worker {
     queries: Map<string, PromissedQuery>;
-    getImage(size?: {w: number, h: number}): Promise<any>;
+    getImage(size?: { w: number, h: number; }): Promise<any>;
 };
 
-export default function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): WorkerEx | null {
+export function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): WorkerEx | null {
 
     const [worker, setWorker] = useAtom(RenderWorkerAtom);
     const [offscreenCanvasCashed, setOffscreenCanvasCashed] = useAtom(OffscreenCanvasAtom);
