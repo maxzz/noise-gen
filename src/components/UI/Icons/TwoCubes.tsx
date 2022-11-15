@@ -2,7 +2,7 @@ import React from 'react';
 
 function StaticCube() {
     return (
-        <svg viewBox="0 0 128 172.4" className="w-full h-full" fill="currentColor">
+        <svg viewBox="0 0 128 172.4" className="" fill="currentColor">
             <g>
                 <path d="M126.9 38.1v.8l.1-.1.1-.1c.1 0 0-.1 0-.1v-.1-.1-.1l-.2-.2M66.4 84.5l-61.5-26 60.5-46.9 58.7 27.3-57.7 45.6m-1-74.9l-.3.1-.2.1-.2.1-.2.1L2 58.4l-.2.1-.1.2-.1.2V59.2l.1.1.1.1.1.1.2.1v-.4-.2l.1-.2.1-.1.1-.1H3.2L50 78.4l15.9 6.7.1-.1.1-.1.1-.1.1-.1 59.9-47-18-8.4-42-19.6H65.6l-.2-.1" />
                 <path d="M67.7 157.7l-.4.3.4.2v-.5m-.5-71.6l-.2.1.6 57.1-.1-20.5-.2-36.1v-.2-.2-.2c0 .1-.1.1-.1 0M2.7 58.5c-.1 0-.1 0 0 0h-.1-.1-.1l-.1.1-.1.1-.1.2V59.5l1 37.5.9 36.9v.2l.1.2.1.2.1.2.1.2.2.2.2.1.2.1 17 6.5 44.9 17.1H67.7l.1-.1.1-.1.1-.2V158.2l-.4-.2-.4.3-.1.1-.1.1c0 .1-.1 0-.1 0h-.1-.1-.1-.2l-.1-.1-.1-.1-.1-.1v-.1l-.2-15.8.1 14.2-60-22.9-1.9-72.4L65.3 87v-.4-.2-.2l.1-.2.1-.3.1-.1.1-.1.1-.1.1-.1L50 78.4 3.1 58.5H3h-.1-.2" />
@@ -21,10 +21,12 @@ function StaticCube() {
 export function TwoCubes() {
     return (
         <div className="relative h-8 w-16 active:animate-bounce">
-            <div className="absolute left-0 -top-1 w-10 h-10 transform rotate-45 scale-75 translate-x-6">
+            <div className="absolute left-0 -top-1 w-10 h-10 transform">
+                {/* rotate-12 scale-75 */}
                 <StaticCube />
             </div>
-            <div className="absolute left-0 -top-1 w-10 h-10 transform rotate-12 scale-75">
+            <div className="absolute left-0 -top-1 w-10 h-10 transform translate-x-6">
+                {/* rotate-45 scale-75 */}
                 <StaticCube />
             </div>
         </div>
