@@ -1,8 +1,8 @@
 import React from 'react';
-import { MainControls } from '../MainControls';
-import { PreciseControls } from '../PreciseControls';
-import { Canvas } from '../RenderCanvas';
-//import SortedList from '../UI/DraggableList/TestSortedList';
+import { MainControls } from './MainControls';
+import { PreciseControls } from './PreciseControls';
+import { Canvas } from './RenderCanvas';
+//import SortedList from '@/components/UI/DraggableList/TestSortedList';
 
 export function Section2_Main() {
     return (

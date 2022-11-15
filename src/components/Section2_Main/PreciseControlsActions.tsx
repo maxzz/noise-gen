@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useSpring, a } from '@react-spring/web';
 import { useKey } from 'react-use';
-import { AppBackgroundUrlAtom, RenderWorkerAtom } from '../store';
+import { AppBackgroundUrlAtom, RenderWorkerAtom } from '@/store';
 import { I2W, PRESET_H, PRESET_W, WH } from '@/store/types/app-types';
 import { SizeBoxes } from './SizeBoxes';
 import { PopupImageSize } from './PopupImageSize';
