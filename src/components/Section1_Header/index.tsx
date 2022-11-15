@@ -46,6 +46,7 @@ export function Section1_Header() {
                 <div className="pl-1 pb-0.5 tracking-tighter" style={{ textShadow: '#a88cff70 3px 2px' }}>
                     Noise generator: xp10-525N
                 </div>
+                
                 <GithubLogo className="text-purple-500 border-purple-400" href="https://github.com/maxzz/noise-gen" />
             </div>
         </div>
