@@ -1,12 +1,12 @@
 import React from 'react';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { AppBackgroundUrlAtom, RenderWorkerAtom } from '../store';
-import { I2W, PRESET_H, PRESET_W, WH } from '../store/app-types';
-import SizeBoxes from './SizeBoxes';
-import saveBlobData from '../utils/saveImage';
-import PopupImageSize from './PopupImageSize';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useSpring, a } from '@react-spring/web';
 import { useKey } from 'react-use';
+import { AppBackgroundUrlAtom, RenderWorkerAtom } from '../store';
+import { I2W, PRESET_H, PRESET_W, WH } from '@/store/types/app-types';
+import { SizeBoxes } from './SizeBoxes';
+import { PopupImageSize } from './PopupImageSize';
+import { saveBlobData } from '@/utils/saveImage';
 
 export function PreciseControlsActions() {
     const worker = useAtomValue(RenderWorkerAtom);
@@ -57,8 +57,8 @@ export function PreciseControlsActions() {
             <div className="px-1 flex-centered space-x-1 
                 border rounded border-gray-400 bg-gray-50 hover:bg-white
                 "
-                style={{boxShadow: '#00000014 1px 1px 0px 0px'}}
-                >
+                style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
+            >
                 <SizeBoxes />
             </div>
 
@@ -68,7 +68,7 @@ export function PreciseControlsActions() {
                 text-gray-500
                 border rounded border-gray-400 bg-gray-50 hover:bg-white
                 transform active-scale cursor-pointer"
-                style={{boxShadow: '#00000014 1px 1px 0px 0px'}}
+                style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
                 title="Set canvas image as application background (F2)"
                 onClick={setAsBackground}
             >
@@ -83,7 +83,7 @@ export function PreciseControlsActions() {
                 text-gray-500
                 border rounded border-gray-400 bg-gray-50 hover:bg-white
                 transform active-scale cursor-pointer"
-                style={{boxShadow: '#00000014 1px 1px 0px 0px'}}
+                style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
                 title="Save preset"
                 onClick={appendNew}
             >
@@ -100,7 +100,7 @@ export function PreciseControlsActions() {
                     text-gray-500
                     border rounded border-gray-400 bg-gray-50 hover:bg-white
                     active-scale cursor-pointer"
-                    style={{boxShadow: '#00000014 1px 1px 0px 0px'}}
+                    style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
                     title="Save image"
                     onClick={() => setShowSelectFileSize((prev) => !prev)}
                 >

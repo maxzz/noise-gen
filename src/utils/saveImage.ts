@@ -1,4 +1,4 @@
-const saveBlobData = (function () {
+export const saveBlobData = (function () {
     const a = document.createElement("a");
     document.body.appendChild(a);
     a.style.display = 'none';
@@ -11,8 +11,6 @@ const saveBlobData = (function () {
         window.URL.revokeObjectURL(url);
     };
 }());
-
-export default saveBlobData;
 
 /*
     async function supportsImgType(type) {

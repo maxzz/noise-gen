@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFloatInput } from '../../hooks/useFloatInput';
+import { useFloatInput } from '@/hooks/useFloatInput';
 import './Sliders.scss';
 
 export interface SliderProps {
@@ -12,7 +12,7 @@ export interface SliderProps {
     onChange: (value: number) => void;
 }
 
-function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onChange }: SliderProps) {
+export function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', value, onChange }: SliderProps) {
     const [local, onSliderChange, onInputChange, onInputKey] = useFloatInput(value, { min, max, step }, onChange); // TODO: what to do with NaN?
     return (
         <div className="px-2 w-full h-5 flex-centered space-x-2 text-xs text-purple-900">
@@ -56,5 +56,3 @@ export function SmallSlider({ label, min, max, step = .01, labelWidth = '4.5rem'
         </div>
     );
 }
-
-export default Slider;

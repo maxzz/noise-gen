@@ -1,9 +1,9 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { useClickAway } from 'react-use';
-import { ExportImageSizeAtom } from '../store';
-import { WH } from '../store/app-types';
-import { bytesToSize } from '../utils/numbers';
+import { ExportImageSizeAtom } from '@/store';
+import { WH } from '@/store/types/app-types';
+import { bytesToSize } from '@/utils';
 
 function validInt(v: string): number {
     const n = +(+v).toFixed(0);
@@ -19,7 +19,7 @@ function sizeTooBigMessage(size: WH) {
 The current image size ${size.w} x ${size.h} = ${sizeInMB(size)} (uncompressed in pixels).`;
 }
 
-function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
+export function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
     const [width, setWidth] = React.useState('' + exportImageSize.w);
     const [height, setHeight] = React.useState('' + exportImageSize.h);
@@ -104,5 +104,3 @@ function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
         </div>
     );
 }
-
-export default PopupImageSize;

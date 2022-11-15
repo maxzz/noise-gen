@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useSetAtom } from 'jotai';
-import { GeneratePresetAtom, RandomSeedAtom, SeedAtom } from '../store';
+import { GeneratePresetAtom, RandomSeedAtom, SeedAtom } from '@/store';
 import { ButtonShowNoise } from './UI/ButtonShowNoise';
 import { ButtonChooseColorBg } from './UI/ButtonChooseColorBg';
 import { ButtonChooseColor } from './UI/ButtonChooseColor';

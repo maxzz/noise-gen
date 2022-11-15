@@ -1,7 +1,7 @@
 //#region Offscreen canvas and Worker
 
 import { atom } from "jotai";
-import { WorkerEx } from "../hooks/useCanvasWorker";
+import { WorkerEx } from "@/hooks/useCanvasWorker";
 
 export const OffscreenCanvasAtom = atom<OffscreenCanvas | null>(null);
 export const RenderWorkerAtom = atom<WorkerEx | null>(null);

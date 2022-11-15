@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { PresetData, PRESET_H, PRESET_W } from '../store/app-types';
-import { PresetsAtom, RemovePresetAtom, SetRenderParamsAtom } from '../store';
+import { PresetData, PRESET_H, PRESET_W } from '@/store/types/app-types';
+import { PresetsAtom, RemovePresetAtom, SetRenderParamsAtom } from '@/store';
 import styles from './PreciseControlsPreviews.module.scss';
 
 interface PreviewBoxProps {

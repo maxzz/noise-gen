@@ -1,8 +1,8 @@
 import { atom } from "jotai";
-import { atomWithCallback } from "../hooks/atomsX";
+import { atomWithCallback } from "@/hooks/atomsX";
 import { defPresets, storePresets } from "./storagePresets";
-import { I2W, I4W, PresetData, PRESET_H, PRESET_W } from "./app-types";
-import { uuid } from "../utils";
+import { I2W, I4W, PresetData, PRESET_H, PRESET_W } from "./types/app-types";
+import { uuid } from "@/utils";
 import { ManualSizeAtom, RenderWorkerAtom } from "./canvas";
 
 export const PresetsAtom = atomWithCallback<PresetData[]>(defPresets(), ({ get }) => storePresets(get));

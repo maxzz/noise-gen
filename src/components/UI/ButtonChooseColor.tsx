@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useSpring, a } from '@react-spring/web';
 import { SketchPicker, ColorResult } from 'react-color';
 import { useClickAway } from 'react-use';
-import { ColorAtom } from '../../store';
+import { ColorAtom } from '@/store';
 import './ButtonChooseColor.scss';
 
 type ButtonChooseColorProps = {

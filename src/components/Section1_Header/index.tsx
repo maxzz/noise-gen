@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from '../../store';
+import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from '@/store';
 import { Cube } from '../UI/Icons/Cube';
 import { TwoCubes } from '../UI/Icons/TwoCubes';
 import { GithubLogo } from '../UI/Icons/GithubLogo';

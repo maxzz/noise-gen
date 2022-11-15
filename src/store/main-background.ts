@@ -1,7 +1,5 @@
 import { atom } from "jotai";
 
-//#region Application background
-
 // Set Application background
 
 const AppBackgroundUrlRawAtom = atom('');
@@ -20,5 +18,3 @@ export const AppBackgroundUrlAtom = atom(
 export const AppBackgroundActiveAtom = atom(
     (get) => !!get(AppBackgroundUrlRawAtom)
 );
-
-//#endregion Application background

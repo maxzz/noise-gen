@@ -1,6 +1,6 @@
 import React from 'react';
 import { a, useSpring } from '@react-spring/web';
-import { randomIntInclusive } from '../../../utils';
+import { randomIntInclusive } from '@/utils';
 
 const FACES = [
     [4],

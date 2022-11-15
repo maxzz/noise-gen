@@ -1,5 +1,5 @@
 import React from 'react';
-import { clamp, getShift4Input } from '../utils';
+import { clamp, getShift4Input } from '@/utils';
 
 function beautifyFloat(v: string) {
     return (v || '').trim().replace(/ /g, '').replace(/^\./, '0.').replace(/\.$/, '.0');

@@ -1,9 +1,9 @@
 import React, { RefObject, useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { OffscreenCanvasAtom, RenderWorkerAtom } from '../store';
-import webWorker from '../utils/render/render-worker?worker';
-import { I2W, I4W, WH } from '../store/app-types';
-import { uuid } from '../utils';
+import { OffscreenCanvasAtom, RenderWorkerAtom } from '@/store';
+import webWorker from '@/utils/render/render-worker?worker';
+import { I2W, I4W, WH } from '@/store/types/app-types';
+import { uuid } from '@/utils';
 
 type PromissedQuery = {
     resolve: (value: any) => void;

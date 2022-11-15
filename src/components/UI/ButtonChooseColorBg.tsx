@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
-import { ColorCanvasAtom } from '../../store';
+import { ColorCanvasAtom } from '@/store';
 
 const BGCOLORS = ['black', 'white', 'transparent'];
 

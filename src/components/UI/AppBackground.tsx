@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from "react";
 import { useAtomValue } from "jotai";
-import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from "../../store";
+import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from "@/store";
 
 export function AppBackground({ children }: HTMLAttributes<HTMLDivElement>) {
     const appBackgroundUrl = useAtomValue(AppBackgroundUrlAtom);

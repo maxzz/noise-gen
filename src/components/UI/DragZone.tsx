@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import useDragZone from '../../hooks/useDragZone';
+import useDragZone from '@/hooks/useDragZone';
 
 type Size2D = { w: number, h: number; };
 

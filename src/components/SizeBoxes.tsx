@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSetAtom } from 'jotai';
-import { ManualSizeAtom } from '../store';
+import { ManualSizeAtom } from '@/store';
 
 const SIZES = [[300, 300], [500, 500], [700, 700], [900, 900]];
 
@@ -34,7 +34,7 @@ function SizeIcon({ select, step }: { select: () => void, step: number; }) {
     );
 }
 
-function SizeBoxes() {
+export function SizeBoxes() {
     const setManualSize = useSetAtom(ManualSizeAtom);
 
     function setSize(w: number, h: number) {
@@ -47,5 +47,3 @@ function SizeBoxes() {
         ))}
     </>);
 }
-
-export default SizeBoxes;

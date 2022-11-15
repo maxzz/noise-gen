@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSetAtom } from 'jotai';
-import { ShowNoiseEditorAtom } from '../../store';
+import { ShowNoiseEditorAtom } from '@/store';
 
 export function ButtonShowNoise() {
     const setShowNoiseEditor = useSetAtom(ShowNoiseEditorAtom);

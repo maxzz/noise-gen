@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { NOISEPARAMS } from "./app-types";
+import { NOISEPARAMS } from "./types/app-types";
 import { NoiseAtom } from "./params-editor";
 
 // Noise Editor
