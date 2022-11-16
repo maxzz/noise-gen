@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { useClickAway } from 'react-use';
 import { ExportImageSizeAtom } from '@/store';
-import { WH } from '@/store/types/app-types';
+import { WH } from '@/store/types';
 import { bytesToSize } from '@/utils';
 
 function validInt(v: string): number {

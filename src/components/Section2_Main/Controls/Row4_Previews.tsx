@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { PresetData, PRESET_H, PRESET_W } from '@/store/types/app-types';
+import { PresetData, PRESET_H, PRESET_W } from '@/store/types';
 import { PresetsAtom, RemovePresetAtom, SetRenderParamsAtom } from '@/store';
 import { IconCross, IconTrash } from '@/components/UI/Icons';
 import styles from './Row4_Previews.module.scss';

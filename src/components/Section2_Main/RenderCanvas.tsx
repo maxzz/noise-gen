@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { ColorCanvasAtom, CreateAppendPresetAtom, InitPreviewsUpdateAtom, ManualSizeAtom, RenderParamsAtom, UpdatePresetPreviewAtom } from '@/store';
-import { I2W, I4W } from '@/store/types/app-types';
+import { I2W, I4W } from '@/store/types';
 import { ResizingZone } from '@/components/UI/ResizingZone';
 import { useCanvasWorker } from '@/hooks/useCanvasWorker';
 
@@ -69,7 +69,10 @@ export function Canvas() {
                         transform active:scale-0"
                     size={manualSize} setSize={setManualSize} onActivated={(active: boolean) => setDragging(active)}
                 />
-                {(dragging || isHovered) && <div className="absolute text-[.6rem] text-gray-700">{widthRaw} x {heightRaw}</div>}
+                
+                {(dragging || isHovered) &&
+                    <div className="absolute text-[.6rem] text-gray-700">{widthRaw} x {heightRaw}</div>
+                }
             </div>
         </div>
     );

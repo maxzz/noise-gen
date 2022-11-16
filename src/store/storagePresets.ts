@@ -1,7 +1,7 @@
 import { Getter } from 'jotai';
 import { PresetsAtom } from '@/store';
 import { debounce } from '@/utils';
-import { PresetData, renderParams2Store, renderParams4Store, STORAGE_KEY } from './types/app-types';
+import { PresetData, renderParams2Store, renderParams4Store, STORAGE_KEY } from './types';
 
 const PRESETS_KEY = `${STORAGE_KEY}-presets4`;
 

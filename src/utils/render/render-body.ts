@@ -1,5 +1,5 @@
 import SimplexNoise from 'simplex-noise';
-import { GenParams } from '@/store/types/app-types';
+import { GenParams } from '@/store/types';
 //import colors from 'simple-color-functions';
 
 export type RenderContext = {

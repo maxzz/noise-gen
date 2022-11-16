@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { Row2_NoiseEditor } from './Row2_NoiseEditor';
 import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, ShowNoiseEditorAtom } from '@/store';
-import { GENPARAMS } from '@/store/types/app-types';
+import { GENPARAMS } from '@/store/types';
 import { Slider } from '@/components/UI/Slider';
 
 function Sliders() {

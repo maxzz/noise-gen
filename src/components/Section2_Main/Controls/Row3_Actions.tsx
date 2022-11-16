@@ -3,7 +3,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useSpring, a } from '@react-spring/web';
 import { useKey } from 'react-use';
 import { AppBackgroundUrlAtom, RenderWorkerAtom } from '@/store';
-import { I2W, PRESET_H, PRESET_W, WH } from '@/store/types/app-types';
+import { I2W, PRESET_H, PRESET_W, WH } from '@/store/types';
 import { Row3_SizeBoxes } from './Row3_SizeBoxes';
 import { Row3_PopupImageSize } from './Row3_PopupImageSize';
 import { saveBlobData } from '@/utils/saveImage';
