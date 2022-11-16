@@ -9,17 +9,16 @@ const hint = `Perview canvas background: white/black/transparent.\nThe saved ima
 export function ButtonChooseColorBg() {
     const [backgorund, setBackgorund] = useAtom(ColorCanvasAtom);
 
-    function changeBkg() {
-        let idx = (BGCOLORS.findIndex((item) => item === backgorund) + 1) % BGCOLORS.length;
+    function onClickChangeBkg() {
+        const idx = (BGCOLORS.findIndex((item) => item === backgorund) + 1) % BGCOLORS.length;
         setBackgorund(BGCOLORS[idx]);
     }
 
     return (
         <button
-            className="w-8 h-8 relative rounded border dark-frame no-active-ouline active-scale"
-            style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
+            className="w-8 h-8 relative rounded border dark-frame no-active-ouline active-scale top-row-button-gradient"
             title={hint}
-            onClick={changeBkg}
+            onClick={onClickChangeBkg}
         >
             <div className="px-0.5 w-full h-full flex items-center justify-evenly">
                 {/* Iocns */}

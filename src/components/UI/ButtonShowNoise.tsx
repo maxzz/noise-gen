@@ -6,8 +6,7 @@ export function ButtonShowNoise() {
     const setShowNoiseEditor = useSetAtom(ShowNoiseEditorAtom);
     return (
         <div
-            className="dark-frame-rounded cursor-pointer text-gray-100 active-scale"
-            style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
+            className="dark-frame-rounded cursor-pointer text-gray-100 active-scale top-row-button-gradient"
             title="Show/Hide noise parameters"
             onClick={() => setShowNoiseEditor(prev => !prev)}
         >

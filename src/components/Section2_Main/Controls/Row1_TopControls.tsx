@@ -20,10 +20,10 @@ export function Row1_TopControls() {
 
             <button
                 className="h-8 px-3 pb-0.5 text-sm
-                dark-frame-rounded text-gray-100 bg-purple-400 
+                dark-frame-rounded text-gray-100 
                 uppercase transform active-scale
-                select-none no-active-ouline"
-                style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
+                select-none no-active-ouline top-row-button-gradient"
+
                 title="Generate random seed"
                 onClick={setRansomSeed}
             >
@@ -32,10 +32,9 @@ export function Row1_TopControls() {
 
             <button
                 className="h-8 px-3 pb-0.5 text-sm
-                dark-frame-rounded text-gray-100 bg-purple-400 
+                dark-frame-rounded text-gray-100
                 uppercase transform active-scale
-                select-none no-active-ouline"
-                style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }}
+                select-none no-active-ouline top-row-button-gradient"
                 title="Generate a random preset"
                 onClick={generatePreset}
             >
@@ -46,7 +45,7 @@ export function Row1_TopControls() {
                 <ButtonShowNoise />
             </div>
 
-            <ButtonChooseColor className="w-8 h-8" style={{ background: 'linear-gradient(hsla(0,0%,100%,.5), transparent) rgb(167, 139, 250) border-box' }} />
+            <ButtonChooseColor className="w-8 h-8 top-row-button-gradient" />
             <ButtonChooseColorBg />
         </div>
     );
