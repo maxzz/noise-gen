@@ -1,4 +1,9 @@
-import { NoiseParamsLimits, RenderParams, WH } from ".";
+import { AppConfig, NoiseParamsLimits, RenderParams, WH } from ".";
+
+export const PRESET_W = 56;
+export const PRESET_H = 56;
+
+export const STORAGE_KEY = 'noisegen-xp10525n';
 
 // packing / unpacking
 
@@ -24,12 +29,6 @@ export const NOISEPARAMS: NoiseParamsLimits = {
 };
 
 //#region RenderParams packing
-
-export type AppConfig = {
-    canvasBg: string;
-    expSize: WH;
-    renderParams: RenderParams;
-};
 
 export const APPCONFIG: AppConfig = {
     canvasBg: 'transparent',

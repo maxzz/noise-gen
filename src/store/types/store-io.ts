@@ -1,6 +1,6 @@
-//#region Seed, Noise packing
+import { NoiseParams, NOISEPARAMS, RenderParams } from ".";
 
-import { NOISEPARAMS, NoiseParams, RenderParams } from "./app-types";
+//#region Seed, Noise packing
 
 function noiseParams2Store(seed: string, n?: NoiseParams): string {
     return n ? ['v7', n.dim, n.x, n.y, n.z, n.w, seed].join('_') : seed; // TODO: compare to def, don't save def
