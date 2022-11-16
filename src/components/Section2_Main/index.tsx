@@ -1,6 +1,6 @@
 import React from 'react';
-import { Row1_TopControls } from './Row1_TopControls';
-import { Row2_All } from './Row2_All';
+import { Row1_TopControls } from './Controls/Row1_TopControls';
+import { Row2_All } from './Controls/Row2_All';
 import { Canvas } from './RenderCanvas';
 //import SortedList from '@/components/UI/DraggableList/TestSortedList';
 

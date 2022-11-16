@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { ColorCanvasAtom, CreateAppendPresetAtom, InitPreviewsUpdateAtom, ManualSizeAtom, RenderParamsAtom, UpdatePresetPreviewAtom } from '@/store';
-import { DragZone } from '@/components/UI/DragZone';
 import { I2W, I4W } from '@/store/types/app-types';
+import { ResizingZone } from '@/components/UI/ResizingZone';
 import { useCanvasWorker } from '@/hooks/useCanvasWorker';
 
 export function Canvas() {
@@ -63,7 +63,7 @@ export function Canvas() {
                     <canvas ref={canvasRef} className="w-full h-full" style={{ backgroundColor: colorCanvas }}></canvas>
                 </div>
 
-                <DragZone
+                <ResizingZone
                     className="absolute w-5 h-5 rounded-full border-2 -bottom-2 -right-2 z-10
                         bg-green-500 border-green-700 active:border-green-600
                         transform active:scale-0"

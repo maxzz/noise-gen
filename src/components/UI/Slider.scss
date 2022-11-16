@@ -8,7 +8,7 @@ input[type="range"].ui-slider {
     $range-track-height: 1px !default; // def 2px
     $range-track-border-color: rgba(108, 72, 240, 0.5) !default;
 
-    -webkit-appearance: none;
+    appearance: none;
     width: 100%; //$range-label-width: 60px !default; width: calc(100% - (#{$range-label-width + 10px}));
     height: $range-track-height;
     border-radius: 5px;
@@ -20,7 +20,7 @@ input[type="range"].ui-slider {
 
     // Range Handle
     &::-webkit-slider-thumb {
-        -webkit-appearance: none;
+        appearance: none;
         width: $range-handle-size;
         height: $range-handle-size;
         border-radius: $range-handle-radius;
@@ -53,4 +53,3 @@ input[type="range"].ui-slider {
         }
     }
 }
-

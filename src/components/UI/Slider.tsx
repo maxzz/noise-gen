@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFloatInput } from '@/hooks/useFloatInput';
-import './Sliders.scss';
+import './Slider.scss';
 
 export interface SliderProps {
     label: string;
