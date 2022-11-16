@@ -16,3 +16,11 @@ export function IconCross({className, ...rest}: SVGAttributes<SVGSVGElement>) {
         </svg>
     );
 }
+
+export function IconChevronHorizontal({className, ...rest}: SVGAttributes<SVGSVGElement>) {
+    return (
+        <svg className={classNames("stroke-current fill-transparent", className)} viewBox="0 0 24 24" {...rest}>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+        </svg>
+    );
+}
