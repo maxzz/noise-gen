@@ -6,5 +6,4 @@ export * from './data-preset-params';
 export * from './data-render-params';
 
 export * from './app-initials';
-export * from '../io/store-io';
 export * from './worker-messages';

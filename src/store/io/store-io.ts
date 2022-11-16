@@ -1,4 +1,4 @@
-import { NoiseParams, NOISEPARAMS, RenderParams } from "../types";
+import { NoiseParams, NOISEPARAMS, RenderParams } from "@/store/types";
 
 //#region Seed, Noise packing
 
