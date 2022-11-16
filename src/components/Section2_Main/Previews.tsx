@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { SVGAttributes } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { PresetData, PRESET_H, PRESET_W } from '@/store/types/app-types';
 import { PresetsAtom, RemovePresetAtom, SetRenderParamsAtom } from '@/store';
 import styles from './Previews.module.scss';
+import { classNames } from '@/utils';
 
 interface PreviewBoxProps {
     item: PresetData;
     deleteItem: (id: string) => void;
     selectItem: (item: PresetData) => void;
+}
+
+function IconTrash({className, ...rest}: SVGAttributes<SVGSVGElement>) {
+    return (
+        <svg className={classNames("stroke-current fill-transparent", className)} strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" {...rest}>
+            <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+    );
+}
+
+function IconCross({className, ...rest}: SVGAttributes<SVGSVGElement>) {
+    return (
+        <svg className={classNames("stroke-current fill-transparent", className)} viewBox="0 0 24 24" {...rest}>
+        <path strokeLinecap="round" strokeWidth={4} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    );
 }
 
 function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
@@ -20,22 +37,17 @@ function PreviewBox({ item, deleteItem, selectItem }: PreviewBoxProps) {
                     src={item.preview} alt="preset"
                 />}
 
-                {item.preview && <div
-                    className={`${styles.removePreset} absolute p-1 -top-3 -right-3 
+                {item.preview &&
+                    <div
+                        className={`${styles.removePreset} absolute p-1 -top-3 -right-3 
                         border rounded-full text-gray-500 border-gray-500 bg-gray-50`}
-                    title="Remove preset"
-                    onClick={(event) => { event.stopPropagation(); deleteItem(item.id); }}
-                >
-                    {/* X mark */}
-                    {/* <svg className="h-3 w-3" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeWidth={4} d="M6 18L18 6M6 6l12 12" />
-                    </svg> */}
-
-                    <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
-                </div>}
-
+                        title="Remove preset"
+                        onClick={(event) => { event.stopPropagation(); deleteItem(item.id); }}
+                    >
+                        <IconCross className="h-3 w-3" />
+                        <IconTrash className="h-3 w-3" />
+                    </div>
+                }
             </div>
         </div>
     );
