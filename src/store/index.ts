@@ -2,7 +2,7 @@ export {
     OffscreenCanvasAtom,
     RenderWorkerAtom,
     ManualSizeAtom,
-} from './canvas';
+} from './atoms/canvas';
 
 export {
     GenParamsAtom,
@@ -10,7 +10,7 @@ export {
     N2Atom,
     DistortionAtom,
     DotDiameterAtom
-} from './params-gen'; // GenParams
+} from './atoms/params-gen'; // GenParams
 
 export {
     ColorCanvasAtom,
@@ -24,14 +24,14 @@ export {
     SetRenderParamsAtom,
     RandomSeedAtom,
     GeneratePresetAtom,
-} from './params-editor'; // Current seed, color, and canvas color
+} from './atoms/params-editor'; // Current seed, color, and canvas color
 
 export {
     SetNoiseScaleAtom,
     SetNoiseTypeAtom,
     ResetNoiseToDefaultAtom,
     ShowNoiseEditorAtom,
-} from './params-noise'; // Noise Editor
+} from './atoms/params-noise'; // Noise Editor
 
 export {
     PresetsAtom,
@@ -39,9 +39,9 @@ export {
     UpdatePresetPreviewAtom,
     InitPreviewsUpdateAtom,
     CreateAppendPresetAtom,
-} from './presets'; // Presets
+} from './atoms/presets'; // Presets
 
 export {
     AppBackgroundUrlAtom,
     AppBackgroundActiveAtom,
-} from './main-background'; // Application background
+} from './atoms/main-background'; // Application background
