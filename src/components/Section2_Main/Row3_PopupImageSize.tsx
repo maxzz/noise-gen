@@ -19,7 +19,7 @@ function sizeTooBigMessage(size: WH) {
 The current image size ${size.w} x ${size.h} = ${sizeInMB(size)} (uncompressed in pixels).`;
 }
 
-export function PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
+export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
     const [width, setWidth] = React.useState('' + exportImageSize.w);
     const [height, setHeight] = React.useState('' + exportImageSize.h);

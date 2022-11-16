@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAtom, useAtomValue } from 'jotai';
-import { NoiseEditor } from './NoiseEditor';
+import { Row2_NoiseEditor } from './Row2_NoiseEditor';
 import { N1Atom, N2Atom, DistortionAtom, DotDiameterAtom, ShowNoiseEditorAtom } from '@/store';
 import { GENPARAMS } from '@/store/types/app-types';
 import { Slider } from '@/components/UI/Slider';
@@ -29,7 +29,7 @@ export function Row2_Sliders() {
             </div>
             {showNoiseEditor && <div className="w-[1px] max-w-[1px] bg-purple-300"></div>}
             <div>
-                <NoiseEditor />
+                <Row2_NoiseEditor />
             </div>
         </div>
     );

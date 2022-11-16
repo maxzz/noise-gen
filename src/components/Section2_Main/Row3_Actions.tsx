@@ -5,7 +5,7 @@ import { useKey } from 'react-use';
 import { AppBackgroundUrlAtom, RenderWorkerAtom } from '@/store';
 import { I2W, PRESET_H, PRESET_W, WH } from '@/store/types/app-types';
 import { Row3_SizeBoxes } from './Row3_SizeBoxes';
-import { PopupImageSize } from './PopupImageSize';
+import { Row3_PopupImageSize } from './Row3_PopupImageSize';
 import { saveBlobData } from '@/utils/saveImage';
 
 export function Row3_Actions() {
@@ -111,7 +111,7 @@ export function Row3_Actions() {
                 {/* Popup */}
                 {showSelectFileSize &&
                     <a.div style={styles} className="absolute mt-1 -top-1 right-0">
-                        <PopupImageSize onSave={saveItemPng} />
+                        <Row3_PopupImageSize onSave={saveItemPng} />
                     </a.div>
                 }
             </div>

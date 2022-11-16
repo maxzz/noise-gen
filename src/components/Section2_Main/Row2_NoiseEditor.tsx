@@ -17,7 +17,7 @@ function NoiseTypeButton({ text, selected, onClick }: { text: string; selected: 
     );
 }
 
-export function NoiseEditor() {
+export function Row2_NoiseEditor() {
     const showNoiseEditor = useAtomValue(ShowNoiseEditorAtom);
     const noise = useAtomValue(NoiseAtom);
     const setNoiseType = useSetAtom(SetNoiseTypeAtom);
