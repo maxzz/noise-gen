@@ -16,7 +16,7 @@ export type NoiseParamsSet = {
 };
 
 export type NoiseParamsLimits = {
-    //d2: NoiseParamsSet;
+  //d2: NoiseParamsSet;
     d3: NoiseParamsSet;
-    //d4: NoiseParamsSet;
+  //d4: NoiseParamsSet;
 };

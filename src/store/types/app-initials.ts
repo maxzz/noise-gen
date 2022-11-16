@@ -1,11 +1,9 @@
-import { AppConfig, NoiseParamsLimits, RenderParams, WH } from ".";
+import { AppConfig, GenParamsLimits, NoiseParamsLimits } from ".";
 
 export const PRESET_W = 56;
 export const PRESET_H = 56;
 
 export const STORAGE_KEY = 'noisegen-xp10525n';
-
-// packing / unpacking
 
 export const NOISEPARAMS: NoiseParamsLimits = {
     // d2: {
@@ -26,6 +24,27 @@ export const NOISEPARAMS: NoiseParamsLimits = {
     //     max: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
     //     gen: { dim: 2, x: 0.01, y: 0.01, z: 0.01, w: 0.01, },
     // },
+};
+
+export const GENPARAMS: GenParamsLimits = {
+    min: {
+        n1: -40,
+        n2: -40,
+        distortion: 0,
+        dotDiameter: 0,
+    },
+    max: {
+        n1: 40,
+        n2: 40,
+        distortion: 400,
+        dotDiameter: 50,
+    },
+    gen: {
+        n1: 40,
+        n2: 40,
+        distortion: 400,
+        dotDiameter: 1,
+    },
 };
 
 //#region RenderParams packing
