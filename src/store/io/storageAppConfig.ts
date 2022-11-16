@@ -2,7 +2,7 @@ import { Getter } from 'jotai';
 import { ColorCanvasAtom, ExportImageSizeAtom, RenderParamsAtom } from '..';
 import { AppConfig, APPCONFIG, STORAGE_KEY } from '@/store/types';
 import { debounce } from '@/utils';
-import { renderParams2Store, renderParams4Store } from './store-io';
+import { renderParams2Store, renderParams4Store } from './io-render-params';
 
 const PARAMS_KEY = `${STORAGE_KEY}-params`;
 
