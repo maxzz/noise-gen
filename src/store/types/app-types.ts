@@ -1,16 +1,8 @@
-import { GenParams } from "./data-gen-params";
-import { NoiseParams } from "./data-noise-params";
+import { RenderParams } from "./data-render-params";
 
 export type WH = {
     w: number;
     h: number;
-};
-
-export type RenderParams = {
-    seed: string;
-    color: string;
-    noise: NoiseParams;
-    genParams: GenParams;
 };
 
 export type PresetData = {

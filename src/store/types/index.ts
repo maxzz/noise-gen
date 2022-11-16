@@ -2,6 +2,7 @@ export * from './app-types';
 
 export * from './data-gen-params';
 export * from './data-noise-params';
+export * from './data-render-params';
 
 export * from './app-initials';
 
