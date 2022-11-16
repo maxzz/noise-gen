@@ -10,7 +10,7 @@ function PreviewBox({ item }: {item: PresetData}) {
     const removePreset = useSetAtom(RemovePresetAtom);
     return (
         <div className={`px-1 py-2 cursor-pointer select-none transform active-scale ${styles.preset}`} onClick={() => setRenderParams(item.renderParams)}>
-            <div className="relative border-4 border-gray-50" style={{ width: `${PRESET_W + 8}px`, height: `${PRESET_H + 8}px` }}> {/* +8 for double border size */}
+            <div className="relative border-4 border-gray-50 shadow" style={{ width: `${PRESET_W + 8}px`, height: `${PRESET_H + 8}px` }}> {/* +8 for double border size */}
                 {item.preview &&
                     <>
                         <img className={`w-full h-full object-cover ${styles.maybeBroken}`} src={item.preview} alt="preset"/>
@@ -30,7 +30,6 @@ function PreviewBox({ item }: {item: PresetData}) {
 
 export function Previews() {
     const presets = useAtomValue(PresetsAtom);
-
     return (
         <div className="px-1 flex flex-wrap">
             {presets.map((preset) => (
