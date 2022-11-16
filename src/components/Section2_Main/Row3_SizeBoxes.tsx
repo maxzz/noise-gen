@@ -34,7 +34,7 @@ function SizeIcon({ select, step }: { select: () => void, step: number; }) {
     );
 }
 
-export function SizeBoxes() {
+export function Row3_SizeBoxes() {
     const setManualSize = useSetAtom(ManualSizeAtom);
 
     function setSize(w: number, h: number) {

@@ -4,11 +4,11 @@ import { useSpring, a } from '@react-spring/web';
 import { useKey } from 'react-use';
 import { AppBackgroundUrlAtom, RenderWorkerAtom } from '@/store';
 import { I2W, PRESET_H, PRESET_W, WH } from '@/store/types/app-types';
-import { SizeBoxes } from './SizeBoxes';
+import { Row3_SizeBoxes } from './Row3_SizeBoxes';
 import { PopupImageSize } from './PopupImageSize';
 import { saveBlobData } from '@/utils/saveImage';
 
-export function PreciseControlsActions() {
+export function Row3_Actions() {
     const worker = useAtomValue(RenderWorkerAtom);
     const latestWorker = React.useRef(worker);
     latestWorker.current = worker;
@@ -59,7 +59,7 @@ export function PreciseControlsActions() {
                 "
                 style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
             >
-                <SizeBoxes />
+                <Row3_SizeBoxes />
             </div>
 
             {/* Preset set as background */}

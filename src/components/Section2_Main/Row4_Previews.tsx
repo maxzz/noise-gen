@@ -3,7 +3,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { PresetData, PRESET_H, PRESET_W } from '@/store/types/app-types';
 import { PresetsAtom, RemovePresetAtom, SetRenderParamsAtom } from '@/store';
 import { IconCross, IconTrash } from '@/components/UI/Icons';
-import styles from './Previews.module.scss';
+import styles from './Row4_Previews.module.scss';
 
 function PreviewBox({ item }: {item: PresetData}) {
     const setRenderParams = useSetAtom(SetRenderParamsAtom);
@@ -28,7 +28,7 @@ function PreviewBox({ item }: {item: PresetData}) {
     );
 }
 
-export function Previews() {
+export function Row4_Previews() {
     const presets = useAtomValue(PresetsAtom);
     return (
         <div className="px-1 flex flex-wrap">

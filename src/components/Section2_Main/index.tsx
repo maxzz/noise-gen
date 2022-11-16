@@ -1,6 +1,6 @@
 import React from 'react';
-import { MainControls } from './MainControls';
-import { PreciseControls } from './PreciseControls';
+import { Row1_TopControls } from './Row1_TopControls';
+import { Row2_All } from './Row2_All';
 import { Canvas } from './RenderCanvas';
 //import SortedList from '@/components/UI/DraggableList/TestSortedList';
 
@@ -13,8 +13,8 @@ export function Section2_Main() {
 
             {/* Controls */}
             <div className="w-full flex flex-col space-y-1">
-                <MainControls />
-                <PreciseControls />
+                <Row1_TopControls />
+                <Row2_All />
             </div>
 
             {/* Canvas */}

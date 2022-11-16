@@ -20,7 +20,7 @@ function Sliders() {
     );
 }
 
-export function PreciseControlsSliders() {
+export function Row2_Sliders() {
     const showNoiseEditor = useAtomValue(ShowNoiseEditorAtom);
     return (
         <div className="flex">
