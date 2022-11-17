@@ -1,9 +1,9 @@
 import React from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import { GeneratePresetAtom, RandomSeedAtom, SeedAtom } from '@/store';
-import { ButtonShowNoise } from '@/components/UI/ButtonShowNoise';
-import { ButtonChooseColorBg } from '@/components/UI/ButtonChooseColorBg';
-import { ButtonChooseColor } from '@/components/UI/ButtonChooseColor';
+import { ButtonShowNoise } from '@/components/Section2_Main/Controls/Buttons/ButtonShowNoise';
+import { ButtonChooseColorBg } from './Buttons/ButtonChooseColorBg';
+import { ButtonChooseColor } from './Buttons/ButtonChooseColor';
 
 export function Row1_TopControls() {
     const [seed, setSeed] = useAtom(SeedAtom);
