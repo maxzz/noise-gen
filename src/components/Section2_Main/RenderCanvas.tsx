@@ -5,6 +5,7 @@ import { ColorCanvasAtom, CreateAppendPresetAtom, InitPreviewsUpdateAtom, Manual
 import { I2W, I4W } from '@/store/types';
 import { ResizingZone } from '@/components/UI/ResizingZone';
 import { useCanvasWorker } from '@/hooks/useCanvasWorker';
+import { classNames } from '@/utils';
 
 export function Canvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -53,7 +54,7 @@ export function Canvas() {
 
     return (
         <div className="w-full h-full flex items-center">
-            <div className={`relative ${dragging ? 'border border-dashed border-gray-600' : ''}`} ref={containerRef}>
+            <div className={classNames("relative border", dragging ? 'border-dashed border-primary-600' : 'border-transparent')} ref={containerRef}>
                 {/* Canvas */}
                 <div
                     className="w-full h-full overflow-hidden"
@@ -65,13 +66,16 @@ export function Canvas() {
 
                 <ResizingZone
                     className="absolute w-5 h-5 rounded-full border-2 -bottom-2 -right-2 z-10
-                        bg-green-500 border-green-700 active:border-green-600
-                        transform active:scale-0"
-                    size={manualSize} setSize={setManualSize} onActivated={(active: boolean) => setDragging(active)}
+                        bg-green-500 border-green-700 active:border-green-600 active:scale-0"
+                    size={manualSize}
+                    setSize={setManualSize}
+                    onActivated={(active: boolean) => setDragging(active)}
                 />
-                
+
                 {(dragging || isHovered) &&
-                    <div className="absolute text-[.6rem] text-gray-700">{widthRaw} x {heightRaw}</div>
+                    <div className="absolute text-[.6rem] text-gray-700">
+                        {widthRaw} x {heightRaw}
+                    </div>
                 }
             </div>
         </div>

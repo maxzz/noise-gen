@@ -1,9 +1,9 @@
 import React, { RefObject, useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { OffscreenCanvasAtom, RenderWorkerAtom } from '@/store';
-import webWorker from '@/utils/render/render-worker?worker';
 import { I2W, I4W, WH } from '@/store/types';
 import { uuid } from '@/utils';
+import webWorker from '@/utils/render/render-worker?worker';
 
 type PromissedQuery = {
     resolve: (value: any) => void;
@@ -48,7 +48,7 @@ export function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): WorkerEx 
         newWorker.queries = new Map();
         newWorker.getImage = (size?: WH) => {
             return new Promise((resolve) => {
-                let id = uuid();
+                const id = uuid();
                 newWorker.queries.set(id, { resolve });
                 newWorker.postMessage({
                     type: 'get-image',
@@ -60,7 +60,7 @@ export function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): WorkerEx 
 
         newWorker.addEventListener('message', (event: I4W.Message) => {
             if (event.data.type === 'got-image') {
-                let resolve = newWorker.queries.get(event.data.resolveId);
+                const resolve = newWorker.queries.get(event.data.resolveId);
                 if (!resolve) {
                     console.error('missing promise ID');
                     return;
@@ -76,7 +76,7 @@ export function useCanvasWorker(canvas: RefObject<HTMLCanvasElement>): WorkerEx 
         newWorker.postMessage({ type: 'init', canvas: offscreen } as I2W.Init, [offscreen]);
 
         return () => {
-            console.log('use off', canvas.current, offscreenCanvasCashed);
+            console.log('worker shut down now', canvas.current, offscreenCanvasCashed);
 
             worker?.terminate();
             setWorker(null);

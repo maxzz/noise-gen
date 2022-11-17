@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function useDragZone() {
+export function useDragZone() {
     const [active, setActive] = useState(false);
     const [clientPt, setClientPt] = useState<{ x: number; y: number; }>({ x: 0, y: 0 });
 

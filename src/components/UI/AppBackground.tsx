@@ -7,7 +7,7 @@ export function AppBackground({ children }: HTMLAttributes<HTMLDivElement>) {
     const appBackgroundActive = useAtomValue(AppBackgroundActiveAtom);
     return (
         <div
-            className="App h-screen flex flex-col items-center space-y-4 bg-purple-200 color-vars"
+            className="App min-h-screen flex flex-col items-center space-y-4 bg-purple-200 color-vars"
             // style={{background: `radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`}}
             // style={{backgroundImage: `url(${bkgImage}), radial-gradient(circle, #d5ccf7 0%, #ab9dde 100%)`, backgroundBlendMode: 'multiply, screen, color-dodge'}}
             style={
