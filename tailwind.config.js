@@ -3,6 +3,7 @@ const twTheme = require('tailwindcss/defaultTheme');
 
 const plugin = require('tailwindcss/plugin');
 
+/** @type {import('tailwindcss').Config } */
 module.exports = {
     content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
     //darkMode: false, // or 'media' or 'class'
@@ -24,6 +25,9 @@ module.exports = {
                     "900": "#543BAF"
                 },
             },
+            // strokeLinecap: {
+            //     'linecap': "round",
+            // }
         },
     },
     variants: {
@@ -39,6 +43,14 @@ module.exports = {
                 },
             };
             addComponents(colorClasses);
+        }),
+        plugin(function ({ addUtilities }) {
+            const newUtilities = {
+                ".strokeLinecap-round": {
+                    strokeLinecap: "round",
+                },
+            };
+            addUtilities(newUtilities, ["responsive", "hover"]);
         }),
         require('./tailwind/tailwind-plugin-colors-bridge')({ prefix: '--tm-', groupName: 'primary' }),
         require('./tailwind/tailwnid-plugin-debug-styles'),
