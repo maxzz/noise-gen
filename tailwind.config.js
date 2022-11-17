@@ -25,9 +25,6 @@ module.exports = {
                     "900": "#543BAF"
                 },
             },
-            // strokeLinecap: {
-            //     'linecap': "round",
-            // }
         },
     },
     variants: {
@@ -46,8 +43,11 @@ module.exports = {
         }),
         plugin(function ({ addUtilities }) {
             const newUtilities = {
-                ".strokeLinecap-round": {
+                ".stroke-linecap-round": {
                     strokeLinecap: "round",
+                },
+                ".stroke-linejoin-round": {
+                    strokeLinejoin: "round",
                 },
             };
             addUtilities(newUtilities, ["responsive", "hover"]);
