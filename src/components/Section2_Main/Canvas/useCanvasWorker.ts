@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { OffscreenCanvasAtom, RenderWorkerAtom } from '@/store';
 import { I2W, I4W, WH } from '@/store/types';
 import { uuid } from '@/utils';
-import webWorker from '@/utils/render/render-worker?worker';
+import webWorker from './render/render-worker?worker';
 
 type PromissedQuery = {
     resolve: (value: any) => void;

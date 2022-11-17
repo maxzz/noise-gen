@@ -3,8 +3,8 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useDebounce, useHoverDirty, useMeasure } from 'react-use';
 import { ColorCanvasAtom, CreateAppendPresetAtom, InitPreviewsUpdateAtom, ManualSizeAtom, RenderParamsAtom, UpdatePresetPreviewAtom } from '@/store';
 import { I2W, I4W } from '@/store/types';
-import { ResizingZone } from '@/components/UI/ResizingZone';
-import { useCanvasWorker } from '@/hooks/useCanvasWorker';
+import { ResizingZone } from '@/components/Section2_Main/Canvas/ResizingZone';
+import { useCanvasWorker } from '@/components/Section2_Main/Canvas/useCanvasWorker';
 import { classNames } from '@/utils';
 
 export function Canvas() {
