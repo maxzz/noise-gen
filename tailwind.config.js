@@ -30,6 +30,7 @@ module.exports = {
         extend: {},
     },
     plugins: [
+        require('postcss-import'),
         plugin(function ({ addComponents, theme }) {
             const colorClasses = {
                 '.color-vars': {
