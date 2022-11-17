@@ -9,8 +9,20 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                primary: twColors.slate,
                 darkframe: 'rgb(75, 85, 99)', //border-gray-600
+                primary: twColors.slate,
+                "app": { //https://tailwind.simeongriggs.dev/app/AB9DDE
+                    "50": "#F8F7FC",
+                    "100": "#F2F0FA",
+                    "200": "#E2DDF3",
+                    "300": "#D5CDEE",
+                    "400": "#C1B7E7",
+                    "500": "#AB9DDE",
+                    "600": "#9A89D7",
+                    "700": "#8976D1",
+                    "800": "#735BC8",
+                    "900": "#543BAF"
+                },
             },
         },
     },
