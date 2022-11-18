@@ -58,9 +58,7 @@ export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }
                 className="absolute top-[2px] right-[2px] p-1.5 rounded activ:bg-red-100 hover:bg-red-400 hover:text-white"
                 onClick={() => onSave()}
             >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                {IconCross()}
             </div>
 
             {/* Controls */}
@@ -74,9 +72,7 @@ export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
                 />
                 <div className="">
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    {IconCross()}
                 </div>
                 <input
                     className="px-2 py-1 w-16 rounded border border-gray-500"
@@ -103,4 +99,9 @@ export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }
             </button>
         </div>
     );
+}
+function IconCross() {
+    return <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+    </svg>;
 }
