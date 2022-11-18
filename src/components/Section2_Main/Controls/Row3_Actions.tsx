@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useSpring, a } from '@react-spring/web';
 import { useKey } from 'react-use';
@@ -8,6 +8,22 @@ import { Row3_SizeBoxes } from './Row3_SizeBoxes';
 import { Row3_PopupImageSize } from './Row3_PopupImageSize';
 import { saveBlobData } from '@/utils/saveImage';
 import { IconGridAdd, IconMountains, IconSave } from '@/components/UI/Icons';
+import { classNames } from '@/utils';
+
+function Button({ className, children, ...rest }: HTMLAttributes<HTMLButtonElement>) {
+    return (
+        <button
+            className={classNames(
+                "flex-centered text-gray-500 border rounded border-gray-400 bg-gray-50 hover:bg-white transform active-scale cursor-pointer",
+                className
+            )}
+            style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
+            {...rest}
+        >
+            {children}
+        </button>
+    );
+}
 
 export function Row3_Actions() {
     const worker = useAtomValue(RenderWorkerAtom);
@@ -63,45 +79,21 @@ export function Row3_Actions() {
             </div>
 
             {/* Preset set as background */}
-            <div
-                className="flex-centered 
-                text-gray-500
-                border rounded border-gray-400 bg-gray-50 hover:bg-white
-                transform active-scale cursor-pointer"
-                style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
-                title="Set canvas image as application background (F2)"
-                onClick={setAsBackground}
-            >
+            <Button title="Set canvas image as application background (F2)" onClick={setAsBackground} className="w-8 h-8">
                 <IconMountains className="w-8 h-6 stroke-[.8]" />
-            </div>
-
+            </Button>
+            
             {/* Preset add */}
-            <div
-                className="flex-1 w-8 h-8 flex-centered 
-                text-gray-500
-                border rounded border-gray-400 bg-gray-50 hover:bg-white
-                transform active-scale cursor-pointer"
-                style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
-                title="Save preset"
-                onClick={appendNew}
-            >
+            <Button title="Save preset" onClick={appendNew} className="w-8 h-8 flex-1">
                 <IconGridAdd className="w-6 h-6 stroke-[.8]" />
-            </div>
+            </Button>
 
             {/* Image save */}
             <div className="relative z-10">
                 {/* Save button */}
-                <div
-                    className="flex-1 w-8 h-8 flex-centered 
-                    text-gray-500
-                    border rounded border-gray-400 bg-gray-50 hover:bg-white
-                    active-scale cursor-pointer"
-                    style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
-                    title="Save image"
-                    onClick={() => setShowSelectFileSize((prev) => !prev)}
-                >
+                <Button title="Save image" onClick={() => setShowSelectFileSize((prev) => !prev)} className="w-8 h-8">
                     <IconSave className="w-6 h-6 stroke-[.8]" />
-                </div>
+                </Button>
                 {/* Popup */}
                 {showSelectFileSize &&
                     <a.div style={styles} className="absolute mt-1 -top-1 right-0">
@@ -109,6 +101,7 @@ export function Row3_Actions() {
                     </a.div>
                 }
             </div>
+
         </div>
     );
 }
