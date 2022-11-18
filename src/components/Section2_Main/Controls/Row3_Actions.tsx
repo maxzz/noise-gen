@@ -92,19 +92,19 @@ export function Row3_Actions() {
 
             {/* Preset set as background */}
             <Button className="w-8 h-8" title="Set canvas image as application background (F2)" onClick={setAsBackground}>
-                <IconMountains className="w-8 h-6 stroke-[.8]" />
+                {IconMountains({ className: "w-8 h-6 stroke-[.8]" })}
             </Button>
 
             {/* Preset add */}
             <Button className="flex-1 w-8 h-8" title="Save preset" onClick={appendNew}>
-                <IconGridAdd className="w-6 h-6 stroke-[.8]" />
+                {IconGridAdd({ className: "w-6 h-6 stroke-[.8]" })}
             </Button>
 
             {/* Image save */}
             <div className="relative z-10">
                 {/* Save button */}
                 <Button className="w-8 h-8" title="Save image" onClick={() => setShowSelectFileSize((prev) => !prev)}>
-                    <IconSave className="w-6 h-6 stroke-[.8]" />
+                    {IconSave({ className: "w-6 h-6 stroke-[.8]" })}
                 </Button>
                 {/* Popup */}
                 {showSelectFileSize &&
