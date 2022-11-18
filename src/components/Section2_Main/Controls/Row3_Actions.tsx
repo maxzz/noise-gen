@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { useSpring, a } from '@react-spring/web';
+import { useSpring, a, easings } from '@react-spring/web';
 import { useKey } from 'react-use';
 import { AppBackgroundUrlAtom, RenderWorkerAtom } from '@/store';
 import { I2W, PRESET_H, PRESET_W, WH } from '@/store/types';
@@ -53,7 +53,8 @@ export function Row3_Actions() {
         scale: showSelectFileSize ? 1 : 0,
         transformOrigin: 'top right',
         config: {
-            duration: 200
+            duration: 200,
+            easing: easings.easeOutCirc,
         }
     });
 
