@@ -7,7 +7,7 @@ import { I2W, PRESET_H, PRESET_W, WH } from '@/store/types';
 import { Row3_SizeBoxes } from './Row3_SizeBoxes';
 import { Row3_PopupImageSize } from './Row3_PopupImageSize';
 import { saveBlobData } from '@/utils/saveImage';
-import { IconAdd, IconMountains, IconSave } from '@/components/UI/Icons';
+import { IconGridAdd, IconMountains, IconSave } from '@/components/UI/Icons';
 
 export function Row3_Actions() {
     const worker = useAtomValue(RenderWorkerAtom);
@@ -72,7 +72,7 @@ export function Row3_Actions() {
                 title="Set canvas image as application background (F2)"
                 onClick={setAsBackground}
             >
-                <IconMountains className="w-8 h-6" />
+                <IconMountains className="w-8 h-6 stroke-[.8]" />
             </div>
 
             {/* Preset add */}
@@ -85,7 +85,7 @@ export function Row3_Actions() {
                 title="Save preset"
                 onClick={appendNew}
             >
-                <IconAdd className="w-6 h-6" />
+                <IconGridAdd className="w-6 h-6 stroke-[.8]" />
             </div>
 
             {/* Image save */}
@@ -100,7 +100,7 @@ export function Row3_Actions() {
                     title="Save image"
                     onClick={() => setShowSelectFileSize((prev) => !prev)}
                 >
-                    <IconSave className="w-6 h-6" />
+                    <IconSave className="w-6 h-6 stroke-[.8]" />
                 </div>
                 {/* Popup */}
                 {showSelectFileSize &&
