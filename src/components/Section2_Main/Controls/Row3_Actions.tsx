@@ -10,11 +10,26 @@ import { saveBlobData } from '@/utils/saveImage';
 import { IconGridAdd, IconMountains, IconSave } from '@/components/UI/Icons';
 import { classNames } from '@/utils';
 
+function Frame({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
+    return (
+        <div
+            className={classNames(
+                "px-1 flex-centered text-gray-500 border-gray-400 bg-gray-50 hover:bg-white border rounded space-x-1",
+                className
+            )}
+            style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
+            {...rest}
+        >
+            {children}
+        </div>
+    );
+}
+
 function Button({ className, children, ...rest }: HTMLAttributes<HTMLButtonElement>) {
     return (
         <button
             className={classNames(
-                "flex-centered text-gray-500 border rounded border-gray-400 bg-gray-50 hover:bg-white transform active-scale cursor-pointer",
+                "flex-centered text-gray-500 border-gray-400 bg-gray-50 hover:bg-white border rounded transform active-scale cursor-pointer",
                 className
             )}
             style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
@@ -71,27 +86,24 @@ export function Row3_Actions() {
         <div className="p-2 flex space-x-1">
 
             {/* Canvas size buttons */}
-            <div
-                className="px-1 flex-centered space-x-1 border rounded border-gray-400 bg-gray-50 hover:bg-white"
-                style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
-            >
+            <Frame>
                 <Row3_SizeBoxes />
-            </div>
+            </Frame>
 
             {/* Preset set as background */}
-            <Button title="Set canvas image as application background (F2)" onClick={setAsBackground} className="w-8 h-8">
+            <Button className="w-8 h-8" title="Set canvas image as application background (F2)" onClick={setAsBackground}>
                 <IconMountains className="w-8 h-6 stroke-[.8]" />
             </Button>
-            
+
             {/* Preset add */}
-            <Button title="Save preset" onClick={appendNew} className="w-8 h-8 flex-1">
+            <Button className="flex-1 w-8 h-8" title="Save preset" onClick={appendNew}>
                 <IconGridAdd className="w-6 h-6 stroke-[.8]" />
             </Button>
 
             {/* Image save */}
             <div className="relative z-10">
                 {/* Save button */}
-                <Button title="Save image" onClick={() => setShowSelectFileSize((prev) => !prev)} className="w-8 h-8">
+                <Button className="w-8 h-8" title="Save image" onClick={() => setShowSelectFileSize((prev) => !prev)}>
                     <IconSave className="w-6 h-6 stroke-[.8]" />
                 </Button>
                 {/* Popup */}
