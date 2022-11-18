@@ -48,10 +48,12 @@ export function Row3_Actions() {
     const setAppBackgroundUrl = useSetAtom(AppBackgroundUrlAtom);
     const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
-    const styles = useSpring({
+    const popupStyles = useSpring({
         opacity: showSelectFileSize ? 1 : 0,
+        scale: showSelectFileSize ? 1 : 0,
+        transformOrigin: 'top right',
         config: {
-            duration: 100
+            duration: 200
         }
     });
 
@@ -108,7 +110,7 @@ export function Row3_Actions() {
                 </Button>
                 {/* Popup */}
                 {showSelectFileSize &&
-                    <a.div style={styles} className="absolute mt-1 -top-1 right-0">
+                    <a.div style={popupStyles} className="absolute mt-1 -top-1 right-0">
                         <Row3_PopupImageSize onSave={saveItemPng} />
                     </a.div>
                 }
