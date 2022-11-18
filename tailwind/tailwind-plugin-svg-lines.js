@@ -1,5 +1,8 @@
 const plugin = require('tailwindcss/plugin');
 
+/**
+ * @param {import('tailwindcss/types/config').PluginAPI} helpers
+ */
 function add({ addUtilities }) {
     const newUtilities = {
         ".stroke-round": {
