@@ -112,7 +112,7 @@ export function Row3_Actions() {
                 {/* Popup */}
                 {showSelectFileSize &&
                     <a.div style={popupStyles} className="absolute mt-1 -top-1 right-0">
-                        <Row3_PopupImageSize onSave={saveItemPng} />
+                        <Row3_PopupImageSize onClickedSave={saveItemPng} />
                     </a.div>
                 }
             </div>

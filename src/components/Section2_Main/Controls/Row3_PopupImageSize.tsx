@@ -20,8 +20,9 @@ function sizeTooBigMessage(size: WH) {
 The current image size ${size.w} x ${size.h} = ${sizeInMB(size)} (uncompressed in pixels).`;
 }
 
-export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }) {
+export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: (size?: WH) => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
+    
     const [width, setWidth] = React.useState('' + exportImageSize.w);
     const [height, setHeight] = React.useState('' + exportImageSize.h);
 
@@ -49,11 +50,12 @@ export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }
         isValid && setExportImageSize({ w, h });
     }, [width, height]);
 
-    const notice = tooBig
+    const noticeTitle = tooBig
         ? sizeTooBigMessage({ w: +width, h: +height })
         : valid
             ? `The current size is ${sizeInMB({ w: +width, h: +height })} (uncompressed in pixels).`
             : 'The numbers are not valid.';
+    const noticeButton = valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size';
 
     return (
         // Popup frame
@@ -98,10 +100,10 @@ export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }
                     valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'
                 )
                 }
-                title={notice}
+                title={noticeTitle}
                 onClick={() => valid && onSave(exportImageSize)}
             >
-                <div className="pb-0.5">{valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size'}</div>
+                <div className="pb-0.5">{noticeButton}</div>
             </button>
         </div>
     );
