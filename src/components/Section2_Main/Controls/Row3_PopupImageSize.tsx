@@ -11,31 +11,31 @@ function validInt(v: string): number {
     return !isNaN(n) && n > 0 ? n : 0;
 }
 
-function sizeInMB(size: WH): string {
-    return bytesToSize(size.w * size.h, 2);
-}
-
-function sizeTooBigMessage(size: WH) {
-    return `Sizes over 2000 x 2000 are already a bit too much for Chrome.
-The current image size ${size.w} x ${size.h} = ${sizeInMB(size)} (uncompressed in pixels).`;
-}
-
 function getNotices(valid: boolean, tooBig: boolean, size: WH) {
-    const noticeTitle = tooBig
+    const forTitle = tooBig
         ? sizeTooBigMessage(size)
         : valid
             ? `The current size is ${sizeInMB(size)} (uncompressed in pixels).`
             : 'The numbers are not valid.';
-    const noticeButton = valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size';
+    const forButton = valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size';
     return {
-        noticeTitle,
-        noticeButton,
+        forTitle,
+        forButton,
+    };
+
+    function sizeInMB(size: WH): string {
+        return bytesToSize(size.w * size.h, 2);
+    }
+
+    function sizeTooBigMessage(size: WH) {
+        return `Sizes over 2000 x 2000 are already a bit too much for Chrome.
+    The current image size ${size.w} x ${size.h} = ${sizeInMB(size)} (uncompressed in pixels).`;
     }
 }
 
 export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: (size?: WH) => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
-    
+
     const [width, setWidth] = React.useState('' + exportImageSize.w);
     const [height, setHeight] = React.useState('' + exportImageSize.h);
 
@@ -106,12 +106,13 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
                 className={classNames(
                     "self-end mt-2 mb-2 px-3 py-1 h-8 rounded border active-scale",
                     valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'
-                )
-                }
-                title={notices.noticeTitle}
+                )}
+                title={notices.forTitle}
                 onClick={() => valid && onSave(exportImageSize)}
             >
-                <div className="pb-0.5">{notices.noticeButton}</div>
+                <div className="pb-0.5">
+                    {notices.forButton}
+                </div>
             </button>
         </div>
     );
