@@ -20,6 +20,19 @@ function sizeTooBigMessage(size: WH) {
 The current image size ${size.w} x ${size.h} = ${sizeInMB(size)} (uncompressed in pixels).`;
 }
 
+function getNotices(valid: boolean, tooBig: boolean, size: WH) {
+    const noticeTitle = tooBig
+        ? sizeTooBigMessage(size)
+        : valid
+            ? `The current size is ${sizeInMB(size)} (uncompressed in pixels).`
+            : 'The numbers are not valid.';
+    const noticeButton = valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size';
+    return {
+        noticeTitle,
+        noticeButton,
+    }
+}
+
 export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: (size?: WH) => void; }) {
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
     
@@ -50,12 +63,7 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
         isValid && setExportImageSize({ w, h });
     }, [width, height]);
 
-    const noticeTitle = tooBig
-        ? sizeTooBigMessage({ w: +width, h: +height })
-        : valid
-            ? `The current size is ${sizeInMB({ w: +width, h: +height })} (uncompressed in pixels).`
-            : 'The numbers are not valid.';
-    const noticeButton = valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size';
+    const notices = getNotices(valid, tooBig, { w: +width, h: +height });
 
     return (
         // Popup frame
@@ -100,10 +108,10 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
                     valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'
                 )
                 }
-                title={noticeTitle}
+                title={notices.noticeTitle}
                 onClick={() => valid && onSave(exportImageSize)}
             >
-                <div className="pb-0.5">{noticeButton}</div>
+                <div className="pb-0.5">{notices.noticeButton}</div>
             </button>
         </div>
     );
