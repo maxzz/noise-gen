@@ -68,24 +68,26 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
     return (
         // Popup frame
         <div
-            className="px-4 pt-1 relative text-sm border-gray-100 bg-app-400 text-app-900 flex flex-col rounded border shadow-lg"
+            className="relative px-4 pt-2 text-sm border-gray-100 bg-app-400 text-app-900 flex flex-col rounded border shadow-lg"
             onKeyDown={((event) => event.key === 'Escape' && onSave())}
             ref={containerRef}
         >
+            <div className="mr-8 font-bold uppercase whitespace-nowrap">Save image as PNG</div>
+            
             {/* Close button */}
             <div
-                className="absolute top-[2px] right-[2px] p-1.5 rounded activ:bg-red-100 hover:bg-red-500 hover:text-white"
+                className="absolute top-[4px] right-[2px] p-1.5 rounded activ:bg-red-100 hover:bg-red-500 hover:text-white transition-colors"
                 onClick={() => onSave()}
             >
                 {IconCross({ className: "h-4 w-4 stroke-2" })}
             </div>
 
             {/* Controls */}
-            <div className="mt-4">Image size in pixels</div>
-            <div className="mt-2 flex items-center space-x-1">
+            <div className="mt-2">Image size in pixels</div>
+            <div className="mt-2 flex items-center justify-between">
                 <input
                     ref={firstInputRef}
-                    className="px-2 py-1 w-16 bg-app-100 border-app-700 focus:outline-none focus:ring-1 ring-app-600 ring-offset-2 ring-offset-app-400 shadow-app-900/20 shadow-inner rounded border"
+                    className="px-2 py-1 w-20 bg-app-100 border-app-700 focus:outline-none focus:ring-1 ring-app-600 ring-offset-2 ring-offset-app-400 shadow-app-900/20 shadow-inner rounded border"
                     value={width}
                     onChange={(e) => setWidth(e.target.value)}
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
@@ -94,7 +96,7 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
                 {IconCross({ className: "h-4 w-4" })}
 
                 <input
-                    className="px-2 py-1 w-16 bg-app-100 border-app-700 focus:outline-none focus:ring-1 ring-app-600 ring-offset-2 ring-offset-app-400 shadow-app-900/20 shadow-inner rounded border"
+                    className="px-2 py-1 w-20 bg-app-100 border-app-700 focus:outline-none focus:ring-1 ring-app-600 ring-offset-2 ring-offset-app-400 shadow-app-900/20 shadow-inner rounded border"
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
@@ -104,7 +106,7 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
             {/* Save button */}
             <button
                 className={classNames(
-                    "self-end my-4 px-4 h-8 active-scale focus:outline-none focus:ring-1 ring-app-600 ring-offset-2 ring-offset-app-400 shadow rounded border",
+                    "self-end mt-4 mb-3 px-4 h-8 active-scale focus:outline-none focus:ring-1 ring-app-600 ring-offset-2 ring-offset-app-400 shadow rounded border",
                     valid
                         ? 'bg-app-500 text-gray-900 border-gray-500 hover:bg-app-600'
                         : 'text-red-600 border-none',
