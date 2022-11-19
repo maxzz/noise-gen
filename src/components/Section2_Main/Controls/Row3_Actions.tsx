@@ -14,10 +14,9 @@ function Frame({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>)
     return (
         <div
             className={classNames(
-                "flex-centered text-app-800 border-gray-400 bg-app-100 hover:bg-white border rounded shadow",
+                "flex-centered text-app-800 border-app-500 bg-app-300/50 hover:text-app-50 hover:bg-app-400 border rounded shadow",
                 "px-1 space-x-1", className,
             )}
-            style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
             {...rest}
         >
             {children}
@@ -29,10 +28,9 @@ function Button({ className, children, ...rest }: HTMLAttributes<HTMLButtonEleme
     return (
         <button
             className={classNames(
-                "flex-centered text-app-800 border-gray-400 bg-app-100 hover:bg-white border rounded shadow",
+                "flex-centered text-app-800 border-app-500 bg-app-300/50 hover:text-app-50 hover:bg-app-400 border rounded shadow",
                 "active-scale cursor-pointer", className,
             )}
-            style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
             {...rest}
         >
             {children}
@@ -45,7 +43,6 @@ function ButtonImageSave({ onClickBtnSave }: { onClickBtnSave: (size?: any) => v
     const popupStyles = useSpring({
         opacity: showSelectFileSize ? 1 : 0,
         scale: showSelectFileSize ? 1 : 0,
-        transformOrigin: 'top right',
         config: {
             duration: 200,
             easing: easings.easeOutCirc,
@@ -54,12 +51,12 @@ function ButtonImageSave({ onClickBtnSave }: { onClickBtnSave: (size?: any) => v
     return (
         <div className="relative z-10">
             <Button className="w-8 h-8" title="Save image" onClick={() => setShowSelectFileSize((prev) => !prev)}>
-                {IconSave({ className: "p-0.5 w-6 h-6 stroke-[.8]" })}
+                {IconSave({ className: "p-0.5 w-6 h-6 stroke-[.8] hover:stroke-2" })}
             </Button>
 
             {/* Popup */}
             {showSelectFileSize &&
-                <a.div style={popupStyles} className="absolute mt-1 -top-1 right-0">
+                <a.div style={popupStyles} className="absolute mt-1 -top-1 right-0 origin-top-right">
                     <Row3_PopupImageSize onClickedSave={(size?: any) => {
                         setShowSelectFileSize(false);
                         onClickBtnSave(size);
