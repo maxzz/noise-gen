@@ -24,6 +24,18 @@ module.exports = {
                     "800": "#735BC8",
                     "900": "#543BAF"
                 },
+                // "app": { //https://tailwind.simeongriggs.dev/app/8664FF - this is better w/ pure colors wo/ gray
+                //     "50": "#F7F5FF",
+                //     "100": "#EFEBFF",
+                //     "200": "#DBD1FF",
+                //     "300": "#C7B8FF",
+                //     "400": "#AB94FF",
+                //     "500": "#8664FF",
+                //     "600": "#7752FF",
+                //     "700": "#6338FF",
+                //     "800": "#4714FF",
+                //     "900": "#2800B8"
+                // },
             },
         },
     },
