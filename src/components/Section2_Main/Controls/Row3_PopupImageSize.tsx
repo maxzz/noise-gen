@@ -68,7 +68,7 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
     return (
         // Popup frame
         <div
-            className="px-2 pt-1 relative rounded border text-sm border-gray-500 bg-purple-300 flex flex-col shadow-lg text-purple-900"
+            className="px-4 pt-1 relative rounded border text-sm border-gray-100 bg-app-400 flex flex-col shadow-lg text-purple-900"
             onKeyDown={((event) => event.key === 'Escape' && onSave())}
             ref={containerRef}
         >
@@ -104,8 +104,8 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
             {/* Save button */}
             <button
                 className={classNames(
-                    "self-end mt-2 mb-2 px-3 py-1 h-8 rounded border active-scale",
-                    valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'
+                    "self-end mt-4 mb-4 px-4 py-1 h-8 rounded border active-scale",
+                    valid ? 'bg-app-500 text-gray-200 border-gray-500' : 'text-red-600 border-none'
                 )}
                 title={notices.forTitle}
                 onClick={() => valid && onSave(exportImageSize)}
