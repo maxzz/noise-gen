@@ -74,7 +74,7 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
         >
             {/* Close button */}
             <div
-                className="absolute top-[2px] right-[2px] p-1.5 rounded activ:bg-red-100 hover:bg-red-400 hover:text-white"
+                className="absolute top-[2px] right-[2px] p-1.5 rounded activ:bg-red-100 hover:bg-red-500 hover:text-white"
                 onClick={() => onSave()}
             >
                 {IconCross({ className: "h-4 w-4 stroke-2" })}
@@ -82,19 +82,19 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
 
             {/* Controls */}
             <div className="mt-4">Image size in pixels</div>
-            <div className="mt-1 flex items-center space-x-1">
+            <div className="mt-2 flex items-center space-x-1">
                 <input
                     ref={firstInputRef}
-                    className="px-2 py-1 w-16 bg-app-100 border-app-700 focus:outline-none focus:ring ring-app-600 ring-offset-1 ring-offset-app-400 rounded border"
+                    className="px-2 py-1 w-16 bg-app-100 border-app-700 focus:outline-none focus:ring-1 ring-app-600 ring-offset-2 ring-offset-app-400 shadow-app-900/20 shadow-inner rounded border"
                     value={width}
                     onChange={(e) => setWidth(e.target.value)}
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
                 />
 
-                {IconCross({ className: "h-4 w-4 stroke-2" })}
+                {IconCross({ className: "h-4 w-4" })}
 
                 <input
-                    className="px-2 py-1 w-16 bg-app-100 border-app-700 focus:outline-none focus:ring ring-app-600 ring-offset-1 ring-offset-app-400 rounded border"
+                    className="px-2 py-1 w-16 bg-app-100 border-app-700 focus:outline-none focus:ring-1 ring-app-600 ring-offset-2 ring-offset-app-400 shadow-app-900/20 shadow-inner rounded border"
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
@@ -104,8 +104,10 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
             {/* Save button */}
             <button
                 className={classNames(
-                    "self-end mt-4 mb-4 px-4 py-1 h-8 active-scale focus:outline-none focus:ring ring-app-600 ring-offset-1 ring-offset-app-400 rounded border",
-                    valid ? 'bg-app-500 text-gray-200 border-gray-500' : 'text-red-600 border-none'
+                    "self-end my-4 px-4 h-8 active-scale focus:outline-none focus:ring-1 ring-app-600 ring-offset-2 ring-offset-app-400 shadow rounded border",
+                    valid
+                        ? 'bg-app-500 text-gray-900 border-gray-500 hover:bg-app-600'
+                        : 'text-red-600 border-none',
                 )}
                 title={notices.forTitle}
                 onClick={() => valid && onSave(exportImageSize)}
