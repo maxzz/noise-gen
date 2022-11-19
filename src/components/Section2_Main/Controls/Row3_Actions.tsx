@@ -40,79 +40,8 @@ function Button({ className, children, ...rest }: HTMLAttributes<HTMLButtonEleme
     );
 }
 
-export function Row3_Actions() {
-    const worker = useAtomValue(RenderWorkerAtom);
-    const latestWorker = React.useRef(worker);
-    latestWorker.current = worker;
-
-    const setAppBackgroundUrl = useSetAtom(AppBackgroundUrlAtom);
-    // const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
-
-    // const popupStyles = useSpring({
-    //     opacity: showSelectFileSize ? 1 : 0,
-    //     scale: showSelectFileSize ? 1 : 0,
-    //     transformOrigin: 'top right',
-    //     config: {
-    //         duration: 200,
-    //         easing: easings.easeOutCirc,
-    //     }
-    // });
-
-    useKey('F2', (event) => {
-        if (event.altKey) {
-            setAppBackgroundUrl(null);
-        } else {
-            setAsBackground();
-        }
-    });
-
-    function appendNew() {
-        worker?.postMessage({ type: 'get-preview', smallWidth: PRESET_W, smallHeight: PRESET_H } as I2W.GetPreview);
-    }
-
-    async function setAsBackground() {
-        if (latestWorker.current) {
-            let blob = await latestWorker.current.getImage();
-            setAppBackgroundUrl(blob);
-        }
-    }
-
-    async function saveItemPng(size?: WH) {
-        //setShowSelectFileSize(false);
-        if (size && worker) {
-            let blob = await worker.getImage(size);
-            saveBlobData(blob, 'noise-gen.png');
-        }
-    }
-
-    return (
-        <div className="p-2 flex space-x-1">
-
-            {/* Canvas size buttons */}
-            <Frame>
-                <Row3_SizeBoxes />
-            </Frame>
-
-            {/* Preset set as background */}
-            <Button className="w-8 h-8" title="Set canvas image as application background (F2)" onClick={setAsBackground}>
-                {IconMountains({ className: "w-8 h-6 stroke-[.7]" })}
-            </Button>
-
-            {/* Preset add */}
-            <Button className="flex-1 w-8 h-8" title="Save preset" onClick={appendNew}>
-                {IconGridAdd({ className: "w-6 h-6 stroke-[.8]" })}
-            </Button>
-
-            {/* Image save */}
-            <ButtonImageSave onClickBtnSave={saveItemPng} />
-        </div>
-    );
-}
-
 function ButtonImageSave({ onClickBtnSave }: { onClickBtnSave: (size?: any) => void; }) {
-
     const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
-
     const popupStyles = useSpring({
         opacity: showSelectFileSize ? 1 : 0,
         scale: showSelectFileSize ? 1 : 0,
@@ -124,7 +53,6 @@ function ButtonImageSave({ onClickBtnSave }: { onClickBtnSave: (size?: any) => v
     });
     return (
         <div className="relative z-10">
-            {/* Save button */}
             <Button className="w-8 h-8" title="Save image" onClick={() => setShowSelectFileSize((prev) => !prev)}>
                 {IconSave({ className: "p-0.5 w-6 h-6 stroke-[.8]" })}
             </Button>
@@ -138,6 +66,62 @@ function ButtonImageSave({ onClickBtnSave }: { onClickBtnSave: (size?: any) => v
                     }} />
                 </a.div>
             }
+        </div>
+    );
+}
+
+export function Row3_Actions() {
+    const worker = useAtomValue(RenderWorkerAtom);
+    const latestWorker = React.useRef(worker);
+    latestWorker.current = worker;
+
+    const setAppBackgroundUrl = useSetAtom(AppBackgroundUrlAtom);
+
+    useKey('F2', (event) => {
+        if (event.altKey) {
+            setAppBackgroundUrl(null);
+        } else {
+            setAsBackground();
+        }
+    });
+
+    function postAppendNewPreset() {
+        worker?.postMessage({ type: 'get-preview', smallWidth: PRESET_W, smallHeight: PRESET_H } as I2W.GetPreview);
+    }
+
+    async function setAsBackground() {
+        if (latestWorker.current) {
+            let blob = await latestWorker.current.getImage();
+            setAppBackgroundUrl(blob);
+        }
+    }
+
+    async function saveItemPng(size?: WH) {
+        if (size && worker) {
+            let blob = await worker.getImage(size);
+            saveBlobData(blob, 'noise-gen.png');
+        }
+    }
+
+    return (
+        <div className="p-2 flex space-x-1">
+            {/* Canvas size buttons */}
+            <Frame>
+                <Row3_SizeBoxes />
+            </Frame>
+
+            {/* Preset set as background */}
+            <Button className="w-8 h-8" title="Set canvas image as app background (F2 / Alt+F2 clear)" onClick={setAsBackground}>
+                {IconMountains({ className: "w-8 h-6 stroke-[.7]" })}
+            </Button>
+
+            {/* Preset add */}
+            <Button className="flex-1 w-8 h-8" title="Save preset" onClick={postAppendNewPreset}>
+                {IconGridAdd({ className: "w-6 h-6 stroke-[.8]" })}
+            </Button>
+
+            {/* Image save */}
+            <ButtonImageSave onClickBtnSave={saveItemPng} />
         </div>
     );
 }
