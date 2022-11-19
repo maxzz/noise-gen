@@ -11,16 +11,16 @@ export function IconTrash({ className, ...rest }: SVGAttributes<SVGSVGElement>) 
 
 export function IconCross({ className, ...rest }: SVGAttributes<SVGSVGElement>) {
     return (
-        <svg className={classNames("stroke-current fill-transparent", className)} viewBox="0 0 24 24" {...rest}>
-            <path strokeLinecap="round" strokeWidth={4} d="M6 18L18 6M6 6l12 12" />
+        <svg className={classNames("fill-transparent stroke-current stroke-round", className)} viewBox="0 0 24 24" {...rest}>
+            <path d="M6 18L18 6M6 6l12 12" />
         </svg>
     );
 }
 
 export function IconChevronHorizontal({ className, ...rest }: SVGAttributes<SVGSVGElement>) {
     return (
-        <svg className={classNames("stroke-current fill-transparent", className)} viewBox="0 0 24 24" {...rest}>
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+        <svg className={classNames("fill-transparent stroke-current stroke-round", className)} viewBox="0 0 24 24" {...rest}>
+            <path d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
         </svg>
     );
 }
