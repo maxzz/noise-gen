@@ -5,7 +5,7 @@ import { ManualSizeAtom } from '@/store';
 function SizeIcon({ select, step }: { select: () => void, step: number; }) {
     return (
         <div
-            className="flex-centered active:scale-95 cursor-pointer ring-app-900 hover:ring-1 ring-offset-2"
+            className="flex-centered active:scale-95 cursor-pointer ring-purple-500 hover:ring-1 ring-offset-2"
             title={`Set canvas ${CanvasSizes[step][0]} x ${CanvasSizes[step][1]}`}
             onClick={select}
         >
