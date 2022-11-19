@@ -85,7 +85,7 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
             <div className="mt-1 flex items-center space-x-1">
                 <input
                     ref={firstInputRef}
-                    className="px-2 py-1 w-16 bg-app-100 border-app-700 rounded border"
+                    className="px-2 py-1 w-16 bg-app-100 border-app-700 focus:outline-none focus:ring-1 ring-app-700 ring-offset-1 ring-offset-app-400 rounded border"
                     value={width}
                     onChange={(e) => setWidth(e.target.value)}
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
@@ -94,7 +94,7 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
                 {IconCross({ className: "h-4 w-4 stroke-2" })}
 
                 <input
-                    className="px-2 py-1 w-16 bg-app-100 border-app-700 rounded border"
+                    className="px-2 py-1 w-16 bg-app-100 border-app-700 focus:outline-none focus:ring-1 ring-app-700 ring-offset-1 ring-offset-app-400 rounded border"
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
