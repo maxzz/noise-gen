@@ -14,8 +14,8 @@ function Frame({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>)
     return (
         <div
             className={classNames(
-                "px-1 flex-centered text-gray-500 border-gray-400 bg-gray-50 hover:bg-white border rounded space-x-1",
-                className
+                "flex-centered text-app-800 border-gray-400 bg-app-100 hover:bg-white border rounded shadow",
+                "px-1 space-x-1", className,
             )}
             style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
             {...rest}
@@ -29,8 +29,8 @@ function Button({ className, children, ...rest }: HTMLAttributes<HTMLButtonEleme
     return (
         <button
             className={classNames(
-                "flex-centered text-gray-500 border-gray-400 bg-gray-50 hover:bg-white border rounded transform active-scale cursor-pointer",
-                className
+                "flex-centered text-app-800 border-gray-400 bg-app-100 hover:bg-white border rounded shadow",
+                "active-scale cursor-pointer", className,
             )}
             style={{ boxShadow: '#00000014 1px 1px 0px 0px' }}
             {...rest}
@@ -46,17 +46,17 @@ export function Row3_Actions() {
     latestWorker.current = worker;
 
     const setAppBackgroundUrl = useSetAtom(AppBackgroundUrlAtom);
-    const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
+    // const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
 
-    const popupStyles = useSpring({
-        opacity: showSelectFileSize ? 1 : 0,
-        scale: showSelectFileSize ? 1 : 0,
-        transformOrigin: 'top right',
-        config: {
-            duration: 200,
-            easing: easings.easeOutCirc,
-        }
-    });
+    // const popupStyles = useSpring({
+    //     opacity: showSelectFileSize ? 1 : 0,
+    //     scale: showSelectFileSize ? 1 : 0,
+    //     transformOrigin: 'top right',
+    //     config: {
+    //         duration: 200,
+    //         easing: easings.easeOutCirc,
+    //     }
+    // });
 
     useKey('F2', (event) => {
         if (event.altKey) {
@@ -78,7 +78,7 @@ export function Row3_Actions() {
     }
 
     async function saveItemPng(size?: WH) {
-        setShowSelectFileSize(false);
+        //setShowSelectFileSize(false);
         if (size && worker) {
             let blob = await worker.getImage(size);
             saveBlobData(blob, 'noise-gen.png');
@@ -95,7 +95,7 @@ export function Row3_Actions() {
 
             {/* Preset set as background */}
             <Button className="w-8 h-8" title="Set canvas image as application background (F2)" onClick={setAsBackground}>
-                {IconMountains({ className: "w-8 h-6 stroke-[.8]" })}
+                {IconMountains({ className: "w-8 h-6 stroke-[.7]" })}
             </Button>
 
             {/* Preset add */}
@@ -104,19 +104,40 @@ export function Row3_Actions() {
             </Button>
 
             {/* Image save */}
-            <div className="relative z-10">
-                {/* Save button */}
-                <Button className="w-8 h-8" title="Save image" onClick={() => setShowSelectFileSize((prev) => !prev)}>
-                    {IconSave({ className: "w-6 h-6 stroke-[.8]" })}
-                </Button>
-                {/* Popup */}
-                {showSelectFileSize &&
-                    <a.div style={popupStyles} className="absolute mt-1 -top-1 right-0">
-                        <Row3_PopupImageSize onClickedSave={saveItemPng} />
-                    </a.div>
-                }
-            </div>
+            <ButtonImageSave onClickBtnSave={saveItemPng} />
+        </div>
+    );
+}
 
+function ButtonImageSave({ onClickBtnSave }: { onClickBtnSave: (size?: any) => void; }) {
+
+    const [showSelectFileSize, setShowSelectFileSize] = React.useState(false);
+
+    const popupStyles = useSpring({
+        opacity: showSelectFileSize ? 1 : 0,
+        scale: showSelectFileSize ? 1 : 0,
+        transformOrigin: 'top right',
+        config: {
+            duration: 200,
+            easing: easings.easeOutCirc,
+        }
+    });
+    return (
+        <div className="relative z-10">
+            {/* Save button */}
+            <Button className="w-8 h-8" title="Save image" onClick={() => setShowSelectFileSize((prev) => !prev)}>
+                {IconSave({ className: "p-0.5 w-6 h-6 stroke-[.8]" })}
+            </Button>
+
+            {/* Popup */}
+            {showSelectFileSize &&
+                <a.div style={popupStyles} className="absolute mt-1 -top-1 right-0">
+                    <Row3_PopupImageSize onClickedSave={(size?: any) => {
+                        setShowSelectFileSize(false);
+                        onClickBtnSave(size);
+                    }} />
+                </a.div>
+            }
         </div>
     );
 }
