@@ -72,15 +72,9 @@ export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }
                     onChange={(e) => setWidth(e.target.value)}
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
                 />
-                {/* <div className="h-4 w-4 stroke-2"> */}
+
                 <div className="">
-                    {/* {IconCross({})} */}
                     {IconCross({className:"h-4 w-4 stroke-2"})}
-
-                    {/* <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg> */}
-
                 </div>
                 <input
                     className="px-2 py-1 w-16 rounded border border-gray-500"
