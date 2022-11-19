@@ -68,7 +68,7 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
     return (
         // Popup frame
         <div
-            className="px-4 pt-1 relative rounded border text-sm border-gray-100 bg-app-400 flex flex-col shadow-lg text-purple-900"
+            className="px-4 pt-1 relative text-sm border-gray-100 bg-app-400 text-app-900 flex flex-col rounded border shadow-lg"
             onKeyDown={((event) => event.key === 'Escape' && onSave())}
             ref={containerRef}
         >
@@ -85,7 +85,7 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
             <div className="mt-1 flex items-center space-x-1">
                 <input
                     ref={firstInputRef}
-                    className="px-2 py-1 w-16 rounded border border-gray-500"
+                    className="px-2 py-1 w-16 bg-app-100 border-app-700 rounded border"
                     value={width}
                     onChange={(e) => setWidth(e.target.value)}
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
@@ -94,7 +94,7 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
                 {IconCross({ className: "h-4 w-4 stroke-2" })}
 
                 <input
-                    className="px-2 py-1 w-16 rounded border border-gray-500"
+                    className="px-2 py-1 w-16 bg-app-100 border-app-700 rounded border"
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
@@ -104,7 +104,7 @@ export function Row3_PopupImageSize({ onClickedSave: onSave }: { onClickedSave: 
             {/* Save button */}
             <button
                 className={classNames(
-                    "self-end mt-4 mb-4 px-4 py-1 h-8 rounded border active-scale",
+                    "self-end mt-4 mb-4 px-4 py-1 h-8 active-scale rounded border",
                     valid ? 'bg-app-500 text-gray-200 border-gray-500' : 'text-red-600 border-none'
                 )}
                 title={notices.forTitle}
