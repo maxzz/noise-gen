@@ -11,11 +11,11 @@ function ButtonClearAppBg() {
     return (<>
         {appBackgroundActive &&
             <button
-                className="ml-2 px-2 pb-[1px] text-xs dark-frame-rounded bg-purple-100 uppercase"
+                className="ml-2 px-2 py-2 text-xs text-app-100 bg-app-700 hover:text-app-900 hover:bg-app-200 rounded uppercase active:scale-[.97]"
                 title="Clear background image (Alt+F2)"
                 onClick={() => setAppBackgroundUrl(null)}
             >
-                Clear bkg
+                Clear background
             </button>
         }
     </>);
@@ -24,7 +24,7 @@ function ButtonClearAppBg() {
 export function Section1_Header() {
     return (
         <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-app-500 select-none" style={{ boxShadow: '#00000033 0 1px 2px' }}>
-            <div className="mx-4 flex-none flex-centered">
+            <div className="mx-4 flex-none flex-centered space-x-4">
                 <div className="flex items-center space-x-2">
                     <TwoCubes />
 
