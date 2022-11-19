@@ -14,7 +14,7 @@ function Frame({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>)
     return (
         <div
             className={classNames(
-                "flex-centered text-app-800 border-app-500 bg-app-300/50 hover:text-app-50 hover:bg-app-400 border rounded shadow",
+                "flex-centered text-app-800 border-app-500 bg-app-300/50 hover:text-app-50 hover:bg-app-400 border rounded shadow group transition-colors",
                 "px-1 space-x-1", className,
             )}
             {...rest}
@@ -28,7 +28,7 @@ function Button({ className, children, ...rest }: HTMLAttributes<HTMLButtonEleme
     return (
         <button
             className={classNames(
-                "flex-centered text-app-800 border-app-500 bg-app-300/50 hover:text-app-50 hover:bg-app-400 border rounded shadow",
+                "flex-centered text-app-800 border-app-500 bg-app-300/50 hover:text-app-50 hover:bg-app-400 border rounded shadow group transition-colors",
                 "active-scale cursor-pointer", className,
             )}
             {...rest}
@@ -51,7 +51,8 @@ function ButtonImageSave({ onClickBtnSave }: { onClickBtnSave: (size?: any) => v
     return (
         <div className="relative z-10">
             <Button className="w-8 h-8" title="Save image" onClick={() => setShowSelectFileSize((prev) => !prev)}>
-                {IconSave({ className: "p-0.5 w-6 h-6 stroke-[.8] hover:stroke-2" })}
+                {IconSave({ className: "p-0.5 w-6 h-6 stroke-[.8] group-hover:stroke-[1.5]" })}
+                {/* <IconSave className="p-0.5 w-6 h-6 stroke-[.8] group-hover:stroke-[1.5]" /> */}
             </Button>
 
             {/* Popup */}
@@ -109,12 +110,12 @@ export function Row3_Actions() {
 
             {/* Preset set as background */}
             <Button className="w-8 h-8" title="Set canvas image as app background (F2 / Alt+F2 clear)" onClick={setAsBackground}>
-                {IconMountains({ className: "w-8 h-6 stroke-[.7]" })}
+                {IconMountains({ className: "w-8 h-6 stroke-[.7] group-hover:stroke-[1.5]" })}
             </Button>
 
             {/* Preset add */}
             <Button className="flex-1 w-8 h-8" title="Save preset" onClick={postAppendNewPreset}>
-                {IconGridAdd({ className: "w-6 h-6 stroke-[.8]" })}
+                {IconGridAdd({ className: "w-6 h-6 stroke-[.8] group-hover:stroke-[1.5]" })}
             </Button>
 
             {/* Image save */}
