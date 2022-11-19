@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useClickAway } from 'react-use';
 import { ExportImageSizeAtom } from '@/store';
 import { WH } from '@/store/types';
-import { bytesToSize } from '@/utils';
+import { bytesToSize, classNames } from '@/utils';
 import { IconCross } from '@/components/UI/Icons';
 
 function validInt(v: string): number {
@@ -24,8 +24,10 @@ export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }
     const [exportImageSize, setExportImageSize] = useAtom(ExportImageSizeAtom);
     const [width, setWidth] = React.useState('' + exportImageSize.w);
     const [height, setHeight] = React.useState('' + exportImageSize.h);
+
     const [valid, setValid] = React.useState(true);
     const [tooBig, setTooBig] = React.useState(false);
+
     const containerRef = React.useRef<HTMLDivElement>(null);
     const firstInputRef = React.useRef<HTMLInputElement>(null);
     useClickAway(containerRef, () => onSave());
@@ -47,6 +49,12 @@ export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }
         isValid && setExportImageSize({ w, h });
     }, [width, height]);
 
+    const notice = tooBig
+        ? sizeTooBigMessage({ w: +width, h: +height })
+        : valid
+            ? `The current size is ${sizeInMB({ w: +width, h: +height })} (uncompressed in pixels).`
+            : 'The numbers are not valid.';
+
     return (
         // Popup frame
         <div
@@ -59,7 +67,7 @@ export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }
                 className="absolute top-[2px] right-[2px] p-1.5 rounded activ:bg-red-100 hover:bg-red-400 hover:text-white"
                 onClick={() => onSave()}
             >
-                {IconCross({className:"h-4 w-4 stroke-2"})}
+                {IconCross({ className: "h-4 w-4 stroke-2" })}
             </div>
 
             {/* Controls */}
@@ -73,9 +81,8 @@ export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }
                     onKeyDown={((event) => valid && event.key === 'Enter' && onSave(exportImageSize))}
                 />
 
-                <div className="">
-                    {IconCross({className:"h-4 w-4 stroke-2"})}
-                </div>
+                {IconCross({ className: "h-4 w-4 stroke-2" })}
+
                 <input
                     className="px-2 py-1 w-16 rounded border border-gray-500"
                     value={height}
@@ -86,15 +93,12 @@ export function Row3_PopupImageSize({ onSave }: { onSave: (size?: WH) => void; }
 
             {/* Save button */}
             <button
-                className={
-                    `self-end mt-2 mb-2 px-3 py-1 h-8 rounded border active-scale 
-                    ${valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'}`
+                className={classNames(
+                    "self-end mt-2 mb-2 px-3 py-1 h-8 rounded border active-scale",
+                    valid ? 'bg-purple-500 text-gray-200 border-gray-200' : 'text-red-600 border-none'
+                )
                 }
-                title={`${tooBig
-                    ? sizeTooBigMessage({ w: +width, h: +height })
-                    : valid
-                        ? `The current size is ${sizeInMB({ w: +width, h: +height })} (uncompressed in pixels).`
-                        : 'The numbers are not valid.'}`}
+                title={notice}
                 onClick={() => valid && onSave(exportImageSize)}
             >
                 <div className="pb-0.5">{valid ? 'Save' : tooBig ? 'Max is 2000 x 2000' : 'Invalid size'}</div>
