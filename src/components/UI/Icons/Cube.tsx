@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { a, useSpring } from '@react-spring/web';
 import { randomIntInclusive } from '@/utils';
 
@@ -22,6 +22,7 @@ function Face({ digit, size, style = {}, cubeProps }: { digit: number; size: num
         }
         return items;
     }, [digit]);
+
     const {
         colorBorder = 'rgb(155, 108, 230)', // rgb(155, 108, 230) rgb(209, 213, 219) rgb(76, 29, 149)
         colorBg = 'rgb(167, 139, 250)',     // bg-purple-400
@@ -29,21 +30,20 @@ function Face({ digit, size, style = {}, cubeProps }: { digit: number; size: num
         colorDots = 'rgb(76, 29, 149)',     // bg-purple-900
     } = cubeProps;
     const border = size * 4 / 100;
+    const css = {
+        gap: '5%',
+        padding: '14%',
+        backgroundColor: colorBg,
+        '--tw-ring-color': colorFace,
+        '--ww': `${border}px`,
+        '--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(var(--ww) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+        border: `${border}px solid ${colorBorder}`,
+        borderRadius: `${border * 4}px`,
+        ...style
+    } as React.CSSProperties;
+
     return (
-        <div
-            className="absolute w-full h-full rounded-sm grid grid-cols-3 grid-rows-3 ring-2"
-            style={{
-                gap: '5%',
-                padding: '14%',
-                backgroundColor: colorBg,
-                '--tw-ring-color': colorFace,
-                '--ww': `${border}px`,
-                '--tw-ring-shadow': 'var(--tw-ring-inset) 0 0 0 calc(var(--ww) + var(--tw-ring-offset-width)) var(--tw-ring-color)',
-                border: `${border}px solid ${colorBorder}`,
-                borderRadius: `${border * 4}px`,
-                ...style
-            } as React.CSSProperties}
-        >
+        <div className="absolute w-full h-full rounded-sm grid grid-cols-3 grid-rows-3 ring-2" style={css}>
             {items.map((on: number, i: number) => (
                 <div className="w-full h-full rounded-full" style={{ backgroundColor: on ? colorDots : 'transparent' }} key={i} />
             ))}
@@ -52,10 +52,10 @@ function Face({ digit, size, style = {}, cubeProps }: { digit: number; size: num
 }
 
 const ANGLES_AXIS = ['X', 'Y', 'X', 'X', 'Y', 'Y'];
-const ANGLES = [180, -90, 90, -90, 90, 0]; // k:back l:left t:top b:bottom r:right f:front
-const faceStyle = (idx: number, move: number): string => `rotate${ANGLES_AXIS[idx]}(${ANGLES[idx]}deg) translateZ(${move}px)`;
-const ANGLE_ISO = 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)';
-const ANGLE_ZERO = 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)';
+const FACE_ANGLES = [180, -90, 90, -90, 90, 0]; // k:back l:left t:top b:bottom r:right f:front
+const ROTATIONS_ISO = 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)';
+const ROTATIONS_ZERO = 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)';
+const faceStyle = (idx: number, move: number): string => `rotate${ANGLES_AXIS[idx]}(${FACE_ANGLES[idx]}deg) translateZ(${move}px)`;
 
 type CubeProps = {
     colorBorder: string;
@@ -68,10 +68,10 @@ type CubeProps = {
 export function Cube(cubeProps: Partial<CubeProps> = {}) {
     const [digit, setDigit] = React.useState(0);
 
-    let dieSize = 20;
+    const dieSize = 20;
 
     const [styles, api] = useSpring(() => ({
-        transform: cubeProps.initialIso ? ANGLE_ISO : ANGLE_ZERO,
+        transform: cubeProps.initialIso ? ROTATIONS_ISO : ROTATIONS_ZERO,
     }));
 
     function startSpin() {
@@ -79,26 +79,23 @@ export function Cube(cubeProps: Partial<CubeProps> = {}) {
             to: async (next, cancel) => {
                 await next({ transform: `rotateX(360deg) rotateY(360deg) rotateZ(360deg)`, config: { duration: 1000 } });
                 setDigit(randomIntInclusive(1, 6));
-                await next({ transform: ANGLE_ZERO });
+                await next({ transform: ROTATIONS_ZERO });
             }
         });
     }
 
+    const dieContainer: CSSProperties = {
+        transformStyle: 'preserve-3d',
+        transformOrigin: 'center center',
+        perspectiveOrigin: '50% 50%',
+        width: `${dieSize}px`,
+        height: `${dieSize}px`,
+        //perspective: '300px',
+    }
+
     return (
-        <a.div
-            className="relative"
-            style={{
-                transformStyle: 'preserve-3d',
-                transformOrigin: 'center center',
-                perspectiveOrigin: '50% 50%',
-                width: `${dieSize}px`,
-                height: `${dieSize}px`,
-                //perspective: '300px',
-                ...styles
-            }}
-            onClick={startSpin}
-        >
-            {ANGLES.map((_angle: number, idx: number) => (
+        <a.div className="relative" style={{...dieContainer, ...styles}} onClick={startSpin}>
+            {FACE_ANGLES.map((_angle: number, idx: number) => (
                 <Face
                     digit={(digit + idx) % 6 + 1}
                     size={dieSize}
