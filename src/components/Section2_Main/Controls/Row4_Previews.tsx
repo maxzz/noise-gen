@@ -19,7 +19,7 @@ function PreviewBox({ item }: {item: PresetData}) {
                             title="Remove preset"
                             onClick={(event) => { event.stopPropagation(); removePreset(item.id); }}
                         >
-                            <IconTrash className="h-3 w-3" /> {/* <IconCross className="h-3 w-3" /> */}
+                            <IconTrash className="h-3 w-3 stroke-2" /> {/* <IconCross className="h-3 w-3" /> */}
                         </div>
                     </>
                 }
