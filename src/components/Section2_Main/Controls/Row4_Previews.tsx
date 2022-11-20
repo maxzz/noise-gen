@@ -3,19 +3,21 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { PresetData, PRESET_H, PRESET_W } from '@/store/types';
 import { PresetsAtom, RemovePresetAtom, SetRenderParamsAtom } from '@/store';
 import { IconCross, IconTrash } from '@/components/UI/Icons';
-import styles from './Row4_Previews.module.scss';
+import css from './Row4_Previews.module.scss';
 
-function PreviewBox({ item }: {item: PresetData}) {
+const boxSizeStyle = { width: `${PRESET_W + 8}px`, height: `${PRESET_H + 8}px` }; // +8 for double border size
+
+function PreviewBox({ item }: { item: PresetData; }) {
     const setRenderParams = useSetAtom(SetRenderParamsAtom);
     const removePreset = useSetAtom(RemovePresetAtom);
     return (
-        <div className={`px-1 py-2 cursor-pointer select-none transform active-scale ${styles.preset}`} onClick={() => setRenderParams(item.renderParams)}>
-            <div className="relative border-4 border-gray-50 shadow" style={{ width: `${PRESET_W + 8}px`, height: `${PRESET_H + 8}px` }}> {/* +8 for double border size */}
+        <div className={`px-1 py-2 cursor-pointer select-none transform active-scale ${css.preset}`} onClick={() => setRenderParams(item.renderParams)}>
+            <div className="relative border-4 border-gray-50 shadow" style={boxSizeStyle}>
                 {item.preview &&
                     <>
-                        <img className={`w-full h-full object-cover ${styles.maybeBroken}`} src={item.preview} alt="preset"/>
+                        <img className={`w-full h-full object-cover ${css.maybeBroken}`} src={item.preview} alt="preset" />
                         <div
-                            className={`absolute p-1 -top-3 -right-3 border rounded-full text-gray-500 border-gray-500 bg-gray-50 ${styles.removePreset}`}
+                            className={`absolute p-1 -top-3 -right-3 border rounded-full text-gray-500 border-gray-500 bg-gray-50 ${css.removePreset}`}
                             title="Remove preset"
                             onClick={(event) => { event.stopPropagation(); removePreset(item.id); }}
                         >
