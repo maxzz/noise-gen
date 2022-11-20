@@ -25,7 +25,7 @@ export function Slider({ label, min, max, step = .01, labelWidth = '4.5rem', val
                 tabIndex={-1}
                 onChange={onSliderChange}
             />
-            <input className="w-8 bg-purple-100 text-[.6rem]"
+            <input className="w-8 bg-purple-100 focus:bg-white text-[.6rem] tm-focus-ring rounded-sm"
                 value={local}
                 onChange={onInputChange}
                 onKeyDown={onInputKey}
@@ -48,7 +48,7 @@ export function SmallSlider({ label, min, max, step = .01, labelWidth = '4.5rem'
                 onChange={onSliderChange}
                 onKeyDown={onInputKey}
             />
-            <input className="w-8 bg-purple-100 text-[.6rem]"
+            <input className="w-8 bg-purple-100 focus:bg-white text-[.6rem] tm-focus-ring rounded-sm"
                 value={local}
                 onChange={onInputChange}
                 onKeyDown={onInputKey}
