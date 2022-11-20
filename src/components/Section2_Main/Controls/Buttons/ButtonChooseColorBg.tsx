@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { ColorCanvasAtom } from '@/store';
-import { classNames } from '@/utils';
 
 const BGCOLORS = ['black', 'white', 'transparent'];
 
@@ -17,10 +16,7 @@ export function ButtonChooseColorBg() {
 
     return (
         <button
-            className={classNames(
-                "relative w-8 h-8 dark-frame top-row-button-gradient active-scale rounded border",
-                "focus:ring-1 ring-offset-1 ring-offset-[#ab9dde] focus:ring-purple-600 focus:outline-none",
-            )}
+            className="relative w-8 h-8 dark-frame top-row-button-gradient active-scale rounded border tm-focus-ring"
             title={hint}
             onClick={onClickChangeBkg}
         >

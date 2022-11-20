@@ -18,4 +18,8 @@
     .flex-centered {
         @apply flex items-center justify-center;
     }
+
+    .tm-focus-ring {
+        @apply focus:ring-1 ring-offset-1 ring-offset-[#ab9dde] focus:ring-purple-600 focus:outline-none;
+    }
 }

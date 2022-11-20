@@ -9,11 +9,7 @@ import { IconCosine } from '@/components/UI/Icons';
 function Button({ className, children, ...rest }: HTMLAttributes<HTMLButtonElement>) {
     return (
         <button
-            className={classNames(
-                "text-app-100 top-row-button-gradient dark-frame-rounded active-scale focus:outline-none select-none",
-                "focus:ring-1 ring-offset-1 ring-offset-[#ab9dde] focus:ring-purple-600 focus:outline-none",
-                className,
-            )}
+            className={classNames("text-app-100 top-row-button-gradient dark-frame-rounded tm-focus-ring active-scale focus:outline-none select-none", className)}
             {...rest}
         >
             {children}
@@ -25,11 +21,7 @@ function Input({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
     const [seed, setSeed] = useAtom(SeedAtom);
     return (
         <input
-            className={classNames(
-                "px-2 py-1 w-full text-xs text-app-900 bg-purple-100 dark-frame-rounded",
-                "focus:ring-1 ring-offset-1 ring-offset-[#ab9dde] focus:ring-purple-600 focus:outline-none",
-                className,
-            )}
+            className={classNames("px-2 py-1 w-full text-xs text-app-900 bg-purple-100 dark-frame-rounded tm-focus-ring", className)}
             placeholder="Type anything as a seed"
             value={seed} onChange={(event) => setSeed(event.target.value)}
             {...rest}

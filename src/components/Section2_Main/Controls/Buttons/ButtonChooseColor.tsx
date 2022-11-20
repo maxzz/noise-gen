@@ -22,11 +22,7 @@ export function ButtonChooseColor({ className }: HTMLAttributes<HTMLDivElement>)
 
     return (
         <button
-            className={classNames(
-                "relative dark-frame top-row-button-gradient active-scale rounded border",
-                "focus:ring-1 ring-offset-1 ring-offset-[#ab9dde] focus:ring-purple-600 focus:outline-none",
-                className,
-            )}
+            className={classNames("relative dark-frame top-row-button-gradient active-scale rounded border tm-focus-ring", className)}
             ref={containerRef}
             title="Change canvas color"
             onKeyDown={((event) => {
@@ -39,7 +35,7 @@ export function ButtonChooseColor({ className }: HTMLAttributes<HTMLDivElement>)
             <div className="flex-centered rounded" onClick={() => setIsDown(v => !v)}>
                 {/* Inner frame */}
                 <div
-                    className="w-5 h-5 rounded-[0.15rem] border border-t-gray-500 border-l-gray-500 border-b-purple-300 border-r-purple-300"
+                    className="w-5 h-5 rounded-[0.15rem] border border-t-gray-500 border-l-gray-500 border-b-purple-300 border-r-purple-300 shadow-inner"
                     style={{ backgroundColor: color }}
                 >
                 </div>
