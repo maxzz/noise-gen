@@ -6,7 +6,7 @@ Noise generator: XP10-525N (as "Experimental 21.05.25 Noise").
 
 <!-- ![](src/assets/previews/2021-06-14_16-56-56.png) -->
 
-<img src="src/assets/previews/2021-06-14_17-38-45.png" width="440px" />
+<img src="src/assets/previews/2022-11-20_15-22-13.png" />
 
 #### Project roadmap
 
