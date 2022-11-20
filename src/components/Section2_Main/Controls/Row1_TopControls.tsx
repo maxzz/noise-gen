@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import { GeneratePresetAtom, RandomSeedAtom, SeedAtom } from '@/store';
 import { ButtonShowNoise } from '@/components/Section2_Main/Controls/Buttons/ButtonShowNoise';
 import { ButtonChooseColorBg } from './Buttons/ButtonChooseColorBg';
 import { ButtonChooseColor } from './Buttons/ButtonChooseColor';
+import { classNames } from '@/utils';
+
+function Button({ className, children, ...rest }: HTMLAttributes<HTMLButtonElement>) {
+    return (
+        <button
+            className={classNames(
+                "h-8 px-3 pb-0.5 text-sm dark-frame-rounded text-gray-100 uppercase transform active-scale select-none no-active-ouline top-row-button-gradient",
+                "", className,
+            )}
+            {...rest}
+        >
+            {children}
+        </button>
+    );
+}
 
 export function Row1_TopControls() {
     const [seed, setSeed] = useAtom(SeedAtom);
@@ -18,28 +33,13 @@ export function Row1_TopControls() {
                 value={seed} onChange={(event) => setSeed(event.target.value)}
             />
 
-            <button
-                className="h-8 px-3 pb-0.5 text-sm
-                dark-frame-rounded text-gray-100 
-                uppercase transform active-scale
-                select-none no-active-ouline top-row-button-gradient"
-
-                title="Generate random seed"
-                onClick={setRansomSeed}
-            >
+            <Button title="Generate random seed" onClick={setRansomSeed}>
                 Random Seed
-            </button>
+            </Button>
 
-            <button
-                className="h-8 px-3 pb-0.5 text-sm
-                dark-frame-rounded text-gray-100
-                uppercase transform active-scale
-                select-none no-active-ouline top-row-button-gradient"
-                title="Generate a random preset"
-                onClick={generatePreset}
-            >
+            <Button title="Generate a random preset" onClick={generatePreset}>
                 Preset
-            </button>
+            </Button>
 
             <div className="w-8 h-8 flex-none">
                 <ButtonShowNoise />
