@@ -9,12 +9,12 @@ export function GitHubSvg() {
     );
 }
 
-export function GithubLogo({ className, href, ...rest }: { href: string; } & HTMLAttributes<HTMLElement>) {
+export function GithubLogo({ className, href, rel="nofollow noopener noreferrer", ...rest }: { href: string; rel?: string } & HTMLAttributes<HTMLDivElement>) {
     return (
-        <a href={href} target="_blank" title="Open the source code of the project on GitHub">
-            <div className={classNames("w-4 h-4 p-px pt-0.5 border-[0.6px] rounded", className)} {...rest}>
+        <div className={classNames("w-4 h-4 p-px pt-0.5 border-[0.6px] rounded", className)} {...rest}>
+            <a href={href} target="_blank" title="Open the source code of the project on GitHub" rel={rel}>
                 <GitHubSvg />
-            </div>
-        </a>
+            </a>
+        </div>
     );
 }

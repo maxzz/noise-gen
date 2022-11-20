@@ -40,7 +40,7 @@ function Face({ digit, size, style = {}, cubeProps }: { digit: number; size: num
         border: `${border}px solid ${colorBorder}`,
         borderRadius: `${border * 4}px`,
         ...style
-    } as React.CSSProperties;
+    } as CSSProperties;
 
     return (
         <div className="absolute w-full h-full rounded-sm grid grid-cols-3 grid-rows-3 ring-2" style={css}>
