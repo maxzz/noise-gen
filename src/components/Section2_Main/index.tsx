@@ -18,7 +18,7 @@ export function Section2_Main() {
             </div>
 
             {/* Canvas */}
-            <div className="flex-1 mt-1">
+            <div className="flex-1 mt-1 grid">
                 <Canvas />
             </div>
         </div>
