@@ -11,6 +11,7 @@ function Button({ className, children, ...rest }: HTMLAttributes<HTMLButtonEleme
         <button
             className={classNames(
                 "text-app-100 top-row-button-gradient dark-frame-rounded active-scale focus:outline-none select-none",
+                "focus:ring-1 ring-offset-1 ring-offset-[#ab9dde] focus:ring-purple-600 focus:outline-none",
                 className,
             )}
             {...rest}
@@ -26,6 +27,7 @@ function Input({ className, ...rest }: HTMLAttributes<HTMLInputElement>) {
         <input
             className={classNames(
                 "px-2 py-1 w-full text-xs text-app-900 bg-purple-100 dark-frame-rounded",
+                "focus:ring-1 ring-offset-1 ring-offset-[#ab9dde] focus:ring-purple-600 focus:outline-none",
                 className,
             )}
             placeholder="Type anything as a seed"
