@@ -21,6 +21,14 @@ function ButtonClearAppBg() {
     </>);
 }
 
+const cubeProps = {
+    initialIso: true,
+    colorFace: "var(--purple-900)",
+    colorBorder: "var(--purple-200)",
+    colorBg: "var(--purple-300)",
+    colorDots: "var(--purple-900)",
+}
+
 export function Section1_Header() {
     return (
         <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-app-500 select-none" style={{ boxShadow: '#00000033 0 1px 2px' }}>
@@ -29,13 +37,7 @@ export function Section1_Header() {
                     <TwoCubes />
 
                     <div className="-ml-1">
-                        <Cube
-                            initialIso={true}
-                            colorFace="var(--purple-900)"
-                            colorBorder="var(--purple-200)"
-                            colorBg="var(--purple-300)"
-                            colorDots="var(--purple-900)"
-                        />
+                        {Cube(cubeProps)}
                     </div>
                 </div>
 
