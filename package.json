@@ -13,7 +13,7 @@
     "dependencies": {
         "@react-spring/web": "9.5.5",
         "@types/react-color": "3.0.6",
-        "jotai": "1.9.2",
+        "jotai": "1.10.0",
         "lodash-move": "^1.1.1",
         "lodash.clamp": "^4.0.3",
         "react": "^17.0.2",
@@ -35,7 +35,7 @@
         "postcss-import": "^15.0.0",
         "sass": "1.56.1",
         "tailwindcss": "3.2.4",
-        "typescript": "4.8.4",
-        "vite": "3.2.3"
+        "typescript": "4.9.3",
+        "vite": "3.2.4"
     }
 }
