@@ -3,7 +3,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from '@/store';
 import { Cube } from '@/components/UI/Icons/Cube';
 import { TwoCubes } from '@/components/UI/Icons/TwoCubes';
-import { GithubLogo } from '@/components/UI/Icons/GithubLogo';
+import { GithubLink } from '@/components/UI/Icons/GithubLink';
 
 function ButtonClearAppBg() {
     const appBackgroundActive = useAtomValue(AppBackgroundActiveAtom);
@@ -47,7 +47,7 @@ export function Section1_Header() {
                     Noise generator: xp10-525N
                 </div>
                 
-                <GithubLogo className="text-app-800 border-app-700" href="https://github.com/maxzz/noise-gen" />
+                <GithubLink className="text-app-800 border-app-700" href="https://github.com/maxzz/noise-gen" />
             </div>
         </div>
     );
