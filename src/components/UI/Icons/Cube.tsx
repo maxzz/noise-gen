@@ -1,6 +1,6 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, HTMLAttributes } from 'react';
 import { a, useSpring } from '@react-spring/web';
-import { randomIntInclusive } from '@/utils';
+import { classNames, randomIntInclusive } from '@/utils';
 
 const FACES = [
     [4],
@@ -57,7 +57,7 @@ const ROTATIONS_ISO = 'rotateX(75deg) rotateY(0deg) rotateZ(45deg)';
 const ROTATIONS_ZERO = 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)';
 const faceStyle = (idx: number, move: number): string => `rotate${ANGLES_AXIS[idx]}(${FACE_ANGLES[idx]}deg) translateZ(${move}px)`;
 
-type CubeProps = {
+export type CubeProps = {
     colorBorder: string;
     colorBg: string;
     colorFace: string;
@@ -65,7 +65,7 @@ type CubeProps = {
     initialIso: boolean;
 };
 
-export function Cube(cubeProps: Partial<CubeProps> = {}) {
+export function Cube({cubeProps, className, ...rest}: { cubeProps: Partial<CubeProps> } & HTMLAttributes<HTMLDivElement>) {
     const [digit, setDigit] = React.useState(0);
 
     const dieSize = 20;
@@ -94,7 +94,7 @@ export function Cube(cubeProps: Partial<CubeProps> = {}) {
     }
 
     return (
-        <a.div className="relative" style={{...dieContainer, ...styles}} onClick={startSpin}>
+        <a.div className={classNames("relative", className)} style={{...dieContainer, ...styles}} onClick={startSpin} {...rest}>
             {FACE_ANGLES.map((_angle: number, idx: number) => (
                 <Face
                     digit={(digit + idx) % 6 + 1}

@@ -27,7 +27,7 @@ const cubeProps = {
     colorBorder: "var(--purple-200)",
     colorBg: "var(--purple-300)",
     colorDots: "var(--purple-900)",
-}
+};
 
 export function Section1_Header() {
     return (
@@ -35,10 +35,7 @@ export function Section1_Header() {
             <div className="mx-4 flex-none flex-centered space-x-4">
                 <div className="flex items-center space-x-2">
                     <TwoCubes />
-
-                    <div className="-ml-1">
-                        {Cube(cubeProps)}
-                    </div>
+                    {Cube({ cubeProps })}
                 </div>
 
                 <ButtonClearAppBg />
@@ -48,7 +45,7 @@ export function Section1_Header() {
                 <div className="pl-1 pb-0.5 tracking-tighter" style={{ textShadow: '#7e66ca70 3px 2px' }}>
                     Noise generator: xp10-525N
                 </div>
-                
+
                 <GithubLink className="text-app-800 border-app-700" href="https://github.com/maxzz/noise-gen" />
             </div>
         </div>
