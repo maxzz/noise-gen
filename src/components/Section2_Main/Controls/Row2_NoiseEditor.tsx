@@ -35,7 +35,6 @@ function NoiseSelector() {
 export function Row2_NoiseEditor() {
     const showNoiseEditor = useAtomValue(ShowNoiseEditorAtom);
     const noise = useAtomValue(NoiseAtom);
-    //const setNoiseType = useSetAtom(SetNoiseTypeAtom);
     const setNoiseScale = useSetAtom(SetNoiseScaleAtom);
     const resetNoiseToDefault = useSetAtom(ResetNoiseToDefaultAtom);
 
@@ -50,10 +49,6 @@ export function Row2_NoiseEditor() {
         }
     });
 
-    // function setNoise(value: number) {
-    //     setNoiseType(value);
-    // }
-
     function setScale(axis: string, value: number) {
         setNoiseScale({ axis, value });
     }
@@ -66,10 +61,7 @@ export function Row2_NoiseEditor() {
     return (
         <div className="relative text-purple-900 flex flex-col">
             {/* Editor body */}
-            <a.div
-                className="-mt-2 pt-2 overflow-hidden"
-                style={{ width: springStyles.width, opacity: springStyles.opacity, transform: springStyles.transform }}
-            >
+            <a.div className="-mt-2 pt-2 overflow-hidden" style={springStyles}>
                 {showNoiseEditor &&
                     <div className="w-36 pl-1">
                         {/* Noise type buttons */}
@@ -95,12 +87,6 @@ export function Row2_NoiseEditor() {
                                     </div>}
                             </div>
 
-                            {/* Noise type buttons */}
-                            {/* <div className="pl-2 flex items-center text-[.6rem] space-x-1">
-                                <NoiseTypeButton text="2D" selected={noise.dim === 2} onClick={() => setNoise(2)} />
-                                <NoiseTypeButton text="3D" selected={noise.dim === 3} onClick={() => setNoise(3)} />
-                                <NoiseTypeButton text="4D" selected={noise.dim === 4} onClick={() => setNoise(4)} />
-                            </div> */}
                             <NoiseSelector />
                         </div>
 
