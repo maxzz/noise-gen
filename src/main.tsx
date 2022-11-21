@@ -9,3 +9,6 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById('root')
 );
+
+//TODO: hide all controls on main screen when background applied
+//TODO: collapse/expand previews
