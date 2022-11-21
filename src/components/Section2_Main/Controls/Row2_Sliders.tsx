@@ -45,9 +45,7 @@ export function Row2_Sliders() {
             </div>
             {/* Editors separator */}
             {showNoiseEditor && <div className="w-[1px] max-w-[1px] bg-purple-300"></div>}
-            <div>
-                <Row2_NoiseEditor />
-            </div>
+            <Row2_NoiseEditor />
         </div>
     );
 }
