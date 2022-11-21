@@ -14,7 +14,7 @@ function Frame({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>)
     return (
         <div
             className={classNames(
-                "flex-centered text-app-800 bg-app-300/50 hover:text-app-50 hover:bg-app-400 border-app-500 border rounded shadow group transition-colors",
+                "flex-centered text-app-800 bg-app-300/50 hover:text-app-50 hover:bg-app-400 border-app-500 border rounded shadow group transition-colors tm-focus-ring ring-offset-purple-100",
                 "px-1 space-x-1", className,
             )}
             {...rest}
@@ -28,7 +28,7 @@ function Button({ className, children, ...rest }: HTMLAttributes<HTMLButtonEleme
     return (
         <button
             className={classNames(
-                "flex-centered text-app-800 bg-app-300/50 hover:text-app-50 hover:bg-app-400 border-app-500 border rounded shadow group transition-colors",
+                "flex-centered text-app-800 bg-app-300/50 hover:text-app-50 hover:bg-app-400 border-app-500 border rounded shadow group transition-colors tm-focus-ring ring-offset-purple-100",
                 "active-scale cursor-pointer", className,
             )}
             {...rest}
