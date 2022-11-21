@@ -76,15 +76,17 @@ export function Row2_NoiseEditor() {
                                 >
                                     Noise
                                 </div>
-                                {showResetNoise &&
-                                    <div className="
+                                {/* {showResetNoise && */}
+                                    <button className="
                                         absolute ml-1.5 px-2 py-1 left-full top-1/2 -translate-y-1/2 
+                                        text-white bg-red-500 hover:bg-red-600 tm-focus-ring rounded shadow
                                         active-scale whitespace-nowrap
-                                        text-white bg-red-600 border rounded border-red-900"
+                                        "
                                         onClick={resetNoise}
                                     >
                                         Reset noise
-                                    </div>}
+                                    </button>
+                                    {/* } */}
                             </div>
 
                             <NoiseSelector />
