@@ -4,30 +4,28 @@ import { useSpring, a } from '@react-spring/web';
 import { SmallSlider } from '@/components/UI/Slider';
 import { NoiseAtom, ResetNoiseToDefaultAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '@/store';
 import { NOISEPARAMS } from '@/store/types';
+import { classNames } from '@/utils';
 
 function NoiseTypeButton({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
         <div
-            className={
-                `w-5 h-5 px-1 py-0.5 border border-purple-400 rounded flex-centered cursor-pointer
-                ${selected ? 'bg-white ring-1 ring-offset-1 ring-offset-red-100 ring-purple-400' : ''}`
-            }
+            className={classNames(
+                "w-5 h-5 px-1 py-0.5 border border-purple-400 rounded flex-centered cursor-pointer",
+                selected && "bg-white ring-1 ring-offset-1 ring-offset-red-100 ring-purple-400",
+            )}
             onClick={onClick}
         >{text}</div>
     );
 }
 
 function NoiseSelector() {
-    const noise = useAtomValue(NoiseAtom);
+    const { dim } = useAtomValue(NoiseAtom);
     const setNoiseType = useSetAtom(SetNoiseTypeAtom);
-    function setNoise(value: number) {
-        setNoiseType(value);
-    }
     return (
         <div className="pl-2 flex items-center text-[.6rem] space-x-1">
-            <NoiseTypeButton text="2D" selected={noise.dim === 2} onClick={() => setNoise(2)} />
-            <NoiseTypeButton text="3D" selected={noise.dim === 3} onClick={() => setNoise(3)} />
-            <NoiseTypeButton text="4D" selected={noise.dim === 4} onClick={() => setNoise(4)} />
+            <NoiseTypeButton text="2D" selected={dim === 2} onClick={() => setNoiseType(2)} />
+            <NoiseTypeButton text="3D" selected={dim === 3} onClick={() => setNoiseType(3)} />
+            <NoiseTypeButton text="4D" selected={dim === 4} onClick={() => setNoiseType(4)} />
         </div>
     );
 }
