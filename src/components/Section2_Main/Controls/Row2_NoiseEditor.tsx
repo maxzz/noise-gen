@@ -32,6 +32,23 @@ function NoiseSelector() {
     );
 }
 
+function ButtonResetNoise({ onClicked }: { onClicked: (v: boolean) => void; }) {
+    const resetNoiseToDefault = useSetAtom(ResetNoiseToDefaultAtom);
+    function resetNoise() {
+        resetNoiseToDefault();
+        onClicked(false);
+    }
+    return (
+        <button className="absolute ml-1.5 px-2 py-1 left-full top-1/2 -translate-y-1/2 
+        text-white bg-red-500 hover:bg-red-600 tm-focus-ring rounded shadow
+        active-scale whitespace-nowrap"
+            onClick={resetNoise}
+        >
+            Reset noise
+        </button>
+    );
+}
+
 export function Row2_NoiseEditor() {
     const showNoiseEditor = useAtomValue(ShowNoiseEditorAtom);
     const noise = useAtomValue(NoiseAtom);
@@ -76,17 +93,16 @@ export function Row2_NoiseEditor() {
                                 >
                                     Noise
                                 </div>
-                                {/* {showResetNoise && */}
-                                    <button className="
-                                        absolute ml-1.5 px-2 py-1 left-full top-1/2 -translate-y-1/2 
+                                {showResetNoise && <ButtonResetNoise onClicked={setShowResetNoise} />}
+                                {/* {showResetNoise &&
+                                    <button className="absolute ml-1.5 px-2 py-1 left-full top-1/2 -translate-y-1/2 
                                         text-white bg-red-500 hover:bg-red-600 tm-focus-ring rounded shadow
-                                        active-scale whitespace-nowrap
-                                        "
+                                        active-scale whitespace-nowrap"
                                         onClick={resetNoise}
                                     >
                                         Reset noise
                                     </button>
-                                    {/* } */}
+                                } */}
                             </div>
 
                             <NoiseSelector />
