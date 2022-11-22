@@ -6,15 +6,17 @@ import { NoiseAtom, ResetNoiseToDefaultAtom, SetNoiseScaleAtom, SetNoiseTypeAtom
 import { AxisKey, NoiseParams, NOISEPARAMS } from '@/store/types';
 import { classNames } from '@/utils';
 
-function NoiseSelectorButton({ text, selected, onClick }: { text: string; selected: boolean; } & HTMLAttributes<HTMLDivElement>) {
+function NoiseSelectorButton({ selected, children, ...rest }: { selected: boolean; } & HTMLAttributes<HTMLDivElement>) {
     return (
         <div
             className={classNames(
                 "w-5 h-5 px-1 py-0.5 border border-purple-400 rounded flex-centered cursor-pointer",
                 selected && "bg-white ring-1 ring-offset-1 ring-offset-red-100 ring-purple-400",
             )}
-            onClick={onClick}
-        >{text}</div>
+            {...rest}
+        >
+            {children}
+        </div>
     );
 }
 
@@ -23,27 +25,10 @@ function NoiseSelector() {
     const setNoiseType = useSetAtom(SetNoiseTypeAtom);
     return (
         <div className="pl-2 flex items-center text-[.6rem] space-x-1">
-            <NoiseSelectorButton text="2D" selected={dim === 2} onClick={() => setNoiseType(2)} />
-            <NoiseSelectorButton text="3D" selected={dim === 3} onClick={() => setNoiseType(3)} />
-            <NoiseSelectorButton text="4D" selected={dim === 4} onClick={() => setNoiseType(4)} />
+            <NoiseSelectorButton selected={dim === 2} onClick={() => setNoiseType(2)}>2D</NoiseSelectorButton>
+            <NoiseSelectorButton selected={dim === 3} onClick={() => setNoiseType(3)}>3D</NoiseSelectorButton>
+            <NoiseSelectorButton selected={dim === 4} onClick={() => setNoiseType(4)}>4D</NoiseSelectorButton>
         </div>
-    );
-}
-
-function ButtonResetNoise({ onClicked }: { onClicked: (v: boolean) => void; }) {
-    const resetNoiseToDefault = useSetAtom(ResetNoiseToDefaultAtom);
-    function resetNoise() {
-        resetNoiseToDefault();
-        onClicked(false);
-    }
-    return (
-        <button className="absolute ml-1.5 px-2 py-1 left-full top-1/2 -translate-y-1/2 
-        text-white bg-red-500 hover:bg-red-600 tm-focus-ring rounded shadow
-        active-scale whitespace-nowrap"
-            onClick={resetNoise}
-        >
-            Reset noise
-        </button>
     );
 }
 
@@ -64,6 +49,18 @@ function NoiseParamSliders() {
             {noise.dim >= 3 && MiniSlider({ noise, axis: 'z', set })}
             {noise.dim >= 4 && MiniSlider({ noise, axis: 'w', set })}
         </div>
+    );
+}
+
+function ButtonResetNoise({ onClicked }: { onClicked: (v: boolean) => void; }) {
+    const resetNoiseToDefault = useSetAtom(ResetNoiseToDefaultAtom);
+    return (
+        <button
+            className="absolute ml-1.5 px-2 py-1 left-full top-1/2 -translate-y-1/2 text-white bg-red-500 hover:bg-red-600 tm-focus-ring rounded shadow active-scale whitespace-nowrap"
+            onClick={() => (resetNoiseToDefault(), onClicked(false))}
+        >
+            Reset noise
+        </button>
     );
 }
 
