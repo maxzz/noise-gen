@@ -53,7 +53,6 @@ export function Row2_NoiseEditor() {
     const showNoiseEditor = useAtomValue(ShowNoiseEditorAtom);
     const noise = useAtomValue(NoiseAtom);
     const setNoiseScale = useSetAtom(SetNoiseScaleAtom);
-    const resetNoiseToDefault = useSetAtom(ResetNoiseToDefaultAtom);
 
     const [showResetNoise, setShowResetNoise] = React.useState(false);
 
@@ -68,11 +67,6 @@ export function Row2_NoiseEditor() {
 
     function setScale(axis: string, value: number) {
         setNoiseScale({ axis, value });
-    }
-
-    function resetNoise() {
-        resetNoiseToDefault();
-        setShowResetNoise(false);
     }
 
     return (
@@ -94,15 +88,6 @@ export function Row2_NoiseEditor() {
                                     Noise
                                 </div>
                                 {showResetNoise && <ButtonResetNoise onClicked={setShowResetNoise} />}
-                                {/* {showResetNoise &&
-                                    <button className="absolute ml-1.5 px-2 py-1 left-full top-1/2 -translate-y-1/2 
-                                        text-white bg-red-500 hover:bg-red-600 tm-focus-ring rounded shadow
-                                        active-scale whitespace-nowrap"
-                                        onClick={resetNoise}
-                                    >
-                                        Reset noise
-                                    </button>
-                                } */}
                             </div>
 
                             <NoiseSelector />
@@ -110,10 +95,10 @@ export function Row2_NoiseEditor() {
 
                         {/* Noise params */}
                         <div className="pl-1 mt-1 text-right">
-                            <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.x} max={NOISEPARAMS.d3.max.x} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />
-                            <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.y} max={NOISEPARAMS.d3.max.y} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />
-                            {noise.dim > 2 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.z} max={NOISEPARAMS.d3.max.z} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
-                            {noise.dim > 3 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.w} max={NOISEPARAMS.d3.max.w} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
+                            {noise.dim >= 2 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.x} max={NOISEPARAMS.d3.max.x} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />}
+                            {noise.dim >= 2 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.y} max={NOISEPARAMS.d3.max.y} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />}
+                            {noise.dim >= 3 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.z} max={NOISEPARAMS.d3.max.z} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
+                            {noise.dim >= 4 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.w} max={NOISEPARAMS.d3.max.w} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
                         </div>
                     </div>
                 }
