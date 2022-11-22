@@ -48,13 +48,10 @@ function ButtonResetNoise({ onClicked }: { onClicked: (v: boolean) => void; }) {
 }
 
 function MiniSlider({ noise, axis }: { noise: NoiseParams; axis: AxisKey; }) {
-    const setNoiseScale = useSetAtom(SetNoiseScaleAtom);
-    function setScale(axis: AxisKey, value: number) {
-        setNoiseScale({ axis, value });
-    }
+    const set = useSetAtom(SetNoiseScaleAtom);
     const { min, max } = NOISEPARAMS.d3;
     return (
-        <SmallSlider labelWidth="2rem" min={min[axis]} max={max[axis]} value={noise[axis]} onChange={(value) => setScale(axis, value)} label={`scale ${axis}`} />
+        <SmallSlider labelWidth="2rem" min={min[axis]} max={max[axis]} value={noise[axis]} onChange={value => set({ axis, value })} label={`scale ${axis}`} />
     );
 }
 
@@ -63,11 +60,9 @@ function NoiseParamSliders() {
     return (
         <div className="pl-1 mt-1 text-right">
             {noise.dim >= 2 && MiniSlider({ noise, axis:'x'})}
-            {/* {noise.dim >= 2 && <MiniSlider noise={noise} axis={'x'} />} */}
-            
-            {noise.dim >= 2 && <MiniSlider noise={noise} axis={'y'} />}
-            {noise.dim >= 2 && <MiniSlider noise={noise} axis={'z'} />}
-            {noise.dim >= 2 && <MiniSlider noise={noise} axis={'w'} />}
+            {noise.dim >= 2 && MiniSlider({ noise, axis:'y'})}
+            {noise.dim >= 3 && MiniSlider({ noise, axis:'z'})}
+            {noise.dim >= 4 && MiniSlider({ noise, axis:'w'})}
         </div>
     );
 }
