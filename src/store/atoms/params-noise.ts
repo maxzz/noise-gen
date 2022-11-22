@@ -1,12 +1,12 @@
 import { atom } from "jotai";
-import { NOISEPARAMS } from "@/store/types";
+import { AxisKey, NOISEPARAMS } from "@/store/types";
 import { NoiseAtom } from "./params-editor";
 
 // Noise Editor
 
 export const SetNoiseScaleAtom = atom(
     null,
-    (get, set, { axis, value }: { axis: string, value: number; }) => {
+    (get, set, { axis, value }: { axis: AxisKey, value: number; }) => {
         set(NoiseAtom, { ...get(NoiseAtom), [axis]: value });
     }
 );

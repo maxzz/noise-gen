@@ -6,6 +6,8 @@ export type NoiseParams = {
     w: number;      // scale w, def is 1 if unused.
 };
 
+export type AxisKey = keyof Omit<NoiseParams, 'dim'>;
+
 //export type NoiseParamsRaw = [number, number, number, number, number];
 
 export type NoiseParamsSet = {
