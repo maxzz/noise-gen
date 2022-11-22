@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useSpring, a } from '@react-spring/web';
 import { SmallSlider } from '@/components/UI/Slider';
@@ -6,7 +6,7 @@ import { NoiseAtom, ResetNoiseToDefaultAtom, SetNoiseScaleAtom, SetNoiseTypeAtom
 import { AxisKey, NoiseParams, NOISEPARAMS } from '@/store/types';
 import { classNames } from '@/utils';
 
-function NoiseSelectorButton({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
+function NoiseSelectorButton({ text, selected, onClick }: { text: string; selected: boolean; } & HTMLAttributes<HTMLDivElement>) {
     return (
         <div
             className={classNames(
@@ -59,10 +59,10 @@ function NoiseParamSliders() {
     const noise = useAtomValue(NoiseAtom);
     return (
         <div className="pl-1 mt-1 text-right">
-            {noise.dim >= 2 && MiniSlider({ noise, axis:'x'})}
-            {noise.dim >= 2 && MiniSlider({ noise, axis:'y'})}
-            {noise.dim >= 3 && MiniSlider({ noise, axis:'z'})}
-            {noise.dim >= 4 && MiniSlider({ noise, axis:'w'})}
+            {noise.dim >= 2 && MiniSlider({ noise, axis: 'x' })}
+            {noise.dim >= 2 && MiniSlider({ noise, axis: 'y' })}
+            {noise.dim >= 3 && MiniSlider({ noise, axis: 'z' })}
+            {noise.dim >= 4 && MiniSlider({ noise, axis: 'w' })}
         </div>
     );
 }
