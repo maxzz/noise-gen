@@ -3,10 +3,10 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useSpring, a } from '@react-spring/web';
 import { SmallSlider } from '@/components/UI/Slider';
 import { NoiseAtom, ResetNoiseToDefaultAtom, SetNoiseScaleAtom, SetNoiseTypeAtom, ShowNoiseEditorAtom } from '@/store';
-import { NOISEPARAMS } from '@/store/types';
+import { AxisKey, NoiseParams, NOISEPARAMS } from '@/store/types';
 import { classNames } from '@/utils';
 
-function NoiseTypeButton({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
+function NoiseSelectorButton({ text, selected, onClick }: { text: string; selected: boolean; onClick: () => void; }) {
     return (
         <div
             className={classNames(
@@ -23,9 +23,9 @@ function NoiseSelector() {
     const setNoiseType = useSetAtom(SetNoiseTypeAtom);
     return (
         <div className="pl-2 flex items-center text-[.6rem] space-x-1">
-            <NoiseTypeButton text="2D" selected={dim === 2} onClick={() => setNoiseType(2)} />
-            <NoiseTypeButton text="3D" selected={dim === 3} onClick={() => setNoiseType(3)} />
-            <NoiseTypeButton text="4D" selected={dim === 4} onClick={() => setNoiseType(4)} />
+            <NoiseSelectorButton text="2D" selected={dim === 2} onClick={() => setNoiseType(2)} />
+            <NoiseSelectorButton text="3D" selected={dim === 3} onClick={() => setNoiseType(3)} />
+            <NoiseSelectorButton text="4D" selected={dim === 4} onClick={() => setNoiseType(4)} />
         </div>
     );
 }
@@ -47,19 +47,35 @@ function ButtonResetNoise({ onClicked }: { onClicked: (v: boolean) => void; }) {
     );
 }
 
+function MiniSlider({ noise, axis }: { noise: NoiseParams; axis: AxisKey; }) {
+    const setNoiseScale = useSetAtom(SetNoiseScaleAtom);
+    function setScale(axis: AxisKey, value: number) {
+        setNoiseScale({ axis, value });
+    }
+    const { min, max } = NOISEPARAMS.d3;
+    return (
+        <SmallSlider labelWidth="2rem" min={min[axis]} max={max[axis]} value={noise[axis]} onChange={(value) => setScale(axis, value)} label={`scale ${axis}`} />
+    );
+}
+
 function NoiseParamSliders() {
     const noise = useAtomValue(NoiseAtom);
     const setNoiseScale = useSetAtom(SetNoiseScaleAtom);
-    const { min, max } = NOISEPARAMS.d3;
-    function setScale(axis: string, value: number) {
+    function setScale(axis: AxisKey, value: number) {
         setNoiseScale({ axis, value });
     }
+    const { min, max } = NOISEPARAMS.d3;
     return (
         <div className="pl-1 mt-1 text-right">
-            {noise.dim >= 2 && <SmallSlider labelWidth="2rem" min={min.x} max={max.x} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />}
+            {noise.dim >= 2 && <MiniSlider noise={noise} axis={'x'} />}
+            {noise.dim >= 2 && <MiniSlider noise={noise} axis={'y'} />}
+            {noise.dim >= 2 && <MiniSlider noise={noise} axis={'z'} />}
+            {noise.dim >= 2 && <MiniSlider noise={noise} axis={'w'} />}
+
+            {/* {noise.dim >= 2 && <SmallSlider labelWidth="2rem" min={min.x} max={max.x} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />}
             {noise.dim >= 2 && <SmallSlider labelWidth="2rem" min={min.y} max={max.y} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />}
             {noise.dim >= 3 && <SmallSlider labelWidth="2rem" min={min.z} max={max.z} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
-            {noise.dim >= 4 && <SmallSlider labelWidth="2rem" min={min.w} max={max.w} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
+            {noise.dim >= 4 && <SmallSlider labelWidth="2rem" min={min.w} max={max.w} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />} */}
         </div>
     );
 }
