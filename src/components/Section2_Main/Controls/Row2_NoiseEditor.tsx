@@ -49,10 +49,24 @@ function ButtonResetNoise({ onClicked }: { onClicked: (v: boolean) => void; }) {
     );
 }
 
-export function Row2_NoiseEditor() {
-    const showNoiseEditor = useAtomValue(ShowNoiseEditorAtom);
+function NoiseParamSliders() {
     const noise = useAtomValue(NoiseAtom);
     const setNoiseScale = useSetAtom(SetNoiseScaleAtom);
+    function setScale(axis: string, value: number) {
+        setNoiseScale({ axis, value });
+    }
+    return (
+        <div className="pl-1 mt-1 text-right">
+            {noise.dim >= 2 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.x} max={NOISEPARAMS.d3.max.x} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />}
+            {noise.dim >= 2 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.y} max={NOISEPARAMS.d3.max.y} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />}
+            {noise.dim >= 3 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.z} max={NOISEPARAMS.d3.max.z} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
+            {noise.dim >= 4 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.w} max={NOISEPARAMS.d3.max.w} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
+        </div>
+    );
+}
+
+export function Row2_NoiseEditor() {
+    const showNoiseEditor = useAtomValue(ShowNoiseEditorAtom);
 
     const [showResetNoise, setShowResetNoise] = React.useState(false);
 
@@ -64,10 +78,6 @@ export function Row2_NoiseEditor() {
             duration: 200,
         }
     });
-
-    function setScale(axis: string, value: number) {
-        setNoiseScale({ axis, value });
-    }
 
     return (
         <div className="relative text-purple-900 flex flex-col">
@@ -83,7 +93,7 @@ export function Row2_NoiseEditor() {
                                 <div
                                     className="cursor-pointer hover:text-purple-500"
                                     title="Reset noise to default settings"
-                                    onClick={() => setShowResetNoise((prev) => !prev)}
+                                    onClick={() => setShowResetNoise(v => !v)}
                                 >
                                     Noise
                                 </div>
@@ -93,13 +103,7 @@ export function Row2_NoiseEditor() {
                             <NoiseSelector />
                         </div>
 
-                        {/* Noise params */}
-                        <div className="pl-1 mt-1 text-right">
-                            {noise.dim >= 2 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.x} max={NOISEPARAMS.d3.max.x} value={noise.x} onChange={(value) => setScale('x', value)} label="scale x" />}
-                            {noise.dim >= 2 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.y} max={NOISEPARAMS.d3.max.y} value={noise.y} onChange={(value) => setScale('y', value)} label="scale y" />}
-                            {noise.dim >= 3 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.z} max={NOISEPARAMS.d3.max.z} value={noise.z} onChange={(value) => setScale('z', value)} label="scale z" />}
-                            {noise.dim >= 4 && <SmallSlider labelWidth="2rem" min={NOISEPARAMS.d3.min.w} max={NOISEPARAMS.d3.max.w} value={noise.w} onChange={(value) => setScale('w', value)} label="scale w" />}
-                        </div>
+                        <NoiseParamSliders />
                     </div>
                 }
             </a.div>
