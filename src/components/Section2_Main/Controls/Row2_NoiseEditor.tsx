@@ -62,7 +62,9 @@ function NoiseParamSliders() {
     const noise = useAtomValue(NoiseAtom);
     return (
         <div className="pl-1 mt-1 text-right">
-            {noise.dim >= 2 && <MiniSlider noise={noise} axis={'x'} />}
+            {noise.dim >= 2 && MiniSlider({ noise, axis:'x'})}
+            {/* {noise.dim >= 2 && <MiniSlider noise={noise} axis={'x'} />} */}
+            
             {noise.dim >= 2 && <MiniSlider noise={noise} axis={'y'} />}
             {noise.dim >= 2 && <MiniSlider noise={noise} axis={'z'} />}
             {noise.dim >= 2 && <MiniSlider noise={noise} axis={'w'} />}
