@@ -10,7 +10,7 @@ export function Row2_All() {
             <Row2_Sliders />
             <Row3_Actions />
             <Row4_PreviewSection />
-            <Row4_Previews />
+            {/* <Row4_Previews /> */}
         </div>
     );
 }
