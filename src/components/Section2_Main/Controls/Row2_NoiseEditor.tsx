@@ -64,44 +64,39 @@ function ButtonResetNoise({ onClicked }: { onClicked: (v: boolean) => void; }) {
     );
 }
 
+function LabelNoiseWithButton() {
+    const [showResetNoise, setShowResetNoise] = React.useState(false);
+    return (
+        <div className="relative">
+            <div
+                className="cursor-pointer hover:text-purple-500"
+                title="Reset noise to default settings"
+                onClick={() => setShowResetNoise(v => !v)}
+            >
+                Noise
+            </div>
+            {showResetNoise && <ButtonResetNoise onClicked={setShowResetNoise} />}
+        </div>
+    );
+}
+
 export function Row2_NoiseEditor() {
     const showNoiseEditor = useAtomValue(ShowNoiseEditorAtom);
-
-    const [showResetNoise, setShowResetNoise] = React.useState(false);
-
     const springStyles = useSpring({
         opacity: showNoiseEditor ? 1 : 0,
         width: showNoiseEditor ? 144 : 0,
         transform: showNoiseEditor ? 'scale(1)' : 'scale(0)',
-        config: {
-            duration: 200,
-        }
+        config: { duration: 200, }
     });
-
     return (
         <div className="relative text-purple-900 flex flex-col">
-            {/* Editor body */}
             <a.div className="-mt-2 pt-2 overflow-hidden" style={springStyles}>
                 {showNoiseEditor &&
                     <div className="w-36 pl-1">
-                        {/* Noise type buttons */}
                         <div className="flex items-center text-xs select-none">
-
-                            {/* Label Noise and Reset noise button */}
-                            <div className="relative">
-                                <div
-                                    className="cursor-pointer hover:text-purple-500"
-                                    title="Reset noise to default settings"
-                                    onClick={() => setShowResetNoise(v => !v)}
-                                >
-                                    Noise
-                                </div>
-                                {showResetNoise && <ButtonResetNoise onClicked={setShowResetNoise} />}
-                            </div>
-
+                            <LabelNoiseWithButton />
                             <NoiseSelector />
                         </div>
-
                         <NoiseParamSliders />
                     </div>
                 }
