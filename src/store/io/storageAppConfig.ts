@@ -3,6 +3,8 @@ import { ColorCanvasAtom, ExportImageSizeAtom, RenderParamsAtom } from '..';
 import { AppConfig, APPCONFIG, STORAGE_KEY } from '@/store/types';
 import { debounce } from '@/utils';
 import { renderParams2Store, renderParams4Store } from './io-render-params';
+import { UiOptions } from '../types/data-ui-options';
+import { openPresetsAtom } from '../atoms/ui-options';
 
 const PARAMS_KEY = `${STORAGE_KEY}-params`;
 
@@ -28,6 +30,7 @@ type AppConfigRaw = {
     can: string;                    // canvas background
     exp: { w: number, h: number; }, // Size of exported image
     rpm: string;                    // render params
+    ui: UiOptions;
 };
 
 export const defAppSettings: AppConfig = function (): AppConfig {
@@ -40,6 +43,7 @@ export const defAppSettings: AppConfig = function (): AppConfig {
                 canvasBg: data.can || APPCONFIG.canvasBg,
                 expSize: data.exp || APPCONFIG.expSize,
                 renderParams: rpm || APPCONFIG.renderParams,
+                uiOptions: data.ui || APPCONFIG.uiOptions,
             };
             return config;
         }
@@ -53,6 +57,9 @@ export const storeAppParams = debounce((get: Getter) => {
         can: get(ColorCanvasAtom),
         exp: get(ExportImageSizeAtom),
         rpm: renderParams2Store(get(RenderParamsAtom)),
+        ui: {
+            openPresets: get(openPresetsAtom),
+        }
     };
     localStorage.setItem(PARAMS_KEY, JSON.stringify(data));
 }, 1000);

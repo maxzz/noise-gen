@@ -64,7 +64,7 @@ export const APPCONFIG: AppConfig = {
         },
     },
     uiOptions: {
-        showPreviews: true,
+        openPresets: true,
     }
 };
 

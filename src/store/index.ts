@@ -39,8 +39,11 @@ export {
     UpdatePresetPreviewAtom,
     InitPreviewsUpdateAtom,
     CreateAppendPresetAtom,
-    expandPresetsAtom,
 } from './atoms/presets'; // Presets
+
+export {
+    openPresetsAtom as expandPresetsAtom,
+} from './atoms/ui-options'; // UI options
 
 export {
     AppBackgroundUrlAtom,

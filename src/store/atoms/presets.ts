@@ -89,5 +89,3 @@ export const CreateAppendPresetAtom = atom(
         reader.readAsDataURL(data.blob);
     }
 );
-
-export const expandPresetsAtom = atom(true);
