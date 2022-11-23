@@ -61,7 +61,10 @@ export const APPCONFIG: AppConfig = {
             n2: 6.3, // def 10
             distortion: 1, // def 2
             dotDiameter: .1, // def 1
-        }
+        },
+    },
+    uiOptions: {
+        showPreviews: true,
     }
 };
 
