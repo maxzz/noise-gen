@@ -42,7 +42,7 @@ export {
 } from './atoms/presets'; // Presets
 
 export {
-    openPresetsAtom as expandPresetsAtom,
+    openPresetsAtom,
 } from './atoms/ui-options'; // UI options
 
 export {

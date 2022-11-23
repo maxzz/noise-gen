@@ -4,7 +4,7 @@ import { AppConfig, APPCONFIG, STORAGE_KEY } from '@/store/types';
 import { debounce } from '@/utils';
 import { renderParams2Store, renderParams4Store } from './io-render-params';
 import { UiOptions } from '../types/data-ui-options';
-import { openPresetsAtom } from '../atoms/ui-options';
+import { openPresetsAtom } from '..';
 
 const PARAMS_KEY = `${STORAGE_KEY}-params`;
 
