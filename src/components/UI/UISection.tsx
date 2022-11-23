@@ -9,7 +9,7 @@ export function UISection({ className, title, children, openAtom }: { className?
     return (
         <div>
             <UISectionPane
-                className={classNames("px-2 text-sm text-app-900 rounded select-none cursor-pointer flex items-center", className)}
+                className={classNames("px-2 text-xs font-bold uppercase text-app-900/80 rounded select-none cursor-pointer flex items-center", className)}
                 open={open}
                 onClick={() => setOpen(v => !v)}
             >
