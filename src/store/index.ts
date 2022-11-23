@@ -39,6 +39,7 @@ export {
     UpdatePresetPreviewAtom,
     InitPreviewsUpdateAtom,
     CreateAppendPresetAtom,
+    expandPresetsAtom,
 } from './atoms/presets'; // Presets
 
 export {
