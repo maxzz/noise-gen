@@ -1,6 +1,7 @@
 import React, { CSSProperties, HTMLAttributes } from 'react';
 import { a, useSpring } from '@react-spring/web';
 import { classNames, randomIntInclusive } from '@/utils';
+import { PrimitiveAtom, useAtom } from 'jotai';
 
 const FACES = [
     [4],
@@ -65,8 +66,8 @@ export type CubeProps = {
     initialIso: boolean;
 };
 
-export function Cube({cubeProps, className, ...rest}: { cubeProps: Partial<CubeProps> } & HTMLAttributes<HTMLDivElement>) {
-    const [digit, setDigit] = React.useState(0);
+export function Cube({cubeProps, diceAtom, className, ...rest}: { cubeProps: Partial<CubeProps>; diceAtom: PrimitiveAtom<number> } & HTMLAttributes<HTMLDivElement>) {
+    const [digit, setDigit] = useAtom(diceAtom);
 
     const dieSize = 20;
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { AppBackgroundActiveAtom, AppBackgroundUrlAtom } from '@/store';
-import { Cube } from '@/components/UI/Icons/Cube';
 import { GithubLink } from '@/components/UI/Icons/GithubLink';
 import { GameOfDice } from '../UI/Icons/GameOfDice';
 

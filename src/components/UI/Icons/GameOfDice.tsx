@@ -1,3 +1,4 @@
+import { atom } from "jotai";
 import React from "react";
 import { Cube } from "./Cube";
 
@@ -10,13 +11,15 @@ const cubeProps = {
 };
 
 export function GameOfDice() {
+    const [digitAtom1] = React.useState(atom(0));
+    const [digitAtom2] = React.useState(atom(0));
     return (
         <div className="flex items-center space-x-2">
             <div className="">
-                {Cube({ cubeProps })}
+                {Cube({ cubeProps, diceAtom: digitAtom1 })}
             </div>
             <div className="rotate-12">
-                {Cube({ cubeProps })}
+                {Cube({ cubeProps, diceAtom: digitAtom2 })}
             </div>
         </div>
     );
