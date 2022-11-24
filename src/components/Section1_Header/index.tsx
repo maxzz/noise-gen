@@ -29,9 +29,12 @@ const cubeProps = {
     colorDots: "var(--purple-900)",
 };
 
+const headerStyles = { boxShadow: '#00000033 0 1px 2px' };
+const textStyles = { textShadow: '#7e66ca70 3px 2px' };
+
 export function Section1_Header() {
     return (
-        <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-app-500 select-none" style={{ boxShadow: '#00000033 0 1px 2px' }}>
+        <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-app-500 select-none" style={headerStyles}>
             <div className="mx-4 flex-none flex-centered space-x-4">
                 <div className="flex items-center space-x-2">
                     <TwoCubes />
@@ -42,7 +45,7 @@ export function Section1_Header() {
             </div>
 
             <div className="px-4 py-2 text-xl uppercase flex items-center space-x-1">
-                <div className="pl-1 pb-0.5 tracking-tighter" style={{ textShadow: '#7e66ca70 3px 2px' }}>
+                <div className="pl-1 pb-0.5 tracking-tighter" style={textStyles}>
                     Noise generator: xp10-525N
                 </div>
 
