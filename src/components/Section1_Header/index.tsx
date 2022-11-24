@@ -37,7 +37,7 @@ export function Section1_Header() {
         <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-app-500 select-none" style={headerStyles}>
             <div className="mx-4 flex-none flex-centered space-x-4">
                 <div className="flex items-center space-x-2">
-                    <TwoCubes />
+                    {/* <TwoCubes /> */}
                     {Cube({ cubeProps })}
                 </div>
 
