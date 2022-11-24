@@ -44,8 +44,8 @@ export function Section1_Header() {
                 <ButtonClearAppBg />
             </div>
 
-            <div className="px-4 py-2 text-xl uppercase flex items-center space-x-1">
-                <div className="pl-1 pb-0.5 tracking-tighter" style={textStyles}>
+            <div className="px-4 py-2 text-xl uppercase flex items-center space-x-2">
+                <div className="pl-1 pb-0.5 tracking-tighter text-[clamp(0.75rem,2vw,1.5rem)]" style={textStyles}>
                     Noise generator: xp10-525N
                 </div>
 
