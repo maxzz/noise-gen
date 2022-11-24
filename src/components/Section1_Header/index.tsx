@@ -29,6 +29,19 @@ const cubeProps = {
     colorDots: "var(--purple-900)",
 };
 
+function CubesThrow() {
+    return (
+        <div className="flex items-center space-x-2">
+            <div className="">
+                {Cube({ cubeProps })}
+            </div>
+            <div className="rotate-12">
+                {Cube({ cubeProps })}
+            </div>
+        </div>
+    );
+}
+
 const headerStyles = { boxShadow: '#00000033 0 1px 2px' };
 const textStyles = { textShadow: '#7e66ca70 3px 2px' };
 
@@ -36,15 +49,7 @@ export function Section1_Header() {
     return (
         <div className="w-full py-2 flex items-center justify-between text-purple-900 bg-app-500 select-none" style={headerStyles}>
             <div className="mx-6 flex-none flex-centered space-x-4">
-                <div className="flex items-center space-x-2">
-                    <div className="180">
-                        {Cube({ cubeProps })}
-                    </div>
-                    <div className="rotate-12">
-                        {Cube({ cubeProps })}
-                    </div>
-                </div>
-
+                <CubesThrow />
                 <ButtonClearAppBg />
             </div>
 
